@@ -1,8 +1,6 @@
-using System.Data.Common;
-
-namespace Carpool.DAL
+namespace Carpool.DAL.Entities
 {
-    public class User
+    public class UserEntity
     {
         Guid Id { get; set; }
 
@@ -21,7 +19,5 @@ namespace Carpool.DAL
         public Distance Driven { get; set; }
 
         public ICollection<CarEntity> Cars { get; set; }
-
-        public ICollection<Guid> CarsId { get; set; } 
     }
 }

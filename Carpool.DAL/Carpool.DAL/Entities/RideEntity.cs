@@ -1,8 +1,10 @@
-namespace Carpool.DAL;
+namespace Carpool.DAL.Entities;
 
 public class RideEntity : IEntity
 {
     public Guid Id { get; set; }
+
+    public UserEntity Driver { get; set; }
 
     public Location StartLoc { get; set; }
 
@@ -12,7 +14,9 @@ public class RideEntity : IEntity
 
     public TimeSpan Duration { get; set; }
 
-    public Guid CarId { get; set; }
+    public int Capacity { get; set; }
+
+    public ICollection<UserEntity> Participants { get; set; }
 
     public CarEntity Car { get; set; }
 }

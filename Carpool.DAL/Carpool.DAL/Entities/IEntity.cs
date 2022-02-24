@@ -1,4 +1,4 @@
-﻿namespace Carpool.DAL;
+namespace Carpool.DAL.Entities;
 
 public interface IEntity
 {
