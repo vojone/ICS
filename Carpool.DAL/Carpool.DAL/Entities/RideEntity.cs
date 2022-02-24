@@ -12,7 +12,9 @@ public class RideEntity : IEntity
 
     public DateTime StartT { get; set; }
 
-    public TimeSpan Duration { get; set; }
+    public DateTime EndT { get; set; }
+
+    public int InitialCapacity { get; set; }
 
     public int Capacity { get; set; }
 

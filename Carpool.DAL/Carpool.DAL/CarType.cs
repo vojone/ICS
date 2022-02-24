@@ -8,5 +8,6 @@ public enum CarType
     Sport,
     Hatchback,
     Minivan,
-    Pickup
+    Pickup,
+    SUV
 }

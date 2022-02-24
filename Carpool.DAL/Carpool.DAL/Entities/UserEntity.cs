@@ -12,12 +12,10 @@ namespace Carpool.DAL.Entities
 
         public string Photo { get; set; }
 
-        public int Rating { get; set; }
-
-        public DateTime LicenceSince { get; set; }
-
-        public Distance Driven { get; set; }
+        public int Rating { get; set; } //
 
         public ICollection<CarEntity> Cars { get; set; }
     }
 }
+
+
