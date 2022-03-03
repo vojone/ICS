@@ -12,7 +12,7 @@ public class CarEntity : IEntity
 
     public DateOnly Registration { get; set; }
 
-    public ICollection<string> PhotosUrls { get; set; }
-
     public uint Seats { get; set; }
+
+    public ICollection<Photo> Photos { get; set; }
 }
