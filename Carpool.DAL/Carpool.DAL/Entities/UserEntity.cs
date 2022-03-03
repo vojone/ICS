@@ -4,17 +4,17 @@ namespace Carpool.DAL.Entities
     {
         Guid Id { get; set; }
 
-        public string Login { get; set; }
-
         public string Name { get; set; }
 
         public string Surname { get; set; }
 
-        public string Photo { get; set; }
+        public string? PhotoUrl { get; set; }
 
-        public int Rating { get; set; } //
+        public string? Country { get; set; }
 
-        public ICollection<CarEntity> Cars { get; set; }
+        public uint Rating { get; set; }
+
+        public ICollection<CarEntity>? Cars { get; set; }
     }
 }
 

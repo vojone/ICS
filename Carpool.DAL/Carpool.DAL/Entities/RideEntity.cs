@@ -4,21 +4,23 @@ public class RideEntity : IEntity
 {
     public Guid Id { get; set; }
 
+    public Location DepartureL { get; set; }
+    
+    public Location ArrivalL { get; set; }
+
+    public DateTime DepartureT { get; set; }
+
+    public DateTime ArrivalT { get; set; }
+
+    public uint InitialCapacity { get; set; }
+
+    public uint Capacity { get; set; }
+
+    public CarEntity Car { get; set; }
+
     public UserEntity Driver { get; set; }
-
-    public Location StartLoc { get; set; }
-
-    public Location EndLoc { get; set; }
-
-    public DateTime StartT { get; set; }
-
-    public DateTime EndT { get; set; }
-
-    public int InitialCapacity { get; set; }
-
-    public int Capacity { get; set; }
 
     public ICollection<UserEntity> Participants { get; set; }
 
-    public CarEntity Car { get; set; }
+    public ICollection<UserEntity> RatedBy { get; set; }
 }

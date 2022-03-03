@@ -8,5 +8,5 @@ public struct Location
 
     public string Street;
 
-    public string Hint;
+    public string Description;
 }

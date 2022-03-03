@@ -5,7 +5,7 @@ indent_style = space
 indent_size = 4
 
 charset = utf-8
-end_of_line = lf
+end_of_line = crlf
 insert_final_newline = true
 
 # Just for sure (there will be probably no Makefile)
