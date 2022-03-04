@@ -14,7 +14,11 @@ namespace Carpool.DAL.Entities
 
         public uint Rating { get; set; }
 
+        public ICollection<Guid> CarsId { get; set; }
         public ICollection<CarEntity>? Cars { get; set; }
+
+        public ICollection<Guid> RidesId { get; set; }
+        public ICollection<RideEntity> Rides { get; set; }
     }
 }
 
