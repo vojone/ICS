@@ -15,5 +15,5 @@ public class CarEntity : IEntity
     public uint Seats { get; set; }
 
     public ICollection<Guid> PhotosId { get; set; }
-    public ICollection<Photo> Photos { get; set; }
+    public ICollection<PhotoEntity> Photos { get; set; }
 }
