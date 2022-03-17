@@ -1,6 +1,6 @@
 namespace Carpool.DAL.Entities;
 
-public class Photo : IEntity
+public class PhotoEntity : IEntity
 {
     public Guid Id { get; set; }
 
