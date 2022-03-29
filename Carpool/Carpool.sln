@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.DAL", "Carpool.DAL\Carpool.DAL.csproj", "{99C2B88F-920D-42E8-B3EB-95EE4447AE42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carpool.Common", "Carpool.Common\Carpool.Common.csproj", "{91E7E986-13E4-4636-B9FD-FF03724B7186}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.Common", "Carpool.Common\Carpool.Common.csproj", "{91E7E986-13E4-4636-B9FD-FF03724B7186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carpool.DAL.Tests", "Carpool.DAL.Tests\Carpool.DAL.Tests.csproj", "{DDB06E04-CBFB-4323-8AF3-F8709C2C4CDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{91E7E986-13E4-4636-B9FD-FF03724B7186}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91E7E986-13E4-4636-B9FD-FF03724B7186}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91E7E986-13E4-4636-B9FD-FF03724B7186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB06E04-CBFB-4323-8AF3-F8709C2C4CDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB06E04-CBFB-4323-8AF3-F8709C2C4CDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB06E04-CBFB-4323-8AF3-F8709C2C4CDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB06E04-CBFB-4323-8AF3-F8709C2C4CDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
