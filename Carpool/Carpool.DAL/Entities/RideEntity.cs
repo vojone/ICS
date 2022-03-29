@@ -26,9 +26,5 @@ public class RideEntity : IEntity
     public Guid DriverId { get; set; }
     public UserEntity Driver { get; set; }
 
-    public ICollection<Guid> ParticipantsId { get; set; }
-    public ICollection<UserEntity> Participants { get; set; }
-
-    //Every co-driver can rate driver only once (based on ride), so we need to save co-drivers, that already rate the driver
-    public ICollection<Guid> RatedById { get; set; }
+    public ICollection<ParticipantsEntity> Participants { get; set; }
 }
