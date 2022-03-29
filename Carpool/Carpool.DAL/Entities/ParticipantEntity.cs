@@ -1,15 +1,17 @@
 namespace Carpool.DAL.Entities;
 
-public class ParticipantEntity : IEntity
+public record ParticipantEntity(
+    Guid Id,
+    Guid UserId,
+    Guid RideId,
+    bool hasUserRated
+) : IEntity
 {
-    public Guid Id { get; set; }
 
-    public Guid UserId { get; set; }
+#nullable disable
+    public ParticipantEntity() : this(default, default, default, default) { }
+#nullable enable
+
     public UserEntity User { get; set; }
-
-    public Guid RideId { get; set; }
     public RideEntity Ride { get; set; }
-
-    public bool hasUserRated { get; set; }
 }
-
