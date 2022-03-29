@@ -1,4 +1,4 @@
-namespace Carpool.DAL;
+namespace Carpool.Common;
 
 public struct Location
 {
