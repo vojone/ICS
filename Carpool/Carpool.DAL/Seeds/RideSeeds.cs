@@ -46,6 +46,12 @@ public static class RideSeeds
         Participants = Array.Empty<ParticipantEntity>()
     };
 
+    static RideSeeds()
+    {
+        Ride1.ArrivalL = LocationSeeds.Praha;
+        Ride1.DepartureL = LocationSeeds.Brno;
+    }
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<RideEntity>().HasData(

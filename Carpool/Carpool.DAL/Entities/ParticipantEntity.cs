@@ -12,6 +12,6 @@ public record ParticipantEntity(
     public ParticipantEntity() : this(default, default, default, default) { }
 #nullable enable
 
-    public UserEntity User { get; set; }
-    public RideEntity Ride { get; set; }
+    public UserEntity? User { get; init; }
+    public RideEntity? Ride { get; init; }
 }

@@ -24,14 +24,6 @@ namespace Carpool.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<RideEntity>()
-                .HasOne(i => i.ArrivalL)
-                .WithOne();
-
-            modelBuilder.Entity<RideEntity>()
-                .HasOne(i => i.DepartureL)
-                .WithOne();
-
             if (!_seedDemoData) return;
 
             LocationSeeds.Seed(modelBuilder);

@@ -11,12 +11,12 @@ public record UserEntity(
     uint Rating) : IEntity
 {
 
-    public PhotoEntity? Photo { get; init; }
-    public ICollection<CarEntity>? Cars { get; init; } = new List<CarEntity>();
+    public PhotoEntity? Photo { get; set; }
+    public ICollection<CarEntity>? Cars { get; set; } = new List<CarEntity>();
 
-    public ICollection<RideEntity>? DrivingRides { get; init; } = new List<RideEntity>();
+    public ICollection<RideEntity>? DrivingRides { get; set; } = new List<RideEntity>();
 
-    public ICollection<ParticipantEntity>? Rides { get; init; } = new List<ParticipantEntity>();
+    public ICollection<ParticipantEntity>? Rides { get; set; } = new List<ParticipantEntity>();
 
 }
     

@@ -1,5 +1,6 @@
 using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design.Internal;
 
 namespace Carpool.DAL.Seeds;
 
@@ -50,13 +51,24 @@ public static class UserSeeds
         Rides = Array.Empty<ParticipantEntity>()
     };
 
+    public static readonly UserEntity UpdateChuck = Chuck with
+    {
+        Id = Guid.Parse("061AC62A-5701-490F-937A-95BF1FF822D9")
+    };
+
+    public static readonly UserEntity DeleteChuck = Chuck with
+    {
+        Id = Guid.Parse("4546BED6-D1A9-4E57-BA8A-A967F01C82AB")
+    };
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
             Obiwan,
             Jack,
-            Chuck
+            Chuck,
+            UpdateChuck,
+            DeleteChuck
         );
     }
 }
