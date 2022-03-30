@@ -1,3 +1,5 @@
+using Carpool.Common;
+
 namespace Carpool.DAL.Entities;
 
 public class RideEntity : IEntity
