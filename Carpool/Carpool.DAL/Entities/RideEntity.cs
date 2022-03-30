@@ -1,11 +1,12 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Carpool.Common;
 
 namespace Carpool.DAL.Entities;
 
 public record RideEntity(
     Guid Id,
-    Guid ArrivalId,
-    Guid DepartureId,
+    Guid DepartureLId,
+    Guid ArrivalLId,
     DateTime DepartureT,
     DateTime ArrivalT,
     uint InitialCapacity,
@@ -14,6 +15,7 @@ public record RideEntity(
     Guid CarId,
     Guid DriverId) : IEntity
 {
+
     public LocationEntity? DepartureL { get; set; }
     public LocationEntity? ArrivalL { get; set; }
     public CarEntity? Car { get; set; }

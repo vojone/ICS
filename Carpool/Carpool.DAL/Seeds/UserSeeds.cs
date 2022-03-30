@@ -6,7 +6,7 @@ namespace Carpool.DAL.Seeds;
 public static class UserSeeds
 {
     public static readonly UserEntity Obiwan = new(
-        Id: Guid.Parse("00000000-0000-0000-0000-000000000001"), 
+        Id: Guid.Parse("0BF2856B-BB93-4170-9B37-90FF33B2F485"), 
         Name: "Obiwan",
         Surname: "Kenobi",
         PhotoId: null,
@@ -15,13 +15,13 @@ public static class UserSeeds
     )
     {
         Photo = null,
-        Cars = null,
-        DrivingRides = null,
-        Rides = null
+        Cars = Array.Empty<CarEntity>(),
+        DrivingRides = Array.Empty<RideEntity>(),
+        Rides = Array.Empty<ParticipantEntity>()
     };
 
     public static readonly UserEntity Jack = new(
-        Id: Guid.NewGuid(),
+        Id: Guid.Parse("19CC4BD8-644D-428E-B212-7AC068CA2307"),
         Name: "Jack",
         Surname: "Sparrow",
         PhotoId: null,
@@ -30,13 +30,13 @@ public static class UserSeeds
     )
     {
         Photo = null,
-        Cars = null,
-        DrivingRides = null,
-        Rides = null
+        Cars = Array.Empty<CarEntity>(),
+        DrivingRides = Array.Empty<RideEntity>(),
+        Rides = Array.Empty<ParticipantEntity>()
     };
 
     public static readonly UserEntity Chuck = new(
-        Id: Guid.Parse("00000000-0000-0000-0000-000000000002"),
+        Id: Guid.Parse("DE5D480F-883C-4F70-81BE-9D7E9B360C31"),
         Name: "Chuck",
         Surname: "Norris",
         PhotoId: null,
@@ -45,10 +45,11 @@ public static class UserSeeds
     )
     {
         Photo = null,
-        Cars = null,
-        DrivingRides = null,
-        Rides = null
+        Cars = Array.Empty<CarEntity>(),
+        DrivingRides = Array.Empty<RideEntity>(),
+        Rides = Array.Empty<ParticipantEntity>()
     };
+
 
     public static void Seed(this ModelBuilder modelBuilder)
     {

@@ -8,7 +8,7 @@ namespace Carpool.DAL.Seeds;
 public static class CarSeeds
 {
     public static readonly CarEntity Hyundai = new(
-        Id: Guid.NewGuid(),
+        Id: Guid.Parse("10D6F922-7B64-4497-8E46-0C8C69354A49"),
         Name: "Santa Fe",
         Brand: "Hyundai",
         Type: CarType.SUV,
@@ -17,7 +17,7 @@ public static class CarSeeds
     );
 
     public static readonly CarEntity Kia = new(
-        Id: Guid.NewGuid(),
+        Id: Guid.Parse("B28B6CA6-E1A7-4779-8384-5147563A1F15"),
         Name: "Sportage",
         Brand: "Kia",
         Type: CarType.Sport,
@@ -28,8 +28,8 @@ public static class CarSeeds
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
-            Hyundai with { Photos = Array.Empty<PhotoEntity>()},
-            Kia with { Photos = Array.Empty<PhotoEntity>() }
+            Hyundai,
+            Kia
         );
     }
 }

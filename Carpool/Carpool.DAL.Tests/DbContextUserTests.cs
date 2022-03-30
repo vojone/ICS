@@ -1,22 +1,26 @@
 using System.Linq;
+using System.Threading.Tasks;
+using Carpool.DAL.Seeds;
+using Microsoft.EntityFrameworkCore;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Carpool.DAL.Tests
 {
-    public class DbContextUserTests
+    public class DbContextUserTests : DbContextTestsBase
     {
-        private readonly CarpoolDbContext CarpoolDbContextSUT;
-        public DbContextUserTests()
+        public DbContextUserTests(ITestOutputHelper output) : base(output)
         {
-            CarpoolDbContextSUT = new CarpoolDbContext();
         }
 
         [Fact]
-        public void GetAll_Users()
+        public async Task GetExistingChuck()
         {
-            var users = CarpoolDbContextSUT.Users.ToArray();
+            var entity = await CarpoolDbContextSut.Users.SingleAsync(i => i.Id == UserSeeds.Chuck.Id);
 
-            Assert.True(users.Any());
+            //Assert
+            DeepAssert.Equal(UserSeeds.Chuck, entity);
         }
     }
 }
+

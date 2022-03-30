@@ -5,6 +5,5 @@ public record LocationEntity(
     string State,
     string Town,
     string Street,
-    string? Description = null
-) : IEntity;
+    string? Description = null) : IEntity;
 
