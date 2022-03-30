@@ -6,10 +6,11 @@ public record UserEntity(
     Guid Id,
     string Name,
     string Surname,
-    Guid PhotoId,
+    Guid? PhotoId,
     string? Country,
     uint Rating) : IEntity
 {
+
     public PhotoEntity? Photo { get; init; }
     public ICollection<CarEntity>? Cars { get; init; } = new List<CarEntity>();
 
