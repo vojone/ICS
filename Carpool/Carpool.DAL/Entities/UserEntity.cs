@@ -1,29 +1,25 @@
-namespace Carpool.DAL.Entities
+using System.Security.Cryptography.X509Certificates;
+
+namespace Carpool.DAL.Entities;
+
+public record UserEntity(
+    Guid Id,
+    string Name,
+    string Surname,
+    Guid? PhotoId,
+    string? Country,
+    uint Rating) : IEntity
 {
-    public class UserEntity
-    {
-        Guid Id { get; set; }
 
-        public string Name { get; set; }
+    public PhotoEntity? Photo { get; set; }
+    public ICollection<CarEntity>? Cars { get; set; } = new List<CarEntity>();
 
-        public string Surname { get; set; }
+    public ICollection<RideEntity>? DrivingRides { get; set; } = new List<RideEntity>();
 
-        public Guid? PhotoId { get; set; }
-        public PhotoEntity? Photo { get; set; }
+    public ICollection<ParticipantEntity>? Rides { get; set; } = new List<ParticipantEntity>();
 
-        public string? Country { get; set; }
-
-        public uint Rating { get; set; }
-
-        public ICollection<Guid>? CarsId { get; set; }
-        public ICollection<CarEntity>? Cars { get; set; }
-
-        public ICollection<Guid> DrivingRidesId { get; set; }
-        public ICollection<RideEntity> DrivingRides { get; set; }
-
-        public ICollection<Guid> RidesId { get; set; }
-        public ICollection<RideEntity> Rides { get; set; }
-    }
 }
+    
+
 
 
