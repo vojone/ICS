@@ -8,9 +8,11 @@ public record CarEntity(
     string Brand,
     CarType Type,
     DateOnly Registration,
-    uint Seats
+    uint Seats,
+    Guid OwnerId
 ) : IEntity
 {
-    public ICollection<PhotoEntity> Photos { get; set; } = new List<PhotoEntity>();
+    public UserEntity? Owner { get; set; }
+    public ICollection<CarPhotoEntity> Photos { get; set; } = new List<CarPhotoEntity>();
 }
 

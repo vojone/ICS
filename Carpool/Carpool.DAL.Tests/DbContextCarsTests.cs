@@ -32,12 +32,13 @@ namespace Carpool.DAL.Tests
         {
             //Arrange
             CarEntity entity = new(
-                Guid.Parse("142C54E5-B10F-4956-AB0B-B80007670E3C"),
+                Id:Guid.Parse("142C54E5-B10F-4956-AB0B-B80007670E3C"),
                 Name: "Rapid",
                 Brand: "Skoda",
                 Type: CarType.Sport,
                 Registration: DateOnly.MinValue,
-                Seats: 4
+                Seats: 4,
+                OwnerId: UserSeeds.Chuck.Id
             );
 
             //Act

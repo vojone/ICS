@@ -38,8 +38,8 @@ namespace Carpool.DAL.Tests
                 Capacity: 3,
                 State: RideState.Planned,
                 CarId: CarSeeds.Kia.Id,
-                DepartureLId: LocationSeeds.Praha.Id,
-                ArrivalLId: LocationSeeds.Brno.Id,
+                DepartureLId: LocationSeeds.Ostrava.Id,
+                ArrivalLId: LocationSeeds.Liberec.Id,
                 DepartureT: DateTime.MaxValue,
                 ArrivalT: DateTime.MinValue,
                 DriverId: UserSeeds.Obiwan.Id

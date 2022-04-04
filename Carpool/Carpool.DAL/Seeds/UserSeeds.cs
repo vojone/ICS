@@ -7,19 +7,13 @@ namespace Carpool.DAL.Seeds;
 public static class UserSeeds
 {
     public static readonly UserEntity Obiwan = new(
-        Id: Guid.Parse("0BF2856B-BB93-4170-9B37-90FF33B2F485"), 
+        Id: Guid.Parse("0BF2856B-BB93-4170-9B37-90FF33B2F485"),
         Name: "Obiwan",
         Surname: "Kenobi",
         PhotoId: null,
         Country: null,
         Rating: 0
-    )
-    {
-        Photo = null,
-        Cars = Array.Empty<CarEntity>(),
-        DrivingRides = Array.Empty<RideEntity>(),
-        Rides = Array.Empty<ParticipantEntity>()
-    };
+    );
 
     public static readonly UserEntity Jack = new(
         Id: Guid.Parse("19CC4BD8-644D-428E-B212-7AC068CA2307"),
@@ -28,13 +22,7 @@ public static class UserSeeds
         PhotoId: null,
         Country: null,
         Rating: 123
-    )
-    {
-        Photo = null,
-        Cars = Array.Empty<CarEntity>(),
-        DrivingRides = Array.Empty<RideEntity>(),
-        Rides = Array.Empty<ParticipantEntity>()
-    };
+    );
 
     public static readonly UserEntity Chuck = new(
         Id: Guid.Parse("DE5D480F-883C-4F70-81BE-9D7E9B360C31"),
@@ -43,12 +31,13 @@ public static class UserSeeds
         PhotoId: null,
         Country: "USA",
         Rating: 454657894
-    )
+    );
+
+    public static readonly UserEntity ChuckWithPhoto = Chuck with
     {
-        Photo = null,
-        Cars = Array.Empty<CarEntity>(),
-        DrivingRides = Array.Empty<RideEntity>(),
-        Rides = Array.Empty<ParticipantEntity>()
+        Id = Guid.Parse("82DBAB40-9FF0-4F4E-BC3D-F1C1FCEF42E9"),
+        PhotoId = UserPhotoSeeds.UserPhoto.Id,
+        Photo = UserPhotoSeeds.UserPhoto
     };
 
     public static readonly UserEntity UpdateChuck = Chuck with
@@ -67,6 +56,7 @@ public static class UserSeeds
             Obiwan,
             Jack,
             Chuck,
+            ChuckWithPhoto with { Photo = null },
             UpdateChuck,
             DeleteChuck
         );

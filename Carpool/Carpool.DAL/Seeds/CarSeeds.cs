@@ -13,7 +13,8 @@ public static class CarSeeds
         Brand: "Hyundai",
         Type: CarType.SUV,
         Registration: new DateOnly(2010, 05, 01),
-        Seats: 5
+        Seats: 5,
+        OwnerId: UserSeeds.Chuck.Id
     );
 
     public static readonly CarEntity Kia = new(
@@ -22,7 +23,8 @@ public static class CarSeeds
         Brand: "Kia",
         Type: CarType.Sport,
         Registration: new DateOnly(2012, 05, 04),
-        Seats: 4
+        Seats: 4,
+        OwnerId: UserSeeds.Chuck.Id
     );
 
     public static void Seed(this ModelBuilder modelBuilder)

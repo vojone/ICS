@@ -11,7 +11,7 @@ public record UserEntity(
     uint Rating) : IEntity
 {
 
-    public PhotoEntity? Photo { get; set; }
+    public UserPhotoEntity? Photo { get; set; }
     public ICollection<CarEntity>? Cars { get; set; } = new List<CarEntity>();
 
     public ICollection<RideEntity>? DrivingRides { get; set; } = new List<RideEntity>();
