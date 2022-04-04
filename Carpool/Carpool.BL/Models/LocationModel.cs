@@ -12,7 +12,7 @@ namespace Carpool.BL.Models
         string State,
         string Town,
         string Street,
-        string? Description = null) : ModelBase
+        string? Description) : ModelBase
     {
         public string State { get; set; } = State;
         public string Town { get; set; } = Town;

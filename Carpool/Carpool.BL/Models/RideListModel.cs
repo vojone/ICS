@@ -5,20 +5,31 @@ using Carpool.DAL.Entities;
 namespace Carpool.BL.Models
 {
     public record RideListModel(
+        Guid DepartureLId,
+        Guid ArrivalLId,
         DateTime DepartureT,
         DateTime ArrivalT,
         uint InitialCapacity,
         uint Capacity,
-        RideState State) : ModelBase
+        RideState State,
+        Guid CarId,
+        Guid DriverId) : ModelBase
     {
-        public DateTime DepartureT { get; set; }
-        public DateTime ArrivalT { get; set; }
-        public uint InitialCapacity { get; set; }
-        public uint Capacity { get; set; }
-        public RideState State { get; set; }
+        public Guid DepartureLId { get; set; } = DepartureLId;
+        public Guid ArrivalLId { get; set; } = ArrivalLId;
+        public DateTime DepartureT { get; set; } = DepartureT;
+        public DateTime ArrivalT { get; set; } = ArrivalT;
+        public uint InitialCapacity { get; set; } = InitialCapacity;
+        public uint Capacity { get; set; } = Capacity;
+        public RideState State { get; set; } = State;
+        public Guid CarId { get; set; } = CarId;
+        public Guid DriverId { get; set; } = DriverId;
         public LocationEntity? DepartureL { get; set; }
         public LocationEntity? ArrivalL { get; set; }
+        public CarEntity? Car { get; set; }
         public UserEntity? Driver { get; set; }
+        public ICollection<ParticipantEntity> Participants { get; set; } = new List<ParticipantEntity>();
+
 
         public class MapperProfile : Profile
         {
@@ -28,6 +39,15 @@ namespace Carpool.BL.Models
             }
         }
 
-        //public static RideDetailModel Empty => new();
+        public static RideListModel Empty =>
+            new(default,
+                default,
+                default,
+                default,
+                default,
+                default,
+                RideState.None,
+                default,
+                default);
     }
 }
