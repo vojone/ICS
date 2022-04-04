@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.Common", "Carpool.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Carpool.DAL.Tests", "Carpool.DAL.Tests\Carpool.DAL.Tests.csproj", "{80B33CE1-A7B4-4DF8-B61B-435FE61560F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Carpool.BL", "Carpool.BL\Carpool.BL.csproj", "{5B01852F-9C71-4294-97D5-AA3E9053A78B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{80B33CE1-A7B4-4DF8-B61B-435FE61560F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80B33CE1-A7B4-4DF8-B61B-435FE61560F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80B33CE1-A7B4-4DF8-B61B-435FE61560F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B01852F-9C71-4294-97D5-AA3E9053A78B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B01852F-9C71-4294-97D5-AA3E9053A78B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B01852F-9C71-4294-97D5-AA3E9053A78B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B01852F-9C71-4294-97D5-AA3E9053A78B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
