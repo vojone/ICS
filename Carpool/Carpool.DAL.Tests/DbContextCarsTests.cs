@@ -11,12 +11,13 @@ using Xunit.Abstractions;
 namespace Carpool.DAL.Tests
 {
     // Contains only basic use cases to ensure that DB context is well configured
-    public class DbContexCarsTests : DbContextTestsBase
+    public class DbContextCarsTests : DbContextTestsBase
     {
-        public DbContexCarsTests(ITestOutputHelper output) : base(output)
+        public DbContextCarsTests(ITestOutputHelper output) : base(output)
         {
         }
 
+        [Fact]
         public async Task GetExisting_Car()
         {
             //Act
@@ -24,7 +25,7 @@ namespace Carpool.DAL.Tests
                 .SingleAsync(i => i.Id == CarSeeds.Hyundai.Id);
 
             //Assert
-            DeepAssert.Equal(CarSeeds.Hyundai, entity);
+            DeepAssert.Equal(CarSeeds.Hyundai with {Owner = null}, entity);
         }
 
         [Fact]

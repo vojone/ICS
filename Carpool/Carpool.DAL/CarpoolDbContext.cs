@@ -26,17 +26,6 @@ namespace Carpool.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            if (!_seedDemoData) return;
-
-            UserPhotoSeeds.Seed(modelBuilder);
-            UserSeeds.Seed(modelBuilder);
-
-            CarSeeds.Seed(modelBuilder);
-            CarPhotoSeeds.Seed(modelBuilder);
-
-            LocationSeeds.Seed(modelBuilder);
-            RideSeeds.Seed(modelBuilder);
-            ParticipantSeeds.Seed(modelBuilder);
 
             modelBuilder.Entity<UserEntity>()
                 .HasMany(i => i.Rides)
@@ -95,6 +84,19 @@ namespace Carpool.DAL
                 .HasForeignKey(i => i.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
+            if (!_seedDemoData) return;
+
+            UserPhotoSeeds.Seed(modelBuilder);
+            UserSeeds.Seed(modelBuilder);
+
+            CarSeeds.Seed(modelBuilder);
+            CarPhotoSeeds.Seed(modelBuilder);
+            
+            LocationSeeds.Seed(modelBuilder);
+            RideSeeds.Seed(modelBuilder);
+
+            ParticipantSeeds.Seed(modelBuilder);
         }
 
     }

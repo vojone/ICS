@@ -17,14 +17,52 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task GetExisting_Chuck()
+        public async Task GetExisting_ChuckId()
         {
             //Act
             var entity = await CarpoolDbContextSut.Users
                 .SingleAsync(i => i.Id == UserSeeds.Chuck.Id);
 
             //Assert
+            DeepAssert.Equal(UserSeeds.Chuck.Id, entity.Id);
+        }
+
+        [Fact]
+        public async Task GetExisting_ChucksPhoto()
+        {
+            //Act
+            var entity = await CarpoolDbContextSut.Users
+                .Include(i => i.Photo)
+                .SingleAsync(i => i.Id == UserSeeds.ChuckWithPhoto.Id);
+
+            //Assert
+            DeepAssert.Equal(UserSeeds.ChuckWithPhoto.Photo, entity.Photo);
+        }
+
+
+        [Fact]
+        public async Task GetExisting_ChuckWithCars()
+        {
+            //Act
+            var entity = await CarpoolDbContextSut.Users
+                .Include(i => i.Cars)
+                .SingleAsync(i => i.Id == UserSeeds.Chuck.Id);
+
+            //Assert
             DeepAssert.Equal(UserSeeds.Chuck, entity);
+        }
+
+        [Fact]
+        public async Task GetExisting_ObiwansRides()
+        {
+            //Act
+            var entities = await CarpoolDbContextSut.Participants
+                .Where(i => i.UserId == UserSeeds.Obiwan.Id)
+                .ToArrayAsync();
+
+
+            //Assert
+            Assert.Contains(ParticipantSeeds.Participant2 with {Ride = null, User = null}, entities);
         }
 
         [Fact]
@@ -54,12 +92,12 @@ namespace Carpool.DAL.Tests
         public async Task Update_User_Persisted()
         {
             //Arrange
-            UserEntity baseEntity = UserSeeds.UpdateChuck;
+            UserEntity baseEntity = UserSeeds.UpdateLeonardo;
 
             UserEntity updatedEntity =
                 baseEntity with
                 {
-                    Name = "Godtier Norris",
+                    Name = "Godtier Leonardo",
                     Rating = UInt32.MaxValue
                 };
 
@@ -77,7 +115,7 @@ namespace Carpool.DAL.Tests
         public async Task Delete_User_ChuckDelete()
         {
             //Arrange
-            UserEntity toBeDeleted = UserSeeds.DeleteChuck;
+            UserEntity toBeDeleted = UserSeeds.DeleteLeonardo;
 
             //Act
             CarpoolDbContextSut.Users.Remove(toBeDeleted);

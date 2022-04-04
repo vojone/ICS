@@ -22,7 +22,7 @@ namespace Carpool.DAL.Seeds
         };
 
         public static readonly ParticipantEntity Participant2 = new(
-            Id: Guid.Parse("D733D8FC-427A-4A86-AC08-D70D8AEDD6E5"),
+            Id: Guid.Parse("522CFAEC-544C-47FE-882F-E6DBD7CF3AA7"),
             UserId: UserSeeds.Obiwan.Id,
             RideId: RideSeeds.Ride1.Id,
             HasUserRated: false
@@ -32,10 +32,11 @@ namespace Carpool.DAL.Seeds
             Ride = RideSeeds.Ride1
         };
 
+
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ParticipantEntity>().HasData(
-                Participant1 with { User = null, Ride = null},
+                Participant1 with { User = null, Ride = null },
                 Participant2 with { User = null, Ride = null }
             );
         }

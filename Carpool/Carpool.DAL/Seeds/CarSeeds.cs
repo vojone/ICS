@@ -15,7 +15,10 @@ public static class CarSeeds
         Registration: new DateOnly(2010, 05, 01),
         Seats: 5,
         OwnerId: UserSeeds.Chuck.Id
-    );
+    )
+    {
+        Owner = UserSeeds.Chuck
+    };
 
     public static readonly CarEntity Kia = new(
         Id: Guid.Parse("B28B6CA6-E1A7-4779-8384-5147563A1F15"),
@@ -25,13 +28,16 @@ public static class CarSeeds
         Registration: new DateOnly(2012, 05, 04),
         Seats: 4,
         OwnerId: UserSeeds.Chuck.Id
-    );
+    )
+    {
+        Owner = UserSeeds.Chuck
+    };
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
-            Hyundai,
-            Kia
+            Hyundai with { Owner = null},
+            Kia with { Owner = null }
         );
     }
 }

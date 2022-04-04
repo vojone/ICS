@@ -1,6 +1,7 @@
 using Carpool.Common;
 using Carpool.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
+using Xunit;
 
 namespace Carpool.DAL.Seeds;
 

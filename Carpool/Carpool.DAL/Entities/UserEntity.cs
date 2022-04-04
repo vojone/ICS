@@ -12,11 +12,11 @@ public record UserEntity(
 {
 
     public UserPhotoEntity? Photo { get; set; }
-    public ICollection<CarEntity>? Cars { get; set; } = new List<CarEntity>();
+    public ICollection<CarEntity> Cars { get; set; } = new List<CarEntity>();
 
-    public ICollection<RideEntity>? DrivingRides { get; set; } = new List<RideEntity>();
+    public ICollection<RideEntity> DrivingRides { get; set; } = new List<RideEntity>();
 
-    public ICollection<ParticipantEntity>? Rides { get; set; } = new List<ParticipantEntity>();
+    public ICollection<ParticipantEntity> Rides { get; set; } = new List<ParticipantEntity>();
 
 }
     
