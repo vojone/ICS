@@ -11,12 +11,13 @@ using Xunit.Abstractions;
 namespace Carpool.DAL.Tests
 {
     // Contains only basic use cases to ensure that DB context is well configured
-    public class DbContexCarsTests : DbContextTestsBase
+    public class DbContextCarsTests : DbContextTestsBase
     {
-        public DbContexCarsTests(ITestOutputHelper output) : base(output)
+        public DbContextCarsTests(ITestOutputHelper output) : base(output)
         {
         }
 
+        [Fact]
         public async Task GetExisting_Car()
         {
             //Act
@@ -24,7 +25,7 @@ namespace Carpool.DAL.Tests
                 .SingleAsync(i => i.Id == CarSeeds.Hyundai.Id);
 
             //Assert
-            DeepAssert.Equal(CarSeeds.Hyundai, entity);
+            DeepAssert.Equal(CarSeeds.Hyundai with {Owner = null}, entity);
         }
 
         [Fact]
@@ -32,12 +33,13 @@ namespace Carpool.DAL.Tests
         {
             //Arrange
             CarEntity entity = new(
-                Guid.Parse("142C54E5-B10F-4956-AB0B-B80007670E3C"),
+                Id:Guid.Parse("142C54E5-B10F-4956-AB0B-B80007670E3C"),
                 Name: "Rapid",
                 Brand: "Skoda",
                 Type: CarType.Sport,
                 Registration: DateOnly.MinValue,
-                Seats: 4
+                Seats: 4,
+                OwnerId: UserSeeds.Chuck.Id
             );
 
             //Act

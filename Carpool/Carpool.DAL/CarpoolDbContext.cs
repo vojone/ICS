@@ -18,19 +18,84 @@ namespace Carpool.DAL
         public DbSet<RideEntity> Rides => Set<RideEntity>();
         public DbSet<CarEntity> Cars => Set<CarEntity>();
         public DbSet<ParticipantEntity> Participants => Set<ParticipantEntity>();
-        public DbSet<PhotoEntity> Photos => Set<PhotoEntity>();
+        public DbSet<UserPhotoEntity> UserPhotos => Set<UserPhotoEntity>();
+        public DbSet<CarPhotoEntity> CarPhotos => Set<CarPhotoEntity>();
+        public DbSet<LocationEntity> Locations => Set<LocationEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(i => i.Rides)
+                .WithOne(i => i.User)
+                .HasForeignKey(i => i.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<RideEntity>()
+                .HasMany(i => i.Participants)
+                .WithOne(i => i.Ride)
+                .HasForeignKey(i => i.RideId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<RideEntity>()
+                .HasOne(i => i.ArrivalL)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<RideEntity>()
+                .HasOne(i => i.DepartureL)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<RideEntity>()
+                .HasOne(i => i.Car)
+                .WithMany()
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<RideEntity>()
+                .HasOne(i => i.Driver)
+                .WithMany(i => i.DrivingRides)
+                .OnDelete(DeleteBehavior.ClientCascade);
+
+
+            modelBuilder.Entity<UserEntity>()
+                .HasMany(i => i.Cars)
+                .WithOne(i => i.Owner)
+                .HasForeignKey(i => i.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<UserEntity>()
+                .HasOne(i => i.Photo)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            modelBuilder.Entity<CarEntity>()
+                .HasMany(i => i.Photos)
+                .WithOne(i => i.Car)
+                .HasForeignKey(i => i.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
             if (!_seedDemoData) return;
 
-            LocationSeeds.Seed(modelBuilder);
-            PhotoSeeds.Seed(modelBuilder);
-            CarSeeds.Seed(modelBuilder);
+            UserPhotoSeeds.Seed(modelBuilder);
             UserSeeds.Seed(modelBuilder);
+
+            CarSeeds.Seed(modelBuilder);
+            CarPhotoSeeds.Seed(modelBuilder);
+            
+            LocationSeeds.Seed(modelBuilder);
             RideSeeds.Seed(modelBuilder);
+
             ParticipantSeeds.Seed(modelBuilder);
         }
 
