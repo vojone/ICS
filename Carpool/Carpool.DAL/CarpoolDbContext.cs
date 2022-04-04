@@ -44,13 +44,13 @@ namespace Carpool.DAL
             modelBuilder.Entity<RideEntity>()
                 .HasOne(i => i.ArrivalL)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
 
             modelBuilder.Entity<RideEntity>()
                 .HasOne(i => i.DepartureL)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.ClientCascade);
 
 
             modelBuilder.Entity<RideEntity>()
@@ -84,6 +84,11 @@ namespace Carpool.DAL
                 .HasForeignKey(i => i.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<CarEntity>()
+                .Property(i => i.Registration)
+                .HasConversion(
+                    v => v.ToString("MM/dd/yyyy"),
+                    v => DateOnly.Parse(v));
 
             if (!_seedDemoData) return;
 
