@@ -32,11 +32,12 @@ namespace Carpool.DAL.Tests
         {
             //Act
             var entity = await CarpoolDbContextSut.Users
-                .Include(i => i.Photo)
-                .SingleAsync(i => i.Id == UserSeeds.ChuckWithPhoto.Id);
+                .SingleAsync(i => i.Id == UserSeeds.Chuck.Id);
+            /*.Include(i => i.PhotoUrl)
+            .SingleAsync(i => i.Id == UserSeeds.ChuckWithPhoto.Id);*/
 
             //Assert
-            DeepAssert.Equal(UserSeeds.ChuckWithPhoto.Photo, entity.Photo);
+            DeepAssert.Equal(UserSeeds.Chuck.PhotoUrl, entity.PhotoUrl);
         }
 
 
@@ -49,7 +50,7 @@ namespace Carpool.DAL.Tests
                 .SingleAsync(i => i.Id == UserSeeds.Chuck.Id);
 
             //Assert
-            DeepAssert.Equal(UserSeeds.Chuck, entity);
+            DeepAssert.Equal(UserSeeds.Chuck.Cars, entity.Cars);
         }
 
         [Fact]

@@ -18,7 +18,7 @@ namespace Carpool.DAL
         public DbSet<RideEntity> Rides => Set<RideEntity>();
         public DbSet<CarEntity> Cars => Set<CarEntity>();
         public DbSet<ParticipantEntity> Participants => Set<ParticipantEntity>();
-        public DbSet<UserPhotoEntity> UserPhotos => Set<UserPhotoEntity>();
+        //public DbSet<UserPhotoEntity> UserPhotos => Set<UserPhotoEntity>();
         public DbSet<CarPhotoEntity> CarPhotos => Set<CarPhotoEntity>();
         public DbSet<LocationEntity> Locations => Set<LocationEntity>();
 
@@ -72,10 +72,10 @@ namespace Carpool.DAL
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-            modelBuilder.Entity<UserEntity>()
+            /*modelBuilder.Entity<UserEntity>()
                 .HasOne(i => i.Photo)
                 .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);*/
 
 
             modelBuilder.Entity<CarEntity>()
@@ -87,12 +87,11 @@ namespace Carpool.DAL
             modelBuilder.Entity<CarEntity>()
                 .Property(i => i.Registration)
                 .HasConversion(
-                    v => v.ToString("MM/dd/yyyy"),
+                    v => v.ToString("dd/MM/yyyy"),
                     v => DateOnly.Parse(v));
 
             if (!_seedDemoData) return;
 
-            UserPhotoSeeds.Seed(modelBuilder);
             UserSeeds.Seed(modelBuilder);
 
             CarSeeds.Seed(modelBuilder);

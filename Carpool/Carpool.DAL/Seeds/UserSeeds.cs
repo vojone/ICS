@@ -10,7 +10,7 @@ public static class UserSeeds
         Id: Guid.Parse("0BF2856B-BB93-4170-9B37-90FF33B2F485"),
         Name: "Obiwan",
         Surname: "Kenobi",
-        PhotoId: null,
+        PhotoUrl: null,
         Country: null,
         Rating: 0
     );
@@ -19,7 +19,7 @@ public static class UserSeeds
         Id: Guid.Parse("19CC4BD8-644D-428E-B212-7AC068CA2307"),
         Name: "Jack",
         Surname: "Sparrow",
-        PhotoId: null,
+        PhotoUrl: null,
         Country: null,
         Rating: 123
     );
@@ -28,7 +28,7 @@ public static class UserSeeds
         Id: Guid.Parse("DE5D480F-883C-4F70-81BE-9D7E9B360C31"),
         Name: "Chuck",
         Surname: "Norris",
-        PhotoId: null,
+        PhotoUrl: "TestUrl",
         Country: "USA",
         Rating: 454657894
     );
@@ -37,16 +37,15 @@ public static class UserSeeds
         Id: Guid.Parse("5D825E40-9003-4BB1-A0AA-DF76571F0D2C"),
         Name: "Leonardo",
         Surname: "diCaprio",
-        PhotoId: null,
+        PhotoUrl: null,
         Country: "USA",
         Rating: 1
     );
 
-    public static readonly UserEntity ChuckWithPhoto = Chuck with
+    public static readonly UserEntity UpdateChuck = Chuck with
     {
         Id = Guid.Parse("82DBAB40-9FF0-4F4E-BC3D-F1C1FCEF42E9"),
-        PhotoId = UserPhotoSeeds.UserPhoto.Id,
-        Photo = UserPhotoSeeds.UserPhoto
+        PhotoUrl = "TEST" //check this seeed
     };
 
     public static readonly UserEntity UpdateLeonardo = Leonardo with
@@ -74,7 +73,7 @@ public static class UserSeeds
             Obiwan with { Rides = Array.Empty<ParticipantEntity>() },
             Jack with { Rides = Array.Empty<ParticipantEntity>() },
             Chuck with { Cars = Array.Empty<CarEntity>()},
-            ChuckWithPhoto with { Photo = null, Cars = Array.Empty<CarEntity>() },
+            UpdateChuck with { Cars = Array.Empty<CarEntity>() },
             UpdateLeonardo,
             DeleteLeonardo
         );
