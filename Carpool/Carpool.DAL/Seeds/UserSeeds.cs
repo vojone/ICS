@@ -45,7 +45,7 @@ public static class UserSeeds
     public static readonly UserEntity UpdateChuck = Chuck with
     {
         Id = Guid.Parse("82DBAB40-9FF0-4F4E-BC3D-F1C1FCEF42E9"),
-        PhotoUrl = "TEST" //check this seeed
+        PhotoUrl = "TEST" //check this seed
     };
 
     public static readonly UserEntity UpdateLeonardo = Leonardo with
@@ -60,22 +60,25 @@ public static class UserSeeds
 
     static UserSeeds()
     {
+        Chuck.Cars.Add(CarSeeds.DeleteKia);
         Chuck.Cars.Add(CarSeeds.Hyundai);
         Chuck.Cars.Add(CarSeeds.Kia);
 
         Jack.Rides.Add(ParticipantSeeds.Participant1);
+        Jack.Rides.Add(ParticipantSeeds.DeleteParticipant1);
         Obiwan.Rides.Add(ParticipantSeeds.Participant2);
     }
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<UserEntity>().HasData(
-            Obiwan with { Rides = Array.Empty<ParticipantEntity>() },
-            Jack with { Rides = Array.Empty<ParticipantEntity>() },
-            Chuck with { Cars = Array.Empty<CarEntity>()},
-            UpdateChuck with { Cars = Array.Empty<CarEntity>() },
-            UpdateLeonardo,
-            DeleteLeonardo
+            Obiwan with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
+            Jack with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
+            Chuck with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
+            Leonardo with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
+            UpdateChuck with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
+            UpdateLeonardo with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
+            DeleteLeonardo with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() }
         );
     }
 }

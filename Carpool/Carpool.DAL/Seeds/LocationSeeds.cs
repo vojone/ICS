@@ -14,7 +14,6 @@ public static class LocationSeeds
         Street: "Manesova"
     );
 
-
     public static readonly LocationEntity Brno = new(
         Id: Guid.Parse("0B1C302C-9F1D-401E-9BBC-73D08F7EACC4"),
         Town: "Brno",
@@ -43,13 +42,22 @@ public static class LocationSeeds
         Street: "Uhelná"
     );
 
-
     public static readonly LocationEntity Liberec = new(
         Id: Guid.Parse("BA6A70E4-2167-48E2-8E09-75DDCB758858"),
         Town: "Liberec",
         State: "Czech Republic",
         Street: "Náměstí"
     );
+
+    public static readonly LocationEntity DeleteOstrava = Ostrava with
+    {
+        Id = Guid.Parse("704B4816-11CF-4549-A0CB-43ABB2B40AB7")
+    };
+
+    public static readonly LocationEntity DeleteLiberec = Liberec with
+    {
+        Id = Guid.Parse("C6FC3CF4-D993-4DE5-B65B-9ABE7E71417C")
+    };
 
     public static void Seed(this ModelBuilder modelBuilder)
     {
@@ -59,7 +67,9 @@ public static class LocationSeeds
             Olomouc,
             Pardubice,
             Ostrava,
-            Liberec
+            Liberec,
+            DeleteOstrava,
+            DeleteLiberec
         );
     }
 }

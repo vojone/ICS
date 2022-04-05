@@ -33,11 +33,33 @@ public static class CarSeeds
         Owner = UserSeeds.Chuck
     };
 
+
+    public static readonly CarEntity DeleteKia = new(
+        Id: Guid.Parse("A26D094F-129A-4FA1-AE44-6039091BB040"),
+        Name: "Delete",
+        Brand: "Kia",
+        Type: CarType.Minivan,
+        Registration: new DateOnly(2012, 10, 04),
+        Seats: 4,
+        OwnerId: UserSeeds.Chuck.Id
+    )
+    {
+        Owner = UserSeeds.Chuck
+    };
+
+
+    static CarSeeds()
+    {
+        Kia.Photos.Add(CarPhotoSeeds.CarPhoto);
+        DeleteKia.Photos.Add(CarPhotoSeeds.DeleteCarPhoto);
+    }
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
-            Hyundai with { Owner = null},
-            Kia with { Owner = null }
+            Hyundai with { Owner = null, Photos = Array.Empty<CarPhotoEntity>() },
+            Kia with { Owner = null, Photos = Array.Empty<CarPhotoEntity>() },
+            DeleteKia with { Owner = null, Photos = Array.Empty<CarPhotoEntity>() }
         );
     }
 }

@@ -47,6 +47,7 @@ namespace Carpool.DAL.Tests
             //Act
             var entity = await CarpoolDbContextSut.Users
                 .Include(i => i.Cars)
+                .ThenInclude(i => i.Photos)
                 .SingleAsync(i => i.Id == UserSeeds.Chuck.Id);
 
             //Assert
@@ -108,22 +109,26 @@ namespace Carpool.DAL.Tests
 
             //Assert
             await using var dbx = await DbContextFactory.CreateDbContextAsync();
-            var actualEntity = await dbx.Users.SingleAsync(i => i.Id == updatedEntity.Id);
+            var actualEntity = await dbx.Users
+                .Include(i => i.Cars)
+                .SingleAsync(i => i.Id == updatedEntity.Id);
+
             DeepAssert.Equal(updatedEntity, actualEntity);
         }
 
         [Fact]
-        public async Task Delete_User_ChuckDelete()
+        public async Task Delete_User_LeonardoDelete()
         {
             //Arrange
             UserEntity toBeDeleted = UserSeeds.DeleteLeonardo;
 
             //Act
-            CarpoolDbContextSut.Users.Remove(toBeDeleted);
-            await CarpoolDbContextSut.SaveChangesAsync();
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            dbx.Users.Remove(toBeDeleted);
+            await dbx.SaveChangesAsync();
 
             //Assert
-            Assert.False(await CarpoolDbContextSut.Users.AnyAsync(i => i.Id == toBeDeleted.Id));
+            Assert.False(await dbx.Users.AnyAsync(i => i.Id == toBeDeleted.Id));
         }
     }
 }

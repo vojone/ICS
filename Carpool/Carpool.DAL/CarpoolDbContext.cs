@@ -18,7 +18,6 @@ namespace Carpool.DAL
         public DbSet<RideEntity> Rides => Set<RideEntity>();
         public DbSet<CarEntity> Cars => Set<CarEntity>();
         public DbSet<ParticipantEntity> Participants => Set<ParticipantEntity>();
-        //public DbSet<UserPhotoEntity> UserPhotos => Set<UserPhotoEntity>();
         public DbSet<CarPhotoEntity> CarPhotos => Set<CarPhotoEntity>();
         public DbSet<LocationEntity> Locations => Set<LocationEntity>();
 
@@ -31,7 +30,7 @@ namespace Carpool.DAL
                 .HasMany(i => i.Rides)
                 .WithOne(i => i.User)
                 .HasForeignKey(i => i.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<RideEntity>()
@@ -44,25 +43,25 @@ namespace Carpool.DAL
             modelBuilder.Entity<RideEntity>()
                 .HasOne(i => i.ArrivalL)
                 .WithOne()
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<RideEntity>()
                 .HasOne(i => i.DepartureL)
                 .WithOne()
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<RideEntity>()
                 .HasOne(i => i.Car)
                 .WithMany()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<RideEntity>()
                 .HasOne(i => i.Driver)
                 .WithMany(i => i.DrivingRides)
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
 
             modelBuilder.Entity<UserEntity>()
@@ -71,11 +70,6 @@ namespace Carpool.DAL
                 .HasForeignKey(i => i.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-
-            /*modelBuilder.Entity<UserEntity>()
-                .HasOne(i => i.Photo)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);*/
 
 
             modelBuilder.Entity<CarEntity>()

@@ -11,10 +11,17 @@ public static class CarPhotoSeeds
         CarId: CarSeeds.Kia.Id
     );
 
+    public static readonly CarPhotoEntity DeleteCarPhoto = new(
+        Id: Guid.Parse("7BA8C605-1E79-414C-A9CD-BE5FAF72A3BC"),
+        Url: @"DeleteCarPhotoPicture",
+        CarId: CarSeeds.DeleteKia.Id
+    );
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarPhotoEntity>().HasData(
-            CarPhoto
+            CarPhoto,
+            DeleteCarPhoto
         );
     }
 }

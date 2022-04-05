@@ -117,5 +117,34 @@ namespace Carpool.DAL.Tests
                 .SingleAsync(i => i.Id == rideEntity.Id);
             DeepAssert.Equal(rideEntity, actualEntity);
         }
+
+        [Fact]
+        public async Task Delete_Ride()
+        {
+            //Arrange
+            var baseEntity = RideSeeds.DeleteRide;
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var toBeDeleted = await dbx.Rides
+                .SingleAsync(i => i.Id == baseEntity.Id);
+
+            //Act
+            Assert.NotNull(toBeDeleted);
+            dbx.Rides.Remove(toBeDeleted);
+            await dbx.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await dbx.Rides.AnyAsync(i => i.Id == baseEntity.Id));
+
+            //Driver and car should be still in DB
+            Assert.True(await dbx.Users.AnyAsync(i => i.Id == baseEntity.DriverId));
+            Assert.True(await dbx.Cars.AnyAsync(i => i.Id == baseEntity.CarId));
+
+            //Participants not
+            Assert.False(await dbx.Participants.AnyAsync(i => i.RideId == baseEntity.Id));
+
+            //And locations should be deleted as well
+            Assert.False(await dbx.Locations.AnyAsync(i => i.Id == baseEntity.ArrivalLId));
+            Assert.False(await dbx.Locations.AnyAsync(i => i.Id == baseEntity.DepartureLId));
+        }
     }
 }
