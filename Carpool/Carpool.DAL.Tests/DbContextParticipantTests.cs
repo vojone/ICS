@@ -72,7 +72,30 @@ namespace Carpool.DAL.Tests
             Assert.True(await dbx.Rides.AnyAsync(i => i.Id == entityBase.RideId));
         }
 
+        [Fact]
+        public async Task Update_Participant()
+        {
+            //Arrange
+            var entityBase = ParticipantSeeds.UpdateParticipant;
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var entity = await CarpoolDbContextSut.Participants
+                .SingleAsync(i => i.Id == entityBase.Id);
 
+            //Act
+            Assert.NotNull(entity);
+
+            var updatedEntity = entity with
+            {
+                HasUserRated = true
+            };
+
+            dbx.Participants.Update(updatedEntity);
+            await dbx.SaveChangesAsync();
+
+            //Arrange
+            var actualEntity = await dbx.Participants.SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(updatedEntity, actualEntity);
+        }
     }
 }
 

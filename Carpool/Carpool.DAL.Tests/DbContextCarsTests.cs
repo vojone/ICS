@@ -58,10 +58,12 @@ namespace Carpool.DAL.Tests
         {
             //Arrange
             var entityBase = CarSeeds.DeleteKia;
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var entity = await dbx.Cars.SingleAsync(i => i.Id == entityBase.Id);
 
             //Act
-            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-            dbx.Cars.Remove(entityBase);
+            Assert.NotNull(entity);
+            dbx.Cars.Remove(entity);
             await dbx.SaveChangesAsync();
 
             //Assert
@@ -72,10 +74,27 @@ namespace Carpool.DAL.Tests
 
             //User should still exists after deletion of his car
             Assert.True(await dbx.Users.AnyAsync(i => i.Id == entityBase.OwnerId));
+        }
 
-            //Adding car 
-            dbx.Cars.Add(entityBase);
+        [Fact]
+        public async Task Delete_CarPhoto()
+        {
+            //Arrange
+            var entityBase = CarPhotoSeeds.DeleteCarPhoto;
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var entity = await dbx.CarPhotos.SingleAsync(i => i.Id == entityBase.Id);
+
+            //Act
+            Assert.NotNull(entity);
+            dbx.CarPhotos.Remove(entity);
             await dbx.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await dbx.CarPhotos.AnyAsync(i => i.Id == entityBase.Id));
+
+
+            //Car should still exists after deletion of its photo
+            Assert.True(await dbx.Cars.AnyAsync(i => i.Id == entityBase.CarId));
         }
     }
 }

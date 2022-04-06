@@ -41,10 +41,10 @@ public static class CarSeeds
         Type: CarType.Minivan,
         Registration: new DateOnly(2012, 10, 04),
         Seats: 4,
-        OwnerId: UserSeeds.Chuck.Id
+        OwnerId: UserSeeds.Jack.Id
     )
     {
-        Owner = UserSeeds.Chuck
+        Owner = UserSeeds.Jack
     };
 
 

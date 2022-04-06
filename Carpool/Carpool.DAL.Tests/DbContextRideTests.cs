@@ -53,8 +53,8 @@ namespace Carpool.DAL.Tests
                 Capacity: 3,
                 State: RideState.Planned,
                 CarId: CarSeeds.Kia.Id,
-                DepartureLId: LocationSeeds.Ostrava.Id,
-                ArrivalLId: LocationSeeds.Liberec.Id,
+                DepartureL:"Ostrava",
+                ArrivalL: "Liberec",
                 DepartureT: DateTime.MaxValue,
                 ArrivalT: DateTime.MinValue,
                 DriverId: UserSeeds.Obiwan.Id
@@ -70,53 +70,6 @@ namespace Carpool.DAL.Tests
             DeepAssert.Equal(entity, actualEntities);
         }
 
-
-        [Fact]
-        public async Task AddNew_Ride_PersistedWithNewLocation()
-        {
-            //Arrange
-            LocationEntity departureEntity = new(
-                Id: Guid.Parse("E490A154-D16A-4C28-AAFF-108A2EAFB1F5"),
-                State: "Czech Republic",
-                Town: "Pardubice",
-                Street: "Dlouhá"
-            );
-
-            LocationEntity arrivalEntity = new(
-                Id: Guid.Parse("4A762DBE-EEFD-4324-B592-1E560AEBCEEF"),
-                State: "Czech Republic",
-                Town: "Pardubice",
-                Street: "Krátká"
-            );
-
-
-            RideEntity rideEntity = new(
-                Id: Guid.Parse("169CCB36-F786-41FE-A8C8-82B9C0AD56A9"),
-                InitialCapacity: 3,
-                Capacity: 3,
-                State: RideState.Planned,
-                CarId: CarSeeds.Kia.Id,
-                DepartureLId: departureEntity.Id,
-                ArrivalLId: arrivalEntity.Id,
-                DepartureT: DateTime.MaxValue,
-                ArrivalT: DateTime.MinValue,
-                DriverId: UserSeeds.Obiwan.Id
-            );
-
-            //Act
-            CarpoolDbContextSut.Locations.Add(departureEntity);
-            CarpoolDbContextSut.Locations.Add(arrivalEntity);
-            CarpoolDbContextSut.Rides.Add(rideEntity);
-            await CarpoolDbContextSut.SaveChangesAsync();
-
-            //Assert
-            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-            var actualEntity = await dbx.Rides
-                .Include(i => i.DepartureL)
-                .Include(i => i.ArrivalL)
-                .SingleAsync(i => i.Id == rideEntity.Id);
-            DeepAssert.Equal(rideEntity, actualEntity);
-        }
 
         [Fact]
         public async Task Delete_Ride()
@@ -141,10 +94,6 @@ namespace Carpool.DAL.Tests
 
             //Participants not
             Assert.False(await dbx.Participants.AnyAsync(i => i.RideId == baseEntity.Id));
-
-            //And locations should be deleted as well
-            Assert.False(await dbx.Locations.AnyAsync(i => i.Id == baseEntity.ArrivalLId));
-            Assert.False(await dbx.Locations.AnyAsync(i => i.Id == baseEntity.DepartureLId));
         }
     }
 }

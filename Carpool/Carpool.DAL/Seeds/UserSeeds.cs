@@ -60,13 +60,17 @@ public static class UserSeeds
 
     static UserSeeds()
     {
-        Chuck.Cars.Add(CarSeeds.DeleteKia);
         Chuck.Cars.Add(CarSeeds.Hyundai);
         Chuck.Cars.Add(CarSeeds.Kia);
 
+        Jack.Cars.Add(CarSeeds.DeleteKia);
+
         Jack.Rides.Add(ParticipantSeeds.Participant1);
         Jack.Rides.Add(ParticipantSeeds.DeleteParticipant1);
+
         Obiwan.Rides.Add(ParticipantSeeds.Participant2);
+
+        DeleteLeonardo.Rides.Add(ParticipantSeeds.UpdateParticipant);
     }
 
     public static void Seed(this ModelBuilder modelBuilder)

@@ -19,7 +19,6 @@ namespace Carpool.DAL
         public DbSet<CarEntity> Cars => Set<CarEntity>();
         public DbSet<ParticipantEntity> Participants => Set<ParticipantEntity>();
         public DbSet<CarPhotoEntity> CarPhotos => Set<CarPhotoEntity>();
-        public DbSet<LocationEntity> Locations => Set<LocationEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,18 +36,6 @@ namespace Carpool.DAL
                 .HasMany(i => i.Participants)
                 .WithOne(i => i.Ride)
                 .HasForeignKey(i => i.RideId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-
-            modelBuilder.Entity<RideEntity>()
-                .HasOne(i => i.ArrivalL)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
-
-
-            modelBuilder.Entity<RideEntity>()
-                .HasOne(i => i.DepartureL)
-                .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
 
 
@@ -91,7 +78,6 @@ namespace Carpool.DAL
             CarSeeds.Seed(modelBuilder);
             CarPhotoSeeds.Seed(modelBuilder);
             
-            LocationSeeds.Seed(modelBuilder);
             RideSeeds.Seed(modelBuilder);
 
             ParticipantSeeds.Seed(modelBuilder);

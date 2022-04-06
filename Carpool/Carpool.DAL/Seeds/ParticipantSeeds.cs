@@ -43,13 +43,25 @@ namespace Carpool.DAL.Seeds
             Ride = RideSeeds.Ride2
         };
 
+        public static readonly ParticipantEntity UpdateParticipant = new(
+            Id: Guid.Parse("B253D9AD-0DB7-4700-AB74-382C2E95A5C7"),
+            UserId: UserSeeds.DeleteLeonardo.Id,
+            RideId: RideSeeds.DeleteRide.Id,
+            HasUserRated: false
+        )
+        {
+            User = UserSeeds.DeleteLeonardo,
+            Ride = RideSeeds.DeleteRide
+        };
+
 
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ParticipantEntity>().HasData(
                 Participant1 with { User = null, Ride = null },
                 DeleteParticipant1 with { User = null, Ride = null },
-                Participant2 with { User = null, Ride = null }
+                Participant2 with { User = null, Ride = null },
+                UpdateParticipant with { User = null, Ride = null }
             );
         }
     }
