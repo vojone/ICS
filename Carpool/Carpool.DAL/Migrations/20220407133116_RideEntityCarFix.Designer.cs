@@ -4,6 +4,7 @@ using Carpool.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Carpool.DAL.Migrations
 {
     [DbContext(typeof(CarpoolDbContext))]
-    partial class CarpoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220407133116_RideEntityCarFix")]
+    partial class RideEntityCarFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,7 +142,8 @@ namespace Carpool.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarId")
+                        .IsUnique();
 
                     b.HasIndex("DriverId");
 
@@ -219,8 +222,8 @@ namespace Carpool.DAL.Migrations
             modelBuilder.Entity("Carpool.DAL.Entities.RideEntity", b =>
                 {
                     b.HasOne("Carpool.DAL.Entities.CarEntity", "Car")
-                        .WithMany()
-                        .HasForeignKey("CarId")
+                        .WithOne()
+                        .HasForeignKey("Carpool.DAL.Entities.RideEntity", "CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
