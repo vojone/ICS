@@ -9,7 +9,7 @@ using Carpool.DAL.Entities;
 
 namespace Carpool.BL.Models
 {
-    public record PhotoModel(string Url) : ModelBase
+    public record CarPhotoModel(string Url) : ModelBase
     {
         public string Url { get; set; } = Url;
 
@@ -17,7 +17,7 @@ namespace Carpool.BL.Models
         {
             public MapperProfile()
             {
-                CreateMap<PhotoEntity, PhotoModel>();
+                CreateMap<CarPhotoEntity, CarPhotoModel>();
             }
         }
     }
