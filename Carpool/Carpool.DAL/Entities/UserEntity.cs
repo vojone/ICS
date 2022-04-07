@@ -6,17 +6,15 @@ public record UserEntity(
     Guid Id,
     string Name,
     string Surname,
-    Guid? PhotoId,
+    string? PhotoUrl,
     string? Country,
     uint Rating) : IEntity
 {
+    public ICollection<CarEntity> Cars { get; set; } = new List<CarEntity>();
 
-    public PhotoEntity? Photo { get; set; }
-    public ICollection<CarEntity>? Cars { get; set; } = new List<CarEntity>();
+    public ICollection<RideEntity> DrivingRides { get; set; } = new List<RideEntity>();
 
-    public ICollection<RideEntity>? DrivingRides { get; set; } = new List<RideEntity>();
-
-    public ICollection<ParticipantEntity>? Rides { get; set; } = new List<ParticipantEntity>();
+    public ICollection<ParticipantEntity> Rides { get; set; } = new List<ParticipantEntity>();
 
 }
     
