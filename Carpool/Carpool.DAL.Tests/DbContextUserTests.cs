@@ -32,24 +32,23 @@ namespace Carpool.DAL.Tests
         {
             //Act
             var entity = await CarpoolDbContextSut.Users
-                .Include(i => i.Photo)
-                .SingleAsync(i => i.Id == UserSeeds.ChuckWithPhoto.Id);
+                .SingleAsync(i => i.Id == UserSeeds.Chuck.Id);
 
             //Assert
-            DeepAssert.Equal(UserSeeds.ChuckWithPhoto.Photo, entity.Photo);
+            DeepAssert.Equal(UserSeeds.Chuck.PhotoUrl, entity.PhotoUrl);
         }
 
 
         [Fact]
-        public async Task GetExisting_ChuckWithCars()
+        public async Task GetExisting_ChuckCars()
         {
             //Act
-            var entity = await CarpoolDbContextSut.Users
-                .Include(i => i.Cars)
-                .SingleAsync(i => i.Id == UserSeeds.Chuck.Id);
+            var entities = await CarpoolDbContextSut.Cars
+                .Where(i => i.OwnerId == UserSeeds.Chuck.Id)
+                .ToArrayAsync();
 
             //Assert
-            DeepAssert.Equal(UserSeeds.Chuck, entity);
+            DeepAssert.Equal(entities.Count(), UserSeeds.Chuck.Cars.Count);
         }
 
         [Fact]
@@ -92,37 +91,45 @@ namespace Carpool.DAL.Tests
         public async Task Update_User_Persisted()
         {
             //Arrange
-            UserEntity baseEntity = UserSeeds.UpdateLeonardo;
+            UserEntity toBeUpdated = UserSeeds.UpdateLeonardo;
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var entity = await CarpoolDbContextSut.Users.SingleAsync(i => i.Id == toBeUpdated.Id);
 
-            UserEntity updatedEntity =
-                baseEntity with
+            var updatedEntity =
+                entity with
                 {
                     Name = "Godtier Leonardo",
                     Rating = UInt32.MaxValue
                 };
 
             //Act
-            CarpoolDbContextSut.Users.Update(updatedEntity);
-            await CarpoolDbContextSut.SaveChangesAsync();
+            Assert.NotNull(entity);
+            dbx.Users.Update(updatedEntity);
+            await dbx.SaveChangesAsync();
 
             //Assert
-            await using var dbx = await DbContextFactory.CreateDbContextAsync();
-            var actualEntity = await dbx.Users.SingleAsync(i => i.Id == updatedEntity.Id);
+            var actualEntity = await dbx.Users
+                .Include(i => i.Cars)
+                .SingleAsync(i => i.Id == updatedEntity.Id);
+
             DeepAssert.Equal(updatedEntity, actualEntity);
         }
 
         [Fact]
-        public async Task Delete_User_ChuckDelete()
+        public async Task Delete_User_LeonardoDelete()
         {
             //Arrange
             UserEntity toBeDeleted = UserSeeds.DeleteLeonardo;
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var entity = await dbx.Users.SingleAsync(i => i.Id == toBeDeleted.Id);
 
             //Act
-            CarpoolDbContextSut.Users.Remove(toBeDeleted);
-            await CarpoolDbContextSut.SaveChangesAsync();
+            Assert.NotNull(entity);
+            dbx.Users.Remove(entity);
+            await dbx.SaveChangesAsync();
 
             //Assert
-            Assert.False(await CarpoolDbContextSut.Users.AnyAsync(i => i.Id == toBeDeleted.Id));
+            Assert.False(await dbx.Users.AnyAsync(i => i.Id == toBeDeleted.Id));
         }
     }
 }

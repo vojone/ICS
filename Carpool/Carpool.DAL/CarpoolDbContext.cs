@@ -18,9 +18,7 @@ namespace Carpool.DAL
         public DbSet<RideEntity> Rides => Set<RideEntity>();
         public DbSet<CarEntity> Cars => Set<CarEntity>();
         public DbSet<ParticipantEntity> Participants => Set<ParticipantEntity>();
-        public DbSet<UserPhotoEntity> UserPhotos => Set<UserPhotoEntity>();
         public DbSet<CarPhotoEntity> CarPhotos => Set<CarPhotoEntity>();
-        public DbSet<LocationEntity> Locations => Set<LocationEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,25 +29,13 @@ namespace Carpool.DAL
                 .HasMany(i => i.Rides)
                 .WithOne(i => i.User)
                 .HasForeignKey(i => i.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<RideEntity>()
                 .HasMany(i => i.Participants)
                 .WithOne(i => i.Ride)
                 .HasForeignKey(i => i.RideId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-
-            modelBuilder.Entity<RideEntity>()
-                .HasOne(i => i.ArrivalL)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
-
-
-            modelBuilder.Entity<RideEntity>()
-                .HasOne(i => i.DepartureL)
-                .WithOne()
                 .OnDelete(DeleteBehavior.Cascade);
 
 
@@ -62,7 +48,7 @@ namespace Carpool.DAL
             modelBuilder.Entity<RideEntity>()
                 .HasOne(i => i.Driver)
                 .WithMany(i => i.DrivingRides)
-                .OnDelete(DeleteBehavior.ClientCascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
 
             modelBuilder.Entity<UserEntity>()
@@ -72,11 +58,6 @@ namespace Carpool.DAL
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-            modelBuilder.Entity<UserEntity>()
-                .HasOne(i => i.Photo)
-                .WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
-
 
             modelBuilder.Entity<CarEntity>()
                 .HasMany(i => i.Photos)
@@ -84,16 +65,19 @@ namespace Carpool.DAL
                 .HasForeignKey(i => i.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<CarEntity>()
+                .Property(i => i.Registration)
+                .HasConversion(
+                    v => v.ToString("dd/MM/yyyy"),
+                    v => DateOnly.Parse(v));
 
             if (!_seedDemoData) return;
 
-            UserPhotoSeeds.Seed(modelBuilder);
             UserSeeds.Seed(modelBuilder);
 
             CarSeeds.Seed(modelBuilder);
             CarPhotoSeeds.Seed(modelBuilder);
             
-            LocationSeeds.Seed(modelBuilder);
             RideSeeds.Seed(modelBuilder);
 
             ParticipantSeeds.Seed(modelBuilder);
