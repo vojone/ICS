@@ -11,13 +11,13 @@ namespace Carpool.BL.Models
     public record UserDetailModel(
         string Name,
         string Surname,
-        Guid? PhotoId,
+        string? PhotoUrl,
         string? Country,
         uint Rating) : ModelBase
     {
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;
-        public Guid? PhotoId { get; set; } = PhotoId;
+        public string? PhotoUrl { get; set; } = PhotoUrl;
         public uint Rating { get; set; } = Rating;
         public string? Country { get; set; } = Country;
 
@@ -29,6 +29,6 @@ namespace Carpool.BL.Models
             }
         }
 
-        public static UserDetailModel Empty => new(String.Empty, String.Empty, default,String.Empty, default);
+        public static UserDetailModel Empty => new(String.Empty, String.Empty, String.Empty, String.Empty, default);
     }
 }
