@@ -42,7 +42,7 @@ public static class RideSeeds
         InitialCapacity: 2,
         Capacity: 2,
         State: RideState.Planned,
-        CarId: CarSeeds.DeleteKia.Id,
+        CarId: CarSeeds.Kia.Id,
         DriverId: UserSeeds.Chuck.Id
     );
 
