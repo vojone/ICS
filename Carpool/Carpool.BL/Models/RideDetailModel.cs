@@ -38,8 +38,8 @@ namespace Carpool.BL.Models
         }
 
         public static RideDetailModel Empty => 
-            new(String.Empty, 
-                String.Empty, 
+            new(string.Empty,
+                string.Empty, 
                 default,
                 default,
                 default,

@@ -10,9 +10,9 @@ using Carpool.DAL.UnitOfWork;
 
 namespace Carpool.BL.Facades
 {
-    public class UserFacade : CRUDFacade<UserEntity, UserListModel, UserDetailModel>
+    public class CarFacade : CRUDFacade<CarEntity, CarListModel, CarDetailModel>
     {
-        public UserFacade(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper) : base(unitOfWorkFactory, mapper)
+        public CarFacade(IUnitOfWorkFactory unitOfWorkFactory, IMapper mapper) : base(unitOfWorkFactory, mapper)
         {
 
         }
