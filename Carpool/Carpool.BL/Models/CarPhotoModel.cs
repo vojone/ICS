@@ -20,5 +20,8 @@ namespace Carpool.BL.Models
                 CreateMap<CarPhotoEntity, CarPhotoModel>();
             }
         }
+
+        public static CarPhotoModel Empty =>
+            new(string.Empty);
     }
 }

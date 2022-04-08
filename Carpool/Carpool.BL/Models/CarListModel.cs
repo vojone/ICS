@@ -4,24 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Carpool.Common;
 using Carpool.DAL.Entities;
 
 namespace Carpool.BL.Models
 {
-    public record UserListModel(
+    public record CarListModel(
         string Name,
-        string Surname,
-        uint Rating) : ModelBase
+        string Brand
+    ) : ModelBase
     {
         public string Name { get; set; } = Name;
-        public string Surname { get; set; } = Surname;
-        public uint Rating { get; set; } = Rating;
+        public string Brand { get; set; } = Brand;
 
         public class MapperProfile : Profile
         {
             public MapperProfile()
             {
-                CreateMap<UserEntity, UserListModel>();
+                CreateMap<CarEntity, CarListModel>();
             }
         }
     }

@@ -29,6 +29,11 @@ namespace Carpool.BL.Models
             }
         }
 
-        public static UserDetailModel Empty => new(String.Empty, String.Empty, String.Empty, String.Empty, default);
+        public static UserDetailModel Empty => 
+            new(string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                default);
     }
 }

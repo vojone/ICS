@@ -24,9 +24,8 @@ namespace Carpool.BL.Models
         public RideState State { get; set; } = State;
         public Guid CarId { get; set; } = CarId;
         public Guid DriverId { get; set; } = DriverId;
-        public CarModel? Car { get; set; }
+        public CarListModel? Car { get; set; }
         public UserDetailModel? Driver { get; set; }
-        public ICollection<ParticipantModel> Participants { get; set; } = new List<ParticipantModel>();
 
 
         public class MapperProfile : Profile
@@ -36,16 +35,5 @@ namespace Carpool.BL.Models
                 CreateMap<RideEntity, RideListModel>().ReverseMap();
             }
         }
-
-        public static RideListModel Empty =>
-            new(String.Empty, 
-                String.Empty, 
-                default,
-                default,
-                default,
-                default,
-                RideState.None,
-                default,
-                default);
     }
 }
