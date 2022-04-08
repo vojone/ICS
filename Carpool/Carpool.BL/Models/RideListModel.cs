@@ -24,9 +24,9 @@ namespace Carpool.BL.Models
         public RideState State { get; set; } = State;
         public Guid CarId { get; set; } = CarId;
         public Guid DriverId { get; set; } = DriverId;
-        public CarModel? Car { get; set; }
+        public CarDetailModel? Car { get; set; }
         public UserDetailModel? Driver { get; set; }
-        public ICollection<ParticipantModel> Participants { get; set; } = new List<ParticipantModel>();
+        public ICollection<ParticipantModel> Participants { get; init; } = new List<ParticipantModel>();
 
 
         public class MapperProfile : Profile
@@ -38,8 +38,8 @@ namespace Carpool.BL.Models
         }
 
         public static RideListModel Empty =>
-            new(String.Empty, 
-                String.Empty, 
+            new(string.Empty,
+                string.Empty, 
                 default,
                 default,
                 default,

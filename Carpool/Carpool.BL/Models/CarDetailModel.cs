@@ -9,7 +9,7 @@ using Carpool.DAL.Entities;
 
 namespace Carpool.BL.Models
 {
-    public record CarModel(
+    public record CarDetailModel(
         string Name,
         string Brand,
         CarType Type,
@@ -22,13 +22,13 @@ namespace Carpool.BL.Models
         public CarType Type { get; set; } = Type;
         public DateOnly Registration { get; set; } = Registration;
         public uint Seats { get; set; } = Seats;
-        public UserDetailModel? Owner { get; set; }
-        public ICollection<CarPhotoModel> Photos { get; set; } = new List<CarPhotoModel>();
+        public UserListModel? Owner { get; set; }
+        public ICollection<CarPhotoModel> Photos { get; init; } = new List<CarPhotoModel>();
         public class MapperProfile : Profile
         {
             public MapperProfile()
             {
-                CreateMap<CarEntity, CarModel>();
+                CreateMap<CarEntity, CarDetailModel>().ReverseMap();
             }
         }
     }
