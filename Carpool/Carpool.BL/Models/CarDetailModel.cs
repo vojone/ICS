@@ -31,5 +31,12 @@ namespace Carpool.BL.Models
                 CreateMap<CarEntity, CarDetailModel>().ReverseMap();
             }
         }
+
+        public static CarDetailModel Empty =>
+            new(string.Empty,
+                string.Empty,
+                CarType.None,
+                default,
+                0);
     }
 }
