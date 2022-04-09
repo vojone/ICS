@@ -11,7 +11,7 @@ namespace Carpool.BL.Models
     public record UserListModel(
         string Name,
         string Surname,
-        uint Rating) : ModelBase
+        uint Rating = 0) : ModelBase
     {
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;

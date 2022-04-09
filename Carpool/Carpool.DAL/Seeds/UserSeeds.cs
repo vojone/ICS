@@ -42,6 +42,15 @@ public static class UserSeeds
         Rating: 1
     );
 
+    public static readonly UserEntity EmptyUser = new(
+        Id: default,
+        Name: default!,
+        Surname: default!,
+        PhotoUrl: default,
+        Country: default,
+        Rating: default
+    );
+
     public static readonly UserEntity UpdateChuck = Chuck with
     {
         Id = Guid.Parse("82DBAB40-9FF0-4F4E-BC3D-F1C1FCEF42E9"),

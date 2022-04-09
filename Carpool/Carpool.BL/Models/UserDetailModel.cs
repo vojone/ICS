@@ -11,9 +11,9 @@ namespace Carpool.BL.Models
     public record UserDetailModel(
         string Name,
         string Surname,
-        string? PhotoUrl,
-        string? Country,
-        uint Rating) : ModelBase
+        string? PhotoUrl = null,
+        string? Country = null,
+        uint Rating = 0) : ModelBase
     {
         public string Name { get; set; } = Name;
         public string Surname { get; set; } = Surname;
