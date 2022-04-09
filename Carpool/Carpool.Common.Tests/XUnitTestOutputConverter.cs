@@ -1,8 +1,7 @@
-using System.IO;
 using System.Text;
 using Xunit.Abstractions;
 
-namespace Carpool.DAL.Tests.Converters
+namespace Carpool.Common.Tests
 {
     //Taken from Sample project 'CookBook'
     public class XUnitTestOutputConverter : TextWriter

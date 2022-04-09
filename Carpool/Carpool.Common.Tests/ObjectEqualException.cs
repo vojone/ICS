@@ -1,6 +1,6 @@
 using Xunit.Sdk;
 
-namespace Carpool.DAL.Tests;
+namespace Carpool.Common.Tests;
 
 public class ObjectEqualException : AssertActualExpectedException
 {
