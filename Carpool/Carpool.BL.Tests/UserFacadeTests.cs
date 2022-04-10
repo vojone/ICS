@@ -115,13 +115,10 @@ namespace Carpool.BL.Tests
             var user = new UserDetailModel(
                 Name: @"Justin",
                 Surname: @"Bieber"
-            )
-            {
-                Id = Guid.Parse("2C05A2D6-E61B-4279-A4F8-A2B219A72B5C")
-            };
+            );
 
             //Act
-            await _userFacadeSut.SaveAsync(user);
+            user = await _userFacadeSut.SaveAsync(user);
 
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();

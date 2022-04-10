@@ -73,6 +73,7 @@ public static class UserSeeds
         Chuck.Cars.Add(CarSeeds.Kia);
 
         Jack.Cars.Add(CarSeeds.DeleteKia);
+        Jack.Cars.Add(CarSeeds.UpdateKia);
 
         Jack.Rides.Add(ParticipantSeeds.Participant1);
         Jack.Rides.Add(ParticipantSeeds.DeleteParticipant1);

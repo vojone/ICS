@@ -20,6 +20,7 @@ namespace Carpool.BL.Models
         public string? PhotoUrl { get; set; } = PhotoUrl;
         public uint Rating { get; set; } = Rating;
         public string? Country { get; set; } = Country;
+        public ICollection<CarDetailModel> Cars { get; init; } = new List<CarDetailModel>();
 
         public class MapperProfile : Profile
         {

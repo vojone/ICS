@@ -53,6 +53,28 @@ namespace Carpool.DAL.Tests
             DeepAssert.Equal(entity, actualEntities);
         }
 
+        [Fact]
+        public async Task Update_UpdateKia()
+        {
+            var baseEntity = CarSeeds.UpdateKia;
+            //Arrange
+            CarEntity entity = baseEntity with
+            {
+                Name = CarSeeds.UpdateKia.Name + " updated",
+                Brand = CarSeeds.UpdateKia.Brand + " updated",
+                Owner = null
+            };
+
+            //Act
+            CarpoolDbContextSut.Cars.Update(entity);
+            await CarpoolDbContextSut.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntities = await dbx.Cars.SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(entity, actualEntities);
+        }
+
 
         [Fact]
         public async Task Delete_Car()

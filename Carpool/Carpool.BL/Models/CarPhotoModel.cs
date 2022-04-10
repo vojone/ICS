@@ -9,15 +9,19 @@ using Carpool.DAL.Entities;
 
 namespace Carpool.BL.Models
 {
-    public record CarPhotoModel(string Url) : ModelBase
+    public record CarPhotoModel(
+        string Url
+    ) : ModelBase
     {
         public string Url { get; set; } = Url;
+
 
         public class MapperProfile : Profile
         {
             public MapperProfile()
             {
-                CreateMap<CarPhotoEntity, CarPhotoModel>();
+                CreateMap<CarPhotoEntity, CarPhotoModel>()
+                    .ReverseMap();
             }
         }
 
