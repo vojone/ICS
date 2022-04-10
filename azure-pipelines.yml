@@ -27,4 +27,9 @@ steps:
     command: 'build'
     projects: '*/Carpool.sln'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '*/Carpool.sln'
+
 
