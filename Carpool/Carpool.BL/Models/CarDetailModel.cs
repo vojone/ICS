@@ -13,14 +13,14 @@ namespace Carpool.BL.Models
         string Name,
         string Brand,
         CarType Type,
-        DateOnly Registration,
+        DateTime Registration,
         uint Seats
     ) : ModelBase
     {
         public string Name { get; set; } = Name;
         public string Brand { get; set; } = Brand;
         public CarType Type { get; set; } = Type;
-        public DateOnly Registration { get; set; } = Registration;
+        public DateTime Registration { get; set; } = Registration;
         public uint Seats { get; set; } = Seats;
         public List<CarPhotoModel> Photos { get; init; } = new();
         public class MapperProfile : Profile

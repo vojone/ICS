@@ -12,7 +12,7 @@ public static class CarSeeds
         Name: "Santa Fe",
         Brand: "Hyundai",
         Type: CarType.SUV,
-        Registration: new DateOnly(2010, 05, 01),
+        Registration: new DateTime(2010, 05, 01),
         Seats: 5,
         OwnerId: UserSeeds.Chuck.Id
     )
@@ -25,7 +25,7 @@ public static class CarSeeds
         Name: "Sportage",
         Brand: "Kia",
         Type: CarType.Sport,
-        Registration: new DateOnly(2012, 05, 04),
+        Registration: new DateTime(2012, 05, 04),
         Seats: 4,
         OwnerId: UserSeeds.Chuck.Id
     )
@@ -39,7 +39,7 @@ public static class CarSeeds
         Name: "Delete",
         Brand: "Kia",
         Type: CarType.Minivan,
-        Registration: new DateOnly(2012, 10, 04),
+        Registration: new DateTime(2012, 10, 04),
         Seats: 4,
         OwnerId: UserSeeds.Jack.Id
     )
@@ -53,7 +53,7 @@ public static class CarSeeds
         Name: "Update",
         Brand: "Kia",
         Type: CarType.Minivan,
-        Registration: new DateOnly(2002, 11, 04),
+        Registration: new DateTime(2002, 11, 04),
         Seats: 4,
         OwnerId: UserSeeds.UpdateLeonardo.Id
     )

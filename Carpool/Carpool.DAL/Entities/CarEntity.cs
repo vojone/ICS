@@ -7,7 +7,7 @@ public record CarEntity(
     string Name,
     string Brand,
     CarType Type,
-    DateOnly Registration,
+    DateTime Registration,
     uint Seats,
     Guid OwnerId
 ) : IEntity
