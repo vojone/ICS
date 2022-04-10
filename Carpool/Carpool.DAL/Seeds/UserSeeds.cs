@@ -42,6 +42,15 @@ public static class UserSeeds
         Rating: 1
     );
 
+    public static readonly UserEntity EmptyUser = new(
+        Id: default,
+        Name: default!,
+        Surname: default!,
+        PhotoUrl: default,
+        Country: default,
+        Rating: default
+    );
+
     public static readonly UserEntity UpdateChuck = Chuck with
     {
         Id = Guid.Parse("82DBAB40-9FF0-4F4E-BC3D-F1C1FCEF42E9"),
@@ -65,12 +74,7 @@ public static class UserSeeds
 
         Jack.Cars.Add(CarSeeds.DeleteKia);
 
-        Jack.Rides.Add(ParticipantSeeds.Participant1);
-        Jack.Rides.Add(ParticipantSeeds.DeleteParticipant1);
-
-        Obiwan.Rides.Add(ParticipantSeeds.Participant2);
-
-        DeleteLeonardo.Rides.Add(ParticipantSeeds.UpdateParticipant);
+        UpdateLeonardo.Cars.Add(CarSeeds.UpdateKia);
     }
 
     public static void Seed(this ModelBuilder modelBuilder)

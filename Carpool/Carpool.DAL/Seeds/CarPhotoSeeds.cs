@@ -24,6 +24,12 @@ public static class CarPhotoSeeds
         Car = CarSeeds.DeleteKia
     };
 
+    public static readonly CarPhotoEntity EmptyPhoto = new(
+        default,
+        default!,
+        default
+    );
+
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarPhotoEntity>().HasData(

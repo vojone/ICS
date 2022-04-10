@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Carpool.Common.Tests;
 using Carpool.DAL.Entities;
 using Carpool.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;

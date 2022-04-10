@@ -7,7 +7,7 @@ public record ParticipantEntity(
     bool HasUserRated
 ) : IEntity
 {
-    //Automapper workaround
+    //Parameter less constructor, because of AutoMapper
 #nullable disable
     public ParticipantEntity() : this(default, default, default, default) { }
 #nullable enable

@@ -18,7 +18,11 @@ public static class RideSeeds
         State: RideState.Planned,
         CarId: CarSeeds.Hyundai.Id,
         DriverId: UserSeeds.Chuck.Id
-    );
+    )
+    {
+        Car = CarSeeds.Hyundai,
+        Driver = UserSeeds.Chuck
+    };
 
     public static readonly RideEntity Ride2 = new(
         Id: Guid.Parse("27720133-5190-4159-9527-AD4F21B7E1D7"),
@@ -31,7 +35,28 @@ public static class RideSeeds
         State: RideState.Planned,
         CarId: CarSeeds.Kia.Id,
         DriverId: UserSeeds.Chuck.Id
-    );
+    )
+    {
+        Car = CarSeeds.Kia,
+        Driver = UserSeeds.Chuck
+    };
+
+    public static readonly RideEntity UpdateRide = new(
+        Id: Guid.Parse("121EC629-BA60-4EBA-9ED8-C755F7EF87CF"),
+        DepartureL: "Kolín",
+        ArrivalL: "Praha",
+        DepartureT: new DateTime(2022, 4, 30, 18, 30, 00),
+        ArrivalT: new DateTime(2022, 4, 30, 21, 30, 00),
+        InitialCapacity: 2,
+        Capacity: 2,
+        State: RideState.Planned,
+        CarId: CarSeeds.Kia.Id,
+        DriverId: UserSeeds.UpdateChuck.Id
+    )
+    {
+        Car = CarSeeds.Kia,
+        Driver = UserSeeds.UpdateChuck
+    };
 
     public static readonly RideEntity DeleteRide = new(
         Id: Guid.Parse("14956E87-4F84-47C4-BD34-FFB02A703CFC"),
@@ -44,6 +69,23 @@ public static class RideSeeds
         State: RideState.Planned,
         CarId: CarSeeds.Kia.Id,
         DriverId: UserSeeds.Chuck.Id
+    )
+    {
+        Car = CarSeeds.Kia,
+        Driver = UserSeeds.Chuck
+    };
+
+    public static readonly RideEntity EmptyRide = new(
+        Id: default,
+        DepartureL: default!,
+        ArrivalL: default!,
+        ArrivalT: default,
+        DepartureT: default,
+        InitialCapacity: default,
+        Capacity: default,
+        State: default,
+        CarId: default,
+        DriverId: default
     );
 
     static RideSeeds()
@@ -61,9 +103,10 @@ public static class RideSeeds
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<RideEntity>().HasData(
-            Ride1 with { Participants = Array.Empty<ParticipantEntity>() },
-            Ride2 with { Participants = Array.Empty<ParticipantEntity>() },
-            DeleteRide with { Participants = Array.Empty<ParticipantEntity>() }
+            Ride1 with { Participants = Array.Empty<ParticipantEntity>(), Car = null, Driver = null },
+            Ride2 with { Participants = Array.Empty<ParticipantEntity>(), Car = null, Driver = null },
+            DeleteRide with { Participants = Array.Empty<ParticipantEntity>(), Car = null, Driver = null },
+            UpdateRide with { Participants = Array.Empty<ParticipantEntity>(), Car = null, Driver = null }
         );
     }
 }

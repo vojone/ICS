@@ -1,10 +1,10 @@
-using Microsoft.EntityFrameworkCore;
 using Carpool.DAL;
+using Microsoft.EntityFrameworkCore;
 
-namespace Carpool.DAL.Tests.Factories
+namespace Carpool.Common.Tests.Factories
 {
     //Taken from sample project 'CookBook'
-    internal class DbContextSQLiteTestingFactory : IDbContextFactory<CarpoolDbContext>
+    public class DbContextSQLiteTestingFactory : IDbContextFactory<CarpoolDbContext>
     {
         private readonly string _databaseName;
         private readonly bool _seedTestingData;

@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using KellermanSoftware.CompareNetObjects;
 
-namespace Carpool.DAL.Tests
+namespace Carpool.Common.Tests
 {
     // Taken from sample project 'CookBook'
     public static class DeepAssert

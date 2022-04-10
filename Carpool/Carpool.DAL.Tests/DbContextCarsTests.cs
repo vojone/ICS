@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Carpool.Common;
+using Carpool.Common.Tests;
 using Carpool.DAL.Entities;
 using Carpool.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,28 @@ namespace Carpool.DAL.Tests
 
             //Act
             CarpoolDbContextSut.Cars.Add(entity);
+            await CarpoolDbContextSut.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntities = await dbx.Cars.SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(entity, actualEntities);
+        }
+
+        [Fact]
+        public async Task Update_UpdateKia()
+        {
+            var baseEntity = CarSeeds.UpdateKia;
+            //Arrange
+            CarEntity entity = baseEntity with
+            {
+                Name = CarSeeds.UpdateKia.Name + " updated",
+                Brand = CarSeeds.UpdateKia.Brand + " updated",
+                Owner = null
+            };
+
+            //Act
+            CarpoolDbContextSut.Cars.Update(entity);
             await CarpoolDbContextSut.SaveChangesAsync();
 
             //Assert
