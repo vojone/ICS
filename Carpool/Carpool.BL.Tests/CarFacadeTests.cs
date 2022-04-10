@@ -22,19 +22,27 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task Create_NewCar_DoesNotThrow()
+        public async Task Create_NewCar_Throw()
         {
             //Arrange
-            var carModel = new CarDetailModel(
-                Name: @"Passat",
-                Brand: @"Volkswagen",
-                Type: CarType.SUV,
-                Registration: new DateOnly(2000, 10, 5),
-                Seats: 5,
-                OwnerId: UserSeeds.DeleteLeonardo.Id
+            var car = new CarDetailModel(
+                Name: @"Fabia",
+                Brand: @"Škoda",
+                Type: CarType.Sport,
+                Registration: new DateOnly(2005, 5, 4),
+                Seats: 4
             );
 
-            var _ = await _carFacadeSut.SaveAsync(carModel);
+            //Act & Assert
+            try
+            {
+                //It should throw exception because user is not specified
+                //New cars can be added only through user profile (user detail model)
+
+                await _carFacadeSut.SaveAsync(car);
+                Assert.True(false, "Assert Fail");
+            }
+            catch (DbUpdateException) { }
         }
 
         [Fact]
@@ -172,31 +180,5 @@ namespace Carpool.BL.Tests
             Assert.Contains(carFromDb.Photos, i => i.Url == urlOfNewPhoto1);
             Assert.Contains(carFromDb.Photos, i => i.Url == urlOfNewPhoto2);
         }
-
-
-        [Fact]
-        public async Task InsertOrUpdate_NewCarAdded()
-        {
-            //Arrange
-            var car = new CarDetailModel(
-                Name: @"Fabia",
-                Brand: @"Škoda",
-                Type: CarType.Sport,
-                Registration: new DateOnly(2005, 5, 4),
-                Seats: 4,
-                OwnerId: UserSeeds.Chuck.Id
-            );
-
-            //Act
-            car = await _carFacadeSut.SaveAsync(car);
-
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var carFromDb = await dbxAssert.Cars
-                .Include(i => i.Owner)
-                .SingleAsync(i => i.Id == car.Id);
-            DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
-        }
-
     }
 }

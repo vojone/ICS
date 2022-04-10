@@ -8,7 +8,7 @@ public record CarPhotoEntity(
 
     //Parameter less constructor, because of AutoMapper
 #nullable disable
-    public CarPhotoEntity() : this(default, default!, default) { }
+    public CarPhotoEntity() : this(default, string.Empty, default) { }
 #nullable enable
 
     public CarEntity? Car { get; set; }

@@ -26,7 +26,7 @@ namespace Carpool.BL.Models
         public Guid DriverId { get; set; } = DriverId;
         public CarDetailModel? Car { get; set; }
         public UserListModel? Driver { get; set; }
-        public ICollection<ParticipantModel> Participants { get; init; } = new List<ParticipantModel>();
+        public List<ParticipantModel> Participants { get; init; } = new();
         
 
         public class MapperProfile : Profile

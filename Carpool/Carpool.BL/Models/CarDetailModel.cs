@@ -14,8 +14,7 @@ namespace Carpool.BL.Models
         string Brand,
         CarType Type,
         DateOnly Registration,
-        uint Seats,
-        Guid OwnerId
+        uint Seats
     ) : ModelBase
     {
         public string Name { get; set; } = Name;
@@ -23,16 +22,13 @@ namespace Carpool.BL.Models
         public CarType Type { get; set; } = Type;
         public DateOnly Registration { get; set; } = Registration;
         public uint Seats { get; set; } = Seats;
-        public Guid OwnerId { get; set; } = OwnerId;
-        public UserListModel? Owner { get; set; }
         public List<CarPhotoModel> Photos { get; init; } = new();
         public class MapperProfile : Profile
         {
             public MapperProfile()
             {
                 CreateMap<CarEntity, CarDetailModel>()
-                    .ReverseMap()
-                    .ForMember(i => i.Owner, expression => expression.Ignore());
+                    .ReverseMap();
             }
         }
 
@@ -41,7 +37,6 @@ namespace Carpool.BL.Models
                 string.Empty,
                 CarType.None,
                 default,
-                0,
-                default);
+                0);
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using Carpool.Common;
 using Carpool.Common.Tests;
 using Carpool.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
@@ -123,6 +124,31 @@ namespace Carpool.BL.Tests
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             var userFromDb = await dbxAssert.Users.SingleAsync(i => i.Id == user.Id);
+            DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
+        }
+
+        [Fact]
+        public async Task InsertOrUpdate_UpdateCarsOfUpdateLeonardo()
+        {
+            //Arrange
+            var user = Mapper.Map<UserDetailModel>(UserSeeds.UpdateLeonardo);
+            user.Cars.Add(new CarDetailModel(
+                Name: @"New car",
+                Brand: @"BMW",
+                Type: CarType.Pickup,
+                Registration: new DateOnly(1999, 12, 1),
+                Seats: 4
+            ));
+
+            //Act
+            user = await _userFacadeSut.SaveAsync(user);
+
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            var userFromDb = await dbxAssert.Users
+                .Include(i => i.Cars)
+                .SingleAsync(i => i.Id == user.Id);
+
             DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
         }
 
