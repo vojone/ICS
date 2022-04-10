@@ -38,7 +38,7 @@ namespace Carpool.DAL.Tests
                 Name: "Rapid",
                 Brand: "Skoda",
                 Type: CarType.Sport,
-                Registration: DateOnly.MinValue,
+                Registration: DateTime.MinValue,
                 Seats: 4,
                 OwnerId: UserSeeds.Chuck.Id
             );

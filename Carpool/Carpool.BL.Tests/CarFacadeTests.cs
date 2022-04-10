@@ -29,7 +29,7 @@ namespace Carpool.BL.Tests
                 Name: @"Fabia",
                 Brand: @"Škoda",
                 Type: CarType.Sport,
-                Registration: new DateOnly(2005, 5, 4),
+                Registration: new DateTime(2005, 5, 4),
                 Seats: 4
             );
 
