@@ -25,14 +25,14 @@ namespace Carpool.BL.Models
         public Guid CarId { get; set; } = CarId;
         public Guid DriverId { get; set; } = DriverId;
         public CarListModel? Car { get; set; }
-        public UserDetailModel? Driver { get; set; }
+        public UserListModel? Driver { get; set; }
 
 
         public class MapperProfile : Profile
         {
             public MapperProfile()
             {
-                CreateMap<RideEntity, RideListModel>().ReverseMap();
+                CreateMap<RideEntity, RideListModel>();
             }
         }
     }

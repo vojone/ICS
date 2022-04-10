@@ -75,13 +75,6 @@ public static class UserSeeds
         Jack.Cars.Add(CarSeeds.DeleteKia);
 
         UpdateLeonardo.Cars.Add(CarSeeds.UpdateKia);
-
-        Jack.Rides.Add(ParticipantSeeds.Participant1);
-        Jack.Rides.Add(ParticipantSeeds.DeleteParticipant1);
-
-        Obiwan.Rides.Add(ParticipantSeeds.Participant2);
-
-        DeleteLeonardo.Rides.Add(ParticipantSeeds.UpdateParticipant);
     }
 
     public static void Seed(this ModelBuilder modelBuilder)

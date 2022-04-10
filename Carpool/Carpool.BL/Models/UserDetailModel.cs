@@ -34,7 +34,6 @@ namespace Carpool.BL.Models
             new(string.Empty,
                 string.Empty,
                 string.Empty,
-                string.Empty,
-                default);
+                string.Empty);
     }
 }

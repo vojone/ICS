@@ -25,7 +25,7 @@ namespace Carpool.BL.Models
         public Guid CarId { get; set; } = CarId;
         public Guid DriverId { get; set; } = DriverId;
         public CarDetailModel? Car { get; set; }
-        public UserListModel? Driver { get; set; }
+        public UserDetailModel? Driver { get; set; }
         public List<ParticipantModel> Participants { get; init; } = new();
         
 
@@ -33,7 +33,8 @@ namespace Carpool.BL.Models
         {
             public MapperProfile()
             {
-                CreateMap<RideEntity, RideDetailModel>().ReverseMap();
+                CreateMap<RideEntity, RideDetailModel>()
+                    .ReverseMap();
             }
         }
 

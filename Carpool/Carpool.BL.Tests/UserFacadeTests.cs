@@ -89,8 +89,8 @@ namespace Carpool.BL.Tests
         {
             //Arrange
             var user = new UserDetailModel(
-                Name: UserSeeds.DeleteLeonardo.Name + " updated",
-                Surname: UserSeeds.DeleteLeonardo.Surname + " updated",
+                Name: UserSeeds.UpdateLeonardo.Name + " updated",
+                Surname: UserSeeds.UpdateLeonardo.Surname + " updated",
                 PhotoUrl: @"updated photoUrl",
                 Country: UserSeeds.UpdateLeonardo.Country,
                 Rating: UserSeeds.UpdateLeonardo.Rating + 10
@@ -131,17 +131,19 @@ namespace Carpool.BL.Tests
         public async Task InsertOrUpdate_UpdateCarsOfUpdateLeonardo()
         {
             //Arrange
-            var user = Mapper.Map<UserDetailModel>(UserSeeds.UpdateLeonardo);
-            user.Cars.Add(new CarDetailModel(
+            var newCar = new CarDetailModel(
                 Name: @"New car",
                 Brand: @"BMW",
                 Type: CarType.Pickup,
                 Registration: new DateOnly(1999, 12, 1),
                 Seats: 4
-            ));
+            );
+
+            var user = Mapper.Map<UserDetailModel>(UserSeeds.UpdateLeonardo);
+            user.Cars.Add(newCar);
 
             //Act
-            user = await _userFacadeSut.SaveAsync(user);
+            await _userFacadeSut.SaveAsync(user);
 
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
@@ -149,8 +151,48 @@ namespace Carpool.BL.Tests
                 .Include(i => i.Cars)
                 .SingleAsync(i => i.Id == user.Id);
 
-            DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
+            Assert.Contains(
+                Mapper.Map<UserDetailModel>(userFromDb).Cars, 
+                i => i.Name == newCar.Name && 
+                     i.Brand == newCar.Brand && 
+                     i.Registration == newCar.Registration);
         }
 
+        [Fact]
+        public async Task InsertOrUpdate_UpdateCarsOfUpdateLeonardoIncludingPhoto()
+        {
+            //Arrange
+            var newCar = new CarDetailModel(
+                Name: @"New car",
+                Brand: @"BMW",
+                Type: CarType.Pickup,
+                Registration: new DateOnly(1999, 12, 1),
+                Seats: 4
+            )
+            {
+                Photos = {
+                    new CarPhotoModel(@"Testing\url"),
+                    new CarPhotoModel(@"Testing\url2")
+                }
+            };
+
+            var user = Mapper.Map<UserDetailModel>(UserSeeds.UpdateLeonardo);
+            user.Cars.Add(newCar);
+
+            //Act
+            await _userFacadeSut.SaveAsync(user);
+
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            var userFromDb = await dbxAssert.Users
+                .Include(i => i.Cars)
+                .ThenInclude(i => i.Photos)
+                .SingleAsync(i => i.Id == user.Id);
+
+            var carFromDb = Mapper.Map<CarDetailModel>(userFromDb.Cars.First(i => i.Name == newCar.Name));
+
+            Assert.Contains(carFromDb.Photos, i => i.Url == newCar.Photos[0].Url);
+            Assert.Contains(carFromDb.Photos, i => i.Url == newCar.Photos[1].Url);
+        }
     }
 }
