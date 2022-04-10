@@ -135,7 +135,7 @@ namespace Carpool.BL.Tests
                 Name: @"New car",
                 Brand: @"BMW",
                 Type: CarType.Pickup,
-                Registration: new DateOnly(1999, 12, 1),
+                Registration: new DateTime(1999, 12, 1),
                 Seats: 4
             );
 
@@ -166,7 +166,7 @@ namespace Carpool.BL.Tests
                 Name: @"New car",
                 Brand: @"BMW",
                 Type: CarType.Pickup,
-                Registration: new DateOnly(1999, 12, 1),
+                Registration: new DateTime(1999, 12, 1),
                 Seats: 4
             )
             {

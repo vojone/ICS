@@ -65,12 +65,6 @@ namespace Carpool.DAL
                 .HasForeignKey(i => i.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<CarEntity>()
-                .Property(i => i.Registration)
-                .HasConversion(
-                    v => v.ToString("dd/MM/yyyy"),
-                    v => DateOnly.Parse(v));
-
             if (!_seedDemoData) return;
 
             UserSeeds.Seed(modelBuilder);
