@@ -22,7 +22,7 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
-        public async Task Create_NewCar_Throw()
+        public async Task SaveAsync_ThrowsDbUpdateException_WhenCarWithoutOwner()
         {
             //Arrange
             var car = new CarDetailModel(
@@ -34,15 +34,13 @@ namespace Carpool.BL.Tests
             );
 
             //Act & Assert
-            try
-            {
-                //It should throw exception because user is not specified
-                //New cars can be added only through user profile (user detail model)
 
-                await _carFacadeSut.SaveAsync(car);
-                Assert.True(false, "Assert Fail");
-            }
-            catch (DbUpdateException) { }
+            //It should throw exception because user is not specified
+            //To add car this way parameters must be set correctly
+            _ = await Assert.ThrowsAsync<DbUpdateException>(
+                async () => await _carFacadeSut.SaveAsync(car)
+            );
+        
         }
 
         [Fact]
@@ -124,12 +122,9 @@ namespace Carpool.BL.Tests
             car.Photos.Add(Mapper.Map<CarPhotoModel>(CarPhotoSeeds.EmptyPhoto));
 
             //Act & Assert
-            try
-            {
-                await _carFacadeSut.SaveAsync(car);
-                Assert.True(false, "Assert Fail");
-            }
-            catch (DbUpdateException) { }
+            _ = await Assert.ThrowsAsync<DbUpdateException>(
+                async () => await _carFacadeSut.SaveAsync(car)
+            );
         }
 
 
