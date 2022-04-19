@@ -88,6 +88,77 @@ namespace Carpool.BL.Tests
             Assert.Null(ride);
         }
 
+        //Demonstrates filtering of rides by arrival location
+        [Fact]
+        public async Task GetByArrivalLocation_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var rides = dbxAssert.Rides
+                .Where(i => i.ArrivalL == RideSeeds.Ride1.ArrivalL);
+
+            //Assert
+            Assert.All(rides, ride =>
+                Assert.Equal(ride.ArrivalL, RideSeeds.Ride1.ArrivalL)
+            );
+
+            Assert.Contains(rides, i => i.Id == RideSeeds.Ride1.Id);
+        }
+
+        //Demonstrates filtering of rides by driver
+        [Fact]
+        public async Task GetByDriverId_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var rides = dbxAssert.Rides
+                .Where(i => i.DriverId == RideSeeds.Ride1.DriverId);
+
+            //Assert
+            Assert.Contains(rides, i => i.Id == RideSeeds.Ride1.Id);
+        }
+
+        //Demonstrates filtering of rides by participants
+        [Fact]
+        public async Task GetBySpecificParticipant_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var participationWRide = dbxAssert.Rides.Join(dbxAssert.Participants,
+                                             ride => ride.Id,
+                                             participant => participant.RideId,
+                                             (ride, participant) => new { Ride = ride, Participant = participant })
+                                                .Where(i => i.Participant.UserId == UserSeeds.Jack.Id).ToList();
+
+            //Assert
+            Assert.All(participationWRide, 
+                p => Assert.Equal(p.Participant.UserId, UserSeeds.Jack.Id)
+            );
+        }
+
+        //Demonstrates filtering of rides by participants
+        [Fact]
+        public async Task GetByDepartureTime_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var rides = dbxAssert.Rides
+                .Where(i => i.DepartureT == RideSeeds.Ride2.DepartureT);
+
+            //Assert
+            Assert.All(rides, ride => 
+                Assert.Equal(ride.DepartureT, RideSeeds.Ride2.DepartureT)
+            );
+        }
+
 
         [Fact]
         public async Task InsertOrUpdate_UpdateRide()
