@@ -88,6 +88,111 @@ namespace Carpool.BL.Tests
             Assert.Null(ride);
         }
 
+        //Demonstrates filtering of rides by arrival location
+        [Fact]
+        public async Task GetByArrivalLocation_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var rides = dbxAssert.Rides
+                .Where(i => i.ArrivalL == RideSeeds.Ride1.ArrivalL);
+
+            //Assert
+            Assert.All(rides, ride =>
+                Assert.Equal(RideSeeds.Ride1.ArrivalL, ride.ArrivalL)
+            );
+
+            Assert.NotEmpty(rides);
+        }
+
+        //Demonstrates filtering of rides by driver
+        [Fact]
+        public async Task GetByDriverId_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var rides = dbxAssert.Rides
+                .Where(i => i.DriverId == RideSeeds.Ride1.DriverId);
+
+            //Assert
+            Assert.All(rides, ride =>
+                Assert.Equal(RideSeeds.Ride1.DriverId, ride.DriverId)
+            );
+
+            Assert.NotEmpty(rides);
+        }
+
+        //Demonstrates filtering of rides by participants
+        [Fact]
+        public async Task GetBySpecificParticipant_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var rides = dbxAssert.Rides
+                .Where(i => i.Participants.Any(
+                    p => p.UserId == UserSeeds.Jack.Id)
+                );
+
+            //Assert
+            Assert.All(rides, 
+                r => Assert.All(r.Participants, 
+                    p => Assert.Equal(UserSeeds.Jack.Id, p.UserId))
+            );
+
+            Assert.NotEmpty(rides);
+        }
+
+        //Demonstrates filtering of rides by participants
+        [Fact]
+        public async Task GetByDepartureTime_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var rides = dbxAssert.Rides
+                .Where(i => i.DepartureT == RideSeeds.Ride2.DepartureT);
+
+            //Assert
+            Assert.All(rides, ride => 
+                Assert.Equal(RideSeeds.Ride2.DepartureT, ride.DepartureT)
+            );
+
+            Assert.NotEmpty(rides);
+        }
+
+        //Demonstrates filtering of rides by available places (in car) in combination with departure location
+        [Fact]
+        public async Task GetByDepartureLocationAndEmptySeats_SeededRide()
+        {
+            //Arrange
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+
+            //Act
+            var rides = dbxAssert.Rides
+                .Where(i => i.Capacity > 0 && i.DepartureL == RideSeeds.Ride2.DepartureL);
+
+
+            //Assert
+            //Departure location must be correct
+            Assert.All(rides, ride =>
+                Assert.Equal(RideSeeds.Ride2.DepartureL, ride.DepartureL)
+            );
+
+            //There must be at least 1 empty seat in car
+            Assert.All(rides, ride =>
+                Assert.True(ride.Capacity > 0)
+            );
+
+            Assert.NotEmpty(rides);
+        }
+
 
         [Fact]
         public async Task InsertOrUpdate_UpdateRide()
