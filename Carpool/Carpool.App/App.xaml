@@ -1,0 +1,13 @@
+<Application x:Class="Carpool.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Carpool.App"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
+             StartupUri="View/RideList.xaml">
+    <Application.Resources>
+
+        <viewModel:LoginScreenViewModel x:Key="LoginScreenViewModel" />
+        <viewModel:RideListViewModel x:Key="RideListViewModel" />
+    </Application.Resources>
+</Application>
