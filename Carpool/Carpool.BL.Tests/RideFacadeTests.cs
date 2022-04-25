@@ -98,11 +98,12 @@ namespace Carpool.BL.Tests
                 .FilterAsync(arrivalLoc: RideSeeds.Ride1.ArrivalL);
 
             //Assert
-            Assert.All(rides, ride =>
+            var rideListModels = rides as RideListModel[] ?? rides.ToArray();
+            Assert.All(rideListModels, ride =>
                 Assert.Equal(RideSeeds.Ride1.ArrivalL, ride.ArrivalL)
             );
 
-            Assert.NotEmpty(rides);
+            Assert.NotEmpty(rideListModels);
         }
 
 
@@ -115,11 +116,12 @@ namespace Carpool.BL.Tests
                 .FilterAsync(departureTime: RideSeeds.Ride2.DepartureT);
 
             //Assert
-            Assert.All(rides, ride =>
+            var rideListModels = rides as RideListModel[] ?? rides.ToArray();
+            Assert.All(rideListModels, ride =>
                 Assert.Equal(RideSeeds.Ride2.DepartureT, ride.DepartureT)
             );
 
-            Assert.NotEmpty(rides);
+            Assert.NotEmpty(rideListModels);
         }
 
 
@@ -133,14 +135,15 @@ namespace Carpool.BL.Tests
                              mustBeAvailable: true);
 
             //Assert
-            Assert.All(rides, ride =>
+            var rideListModels = rides as RideListModel[] ?? rides.ToArray();
+            Assert.All(rideListModels, ride =>
                 {
                     Assert.Equal(RideSeeds.Ride2.DepartureT, ride.DepartureT);
                     Assert.True(ride.Capacity > 0);
                 }
             );
 
-            Assert.NotEmpty(rides);
+            Assert.NotEmpty(rideListModels);
         }
 
 
@@ -156,7 +159,8 @@ namespace Carpool.BL.Tests
                              arrivalLoc: RideSeeds.Ride2.ArrivalL);
 
             //Assert
-            Assert.All(rides, ride =>
+            var rideListModels = rides as RideListModel[] ?? rides.ToArray();
+            Assert.All(rideListModels, ride =>
                 {
                     Assert.Equal(RideSeeds.Ride2.DepartureT, ride.DepartureT);
                     Assert.Equal(RideSeeds.Ride2.ArrivalT, ride.ArrivalT);
@@ -165,7 +169,7 @@ namespace Carpool.BL.Tests
                 }
             );
 
-            Assert.NotEmpty(rides);
+            Assert.NotEmpty(rideListModels);
         }
 
 
@@ -179,11 +183,12 @@ namespace Carpool.BL.Tests
                 .GetByDriverIdAsync(RideSeeds.Ride1.DriverId);
 
             //Assert
-            Assert.All(rides, ride =>
+            var rideListModels = rides as RideListModel[] ?? rides.ToArray();
+            Assert.All(rideListModels, ride =>
                 Assert.Equal(RideSeeds.Ride1.DriverId, ride.DriverId)
             );
 
-            Assert.NotEmpty(rides);
+            Assert.NotEmpty(rideListModels);
         }
 
 
@@ -198,15 +203,17 @@ namespace Carpool.BL.Tests
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
 
-            Assert.All(rides, ride =>
+            var rideListModels = rides as RideListModel[] ?? rides.ToArray();
+            Assert.All(rideListModels, ride =>
                 Assert.NotEmpty(dbxAssert.Participants
                     .Where(p => 
                         p.RideId == ride.Id && 
                         p.UserId == UserSeeds.Jack.Id))
             );
 
-            Assert.NotEmpty(rides);
+            Assert.NotEmpty(rideListModels);
         }
+
 
         [Fact]
         public async Task GetByDepartureLoc_NonExistingRide()
@@ -219,6 +226,151 @@ namespace Carpool.BL.Tests
             //Assert
             Assert.Empty(rides);
         }
+        
+
+        [Fact]
+        public async Task InsertOrUpdate_NewRideWithoutDriverRideCollisions_NotThrows()
+        {
+            //Arrange
+            var ride = new RideDetailModel(
+                DepartureL: "Pardubice",
+                ArrivalL: "Hradec",
+                DepartureT: new DateTime(2023, 8, 6, 12, 0, 0),
+                ArrivalT: new DateTime(2023, 8, 6, 14, 0, 0),
+                InitialCapacity: 4,
+                Capacity: 4,
+                State: RideState.Planned,
+                CarId: CarSeeds.Kia.Id,
+                DriverId: UserSeeds.Chuck.Id
+            );
+
+            //Act
+            await _rideFacadeSut.SaveAsync(ride);
+        }
+
+
+        [Fact]
+        public async Task InsertOrUpdate_NewRideWithDriverCollisions_Throws()
+        {
+            //Arrange
+            var ride = new RideDetailModel(
+                DepartureL: "Pardubice",
+                ArrivalL: "Hradec",
+                DepartureT: RideSeeds.Ride1.DepartureT,
+                ArrivalT: RideSeeds.Ride1.ArrivalT,
+                InitialCapacity: 4,
+                Capacity: 4,
+                State: RideState.Planned,
+                CarId: CarSeeds.Kia.Id,
+                DriverId: UserSeeds.Chuck.Id
+            );
+
+            _ = await Assert.ThrowsAsync<DbUpdateException>(
+                async () => await _rideFacadeSut.SaveAsync(ride)
+            );
+        }
+
+
+        [Fact]
+        public async Task InsertOrUpdate_NewRideWithoutParticipantRideCollisions_NotThrows()
+        {
+            //Arrange
+            var ride = new RideDetailModel(
+                DepartureL: "Pardubice",
+                ArrivalL: "Hradec",
+                DepartureT: new DateTime(2023, 8, 6, 12, 0, 0),
+                ArrivalT: new DateTime(2023, 8, 6, 14, 0, 0),
+                InitialCapacity: 4,
+                Capacity: 4,
+                State: RideState.Planned,
+                CarId: CarSeeds.Kia.Id,
+                DriverId: UserSeeds.Chuck.Id
+            )
+            {
+                Participants =
+                {
+                    new ParticipantModel(
+                        UserId: UserSeeds.Jack.Id,
+                        UserName: UserSeeds.Jack.Name,
+                        UserSurname: UserSeeds.Jack.Surname,
+                        UserRating: UserSeeds.Jack.Rating
+                    ),
+                }
+            };
+
+            //Act
+            await _rideFacadeSut.SaveAsync(ride);
+        }
+
+
+        [Fact]
+        public async Task InsertOrUpdate_NewRideWithParticipantRideCollisions_Throws()
+        {
+            //Arrange
+            var ride = new RideDetailModel(
+                DepartureL: "Pardubice",
+                ArrivalL: "Hradec",
+                DepartureT: RideSeeds.Ride1.DepartureT,
+                ArrivalT: RideSeeds.Ride1.ArrivalT,
+                InitialCapacity: 4,
+                Capacity: 4,
+                State: RideState.Planned,
+                CarId: CarSeeds.Hyundai.Id,
+                DriverId: UserSeeds.UpdateChuck.Id
+            )
+            {
+                Participants =
+                {
+                    new ParticipantModel(
+                        UserId: UserSeeds.Jack.Id,
+                        UserName: UserSeeds.Jack.Name,
+                        UserSurname: UserSeeds.Jack.Surname,
+                        UserRating: UserSeeds.Jack.Rating
+                    ),
+                }
+            };
+
+            _ = await Assert.ThrowsAsync<DbUpdateException>(
+                async () => 
+                    
+                    await _rideFacadeSut.SaveAsync(ride)
+            );
+        }
+
+
+        [Fact]
+        public async Task InsertOrUpdate_SameDriverAsParticipant_Throws()
+        {
+            //Arrange
+            var ride = new RideDetailModel(
+                DepartureL: "Pardubice",
+                ArrivalL: "Hradec",
+                DepartureT: new DateTime(2023, 8, 6, 12, 0, 0),
+                ArrivalT: new DateTime(2023, 8, 6, 14, 0, 0),
+                InitialCapacity: 4,
+                Capacity: 4,
+                State: RideState.Planned,
+                CarId: CarSeeds.Kia.Id,
+                DriverId: UserSeeds.Chuck.Id
+            )
+            {
+                Participants =
+                {
+                    new ParticipantModel(
+                        UserId: UserSeeds.Chuck.Id,
+                        UserName: UserSeeds.Chuck.Name,
+                        UserSurname: UserSeeds.Chuck.Surname,
+                        UserRating: UserSeeds.Chuck.Rating
+                    ),
+                }
+            };
+
+            _ = await Assert.ThrowsAsync<DbUpdateException>(
+                async () =>
+
+                    await _rideFacadeSut.SaveAsync(ride)
+            );
+        }
 
 
         [Fact]
@@ -228,18 +380,21 @@ namespace Carpool.BL.Tests
             var ride = await _rideFacadeSut.GetAsync(RideSeeds.UpdateRide.Id);
 
             Assert.NotNull(ride);
-            ride.ArrivalT = new DateTime(2022, 10, 11, 14, 10, 00);
-            ride.State = RideState.OnGoing;
+            if (ride != null)
+            {
+                ride.ArrivalT = new DateTime(2022, 10, 11, 14, 10, 00);
+                ride.State = RideState.OnGoing;
 
-            //Act
-            await _rideFacadeSut.SaveAsync(ride);
+                //Act
+                await _rideFacadeSut.SaveAsync(ride);
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides
-                .SingleAsync(i => i.Id == ride.Id);
+                //Assert
+                await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+                var rideFromDb = await dbxAssert.Rides
+                    .SingleAsync(i => i.Id == ride.Id);
 
-            DeepAssert.Equal(ride with {Driver = null, Car = null}, Mapper.Map<RideDetailModel>(rideFromDb));
+                DeepAssert.Equal(ride with {Driver = null, Car = null}, Mapper.Map<RideDetailModel>(rideFromDb));
+            }
         }
 
 
@@ -250,18 +405,21 @@ namespace Carpool.BL.Tests
             var ride = await _rideFacadeSut.GetAsync(RideSeeds.UpdateRide.Id);
 
             Assert.NotNull(ride);
-            ride.CarId = CarSeeds.Hyundai.Id;
+            if (ride != null)
+            {
+                ride.CarId = CarSeeds.Hyundai.Id;
 
-            //Act
-            await _rideFacadeSut.SaveAsync(ride);
+                //Act
+                await _rideFacadeSut.SaveAsync(ride);
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides
-                .Include(i => i.Car)
-                .SingleAsync(i => i.Id == ride.Id);
+                //Assert
+                await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+                var rideFromDb = await dbxAssert.Rides
+                    .Include(i => i.Car)
+                    .SingleAsync(i => i.Id == ride.Id);
 
-            DeepAssert.Equal(CarSeeds.Hyundai with {Owner = null}, rideFromDb.Car);
+                DeepAssert.Equal(CarSeeds.Hyundai with {Owner = null}, rideFromDb.Car);
+            }
         }
 
 
@@ -279,20 +437,23 @@ namespace Carpool.BL.Tests
             var ride = await _rideFacadeSut.GetAsync(RideSeeds.UpdateRide.Id);
 
             Assert.NotNull(ride); //Just for safety
-            ride.Participants.Add(newParticipant);
+            if (ride != null)
+            {
+                ride.Participants.Add(newParticipant);
 
-            //Act
-            await _rideFacadeSut.SaveAsync(ride);
+                //Act
+                await _rideFacadeSut.SaveAsync(ride);
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides
-                .Include(i => i.Participants)
-                .ThenInclude(i => i.User)
-                .SingleAsync(i => i.Id == ride.Id);
+                //Assert
+                await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+                var rideFromDb = await dbxAssert.Rides
+                    .Include(i => i.Participants)
+                    .ThenInclude(i => i.User)
+                    .SingleAsync(i => i.Id == ride.Id);
 
-            var participantsFromDb = Mapper.Map<RideDetailModel>(rideFromDb).Participants;
-            Assert.Contains(participantsFromDb, i => i.UserId == newParticipant.UserId);
+                var participantsFromDb = Mapper.Map<RideDetailModel>(rideFromDb).Participants;
+                Assert.Contains(participantsFromDb, i => i.UserId == newParticipant.UserId);
+            }
         }
 
 
@@ -303,22 +464,26 @@ namespace Carpool.BL.Tests
             var ride = await _rideFacadeSut.GetAsync(RideSeeds.Ride1.Id);
 
             Assert.NotNull(ride); //Just for safety
-            Assert.NotEmpty(ride.Participants);
-            var toBeDeleted = ride.Participants[0];
 
-            ride.Participants.Remove(toBeDeleted);
+            if (ride != null)
+            {
+                Assert.NotEmpty(ride.Participants);
+                var toBeDeleted = ride.Participants[0];
 
-            //Act
-            await _rideFacadeSut.SaveAsync(ride);
+                ride.Participants.Remove(toBeDeleted);
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides
-                .Include(i => i.Participants)
-                .ThenInclude(i => i.User)
-                .SingleAsync(i => i.Id == ride.Id);
+                //Act
+                await _rideFacadeSut.SaveAsync(ride);
 
-            Assert.DoesNotContain(rideFromDb.Participants, i => i.UserId == toBeDeleted.UserId);
+                //Assert
+                await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+                var rideFromDb = await dbxAssert.Rides
+                    .Include(i => i.Participants)
+                    .ThenInclude(i => i.User)
+                    .SingleAsync(i => i.Id == ride.Id);
+
+                Assert.DoesNotContain(rideFromDb.Participants, i => i.UserId == toBeDeleted.UserId);
+            }
         }
 
 
@@ -329,21 +494,23 @@ namespace Carpool.BL.Tests
             var ride = await _rideFacadeSut.GetAsync(RideSeeds.Ride1.Id);
 
             Assert.NotNull(ride); //Just for safety
-            Assert.NotEmpty(ride.Participants);
+            if (ride != null)
+            {
+                Assert.NotEmpty(ride.Participants);
+                ride.Participants.Clear();
 
-            ride.Participants.Clear();
+                //Act
+                await _rideFacadeSut.SaveAsync(ride);
 
-            //Act
-            await _rideFacadeSut.SaveAsync(ride);
+                //Assert
+                await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+                var rideFromDb = await dbxAssert.Rides
+                    .Include(i => i.Participants)
+                    .ThenInclude(i => i.User)
+                    .SingleAsync(i => i.Id == ride.Id);
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides
-                .Include(i => i.Participants)
-                .ThenInclude(i => i.User)
-                .SingleAsync(i => i.Id == ride.Id);
-
-            Assert.False(rideFromDb.Participants.Any());
+                Assert.False(rideFromDb.Participants.Any());
+            }
         }
 
 
@@ -354,22 +521,25 @@ namespace Carpool.BL.Tests
             var ride = await _rideFacadeSut.GetAsync(RideSeeds.Ride1.Id);
 
             Assert.NotNull(ride); //Just for safety
-            Assert.NotEmpty(ride.Participants);
-            Assert.False(ride.Participants[0].HasUserRated);
-            ride.Participants[0].HasUserRated = true;
+            if (ride != null)
+            {
+                Assert.NotEmpty(ride.Participants);
+                Assert.False(ride.Participants[0].HasUserRated);
+                ride.Participants[0].HasUserRated = true;
 
-            //Act
-            await _rideFacadeSut.SaveAsync(ride);
+                //Act
+                await _rideFacadeSut.SaveAsync(ride);
 
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var rideFromDb = await dbxAssert.Rides
-                .Include(i => i.Participants)
-                .ThenInclude(i => i.User)
-                .SingleAsync(i => i.Id == ride.Id);
+                //Assert
+                await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+                var rideFromDb = await dbxAssert.Rides
+                    .Include(i => i.Participants)
+                    .ThenInclude(i => i.User)
+                    .SingleAsync(i => i.Id == ride.Id);
 
-            var participantsFromDb = Mapper.Map<RideDetailModel>(rideFromDb).Participants;
-            Assert.True(participantsFromDb[0].HasUserRated);
+                var participantsFromDb = Mapper.Map<RideDetailModel>(rideFromDb).Participants;
+                Assert.True(participantsFromDb[0].HasUserRated);
+            }
         }
 
 
