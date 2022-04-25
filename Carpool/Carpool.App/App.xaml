@@ -4,10 +4,11 @@
              xmlns:local="clr-namespace:Carpool.App"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
-             StartupUri="View/RideList.xaml">
+             StartupUri="View/CarInfo.xaml">
     <Application.Resources>
 
         <viewModel:LoginScreenViewModel x:Key="LoginScreenViewModel" />
         <viewModel:RideListViewModel x:Key="RideListViewModel" />
+        <viewModel:RideHistoryViewModel x:Key="RideHistoryViewModel" />
     </Application.Resources>
 </Application>

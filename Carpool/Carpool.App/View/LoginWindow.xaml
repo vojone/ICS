@@ -15,7 +15,9 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="27*"/>
         </Grid.RowDefinitions>
+        
         <Rectangle x:Name="TopBar" Fill="#FFC4C4C4" Margin="0,8,0,8" Grid.ColumnSpan="3"/>
+        
         <Button x:Name="ButtonCreateUser" 
                 Content="Create New User" 
                 Margin="0,12,10,12" Background="#FF005FB8" HorizontalAlignment="Right" Width="105"/>
