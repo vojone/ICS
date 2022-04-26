@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,23 +15,13 @@ using System.Windows.Shapes;
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for EditRide.xaml
+    /// Interaction logic for CoDriver.xaml
     /// </summary>
-    public partial class EditRide : Window
+    public partial class CoDriver : Window
     {
-        public EditRide()
+        public CoDriver()
         {
             InitializeComponent();
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

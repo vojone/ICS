@@ -13,17 +13,11 @@ namespace Carpool.App.ViewModel
         {
             new CreateRide()
             {
-                State = "Česká republika",
-                Town = "Brno",
-                Street = "Božetěchova 1/2",
-                Description = "Lorem Ipsum",
+                Departure = "Česká republika Brno Božetěchova 1/2 Lorem Ipsum",
                 Date = "22.3.2021",
                 Time = "20:00:00",
 
-                State_arr = "Austria",
-                Town_arr = "Vienna",
-                Street_arr = "Adamsgasse",
-                Description_arr = "Lorem Ipsum",
+                Arrival = "Austria Vienna Adamsgasse Lorem Ipsum",
                 Date_arr = "22.3.2021",
                 Time_arr = "23:00:00",
             }

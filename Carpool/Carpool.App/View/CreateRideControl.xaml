@@ -31,39 +31,9 @@
             BorderBrush="{x:Null}"/>
 
         <TextBox
-            x:Name="TextBoxStateCreateRides"
+            x:Name="TextBoxDepartureCreateRides"
             HorizontalAlignment="Left"
-            Height="19" Margin="44,63,0,0"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="80"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
-
-        <TextBox
-            x:Name="TextBoxTownCreateRides"
-            HorizontalAlignment="Left"
-            Height="19" Margin="145,63,0,0"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="80"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
-
-        <TextBox
-            x:Name="TextBoxStreetCreateRides"
-            HorizontalAlignment="Left"
-            Height="19" Margin="245,63,0,0"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="80"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
-
-        <TextBox
-            x:Name="TextBoxDescritpionCreateRides"
-            HorizontalAlignment="Left"
-            Height="19" Margin="44,93,0,0"
+            Height="52" Margin="44,63,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="281"
@@ -86,36 +56,9 @@
             Background="{x:Null}"
             BorderBrush="{x:Null}" />
         <TextBox
-            x:Name="TextBoxState_arrCreateRides"
+            x:Name="TextBoxArrivalCreateRides"
             HorizontalAlignment="Left"
-            Height="19" Margin="44,237,0,0"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="80"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
-        <TextBox
-            x:Name="TextBoxTown_arrCreateRides"
-            HorizontalAlignment="Left"
-            Height="19" Margin="145,237,0,0"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="80"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
-        <TextBox
-            x:Name="TextBoxStreet_arrCreateRides"
-            HorizontalAlignment="Left"
-            Height="19" Margin="245,237,0,0"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="80"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
-        <TextBox
-            x:Name="TextBoxDescritpion_arrCreateRides"
-            HorizontalAlignment="Left"
-            Height="19" Margin="44,267,0,0"
+            Height="52" Margin="44,239,0,0"
             TextWrapping="Wrap"
             VerticalAlignment="Top"
             Width="281"
