@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,13 +16,23 @@ using System.Windows.Shapes;
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for LoginWindowControl.xaml
+    /// Interaction logic for CreateRideControl.xaml
     /// </summary>
-    public partial class LoginWindowControl : UserControl
+    public partial class CreateRideControl : UserControl
     {
-        public LoginWindowControl()
+        public CreateRideControl()
         {
             InitializeComponent();
+        }
+
+        private void TextBoxStateCreateRides_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

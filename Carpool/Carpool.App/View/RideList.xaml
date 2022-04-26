@@ -10,16 +10,18 @@
         >
     <Grid Background="#FFA1A1A1">
         <Grid.RowDefinitions>
-            <RowDefinition Height="11*"/>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="43*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="109*"/>
         </Grid.RowDefinitions>
         <Rectangle 
+            x:Name="TopBar" 
             Fill="#FFC4C4C4" 
             Margin="0,8,0,8"/>
 
         <TextBox
             IsReadOnly="True" 
+            x:Name="TextBox1" 
             Margin="54,0,0,0" 
             TextWrapping="Wrap" 
             Text="Please select the user" 
@@ -30,41 +32,53 @@
             Width="209" 
             VerticalAlignment="Center" 
             Height="26"/>
-        
         <TextBox
-            x:Name="LogedUserName"
+            Grid.Row="0"
             IsReadOnly="True" 
-            Margin="690,0,0,0" 
+            Margin="624,0,77,0" 
             TextWrapping="Wrap" 
             Text="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            TextAlignment="Center" VerticalAlignment="Center" Height="17" HorizontalAlignment="Right" Width="82"/>
-        
-        <Button  
-            x:Name="ButtonFilterRides"
+            TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <Image
+            Grid.Row="0"
+            Height="40" 
+            Margin="750,17,10,0" 
+            VerticalAlignment="Top"/>
+        <Button 
+            x:Name="ButtonCreateUser_Copy" 
             Content="Filter rides" 
             Margin="0,10,82,0" 
             Background="#FFDBDBDB" 
             Grid.Row="1" 
             BorderBrush="{x:Null}" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="90"/>
-        
         <Button 
-            x:Name="ButtonRideHistory"
+            x:Name="ButtonCreateUser_Copy1" 
             Content="Ride History" 
             Margin="80,10,0,0" 
             Background="#FFDBDBDB" 
             HorizontalAlignment="Left" 
             Grid.Row="1" 
             BorderBrush="{x:Null}" Width="90" VerticalAlignment="Top" Height="28"/>
-        
         <Button 
-            x:Name="ButtonCreateRide" 
+            x:Name="ButtonCreateUser" 
             Content="Create Ride" 
-            Margin="540,0,160,0" 
-            Background="#FF005FB8" Height="34" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="80"/>
+            Margin="0,0,231,0" 
+            Background="#FF005FB8" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98"/>
 
 
-        <local:RideListControl x:Name="RideListView" Grid.Row="1" Margin="0,56,0,0" Width="800" Grid.RowSpan="2"/>
+        <ListView 
+            Grid.Row="2"
+            ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Width="Auto" Background="#FFD1D1D1" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBox IsReadOnly="True" Text="{Binding Odkud}" Width="550" HorizontalAlignment="Left" TextAlignment="Left" FontSize="18" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                        <TextBox IsReadOnly="True" Text="{Binding Kam}" Width="550" HorizontalAlignment="Left" FontSize="18" Margin="10,5,0,0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Window>

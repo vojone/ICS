@@ -1,0 +1,133 @@
+<UserControl x:Class="Carpool.App.View.CreateRideControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Carpool.App.View"
+             xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
+             xmlns:system="clr-namespace:System;assembly=System.Runtime"
+             d:DataContext="{d:DesignInstance viewModel:CreateRideViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle HorizontalAlignment="Left" Height="146" Margin="35,30,0,0" VerticalAlignment="Top" Width="300" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4"/>
+        <Rectangle HorizontalAlignment="Left" Height="146" Margin="35,204,0,0" VerticalAlignment="Top" Width="300" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4"/>
+
+        <TextBox
+            IsReadOnly="True"
+            HorizontalAlignment="Left"
+            Height="18"
+            Margin="44,40,0,0"
+            TextWrapping="Wrap"
+            Text="Departure"
+            VerticalAlignment="Top"
+            Width="68"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}"/>
+
+        <TextBox
+            x:Name="TextBoxStateCreateRides"
+            HorizontalAlignment="Left"
+            Height="19" Margin="44,63,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="80"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+
+        <TextBox
+            x:Name="TextBoxTownCreateRides"
+            HorizontalAlignment="Left"
+            Height="19" Margin="145,63,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="80"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+
+        <TextBox
+            x:Name="TextBoxStreetCreateRides"
+            HorizontalAlignment="Left"
+            Height="19" Margin="245,63,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="80"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+
+        <TextBox
+            x:Name="TextBoxDescritpionCreateRides"
+            HorizontalAlignment="Left"
+            Height="19" Margin="44,93,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="281"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDateCreateRides"
+            Margin="44,131,145,291"
+            VerticalAlignment="Top" 
+            BorderBrush="{x:Null}"
+            />
+        <TextBox
+            IsReadOnly="True"
+            Margin="44,216,223,216"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Text="Arrival"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}" />
+        <TextBox
+            x:Name="TextBoxState_arrCreateRides"
+            HorizontalAlignment="Left"
+            Height="19" Margin="44,237,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="80"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+        <TextBox
+            x:Name="TextBoxTown_arrCreateRides"
+            HorizontalAlignment="Left"
+            Height="19" Margin="145,237,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="80"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+        <TextBox
+            x:Name="TextBoxStreet_arrCreateRides"
+            HorizontalAlignment="Left"
+            Height="19" Margin="245,237,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="80"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+        <TextBox
+            x:Name="TextBoxDescritpion_arrCreateRides"
+            HorizontalAlignment="Left"
+            Height="19" Margin="44,267,0,0"
+            TextWrapping="Wrap"
+            VerticalAlignment="Top"
+            Width="281"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDate_arrCreateRides"
+            VerticalAlignment="Top"
+            Margin="44,305,145,117"
+            BorderBrush="{x:Null}"
+            />
+
+    </Grid>
+</UserControl>
