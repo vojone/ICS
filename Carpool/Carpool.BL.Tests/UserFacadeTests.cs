@@ -85,6 +85,22 @@ namespace Carpool.BL.Tests
         }
 
         [Fact]
+        public async Task Delete_SeededDeleteChuck()
+        {
+            //Act
+            await _userFacadeSut.DeleteAsync(
+                Mapper.Map<UserDetailModel>(UserSeeds.DeleteChuck)
+            );
+
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            Assert.False(await dbxAssert.Users.AnyAsync(i => i.Id == UserSeeds.DeleteChuck.Id));
+
+            //Also his cars should be deleted
+            Assert.False(await dbxAssert.Cars.AnyAsync(i => i.OwnerId == UserSeeds.DeleteChuck.Id));
+        }
+
+        [Fact]
         public async Task InsertOrUpdate_UpdateLeonardo()
         {
             //Arrange
