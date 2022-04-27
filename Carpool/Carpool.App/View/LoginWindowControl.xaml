@@ -9,22 +9,30 @@
              d:DataContext="{d:DesignInstance viewModel:LoginScreenViewModel}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <ListView 
             ItemsSource="{Binding Items}" Margin="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Width="Auto" Background="#FFD1D1D1" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <TextBox IsReadOnly="True" Text="{Binding Name}" Width="550" HorizontalAlignment="Left" TextAlignment="Left" FontSize="18" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                        <TextBox IsReadOnly="True" Text="{Binding Surname}" Width="550" HorizontalAlignment="Left" FontSize="18" Margin="10,5,0,0" Background="{x:Null}" BorderBrush="{x:Null}"/>
-                        <Button 
-                            x:Name="ButtonLogin" 
-                            Content="Book" 
+                    <StackPanel Width="Auto" Background="#FFD1D1D1" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25*"/>
+                                <RowDefinition Height="25*"/>
+                            </Grid.RowDefinitions>
+                            <TextBox IsReadOnly="True" Text="{Binding Name}" Width="500" HorizontalAlignment="Center" TextAlignment="Left" FontSize="18" Background="{x:Null}" BorderBrush="{x:Null}" Height="25" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" IsReadOnly="True" Text="{Binding Surname}" Width="500" HorizontalAlignment="Center" FontSize="18" Background="{x:Null}" BorderBrush="{x:Null}" Height="25" VerticalAlignment="Top"/>
+                            <Button 
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                x:Name="ButtonLogin" 
+                                Content="Book" 
 
-                            Background="#FF005FB8" Height="47" Margin="74,12,5,12"  BorderBrush="{x:Null}"/>
+                                Background="#FF005FB8" Height="35"  BorderBrush="{x:Null}" Width="100" Grid.ColumnSpan="2" Margin="490,5,10,5" HorizontalAlignment="Right"/>
+                        </Grid>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
