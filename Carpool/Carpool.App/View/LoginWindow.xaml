@@ -16,10 +16,17 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="27*"/>
         </Grid.RowDefinitions>
-        <Rectangle x:Name="TopBar" Fill="#FFC4C4C4"/>
-        <Button x:Name="ButtonCreateUser" 
-                Content="Create New User" 
-                Margin="0,12,10,12" Background="#FF005FB8" HorizontalAlignment="Right" Width="105"/>
+        <Rectangle 
+            x:Name="TopBar" 
+            Fill="#FFC4C4C4"/>
+        
+        <Button 
+            x:Name="ButtonCreateUser" 
+            Content="Create New User" 
+            Margin="0,12,10,12" 
+            Background="#FF005FB8" 
+            HorizontalAlignment="Right" 
+            Width="105"/>
 
         <TextBox IsReadOnly="True" x:Name="TextBox1" Margin="10,0,0,0" TextWrapping="Wrap" Text="Please select the user" Background="{x:Null}" FontSize="18" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="209" VerticalAlignment="Center"/>
         <view:LoginWindowControl Margin="73,10,81,10" Grid.Row="1" Width="650" DataContext="{Binding LoginScreenViewModel}"/>
