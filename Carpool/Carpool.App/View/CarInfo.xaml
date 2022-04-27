@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Carpool.App.View"
         mc:Ignorable="d"
-        Title="CarInfo" Height="450" Width="800">
+        Title="CarInfo" Height="450" Width="800"
+        DataContext="{StaticResource CarInfoViewModel}">
     <Grid Background="#FFA1A1A1">
         <Grid.RowDefinitions>
             <RowDefinition Height="65*"/>
