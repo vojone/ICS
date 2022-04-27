@@ -57,7 +57,7 @@
             Margin="69,0,0,0" 
             Background="#FF005FB8" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="98" Grid.Column="3"/>
 
-        <local:CreateRideControl  Grid.ColumnSpan="4" Grid.Row="1" Margin="0,3,0,-3"
+        <local:CreateRideControl Grid.Row="1" Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="371" Width="400"
         />
 
         <Button

@@ -34,5 +34,10 @@ namespace Carpool.App.View
         {
 
         }
+
+        private void Rectangle_GiveFeedback(object sender, GiveFeedbackEventArgs e)
+        {
+
+        }
     }
 }

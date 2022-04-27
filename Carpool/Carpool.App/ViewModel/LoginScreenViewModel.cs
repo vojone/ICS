@@ -11,6 +11,7 @@ namespace Carpool.App.ViewModel
     {
         public ICollection<UserLoginMenu> Items { get; set; } = new List<UserLoginMenu>()
         {
+            
             new UserLoginMenu() {Name = "RadekASDASDASASDASADASDASDASDAS", Surname = "MarekASDASDASDASDASDASDA"},
             new UserLoginMenu() {Name = "1", Surname = "Marek"},
             new UserLoginMenu() {Name = "2", Surname = "Marek"},

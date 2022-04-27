@@ -12,64 +12,66 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="334"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle HorizontalAlignment="Left" Height="146" Margin="35,30,0,0" VerticalAlignment="Top" Width="300" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4"/>
-        <Rectangle HorizontalAlignment="Left" Height="146" Margin="35,204,0,0" VerticalAlignment="Top" Width="300" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52*"/>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="48*"/>
+            <RowDefinition Height="16*"/>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="76*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="45*"/>
 
+        </Grid.RowDefinitions>
+        <Rectangle 
+            Grid.Row="6"
+            Grid.RowSpan="3" Margin="34,5,1,5" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4"
+         
+         />
         <TextBox
-            IsReadOnly="True"
-            HorizontalAlignment="Left"
-            Height="18"
-            Margin="44,40,0,0"
+            x:Name="TextBoxArrivalCreateRides" Margin="44,13,10,13"
             TextWrapping="Wrap"
-            Text="Departure"
-            VerticalAlignment="Top"
-            Width="68"
-            Background="{x:Null}"
-            BorderBrush="{x:Null}"/>
-
-        <TextBox
-            x:Name="TextBoxDepartureCreateRides"
-            HorizontalAlignment="Left"
-            Height="52" Margin="44,63,0,0"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="281"
             Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
-
-        <DatePicker
-            Grid.Column="0"
-            x:Name="TextBoxDateCreateRides"
-            Margin="44,131,145,291"
-            VerticalAlignment="Top" 
-            BorderBrush="{x:Null}"
-            />
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged" Grid.Row="7" Height="50"/>
         <TextBox
             IsReadOnly="True"
-            Margin="44,216,223,216"
+            Margin="45,10,223,0"
             TextWrapping="Wrap"
-            VerticalAlignment="Top"
             Text="Arrival"
             Background="{x:Null}"
-            BorderBrush="{x:Null}" />
-        <TextBox
-            x:Name="TextBoxArrivalCreateRides"
-            HorizontalAlignment="Left"
-            Height="52" Margin="44,239,0,0"
-            TextWrapping="Wrap"
-            VerticalAlignment="Top"
-            Width="281"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged"/>
+            BorderBrush="{x:Null}" Grid.Row="6" Height="18" VerticalAlignment="Top" />
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides"
-            VerticalAlignment="Top"
-            Margin="44,305,145,117"
-            BorderBrush="{x:Null}"
+            Margin="45,10,144,0"
+            BorderBrush="{x:Null}" Grid.Row="8" Height="23" VerticalAlignment="Top"
+            />
+        <Rectangle
+            Grid.RowSpan="3" Margin="33,10,2,7" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1"
+         
+         />
+        <TextBox
+            x:Name="TextBoxArrivalCreateRides_Copy" Margin="44,10,10,10"
+            TextWrapping="Wrap"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged" Grid.Row="2" Height="50"/>
+        <TextBox
+            IsReadOnly="True"
+            Margin="44,15,224,0"
+            TextWrapping="Wrap"
+            Text="Departure"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}" Height="18" VerticalAlignment="Top" Grid.Row="1" />
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDate_arrCreateRides_Copy"
+            Margin="45,5,144,10"
+            BorderBrush="{x:Null}" Grid.Row="3"
             />
 
     </Grid>
