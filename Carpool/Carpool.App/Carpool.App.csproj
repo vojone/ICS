@@ -14,4 +14,12 @@
     <Page Remove="NewFolder\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Toolkit.Mvvm" Version="7.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Carpool.BL\Carpool.BL.csproj" />
+  </ItemGroup>
+
 </Project>
