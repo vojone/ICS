@@ -7,7 +7,6 @@
              StartupUri="View/LoginWindow.xaml">
     <Application.Resources>
 
-        <viewModel:LoginScreenViewModel x:Key="LoginScreenViewModel" />
         <viewModel:RideListViewModel x:Key="RideListViewModel" />
         <viewModel:RideHistoryViewModel x:Key="RideHistoryViewMode"/>
         <viewModel:CreateRideViewModel x:Key="CreateRideViewModel" />
