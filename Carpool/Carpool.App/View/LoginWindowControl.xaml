@@ -20,6 +20,11 @@
                     <StackPanel Width="Auto" Background="#FFD1D1D1" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBox IsReadOnly="True" Text="{Binding Name}" Width="550" HorizontalAlignment="Left" TextAlignment="Left" FontSize="18" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}"/>
                         <TextBox IsReadOnly="True" Text="{Binding Surname}" Width="550" HorizontalAlignment="Left" FontSize="18" Margin="10,5,0,0" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                        <Button 
+                            x:Name="ButtonLogin" 
+                            Content="Book" 
+
+                            Background="#FF005FB8" Height="47" Margin="74,12,5,12"  BorderBrush="{x:Null}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

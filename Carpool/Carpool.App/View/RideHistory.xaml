@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Carpool.App.View"
         mc:Ignorable="d"
         Title="RideHistory" Height="450" Width="800"
-        DataContext="{StaticResource RideHistoryViewModel}">
+        DataContext="{StaticResource RideHistoryViewMode}">
 
 
     <Grid Background="#FFA1A1A1">
@@ -31,7 +31,7 @@
             Width="209" 
             VerticalAlignment="Center" 
             Height="26"/>
-        
+
         <TextBox
             x:Name="LogedUsername"
             IsReadOnly="True" 
