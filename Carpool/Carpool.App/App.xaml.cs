@@ -58,7 +58,7 @@ namespace Carpool.App
 
             services.AddSingleton<IMediator, Mediator>();
 
-            services.AddSingleton<LoginScreenViewModel>();
+            services.AddFactory<ILoginScreenViewModel, LoginScreenViewModel>();
         }
 
 

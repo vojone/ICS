@@ -11,7 +11,7 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.ViewModel
 {
-    public class LoginScreenViewModel : ViewModelBase
+    public class LoginScreenViewModel : ViewModelBase, ILoginScreenViewModel
     {
 
         private readonly UserFacade _userFacade;
