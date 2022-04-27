@@ -21,9 +21,10 @@ namespace Carpool.App
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel mainViewModel)
         {
             InitializeComponent();
+            DataContext = mainViewModel;
         }
 
         private void LoginWindowControl_Loaded(object sender, RoutedEventArgs e)

@@ -19,7 +19,7 @@ namespace Carpool.App.View
     /// <summary>
     /// Interaction logic for LoginWindowControl.xaml
     /// </summary>
-    public partial class LoginWindowControl : UserControl
+    public partial class LoginWindowControl
     {
         public LoginWindowControl()
         {
