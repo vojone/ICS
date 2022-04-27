@@ -26,31 +26,29 @@
             Grid.Column="0"
             Grid.ColumnSpan="3"/>
 
-        <TextBox
-            IsReadOnly="True" 
+        <Label
             Margin="54,0,0,0" 
-            TextWrapping="Wrap" 
-            Text="Please select the user" 
+            Content="Please select the user" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
             VerticalAlignment="Center" 
-            Height="26"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"/>
+            Height="40"
+            Grid.Column="0"/>
 
-        <TextBox
+        <Label
             x:Name="LoggedUserName"
             Grid.Column="2"
-            IsReadOnly="True" 
             Margin="0,0,0,0" 
-            TextWrapping="Wrap" 
-            Text="Jméno usera" 
+            Content="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            TextAlignment="Center" VerticalAlignment="Center" Height="17" HorizontalAlignment="Right" Width="82"/>
+            VerticalAlignment="Center" 
+            Height="17" 
+            HorizontalAlignment="Right" 
+            Width="82"/>
 
         <Button 
             Grid.Column="1"
@@ -139,53 +137,44 @@
             VerticalAlignment="Top" 
             Height="17" Grid.Row="3" FontSize="13" Grid.Column="1"
     />
-        <TextBox
-            IsReadOnly="True" 
-            Margin="71,4,0,0" 
-            TextWrapping="Wrap" 
-            Text="Type" 
+        <Label
+            Margin="71,0,0,0" 
+            Content="Type" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" Grid.Row="3" FontSize="13" Grid.Column="2"
+            Height="27" Grid.Row="3" FontSize="13" Grid.Column="2"
     />
-        <TextBox
-            IsReadOnly="True" 
-            Margin="0,10,0,0" 
-            TextWrapping="Wrap" 
-            Text="Registration date" 
+        <Label 
+            Content="Registration date" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Center" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" Grid.Row="4" FontSize="13"
+            Height="28" Grid.Row="4" FontSize="13"
     />
-        <TextBox
-            IsReadOnly="True" 
-            Margin="71,10,0,0" 
-            TextWrapping="Wrap" 
-            Text="Number of seats" 
+        <Label
+            Margin="71,0,0,0" 
+            Content="Number of seats" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" Grid.Row="4" FontSize="13" Grid.Column="1"
+            Height="28" Grid.Row="4" FontSize="13" Grid.Column="1"
     />
-        <TextBox
-            IsReadOnly="True" 
-            Margin="71,70,0,0" 
-            TextWrapping="Wrap" 
-            Text="Selected car" 
+        <Label
+            Margin="71,61,0,0" 
+            Content="Selected car" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" Grid.Row="2" FontSize="13"
+            Height="26" Grid.Row="2" FontSize="13"
     />
     </Grid>
 </Window>

@@ -19,18 +19,16 @@
             Fill="#FFC4C4C4" 
             Margin="0,8,0,8"/>
 
-        <TextBox
-            IsReadOnly="True" 
+        <Label
             Margin="54,0,0,0" 
-            TextWrapping="Wrap" 
-            Text="Please select the user" 
+            Content="Please select user"
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
             VerticalAlignment="Center" 
-            Height="26"/>
+            Height="34"/>
 
         <TextBox
             x:Name="LogedUsername"

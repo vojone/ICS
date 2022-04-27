@@ -38,13 +38,13 @@
             TextWrapping="Wrap"
             Background="#FFEDEDED"
             BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged" Grid.Row="7" Height="50"/>
-        <TextBox
-            IsReadOnly="True"
-            Margin="45,10,223,0"
-            TextWrapping="Wrap"
-            Text="Arrival"
+
+        <Label
+            Margin="45,5,223,0"
+            Content="Arrival"
             Background="{x:Null}"
-            BorderBrush="{x:Null}" Grid.Row="6" Height="18" VerticalAlignment="Top" />
+            BorderBrush="{x:Null}" Grid.Row="6" Height="23" VerticalAlignment="Top" />
+
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides"
@@ -60,13 +60,12 @@
             TextWrapping="Wrap"
             Background="#FFEDEDED"
             BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged" Grid.Row="2" Height="50"/>
-        <TextBox
-            IsReadOnly="True"
+
+        <Label
             Margin="44,15,224,0"
-            TextWrapping="Wrap"
-            Text="Departure"
+            Content="Departure"
             Background="{x:Null}"
-            BorderBrush="{x:Null}" Height="18" VerticalAlignment="Top" Grid.Row="1" />
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" />
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy"

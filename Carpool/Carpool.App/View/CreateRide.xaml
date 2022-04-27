@@ -21,27 +21,24 @@
             x:Name="TopBar" 
             Fill="#FFC4C4C4" Grid.ColumnSpan="2"/>
 
-        <TextBox
-            IsReadOnly="True" 
+        <Label
             x:Name="TextBox1" 
             Margin="54,0,0,0" 
-            TextWrapping="Wrap" 
-            Text="Create a ride" 
+            Content="Create a ride" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
             VerticalAlignment="Center" 
-            Height="24"/>
-        <TextBox
-            IsReadOnly="True" 
+            Height="40"/>
+        
+        <Label
             Margin="249,0,0,0" 
-            TextWrapping="Wrap" 
-            Text="Jméno usera" 
+            Content="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+            VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
         <Image
             Grid.Row="0"
             Height="60" 

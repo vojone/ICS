@@ -27,24 +27,88 @@
                                 <RowDefinition Height="24*"/>
                                 <RowDefinition Height="23*"/>
                             </Grid.RowDefinitions>
-                            <TextBox x:Name="TextBoxFrom" Grid.Row="1" IsReadOnly="True" Text="{Binding Kam}" FontSize="14" Margin="10,0,10,0" 
-                                     Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto"/>
-                            <TextBox x:Name="TextBoxTo" Grid.Row="0" IsReadOnly="True" Text="{Binding Odkud}" FontSize="14" Margin="10,0,10,0" 
-                                     Background="{x:Null}" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="TextBoxCarName" Grid.Column="0" Grid.Row="2" IsReadOnly="True" Text="{Binding Auto}" FontSize="10" Margin="10,3,102,3" 
-                                Background="{x:Null}" BorderBrush="{x:Null}"/>
+                            <Label 
+                                x:Name="TextBoxFrom" 
+                                Grid.Row="1"
+                                Content="{Binding Kam}" 
+                                FontSize="14" 
+                                Margin="10,1,10,20" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Height="Auto" FontStyle="Normal" Grid.RowSpan="2"/>
 
-                            <TextBox x:Name="TextBoxRating" Grid.Row="2" Grid.Column="1" Text="{Binding Hodnoceni}" FontSize="14"
-                                     Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
+                            <Label 
+                                x:Name="LabelTo" Grid.Row="0" 
+                                Content="{Binding Odkud}" 
+                                FontSize="14" 
+                                Margin="10,0,10,18" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" Grid.RowSpan="2"/>
 
-                            <TextBox x:Name="TextBoxDeparture" Grid.Row="0" Grid.Column="2" Text="{Binding OdKdy}" FontSize="14" Margin="10,0,10,0"
-                                     Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
-                            <TextBox x:Name="TextBoxArrival" Grid.Row="0" Grid.Column="3" Text="{Binding DoKdy}" FontSize="14" Margin="10,0,10,0"
-                                     Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
-                            <TextBox x:Name="TextBoxWhen" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Datum}" FontSize="14" Margin="10,0,10,0"
-                                     Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
-                            <TextBox x:Name="TextBoxSeats" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Mista}" FontSize="14" Margin="10,0,10,0"
-                                     Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
+                            <Label 
+                                x:Name="LabelCarName" 
+                                Grid.Column="0" 
+                                Grid.Row="2" 
+                                Content="{Binding Auto}" 
+                                FontSize="10" 
+                                Margin="10,3,102,-8" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}"/>
+
+                            <Label 
+                                x:Name="LabelRating" 
+                                Grid.Row="2" 
+                                Grid.Column="1" 
+                                Content="{Binding Hodnoceni}" 
+                                FontSize="14"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Height="auto"/>
+
+                            <Label 
+                                x:Name="LabelDeparture" 
+                                Grid.Row="0" Grid.Column="2" 
+                                Content="{Binding OdKdy}" 
+                                FontSize="14" 
+                                Margin="10,0,10,0"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Height="auto"/>
+
+                            <Label 
+                                x:Name="LabelArrival" 
+                                Grid.Row="0" 
+                                Grid.Column="3" 
+                                Content="{Binding DoKdy}" 
+                                FontSize="14" 
+                                Margin="10,0,10,0"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Height="auto"/>
+
+                            <Label 
+                                x:Name="LabelWhen" 
+                                Grid.Row="1" 
+                                Grid.Column="2" 
+                                Grid.ColumnSpan="2" 
+                                Content="{Binding Datum}" 
+                                FontSize="14" 
+                                Margin="10,0,10,0"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Height="auto" />
+
+                            <Label 
+                                x:Name="LabelSeats" 
+                                Grid.Row="2" 
+                                Grid.Column="2" 
+                                Grid.ColumnSpan="2" 
+                                Content="{Binding Mista}" 
+                                FontSize="14" 
+                                Margin="10,0,10,0"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Height="auto"/>
 
 
                             <Button 
