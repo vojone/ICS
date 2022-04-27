@@ -37,9 +37,9 @@ namespace Carpool.App.ViewModel
         public async Task LoadAsync()
         {
             Rides.Clear();
-            var ingredients = await _rideFacade.GetAsync();
+            var rides = await _rideFacade.GetAsync();
             
-            foreach (var item in ingredients)
+            foreach (var item in rides)
             {
                 Rides.Add(item);
             }
