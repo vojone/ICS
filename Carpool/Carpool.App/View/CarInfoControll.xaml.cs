@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for RideList.xaml
+    /// Interaction logic for CarInfoControll.xaml
     /// </summary>
-    public partial class RideList : Window
+    public partial class CarInfoControll : UserControl
     {
-        public RideList()
+        public CarInfoControll()
         {
             InitializeComponent();
         }

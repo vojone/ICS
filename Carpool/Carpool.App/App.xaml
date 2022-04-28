@@ -4,7 +4,8 @@
              xmlns:local="clr-namespace:Carpool.App"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
-             xmlns:viewModel="clr-namespace:Carpool.App.ViewModel">
+             xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
+             StartupUri="View/Ridelist.xaml">
 
     <Application.Resources>
 
