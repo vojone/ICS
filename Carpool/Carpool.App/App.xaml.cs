@@ -8,6 +8,7 @@ using System.Windows;
 using Carpool.App.Services;
 using Carpool.App.Extensions;
 using Carpool.App.Settings;
+using Carpool.App.View;
 using Carpool.App.ViewModel;
 using Carpool.BL;
 using Carpool.DAL;
