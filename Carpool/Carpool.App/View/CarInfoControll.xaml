@@ -29,14 +29,14 @@
             Grid.ColumnSpan="3"/>
 
         <Label
-            Margin="54,0,0,0" 
+            Margin="55,13,0,0" 
             Content="Please select the user" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
-            VerticalAlignment="Center" 
+            VerticalAlignment="Top" 
             Height="40"
             Grid.Column="0"/>
 
@@ -57,15 +57,15 @@
             Grid.ColumnSpan="2"
             x:Name="ButtonCreateRide"
             Content="Create Ride" 
-            Margin="216,0,187,0" 
+            Margin="216,13,108,0" 
             Background="#FF005FB8" 
-            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="80"/>
+            BorderBrush="{x:Null}" VerticalAlignment="Top" Height="40" HorizontalAlignment="Right" Width="130"/>
 
         <Button
             x:Name="ButtonNewCar" 
             Content="New Car" 
-            Margin="70,0,0,0" 
-            Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="1"/>
+            Margin="70,7,0,0" 
+            Background="#FF005FB8" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="1"/>
 
         <ComboBox x:Name="SelectedCarCombobox" HorizontalAlignment="Left" Height="25" Margin="70,20,0,0" Grid.Row="2" VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
             <ComboBox.Background>
@@ -76,7 +76,7 @@
             </ComboBox.Background>
         </ComboBox>
 
-        <TextBox x:Name="CarName" Grid.Row="3" Width="130" Height="25" Margin="68,27,68,7" TextAlignment="Center"/>
+        <TextBox x:Name="CarName" Grid.Row="3" Width="130" Height="25" Margin="68,27,68,7" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
         <DatePicker x:Name="CarRegistrationDate" HorizontalAlignment="Center" Height="25" Grid.Row="4" VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}" Margin="0,33,0,0"/>
 
@@ -90,7 +90,7 @@
             </ComboBox.Background>
         </ComboBox>
 
-        <ComboBox x:Name="CarTypeCombobox" HorizontalAlignment="Left" Height="25" Margin="70,20,0,0" Grid.Row="3" Grid.Column="2" 
+        <ComboBox x:Name="CarTypeCombobox" HorizontalAlignment="Right" Height="25" Margin="70,20,68,0" Grid.Row="3" Grid.Column="2" 
                   VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
@@ -103,10 +103,10 @@
         <Button
             x:Name="ButtonDeleteCar" 
             Content="Delete Car" 
-            Margin="70,0,0,0" 
-            Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="4" Grid.Column="3"/>
+            Margin="70,0,68,0" 
+            Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130" Grid.Row="4" Grid.Column="3"/>
 
-        <ComboBox x:Name="CarSeatsCombobox" HorizontalAlignment="Left" Height="25" Margin="70,20,0,0" Grid.Row="4" Grid.Column="1" 
+        <ComboBox x:Name="CarSeatsCombobox" HorizontalAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="4" Grid.Column="1" 
                   VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
@@ -117,15 +117,15 @@
         </ComboBox>
         <TextBox
             IsReadOnly="True" 
-            Margin="0,4,0,0" 
+            Margin="70,4,0,28" 
             TextWrapping="Wrap" 
             Text="Name" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Center" 
+            HorizontalAlignment="Left" 
             Width="127" 
-            VerticalAlignment="Top" 
-            Height="17" Grid.Row="3" FontSize="13"
+            VerticalAlignment="Center" 
+            Height="26" Grid.Row="3" FontSize="13" TextAlignment="Left"
     />
         <TextBox
             IsReadOnly="True" 
@@ -137,17 +137,17 @@
             HorizontalAlignment="Left" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" Grid.Row="3" FontSize="13" Grid.Column="1"
+            Height="26" Grid.Row="3" FontSize="13" Grid.Column="1"
     />
         <Label
-            Margin="71,0,0,0" 
+            Margin="71,-27,69,0" 
             Content="Type" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Right" 
             Width="127" 
-            VerticalAlignment="Top" 
-            Height="27" Grid.Row="3" FontSize="13" Grid.Column="2"
+            VerticalAlignment="Center" 
+            Height="26" Grid.Row="3" FontSize="13" Grid.Column="2"
     />
         <Label 
             Content="Registration date" 
@@ -156,7 +156,7 @@
             HorizontalAlignment="Center" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="28" Grid.Row="4" FontSize="13"
+            Height="26" Grid.Row="4" FontSize="13" Margin="0,4,0,0"
     />
         <Label 
             Content="Number of seats" 
@@ -164,17 +164,17 @@
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Center" 
             Width="127" 
-            VerticalAlignment="Top" 
-            Height="28" Grid.Row="4" FontSize="13" Grid.Column="1"
+            VerticalAlignment="Center" 
+            Height="26" Grid.Row="4" FontSize="13" Grid.Column="1" Margin="0,4,0,34"
     />
         <Label
-            Margin="71,61,0,0" 
+            Margin="71,-30,0,0" 
             Content="Selected car" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="127" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Center" 
             Height="26" Grid.Row="2" FontSize="13"
     />
     </Grid>

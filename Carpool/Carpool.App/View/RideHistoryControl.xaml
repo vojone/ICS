@@ -9,9 +9,55 @@
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModel:RideHistoryViewModel}">
 
-    <Grid Margin="0,0,21,0">
+    <Grid Margin="0,0,21,0"
+          Width="auto"
+          Height="auto"
+          Background="#FFA1A1A1">
+
+        <Rectangle 
+            Fill="#FFC4C4C4" 
+            Margin="0,8,0,0" VerticalAlignment="Top" Height="52"/>
+
+        <Label
+            Margin="10,17,0,0" 
+            Content="Please select user"
+            Background="{x:Null}" 
+            FontSize="18" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="209" 
+            VerticalAlignment="Top" 
+            Height="34"/>
+
+        <TextBox
+            x:Name="LogedUsername"
+            IsReadOnly="True" 
+            Margin="0,26,48,0" 
+            TextWrapping="Wrap" 
+            Text="Jméno usera" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            TextAlignment="Center" VerticalAlignment="Top" Height="17" HorizontalAlignment="Right" Width="82"/>
+        <Button  
+            Content="Filter rides" 
+            Margin="0,80,70,0" 
+            Background="#FFDBDBDB" 
+            BorderBrush="{x:Null}" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="90"/>
+        <Button 
+            Content="Ride History" 
+            Margin="70,80,0,0" 
+            Background="#919191" 
+            HorizontalAlignment="Left" 
+            IsEnabled="False"
+            BorderBrush="{x:Null}" Width="90" VerticalAlignment="Top" Height="28"/>
+        <Button 
+            x:Name="ButtonCreateRide" 
+            Content="Create Ride" 
+            Margin="0,19,158,397" 
+            Background="#FF005FB8" Height="34" HorizontalAlignment="Right" Width="80"/>
+
         <ListView 
-            ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
+            ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,126,0,0" Height="324">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Width="560"  Background="#FFD1D1D1" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center">
