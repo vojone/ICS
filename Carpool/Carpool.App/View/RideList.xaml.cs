@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for RideListControl.xaml
+    /// Interaction logic for RideList.xaml
     /// </summary>
-    public partial class RideListControl : UserControlBase
+    public partial class RideList : UserControl
     {
-        public RideListControl()
+        public RideList()
         {
             InitializeComponent();
         }

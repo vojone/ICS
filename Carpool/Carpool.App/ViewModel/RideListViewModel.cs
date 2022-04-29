@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Model;
@@ -29,10 +30,17 @@ namespace Carpool.App.ViewModel
 
             //mediator.Register<UpdateMessage<RideWrapper>>(RideUpdated);
             //mediator.Register<DeleteMessage<RideWrapper>>(RideDeleted);
+            FilterRidesCommand = new RelayCommand(FilterRides);
         }
+
+        public ICommand FilterRidesCommand { get; set; }
 
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
 
+        private void FilterRides()
+        {
+            LoadAsync();
+        }
 
         public async Task LoadAsync()
         {
