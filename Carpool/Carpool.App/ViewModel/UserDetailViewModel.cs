@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
@@ -23,6 +24,7 @@ namespace Carpool.App.ViewModel
             _userFacade = userFacade;
             _mediator = mediator;
         }
+
 
         public UserWrapper? Model { get; private set; }
 

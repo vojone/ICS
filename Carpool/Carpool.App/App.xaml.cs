@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Carpool.App.Command;
 using Carpool.App.Services;
 using Carpool.App.Extensions;
 using Carpool.App.Settings;
@@ -56,11 +57,12 @@ namespace Carpool.App
             });
 
             services.AddSingleton<MainWindow>();
-
+            services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IMediator, Mediator>();
 
             services.AddSingleton<MainViewModel>();
             services.AddFactory<ILoginScreenViewModel, LoginScreenViewModel>();
+            services.AddFactory<IUserDetailViewModel, UserDetailViewModel>();
         }
 
 

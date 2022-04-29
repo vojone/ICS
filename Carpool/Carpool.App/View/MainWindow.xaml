@@ -7,8 +7,21 @@
         xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        d:DataContext="{d:DesignInstance viewModel:MainViewModel}">
+        d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
+        DataContext="{Binding}">
+
+    <Window.Resources>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:LoginScreenViewModel}">
+            <local:LoginWindow></local:LoginWindow>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:UserDetailViewModel}">
+            <local:CreateUser></local:CreateUser>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
-        <local:LoginWindow HorizontalContentAlignment="Stretch" DataContext="{Binding LoginScreenViewModel}"/>
+
+        <ContentControl Content="{Binding CurrentViewModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
+        <!--<local:LoginWindow HorizontalContentAlignment="Stretch" DataContext="{Binding LoginScreenViewModel}"/>-->
     </Grid>
 </Window>

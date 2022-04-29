@@ -17,7 +17,7 @@ namespace Carpool.App.View
     /// <summary>
     /// Interaction logic for CreateUser.xaml
     /// </summary>
-    public partial class CreateUser : Window
+    public partial class CreateUser
     {
         public CreateUser()
         {

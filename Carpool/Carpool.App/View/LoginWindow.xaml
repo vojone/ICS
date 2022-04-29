@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Carpool.App.View"
-        xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
+        xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModel:LoginScreenViewModel}"
+        d:DataContext="{d:DesignInstance viewModels:LoginScreenViewModel}"
 >
 
     <Grid Background="#FFA1A1A1">
@@ -24,7 +24,8 @@
             Margin="0,12,10,12" 
             Background="#FF005FB8" 
             HorizontalAlignment="Right" 
-            Width="105"/>
+            Width="105"
+            Command="{Binding DisplayUserCreateScreenCommand}"/>
 
         <TextBox IsReadOnly="True" x:Name="TextBox1" Margin="10,0,0,0" TextWrapping="Wrap" Text="Please select the user" Background="{x:Null}" FontSize="18" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="209" VerticalAlignment="Center"/>
         <local:LoginWindowControl Margin="73,10,81,10" Grid.Row="1" Width="650"/>
