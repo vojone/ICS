@@ -2,6 +2,7 @@ using System;
 
 namespace Carpool.App.Factories
 {
+    //From example project "CookBook"
     public class Factory<T> : IFactory<T>
     {
         private readonly Func<T> _initFunc;

@@ -7,6 +7,7 @@ using Carpool.App.Messages;
 
 namespace Carpool.App.Services
 {
+    //From example project "CookBook"
     public class Mediator : IMediator
     {
         private readonly Dictionary<Type, List<Delegate?>> _registeredActions = new();

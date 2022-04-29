@@ -9,6 +9,7 @@ using Carpool.App.ViewModel;
 
 namespace Carpool.App.View
 {
+    //From example project "CookBook"
     public abstract class UserControlBase : UserControl
     {
         protected UserControlBase()

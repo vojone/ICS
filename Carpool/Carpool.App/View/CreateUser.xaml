@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Carpool.App.View"
         xmlns:converters="clr-namespace:Carpool.App.Converters"
+        xmlns:validators="clr-namespace:Carpool.App.Services"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
         d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}">
@@ -51,8 +52,8 @@
             Width="130" 
             Height="25" 
             Margin="70,20,67,9" 
-            TextAlignment="Center"
-            Text="{Binding Model.Name}"/>
+            TextAlignment="Center" RenderTransformOrigin="0.503,0.306"
+            Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <TextBox
             x:Name="TextBoxLastName" 
@@ -74,16 +75,19 @@
             TextAlignment="Center"
             Text="{Binding Model.Country}"/>
 
-        <DatePicker 
+        <DatePickerTextBox 
             x:Name="RegistrationDate"
             Grid.Row="4" 
-            HorizontalAlignment="Left" 
             Height="25" 
-            VerticalAlignment="Top" 
             Width="130" 
-            
-            BorderBrush="{x:Null}" Margin="70,28,0,0"
-            SelectedDate="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            IsReadOnly="True"
+            Margin="70,20,67,9"
+            Background="LightGray"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Style="{StaticResource ReadOnlyDateTextBoxStyle}"
+            Text="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}" FontSize="14">
+        </DatePickerTextBox>
 
 
         <Button 

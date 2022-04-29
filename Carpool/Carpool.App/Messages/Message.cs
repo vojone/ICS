@@ -3,6 +3,7 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.Messages
 {
+    //From example project "CookBook"
     public abstract record Message<T> : IMessage
         where T : IModel
     {
