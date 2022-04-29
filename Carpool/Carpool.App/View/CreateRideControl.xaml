@@ -9,7 +9,7 @@
              d:DataContext="{d:DesignInstance viewModel:CreateRideViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="#FFA1A1A1">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="334"/>
@@ -73,5 +73,78 @@
             BorderBrush="{x:Null}" Grid.Row="3"
             />
 
+        <Rectangle 
+            x:Name="TopBar" 
+            Fill="#FFC4C4C4" Grid.ColumnSpan="2"/>
+
+        <Label
+            x:Name="TextBox1" 
+            Margin="54,0,0,0" 
+            Content="Create a ride" 
+            Background="{x:Null}" 
+            FontSize="18" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="209" 
+            VerticalAlignment="Center" 
+            Height="40"/>
+
+        <Label
+            Margin="249,0,0,0" 
+            Content="Jméno usera" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+        <Image
+            Grid.Row="0"
+            Height="60" 
+            Margin="348,17,10,0" 
+            VerticalAlignment="Top" Grid.Column="1" Grid.RowSpan="2"/>
+        <Rectangle HorizontalAlignment="Left" Height="60" Margin="50,0,0,0" VerticalAlignment="Center" Width="135" Fill="#FFA1A1A1" Grid.Column="1"/>
+        <Button
+            x:Name="ButtonCreateUser" 
+            Content="Create Ride" 
+            Margin="69,0,0,0" 
+            Background="#FF919191" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="98" Grid.Column="1"/>
+        <Rectangle
+            HorizontalAlignment="Left"
+            Height="278" 
+            VerticalAlignment="Top" 
+            Width="267" Fill="#FFC4C4C4" 
+            RadiusX="10" 
+            RadiusY="10"  
+            Grid.Column="1" Grid.Row="1" Margin="129,29,0,0" Grid.RowSpan="8"/>
+        <Button
+            x:Name="ButtonCreateRide" 
+            Content="Create Ride" 
+            Margin="132,16,0,0" 
+            Background="#FF005FB8"
+            Height="34"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Width="264"
+            Grid.Column="1" Grid.Row="8"/>
+        <ComboBox
+            x:Name="ComboBoxCreateRideSeats"
+            VerticalAlignment="Top"
+            DisplayMemberPath="Source"
+            HorizontalAlignment="Left"
+            Height="22"
+            Width="70"
+            Grid.Column="1" Grid.Row="7" Margin="144,44,0,0" />
+        <ComboBox
+            x:Name="ComboBoxCreateRideCar"
+            DisplayMemberPath="Source"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Grid.Column="1" Grid.Row="2" Margin="161,0,0,0" Width="204"/>
+        <Rectangle
+            HorizontalAlignment="Left"
+            Height="171" 
+            VerticalAlignment="Top" 
+            Width="204" Fill="#FF919191" 
+            RadiusX="10" 
+            RadiusY="10"  
+            Grid.Column="1" Grid.Row="2" Margin="162,38,0,0" Grid.RowSpan="6"/>
     </Grid>
 </UserControl>

@@ -1,15 +1,13 @@
-<Window x:Class="Carpool.App.View.EditRide"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Carpool.App.View"
-        xmlns:viewModel="clr-namespace:Carpool.App.ViewModel" 
-        xmlns:model="clr-namespace:Carpool.App.Model"
-        d:DataContext="{d:DesignInstance viewModel:CreateRideViewModel}"
-
-        mc:Ignorable="d"
-        Title="EditRide" Height="450" Width="800">
+<UserControl x:Class="Carpool.App.View.EditRideControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Carpool.App.View"
+             xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
+             d:DataContext= "{d:DesignInstance viewModel:EditRideViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFA1A1A1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -20,6 +18,20 @@
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
+        <Rectangle Margin="30,216,24,30" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1"
+         
+        />
+        <TextBox
+            x:Name="TextBoxArrivalCreateRides_Copy" Margin="47,252,73,88"
+            TextWrapping="Wrap"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50"/>
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDate_arrCreateRides_Copy"
+            Margin="48,315,141,50"
+            BorderBrush="{x:Null}" Grid.Row="1"
+        />
 
         <Rectangle 
             x:Name="TopBar" 
@@ -58,9 +70,6 @@
             Margin="69,0,0,0" 
             Background="#FF005FB8" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="98" Grid.Column="3"/>
 
-        <local:CreateRideControl Grid.Row="1" Margin="0,3,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Height="371" Width="400"
-        />
-
         <Button
             x:Name="ButtonEditRideSaveChanges" 
             Content="Save changes" 
@@ -72,36 +81,26 @@
             Margin="237,327,0,0" 
             Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" Grid.Column="3" Grid.Row="1"/>
 
-        <UserControl 
-            d:DataContext= "{d:DesignInstance viewModel:EditRideViewModel}"
-            Grid.Column="3" Grid.Row="1"
-            Margin="66,187,0,0"
-            Background="#FFC4C4C4"
-            Height="122"
-            VerticalAlignment="Top" HorizontalAlignment="Left"
-            Width="266">
+        <ListView Grid.Column="1" Grid.Row="1"
+                  Background="#FFC4C4C4"
+                  Height="122"
+                  VerticalAlignment="Top" HorizontalAlignment="Center"
+                  Width="266"
+                  ItemsSource="{Binding EditRide}" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="0,195,0,0">
 
-            <ListView Grid.Column="1" Grid.Row="1"
-                      Background="#FFC4C4C4"
-                      Height="122"
-                      VerticalAlignment="Center" HorizontalAlignment="Center"
-                      Width="266"
-                      ItemsSource="{Binding EditRide}" d:ItemsSource="{d:SampleData ItemCount=3}">
+            <ListView.ItemTemplate >
+                <DataTemplate >
+                    <StackPanel Grid.Column="1" Grid.Row="1" Height="23" Width="216">
+                        <Label 
+                            Content="{Binding CoDriver}" 
+                            Background="#d1d1d1" 
+                            Height="24" 
+                            BorderBrush="{x:Null}"/>
+                    </StackPanel>
+                </DataTemplate>
 
-                <ListView.ItemTemplate >
-                    <DataTemplate >
-                        <StackPanel Grid.Column="1" Grid.Row="1" Height="23" Width="216">
-                            <Label 
-                                Content="{Binding CoDriver}" 
-                                Background="#d1d1d1" 
-                                Height="24" 
-                                BorderBrush="{x:Null}"/>
-                        </StackPanel>
-                    </DataTemplate>
-
-                </ListView.ItemTemplate>
-            </ListView>
-        </UserControl>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <Rectangle
             HorizontalAlignment="Left"
@@ -168,5 +167,29 @@
             Height="23" 
             VerticalAlignment="Top" 
             />
+        <Label
+            Margin="47,222,221,0"
+            Content="Arrival"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" />
+        <Rectangle Margin="31,25,23,221" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1"
+         
+        />
+        <TextBox
+            x:Name="TextBoxArrivalCreateRides_Copy1" Margin="48,61,56,279"
+            TextWrapping="Wrap"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50"/>
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDate_arrCreateRides_Copy1"
+            Margin="49,124,140,241"
+            BorderBrush="{x:Null}" Grid.Row="1"
+        />
+        <Label
+            Margin="48,31,220,0"
+            Content="Departure"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" />
     </Grid>
-</Window>
+</UserControl>
