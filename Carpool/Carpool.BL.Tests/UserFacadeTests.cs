@@ -29,6 +29,7 @@ namespace Carpool.BL.Tests
             (
                 Name: @"Jan",
                 Surname: @"Novák",
+                RegistrationDate: new DateTime(2014, 12, 10),
                 PhotoUrl: @"sampleUrl",
                 Country: @"Czech Republic",
                 Rating: 0
@@ -91,6 +92,7 @@ namespace Carpool.BL.Tests
             var user = new UserDetailModel(
                 Name: UserSeeds.UpdateLeonardo.Name + " updated",
                 Surname: UserSeeds.UpdateLeonardo.Surname + " updated",
+                RegistrationDate: UserSeeds.UpdateLeonardo.RegistrationDate,
                 PhotoUrl: @"updated photoUrl",
                 Country: UserSeeds.UpdateLeonardo.Country,
                 Rating: UserSeeds.UpdateLeonardo.Rating + 10
@@ -115,7 +117,8 @@ namespace Carpool.BL.Tests
             //Arrange
             var user = new UserDetailModel(
                 Name: @"Justin",
-                Surname: @"Bieber"
+                Surname: @"Bieber",
+                RegistrationDate: new DateTime(2012, 5, 5)
             );
 
             //Act

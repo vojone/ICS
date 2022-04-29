@@ -12,7 +12,8 @@ public static class UserSeeds
         Surname: "Kenobi",
         PhotoUrl: null,
         Country: null,
-        Rating: 0
+        Rating: 0,
+        RegistrationDate: DateTime.MinValue
     );
 
     public static readonly UserEntity Jack = new(
@@ -21,7 +22,8 @@ public static class UserSeeds
         Surname: "Sparrow",
         PhotoUrl: null,
         Country: null,
-        Rating: 123
+        Rating: 123,
+        RegistrationDate: new DateTime(2022, 12, 11)
     );
 
     public static readonly UserEntity Chuck = new(
@@ -30,7 +32,8 @@ public static class UserSeeds
         Surname: "Norris",
         PhotoUrl: "TestUrl",
         Country: "USA",
-        Rating: 454657894
+        Rating: 454657894,
+        RegistrationDate: new DateTime(2020, 12, 11)
     );
 
     public static readonly UserEntity Leonardo = new(
@@ -39,7 +42,8 @@ public static class UserSeeds
         Surname: "diCaprio",
         PhotoUrl: null,
         Country: "USA",
-        Rating: 1
+        Rating: 1,
+        RegistrationDate: new DateTime(2019, 12, 11)
     );
 
     public static readonly UserEntity EmptyUser = new(
@@ -48,7 +52,8 @@ public static class UserSeeds
         Surname: default!,
         PhotoUrl: default,
         Country: default,
-        Rating: default
+        Rating: default,
+        RegistrationDate: default
     );
 
     public static readonly UserEntity UpdateChuck = Chuck with
