@@ -17,6 +17,9 @@
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:UserDetailViewModel}">
             <local:CreateUser></local:CreateUser>
         </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:RideListViewModel}">
+            <local:RideList></local:RideList>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>
