@@ -11,12 +11,12 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.ViewModel
 {
-    public class CarInfoViewModel : ViewModelBase, ICarInfoViewModel
+    public class CarDetailViewModel : ViewModelBase, ICarInfoViewModel
     {
         private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
 
-        public CarInfoViewModel(CarFacade carFacade, IMediator mediator)
+        public CarDetailViewModel(CarFacade carFacade, IMediator mediator)
         {
             _carFacade = carFacade;
             _mediator = mediator;

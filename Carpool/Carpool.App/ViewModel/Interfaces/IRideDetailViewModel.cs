@@ -2,7 +2,7 @@ using Carpool.App.Wrapper;
 
 namespace Carpool.App.ViewModel;
 
-public interface ICreateRideViewModel : IDetailViewModel<RideWrapper>
+public interface IRideDetailViewModel : IDetailViewModel<RideWrapper>
 {
     
 }

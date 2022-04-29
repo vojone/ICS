@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Carpool.App.View"
         xmlns:viewModel="clr-namespace:Carpool.App.ViewModel" 
         xmlns:model="clr-namespace:Carpool.App.Model"
-        d:DataContext="{d:DesignInstance viewModel:CreateRideViewModel}"
+        d:DataContext="{d:DesignInstance viewModel:RideDetailViewModel}"
 
         mc:Ignorable="d"
         Title="EditRide" Height="450" Width="800">

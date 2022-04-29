@@ -13,11 +13,11 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.ViewModel
 {
-    public class CreateRideViewModel : ViewModelBase, ICreateRideViewModel
+    public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
     {
         private readonly RideFacade _rideFacade;
         private readonly IMediator _mediator;
-        public CreateRideViewModel(RideFacade rideFacade, IMediator mediator)
+        public RideDetailViewModel(RideFacade rideFacade, IMediator mediator)
         {
             _rideFacade = rideFacade;
             _mediator = mediator;
@@ -45,7 +45,27 @@ namespace Carpool.App.ViewModel
 
         public async Task DeleteAsync()
         {
-            //it's create ride (idk whether it should be here)
+            if (Model is null)
+            {
+                throw new InvalidOperationException("Null model cannot be deleted");
+            }
+
+            if (Model.Id != Guid.Empty)
+            {
+                try
+                {
+                    await _rideFacade.DeleteAsync(Model!.Id);
+                }
+                catch
+                {
+                    //TODO showing error msg
+                }
+
+                _mediator.Send(new DeleteMessage<RideWrapper>
+                {
+                    Model = Model
+                });
+            }
         }
     }
 }

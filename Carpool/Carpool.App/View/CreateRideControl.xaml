@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Carpool.App.View"
              xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             d:DataContext="{d:DesignInstance viewModel:CreateRideViewModel}"
+             d:DataContext="{d:DesignInstance viewModel:RideDetailViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
