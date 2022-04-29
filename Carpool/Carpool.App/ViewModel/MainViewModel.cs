@@ -11,40 +11,61 @@ using Carpool.App.Factories;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.View;
+using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 
 namespace Carpool.App.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel(UserFacade userFacade, IMediator mediator)
+
+        private IViewModel? _currentViewModel;
+
+        public MainViewModel(
+            ILoginScreenViewModel loginScreenViewModel,
+            IUserDetailViewModel userDetailViewModel,
+            IMediator mediator)
         {
-            LoginScreenViewModel = new LoginScreenViewModel(userFacade, mediator);
-            UserDetailViewModel = new UserDetailViewModel(userFacade, mediator);
+            LoginScreenViewModel = loginScreenViewModel;
+            UserDetailViewModel = userDetailViewModel;
+
 
             CurrentViewModel = LoginScreenViewModel;
 
-            Mediator = mediator;
-
-            Mediator.Register<DisplayUserCreateSreenMessage>(GoToUserCreate);
+            mediator.Register<DisplayUserCreateScreenMessage>(OnDisplayUserCreateScreen);
+            mediator.Register<DisplayLoginScreenMessage>(OnDisplayLoginScreen);
         }
 
-        public IMediator Mediator { get; set; }
-
-        public ViewModelBase CurrentViewModel { get; set; }
-
-        public LoginScreenViewModel LoginScreenViewModel { get; set; }
-
-        public UserDetailViewModel UserDetailViewModel { get; set; }
-
-        public void GoToUserCreate(DisplayUserCreateSreenMessage msg)
+        public IViewModel? CurrentViewModel
         {
-            System.Diagnostics.Debug.WriteLine("Clicked");
-            CurrentViewModel = UserDetailViewModel;
-            OnPropertyChanged();
+            get => _currentViewModel;
+            set
+            {
+                _currentViewModel = value;
+                OnPropertyChanged();
+            }
         }
 
-        public ICommand DisplayCreateUserView { get; set; }
+        public ILoginScreenViewModel LoginScreenViewModel { get; set; }
+
+        public IUserDetailViewModel UserDetailViewModel { get; set; }
+
+
+
+
+
+        public void OnDisplayUserCreateScreen(DisplayUserCreateScreenMessage msg)
+        {
+            
+            CurrentViewModel = UserDetailViewModel;
+        }
+
+        public void OnDisplayLoginScreen(DisplayLoginScreenMessage msg)
+        {
+
+            CurrentViewModel = LoginScreenViewModel;
+        }
+
     }
 
 }

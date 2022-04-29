@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Carpool.App.Messages
 {
-    public class DisplayUserCreateSreenMessage : IMessage
+    public class DisplayUserCreateScreenMessage : IMessage
     {
     }
 }

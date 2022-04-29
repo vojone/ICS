@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Services;
@@ -23,6 +24,27 @@ namespace Carpool.App.ViewModel
         {
             _userFacade = userFacade;
             _mediator = mediator;
+
+            DisplayLoginScreenCommand = new RelayCommand(DisplayLoginScreen);
+
+            SaveUserCommand = new AsyncRelayCommand(SaveAsync);
+
+            mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
+        }
+
+
+        public ICommand DisplayLoginScreenCommand { get; set; }
+
+        public ICommand SaveUserCommand { get; set; }
+
+        private void DisplayLoginScreen()
+        {
+            _mediator.Send(new DisplayLoginScreenMessage());
+        }
+
+        private void OnUserNewMessage(NewMessage<UserWrapper> _)
+        {
+            Model = GetEmptyUser();
         }
 
 
@@ -30,7 +52,18 @@ namespace Carpool.App.ViewModel
 
         public async Task LoadAsync(Guid id)
         {
-            Model = await _userFacade.GetAsync(id) ?? UserDetailModel.Empty;
+            Model = await _userFacade.GetAsync(id) ?? GetEmptyUser();
+        }
+
+        public UserDetailModel GetEmptyUser()
+        {
+            return UserDetailModel.Empty;
+        }
+
+
+        public void NewUser()
+        {
+            Model = UserDetailModel.Empty;
         }
 
 

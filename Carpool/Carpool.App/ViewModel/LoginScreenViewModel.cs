@@ -9,6 +9,7 @@ using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Model;
 using Carpool.App.Services;
+using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
 
@@ -27,17 +28,18 @@ namespace Carpool.App.ViewModel
             _mediator = mediator;
 
             DisplayUserCreateScreenCommand = new RelayCommand(DisplayUserCreateScreen);
-
         }
 
         public ICommand DisplayUserCreateScreenCommand { get; set; }
 
         public ObservableCollection<UserListModel> Users { get; set; } = new();
 
-        public void DisplayUserCreateScreen()
+
+        private void DisplayUserCreateScreen()
         {
             System.Diagnostics.Debug.WriteLine("Sending message");
-            _mediator.Send(new DisplayUserCreateSreenMessage());
+            _mediator.Send(new DisplayUserCreateScreenMessage());
+            _mediator.Send(new NewMessage<UserWrapper>());
         }
 
         public async Task LoadAsync()

@@ -57,7 +57,7 @@ namespace Carpool.App
             });
 
             services.AddSingleton<MainWindow>();
-            services.AddSingleton<INavigator, Navigator>();
+
             services.AddSingleton<IMediator, Mediator>();
 
             services.AddSingleton<MainViewModel>();

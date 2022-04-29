@@ -4,8 +4,11 @@
              xmlns:local="clr-namespace:Carpool.App"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
+             xmlns:converters="clr-namespace:Carpool.App.Converters"
              xmlns:views="clr-namespace:Carpool.App.View">
     <Application.Resources>
-        
+        <ResourceDictionary>
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
