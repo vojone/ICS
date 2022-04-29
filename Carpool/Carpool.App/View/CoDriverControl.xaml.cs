@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,9 +18,9 @@ namespace Carpool.App.View
     /// <summary>
     /// Interaction logic for CoDriverControll.xaml
     /// </summary>
-    public partial class CoDriverControll : UserControl
+    public partial class CoDriverControl : UserControl
     {
-        public CoDriverControll()
+        public CoDriverControl()
         {
             InitializeComponent();
         }

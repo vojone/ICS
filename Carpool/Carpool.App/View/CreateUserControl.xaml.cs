@@ -10,28 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for EditRide.xaml
+    /// Interaction logic for CreateUser.xaml
     /// </summary>
-    public partial class EditRide : Window
+    public partial class CreateUserControl
     {
-        public EditRide()
+        public CreateUserControl()
         {
             InitializeComponent();
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
     }
 }
