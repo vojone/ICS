@@ -11,7 +11,7 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.ViewModel
 {
-    public class CarInfoViewModel : ViewModelBase, IDetailViewModel<CarWrapper>
+    public class CarInfoViewModel : ViewModelBase, ICarInfoViewModel
     {
         private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
@@ -49,6 +49,23 @@ namespace Carpool.App.ViewModel
             if (Model is null)
             {
                 throw new InvalidOperationException("Null model cannot be deleted");
+            }
+
+            if (Model.Id != Guid.Empty)
+            {
+                try
+                {
+                    await _carFacade.DeleteAsync(Model!.Id);
+                }
+                catch
+                {
+                    //TODO showing error msg
+                }
+
+                _mediator.Send(new DeleteMessage<CarWrapper>
+                {
+                    Model = Model
+                });
             }
         }
     }

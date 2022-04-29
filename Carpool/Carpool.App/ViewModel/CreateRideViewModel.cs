@@ -1,26 +1,51 @@
 using System;
 using System.Collections.Generic;
+using System.Formats.Asn1;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carpool.App.Messages;
 using Carpool.App.Model;
+using Carpool.App.Services;
+using Carpool.App.Wrapper;
+using Carpool.BL.Facades;
+using Carpool.BL.Models;
 
 namespace Carpool.App.ViewModel
 {
-    internal class CreateRideViewModel
+    public class CreateRideViewModel : ViewModelBase, ICreateRideViewModel
     {
-        public ICollection<CreateRide> CreateRide { get; set; } = new List<CreateRide>()
+        private readonly RideFacade _rideFacade;
+        private readonly IMediator _mediator;
+        public CreateRideViewModel(RideFacade rideFacade, IMediator mediator)
         {
-            new CreateRide()
-            {
-                Departure = "Česká republika Brno Božetěchova 1/2 Lorem Ipsum",
-                Date = "22.3.2021",
-                Time = "20:00:00",
+            _rideFacade = rideFacade;
+            _mediator = mediator;
+        }
 
-                Arrival = "Austria Vienna Adamsgasse Lorem Ipsum",
-                Date_arr = "22.3.2021",
-                Time_arr = "23:00:00",
+        public RideWrapper Model { get; private set; }
+
+        public async Task LoadAsync(Guid id)
+        {
+            Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
+        }
+
+        public async Task SaveAsync()
+        {
+            if (Model == null)
+            {
+                throw new InvalidOperationException("Null model cannot be saved");
             }
-        };
+
+            Model = await _rideFacade.SaveAsync(Model.Model);
+            _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
+        }
+
+        private bool CanSave() => Model?.IsValid ?? false;
+
+        public async Task DeleteAsync()
+        {
+            //it's create ride (idk whether it should be here)
+        }
     }
 }

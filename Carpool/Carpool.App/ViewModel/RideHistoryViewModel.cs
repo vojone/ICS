@@ -1,115 +1,38 @@
 using Carpool.App.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carpool.App.Services;
+using Carpool.BL.Facades;
+using Carpool.BL.Models;
 
 namespace Carpool.App.ViewModel
 {
-    internal class RideHistoryViewModel
+    public class RideHistoryViewModel : ViewModelBase, IRideHistoryViewModel
     {
-        public ICollection<RideHistory> Rides { get; set; } = new List<RideHistory>() {
-            new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-            new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-            new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-            new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-             new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-              new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-               new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-                new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-                 new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-                  new RideHistory(){
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Ridic = "YoMama",
-            },
-        };
+        private readonly RideFacade _rideFacade;
+        private readonly IMediator _mediator;
+        public RideHistoryViewModel(RideFacade rideFacade, IMediator mediator)
+        {
+            _rideFacade = rideFacade;
+            _mediator = mediator;
+        }
+
+        public ObservableCollection<RideListModel> Rides { get; set; } = new();
+
+        //filtering probably?
+        public async Task LoadAsync()
+        {
+            Rides.Clear();
+            var rides = await _rideFacade.GetAsync();
+
+            foreach (var item in rides)
+            {
+                Rides.Add(item);
+            }
+        }
     }
 }

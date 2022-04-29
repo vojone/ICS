@@ -15,7 +15,7 @@ using Carpool.Common;
 
 namespace Carpool.App.ViewModel
 {
-    internal class RideListViewModel : ViewModelBase
+    public class RideListViewModel : ViewModelBase, IRideListViewModel
     {
         private readonly RideFacade _rideFacade;
         private readonly IMediator _mediator;
@@ -45,97 +45,5 @@ namespace Carpool.App.ViewModel
             }
         }
 
-        /*public override void LoadInDesignMode()
-        {
-            Rides.Add(
-                new RideListModel(
-                    "Žilina",
-                    "Brno",
-                    new DateTime(2022,4,30,10,30,0), 
-                    new DateTime(2022, 4, 30, 13, 20, 0),
-                    4,
-                    4,
-                    RideState.Planned,
-                    null
-                    )
-            );
-        }*/
-
-        //old
-        /*public ICollection<RidesList> Rides { get; set; } = new List<RidesList>()
-        {
-            new RidesList()
-            {
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Hodnoceni = "IRON IV",
-                Mista = "2",
-            },
-            new RidesList()
-            {
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Hodnoceni = "IRON IV",
-                Mista = "2",
-            },
-            new RidesList()
-            {
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Hodnoceni = "IRON IV",
-                Mista = "2",
-            },
-            new RidesList()
-            {
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Hodnoceni = "IRON IV",
-                Mista = "2",
-            },
-            new RidesList()
-            {
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Hodnoceni = "IRON IV",
-                Mista = "2",
-            },
-            new RidesList()
-            {
-                Kdo = "Radek Marek",
-                Odkud = "Lanškroun",
-                Kam = "Brno",
-                OdKdy = "15:30",
-                DoKdy = "17:00",
-                Datum = "Pondělí 25.5",
-                Auto = "Žigulík",
-                Hodnoceni = "IRON IV",
-                Mista = "2",
-            },
-        };*/
     }
 }
