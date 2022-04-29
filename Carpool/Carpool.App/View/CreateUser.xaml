@@ -27,18 +27,16 @@
             Grid.ColumnSpan="3"
             Margin="0,8,0,8"/>
 
-        <TextBox
-            IsReadOnly="True" 
+        <Label
             Margin="54,0,0,0" 
-            TextWrapping="Wrap" 
-            Text="Create user profile" 
+            Content="Create user profile" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
             VerticalAlignment="Center" 
-            Height="26"/>
+            Height="39"/>
 
         <TextBox
             x:Name="TextBoxFirstName" 
@@ -101,55 +99,52 @@
             VerticalAlignment="Center"
             Width="130"/>
 
-        <TextBox
-            IsReadOnly="True" 
+        <Label
             Margin="0,2,0,0" 
-            TextWrapping="Wrap" 
-            Text="First name" 
+            Content="First name" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Center" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" Grid.Row="2" FontSize="13"/>
+            Height="26" Grid.Row="2" FontSize="13"/>
 
-        <TextBox
-            IsReadOnly="True" 
+        <Label
             Margin="0,6,0,0" 
-            TextWrapping="Wrap" 
-            Text="Date of registration" 
+            Content="Date of registration" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Center" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" Grid.Row="4" FontSize="13"/>
+            Height="29" 
+            Grid.Row="4" 
+            FontSize="13"/>
 
-        <TextBox
-            IsReadOnly="True" 
-            TextWrapping="Wrap" 
-            Text="Last name" 
+        <Label
+            Content="Last name" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Center" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" Grid.Row="3" FontSize="13" Margin="0,3,0,0"/>
+            Height="25" 
+            Grid.Row="3" 
+            FontSize="13" 
+            Margin="0,3,0,0"/>
 
-        <TextBox
-            IsReadOnly="True" 
-            TextWrapping="Wrap" 
-            Text="Country" 
+        <Label
+            Content="Country" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Center" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="17" 
+            Height="29" 
             Grid.Row="4" 
             FontSize="13" 
-            Grid.Column="1" Margin="0,6,0,0"/>
-
+            Grid.Column="1" 
+            Margin="0,6,0,0"/>
 
     </Grid>
 </UserControl>

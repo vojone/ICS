@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for CoDriver.xaml
+    /// Interaction logic for CoDriverControll.xaml
     /// </summary>
-    public partial class CoDriver : Window
+    public partial class CoDriverControll : UserControl
     {
-        public CoDriver()
+        public CoDriverControll()
         {
             InitializeComponent();
         }
