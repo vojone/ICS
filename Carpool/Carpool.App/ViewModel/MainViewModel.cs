@@ -68,7 +68,7 @@ namespace Carpool.App.ViewModel
         public void OnDisplayUserCreateScreen(DisplayUserCreateScreenMessage msg)
         {
             
-            CurrentViewModel = UserDetailViewModel;
+            CurrentViewModel = RideDetailViewModel;
         }
 
         public void OnDisplayLoginScreen(DisplayLoginScreenMessage msg)
