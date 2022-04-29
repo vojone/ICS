@@ -73,7 +73,8 @@ namespace Carpool.DAL.Tests
                 Guid.Parse("C5DE45D7-64A0-4E8D-AC7F-BF5CFDFB0EFC"),
                 "Tom",
                 "Cruise",
-                null,
+                new DateTime(2015, 10, 10),
+                @"Photo",
                 "USA",
                 0
             );

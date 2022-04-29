@@ -22,6 +22,12 @@ public class UserWrapper : ModelWrapper<UserDetailModel>
         set => SetValue(value);
     }
 
+    public DateTime RegistrationDate
+    {
+        get => GetValue<DateTime>();
+        set => SetValue(value);
+    }
+
     public string? PhotoUrl
     {
         get => GetValue<String>(); 

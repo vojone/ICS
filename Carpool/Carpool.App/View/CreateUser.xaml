@@ -4,10 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Carpool.App.View"
+        xmlns:converters="clr-namespace:Carpool.App.Converters"
         mc:Ignorable="d"
         xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
         d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}">
-    <Grid Background="#FFA1A1A1">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="#FFA1A1A1" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"/>
             <RowDefinition Height="170*"/>
@@ -75,8 +81,9 @@
             Height="25" 
             VerticalAlignment="Top" 
             Width="130" 
+            
             BorderBrush="{x:Null}" Margin="70,28,0,0"
-            Text="{Binding Model.Country}"/>
+            SelectedDate="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
 
         <Button 

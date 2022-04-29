@@ -6,6 +6,7 @@ public record UserEntity(
     Guid Id,
     string Name,
     string Surname,
+    DateTime RegistrationDate,
     string? PhotoUrl,
     string? Country,
     uint Rating) : IEntity

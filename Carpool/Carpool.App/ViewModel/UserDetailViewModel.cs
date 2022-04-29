@@ -61,12 +61,6 @@ namespace Carpool.App.ViewModel
         }
 
 
-        public void NewUser()
-        {
-            Model = UserDetailModel.Empty;
-        }
-
-
         public async Task SaveAsync()
         {
             if (Model == null)
