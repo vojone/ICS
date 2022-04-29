@@ -12,139 +12,121 @@
     <Grid Background="#FFA1A1A1">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="334"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="48*"/>
-            <RowDefinition Height="16*"/>
-            <RowDefinition Height="18*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="76*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="45*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="199*"/>
 
         </Grid.RowDefinitions>
-        <Rectangle 
-            Grid.Row="6"
-            Grid.RowSpan="3" Margin="34,5,1,5" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4"
-         
-         />
-        <TextBox
-            x:Name="TextBoxArrivalCreateRides" Margin="44,13,10,13"
-            TextWrapping="Wrap"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged" Grid.Row="7" Height="50"/>
-
-        <Label
-            Margin="45,5,223,0"
-            Content="Arrival"
-            Background="{x:Null}"
-            BorderBrush="{x:Null}" Grid.Row="6" Height="23" VerticalAlignment="Top" />
-
-        <DatePicker
-            Grid.Column="0"
-            x:Name="TextBoxDate_arrCreateRides"
-            Margin="45,10,144,0"
-            BorderBrush="{x:Null}" Grid.Row="8" Height="23" VerticalAlignment="Top"
-            />
-        <Rectangle
-            Grid.RowSpan="3" Margin="33,10,2,7" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1"
-         
-         />
-        <TextBox
-            x:Name="TextBoxArrivalCreateRides_Copy" Margin="44,10,10,10"
-            TextWrapping="Wrap"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged" Grid.Row="2" Height="50"/>
-
-        <Label
-            Margin="44,15,224,0"
-            Content="Departure"
-            Background="{x:Null}"
-            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" />
-        <DatePicker
-            Grid.Column="0"
-            x:Name="TextBoxDate_arrCreateRides_Copy"
-            Margin="45,5,144,10"
-            BorderBrush="{x:Null}" Grid.Row="3"
-            />
 
         <Rectangle 
             x:Name="TopBar" 
-            Fill="#FFC4C4C4" Grid.ColumnSpan="2"/>
+            Fill="#FFC4C4C4" Grid.ColumnSpan="2" Height="52" VerticalAlignment="Top"/>
 
         <Label
             x:Name="TextBox1" 
-            Margin="54,0,0,0" 
+            Margin="54,6,0,0" 
             Content="Create a ride" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
-            VerticalAlignment="Center" 
+            VerticalAlignment="Top" 
             Height="40"/>
 
         <Label
-            Margin="249,0,0,0" 
+            Margin="249,13,0,0" 
             Content="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
+            VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1"/>
         <Image
             Grid.Row="0"
             Height="60" 
             Margin="348,17,10,0" 
             VerticalAlignment="Top" Grid.Column="1" Grid.RowSpan="2"/>
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="50,0,0,0" VerticalAlignment="Center" Width="135" Fill="#FFA1A1A1" Grid.Column="1"/>
+        <Rectangle HorizontalAlignment="Left" Margin="50,0,0,0" Width="135" Fill="#FFA1A1A1" Grid.Column="1" Height="52" VerticalAlignment="Top"/>
         <Button
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
-            Margin="69,0,0,0" 
-            Background="#FF919191" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="98" Grid.Column="1"/>
+            Margin="69,9,0,0" 
+            Background="#FF919191" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" Grid.Column="1"/>
         <Rectangle
-            HorizontalAlignment="Left"
-            Height="278" 
-            VerticalAlignment="Top" 
+            HorizontalAlignment="Left" 
             Width="267" Fill="#FFC4C4C4" 
             RadiusX="10" 
             RadiusY="10"  
-            Grid.Column="1" Grid.Row="1" Margin="129,29,0,0" Grid.RowSpan="8"/>
+            Grid.Column="1" Grid.Row="1" Margin="79,34,0,0" Height="278" VerticalAlignment="Top"/>
         <Button
             x:Name="ButtonCreateRide" 
             Content="Create Ride" 
-            Margin="132,16,0,0" 
+            Margin="83,336,0,0" 
             Background="#FF005FB8"
             Height="34"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Width="264"
-            Grid.Column="1" Grid.Row="8"/>
+            Grid.Column="1" Grid.Row="1"/>
         <ComboBox
             x:Name="ComboBoxCreateRideSeats"
-            VerticalAlignment="Top"
             DisplayMemberPath="Source"
             HorizontalAlignment="Left"
-            Height="22"
             Width="70"
-            Grid.Column="1" Grid.Row="7" Margin="144,44,0,0" />
+            Grid.Column="1" Grid.Row="1" Margin="94,276,0,0" Height="22" VerticalAlignment="Top" />
         <ComboBox
             x:Name="ComboBoxCreateRideCar"
             DisplayMemberPath="Source"
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="2" Margin="161,0,0,0" Width="204"/>
+            Grid.Column="1" Grid.Row="1" Margin="112,62,0,0" Width="204"/>
         <Rectangle
             HorizontalAlignment="Left"
-            Height="171" 
+            Height="172" 
             VerticalAlignment="Top" 
             Width="204" Fill="#FF919191" 
             RadiusX="10" 
             RadiusY="10"  
-            Grid.Column="1" Grid.Row="2" Margin="162,38,0,0" Grid.RowSpan="6"/>
+            Grid.Column="1" Grid.Row="1" Margin="112,88,0,0"/>
+        <Rectangle Margin="30,224,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
+         
+        />
+        <TextBox
+            x:Name="TextBoxArrivalCreateRides_Copy2" Margin="47,260,0,0"
+            TextWrapping="Wrap"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"/>
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDate_arrCreateRides_Copy2"
+            Margin="48,323,0,0"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
+        />
+        <Label
+            Margin="47,230,0,0"
+            Content="Arrival"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
+        <Rectangle Margin="31,33,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
+         
+        />
+        <TextBox
+            x:Name="TextBoxArrivalCreateRides_Copy1" Margin="48,69,0,0"
+            TextWrapping="Wrap"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="296"/>
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDate_arrCreateRides_Copy1"
+            Margin="49,132,0,0"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
+        />
+        <Label
+            Margin="48,39,0,0"
+            Content="Departure"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
     </Grid>
 </UserControl>
