@@ -17,11 +17,12 @@ using Carpool.App.ViewModel;
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for LoginWindowControl.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class LoginWindowControl
+    public partial class LoginScreenControl : UserControlBase
     {
-        public LoginWindowControl()
+ 
+        public LoginScreenControl()
         {
             InitializeComponent();
         }

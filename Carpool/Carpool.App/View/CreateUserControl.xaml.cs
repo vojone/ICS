@@ -12,19 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Carpool.App.ViewModel;
 
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for CreateUser.xaml
     /// </summary>
-    public partial class LoginWindow : UserControl
+    public partial class CreateUserControl
     {
- 
-        public LoginWindow()
+        public CreateUserControl()
         {
             InitializeComponent();
         }
+
     }
 }

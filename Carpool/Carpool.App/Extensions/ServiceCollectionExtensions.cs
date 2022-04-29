@@ -5,6 +5,7 @@ using System;
 
 namespace Carpool.App.Extensions
 {
+    //From example project "CookBook"
     public static class ServiceCollectionExtensions
     {
         public static void AddFactory<TService, TImplementation>(this IServiceCollection services)

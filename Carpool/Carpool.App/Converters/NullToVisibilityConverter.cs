@@ -10,7 +10,7 @@ using System.Windows.Data;
 
 namespace Carpool.App.Converters
 {
-    
+    //From example project "CookBook"
     public class NullToVisibilityConverter : IValueConverter
     {
         public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for CreateUser.xaml
+    /// Interaction logic for CarInfoControl.xaml
     /// </summary>
-    public partial class CreateUser
+    public partial class CarInfoControl : UserControl
     {
-        public CreateUser()
+        public CarInfoControl()
         {
             InitializeComponent();
         }

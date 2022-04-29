@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 
 namespace Carpool.App.ViewModel
 {
@@ -27,7 +30,7 @@ namespace Carpool.App.ViewModel
 
             DisplayLoginScreenCommand = new RelayCommand(DisplayLoginScreen);
 
-            SaveUserCommand = new AsyncRelayCommand(SaveAsync);
+            SaveUserCommand = new AsyncRelayCommand(OnSaveUser, CanSaveUser);
 
             mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
         }
@@ -37,18 +40,26 @@ namespace Carpool.App.ViewModel
 
         public ICommand SaveUserCommand { get; set; }
 
+
         private void DisplayLoginScreen()
         {
             _mediator.Send(new DisplayLoginScreenMessage());
         }
 
+        private async Task OnSaveUser()
+        {
+            await SaveAsync();
+            DisplayLoginScreen();
+        }
+
         private void OnUserNewMessage(NewMessage<UserWrapper> _)
         {
             Model = GetEmptyUser();
+            Model.Validate();
         }
 
-
         public UserWrapper? Model { get; private set; }
+
 
         public async Task LoadAsync(Guid id)
         {
@@ -72,7 +83,12 @@ namespace Carpool.App.ViewModel
             _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
         }
 
-        private bool CanSave() => Model?.IsValid ?? false;
+
+        private bool CanSaveUser()
+        {
+            return !(Model.HasErrors);
+        }
+
 
 
         public async Task DeleteAsync()

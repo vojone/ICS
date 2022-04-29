@@ -7,6 +7,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 
 namespace Carpool.App.Command;
 
+//From example project "CookBook"
 public class AsyncRelayCommand<T> : IAsyncRelayCommand<T>
 {
     private readonly Microsoft.Toolkit.Mvvm.Input.AsyncRelayCommand<T> _relayCommand;

@@ -8,6 +8,9 @@
              xmlns:views="clr-namespace:Carpool.App.View">
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/ReadOnlyDateTextBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
         </ResourceDictionary>
     </Application.Resources>

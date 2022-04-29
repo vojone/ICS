@@ -7,6 +7,7 @@ using Carpool.App.Messages;
 
 namespace Carpool.App.Services
 {
+    //From example project "CookBook"
     public interface IMediator
     {
         void Register<TMessage>(Action<TMessage> action)

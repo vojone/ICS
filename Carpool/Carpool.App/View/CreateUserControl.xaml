@@ -1,13 +1,14 @@
-<UserControl x:Class="Carpool.App.View.CreateUser"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Carpool.App.View"
-        xmlns:converters="clr-namespace:Carpool.App.Converters"
-        mc:Ignorable="d"
-        xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
-        d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}">
+<UserControl x:Class="Carpool.App.View.CreateUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Carpool.App.View"
+             xmlns:converters="clr-namespace:Carpool.App.Converters"
+             xmlns:validators="clr-namespace:Carpool.App.Services"
+             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
+             d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
@@ -31,18 +32,18 @@
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Margin="0,8,0,8"/>
+            Margin="0,8,0,4"/>
 
         <Label
-            Margin="54,0,0,0" 
+            Margin="59,13,0,0" 
             Content="Create user profile" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
-            VerticalAlignment="Center" 
-            Height="39"/>
+            VerticalAlignment="Top" 
+            Height="39" Grid.ColumnSpan="2"/>
 
         <TextBox
             x:Name="TextBoxFirstName" 
@@ -51,8 +52,8 @@
             Width="130" 
             Height="25" 
             Margin="70,20,67,9" 
-            TextAlignment="Center"
-            Text="{Binding Model.Name}"/>
+            TextAlignment="Center" RenderTransformOrigin="0.503,0.306"
+            Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <TextBox
             x:Name="TextBoxLastName" 
@@ -62,7 +63,7 @@
             Height="25" 
             Margin="70,20,67,9" 
             TextAlignment="Center" RenderTransformOrigin="0.503,0.306"
-            Text="{Binding Model.Surname}"/>
+            Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <TextBox
             x:Name="TextBoxCountry" 
@@ -74,16 +75,19 @@
             TextAlignment="Center"
             Text="{Binding Model.Country}"/>
 
-        <DatePicker 
+        <DatePickerTextBox 
             x:Name="RegistrationDate"
             Grid.Row="4" 
-            HorizontalAlignment="Left" 
             Height="25" 
-            VerticalAlignment="Top" 
             Width="130" 
-            
-            BorderBrush="{x:Null}" Margin="70,28,0,0"
-            SelectedDate="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            IsReadOnly="True"
+            Margin="70,20,67,9"
+            Background="LightGray"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Style="{StaticResource ReadOnlyDateTextBoxStyle}"
+            Text="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}" FontSize="14">
+        </DatePickerTextBox>
 
 
         <Button 
@@ -123,6 +127,7 @@
             Height="26" Grid.Row="2" FontSize="13"/>
 
         <Label
+            Name="RegistrationDateLabel"
             Margin="0,6,0,0" 
             Content="Date of registration" 
             Background="{x:Null}" 

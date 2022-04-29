@@ -22,6 +22,11 @@ namespace Carpool.App.View
     {
         public MainWindow(MainViewModel mainViewModel)
         {
+            //Suppresses harmless errors in views, there is no simple way to solve them - due to https://weblogs.asp.net/akjoshi/resolving-un-harmful-binding-errors-in-wpf
+            #if DEBUG
+                System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
+            #endif
+
             InitializeComponent();
             DataContext = mainViewModel;
         }

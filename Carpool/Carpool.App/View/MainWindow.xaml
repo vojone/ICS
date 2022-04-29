@@ -12,10 +12,10 @@
 
     <Window.Resources>
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:LoginScreenViewModel}">
-            <local:LoginWindow></local:LoginWindow>
+            <local:LoginScreenControl></local:LoginScreenControl>
         </DataTemplate>
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:UserDetailViewModel}">
-            <local:CreateUser></local:CreateUser>
+            <local:CreateUserControl></local:CreateUserControl>
         </DataTemplate>
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:RideListViewModel}">
             <local:RideListControl></local:RideListControl>

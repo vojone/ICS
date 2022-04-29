@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Carpool.App.ViewModel;
 
 namespace Carpool.App.Services
 {
-    public interface INavigator
+    public interface ISession
     {
-        public IViewModel CurrentViewModel { get; set; }
+        public Guid? GetLoggedUser();
+
+        public void LogUserIn(Guid userId);
+
+        public void LogUserOut();
     }
 }

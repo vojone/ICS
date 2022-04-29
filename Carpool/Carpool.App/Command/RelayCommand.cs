@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace Carpool.App.Command
 {
+    //From example project "CookBook"
     public class RelayCommand<T> : ICommand
     {
         private readonly Microsoft.Toolkit.Mvvm.Input.RelayCommand<T> _relayCommand;

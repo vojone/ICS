@@ -7,6 +7,7 @@ using System.Windows.Markup;
 
 namespace Carpool.App.Extensions
 {
+    //From example project "CookBook"
     public class EnumBindingSourceExtension : MarkupExtension
     {
         private Type? _enumType;

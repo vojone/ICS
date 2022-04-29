@@ -19,13 +19,13 @@
             Margin="0,8,0,0" VerticalAlignment="Top" Height="52"/>
 
         <Label
-            Margin="10,17,0,0" 
+            Margin="60,17,0,0" 
             Content="Please select user"
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
-            Width="209" 
+            Width="210" 
             VerticalAlignment="Top" 
             Height="34"/>
 
@@ -104,5 +104,14 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button
+            x:Name="ButtonNewCar_Copy" 
+            Content="&lt;=" 
+            Margin="8,14,0,0" 
+            Background="#FF005FB8" 
+            VerticalAlignment="Top" 
+            Height="40" 
+            HorizontalAlignment="Left" 
+            Width="47"/>
     </Grid>
 </UserControl>
