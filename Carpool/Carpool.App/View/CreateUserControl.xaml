@@ -8,7 +8,7 @@
              xmlns:validators="clr-namespace:Carpool.App.Services"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
-             d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:CreateUserDetailViewModel}">
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>

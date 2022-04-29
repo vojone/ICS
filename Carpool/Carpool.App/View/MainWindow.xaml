@@ -14,7 +14,7 @@
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:LoginScreenViewModel}">
             <local:LoginScreenControl></local:LoginScreenControl>
         </DataTemplate>
-        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:UserDetailViewModel}">
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:CreateUserDetailViewModel}">
             <local:CreateUserControl></local:CreateUserControl>
         </DataTemplate>
     </Window.Resources>

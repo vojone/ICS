@@ -62,7 +62,7 @@ namespace Carpool.App
 
             services.AddSingleton<MainViewModel>();
             services.AddFactory<ILoginScreenViewModel, LoginScreenViewModel>();
-            services.AddFactory<IUserDetailViewModel, UserDetailViewModel>();
+            services.AddFactory<ICreateUserDetailViewModel, CreateUserDetailViewModel>();
         }
 
 

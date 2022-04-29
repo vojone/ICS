@@ -13,62 +13,49 @@ using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
-using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+
 
 namespace Carpool.App.ViewModel
 {
-    public class UserDetailViewModel : ViewModelBase, IUserDetailViewModel
+    public class UserDetailViewModelBase : ViewModelBase, IUserDetailViewModelBase
     {
 
-        private readonly UserFacade _userFacade;
-        private readonly IMediator _mediator;
+        protected readonly UserFacade _userFacade;
+        protected readonly IMediator _mediator;
 
-        public UserDetailViewModel(UserFacade userFacade, IMediator mediator)
+        public UserDetailViewModelBase(UserFacade userFacade, IMediator mediator)
         {
             _userFacade = userFacade;
             _mediator = mediator;
-
-            DisplayLoginScreenCommand = new RelayCommand(DisplayLoginScreen);
-
-            SaveUserCommand = new AsyncRelayCommand(OnSaveUser, CanSaveUser);
-
-            mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
         }
 
+        public UserWrapper? Model { get; protected set; }
 
-        public ICommand DisplayLoginScreenCommand { get; set; }
 
         public ICommand SaveUserCommand { get; set; }
 
 
-        private void DisplayLoginScreen()
-        {
-            _mediator.Send(new DisplayLoginScreenMessage());
-        }
-
-        private async Task OnSaveUser()
+        protected async Task OnSaveUser()
         {
             await SaveAsync();
-            DisplayLoginScreen();
         }
 
-        private void OnUserNewMessage(NewMessage<UserWrapper> _)
+
+        protected bool CanSaveUser()
         {
-            Model = GetEmptyUser();
-            Model.Validate();
+            return Model is { HasErrors: false };
         }
 
-        public UserWrapper? Model { get; private set; }
+
+        public UserDetailModel GetEmptyUser()
+        {
+            return UserDetailModel.Empty;
+        }
 
 
         public async Task LoadAsync(Guid id)
         {
             Model = await _userFacade.GetAsync(id) ?? GetEmptyUser();
-        }
-
-        public UserDetailModel GetEmptyUser()
-        {
-            return UserDetailModel.Empty;
         }
 
 
@@ -82,13 +69,6 @@ namespace Carpool.App.ViewModel
             Model = await _userFacade.SaveAsync(Model.Model);
             _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
         }
-
-
-        private bool CanSaveUser()
-        {
-            return !(Model.HasErrors);
-        }
-
 
 
         public async Task DeleteAsync()

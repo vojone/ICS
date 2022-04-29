@@ -52,7 +52,8 @@
                                     x:Name="ButtonLogin" 
                                     Content="Login" 
                                     Background="#FF005FB8" Height="35"  BorderBrush="{x:Null}" Width="100" Grid.ColumnSpan="2" Margin="490,5,10,5" HorizontalAlignment="Right"
-                                    />
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.LogInCommand}"
+                                    CommandParameter="{Binding Id}"/>
                             </Grid>
                         </StackPanel>
                     </DataTemplate>
