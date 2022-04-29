@@ -20,6 +20,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
+
+//Based on sample project "CookBook"
 namespace Carpool.App
 {
     /// <summary>
@@ -63,6 +65,7 @@ namespace Carpool.App
             services.AddSingleton<MainViewModel>();
             services.AddFactory<ILoginScreenViewModel, LoginScreenViewModel>();
             services.AddFactory<ICreateUserDetailViewModel, CreateUserDetailViewModel>();
+            services.AddFactory<IProfileUserDetailViewModel, ProfileUserDetailViewModel>();
         }
 
 

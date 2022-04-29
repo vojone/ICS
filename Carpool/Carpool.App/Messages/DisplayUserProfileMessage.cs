@@ -1,12 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Carpool.App.View
+namespace Carpool.App.Messages
 {
-    internal class Class1
+    public class DisplayUserProfileMessage : IMessage
     {
     }
 }

@@ -20,19 +20,16 @@ namespace Carpool.App.ViewModel
     public class UserDetailViewModelBase : ViewModelBase, IUserDetailViewModelBase
     {
 
-        protected readonly UserFacade _userFacade;
-        protected readonly IMediator _mediator;
+        protected readonly UserFacade UserFacade;
+        protected readonly IMediator Mediator;
 
         public UserDetailViewModelBase(UserFacade userFacade, IMediator mediator)
         {
-            _userFacade = userFacade;
-            _mediator = mediator;
+            UserFacade = userFacade;
+            Mediator = mediator;
         }
 
         public UserWrapper? Model { get; protected set; }
-
-
-        public ICommand SaveUserCommand { get; set; }
 
 
         protected async Task OnSaveUser()
@@ -55,7 +52,7 @@ namespace Carpool.App.ViewModel
 
         public async Task LoadAsync(Guid id)
         {
-            Model = await _userFacade.GetAsync(id) ?? GetEmptyUser();
+            Model = await UserFacade.GetAsync(id) ?? GetEmptyUser();
         }
 
 
@@ -66,8 +63,8 @@ namespace Carpool.App.ViewModel
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            Model = await _userFacade.SaveAsync(Model.Model);
-            _mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
+            Model = await UserFacade.SaveAsync(Model.Model);
+            Mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
         }
 
 
@@ -82,14 +79,14 @@ namespace Carpool.App.ViewModel
             {
                 try
                 {
-                    await _userFacade.DeleteAsync(Model!.Id);
+                    await UserFacade.DeleteAsync(Model!.Id);
                 }
                 catch
                 {
                     //TODO showing error msg
                 }
 
-                _mediator.Send(new DeleteMessage<UserWrapper>
+                Mediator.Send(new DeleteMessage<UserWrapper>
                 {
                     Model = Model
                 });

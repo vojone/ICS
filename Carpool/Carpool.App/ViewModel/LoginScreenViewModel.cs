@@ -43,7 +43,7 @@ namespace Carpool.App.ViewModel
 
         private void DisplayUserCreateScreen()
         {
-            System.Diagnostics.Debug.WriteLine("Going to user create, sending");
+            System.Diagnostics.Debug.WriteLine("Going to User Create, sending");
             _mediator.Send(new DisplayUserCreateScreenMessage());
             _mediator.Send(new NewMessage<UserWrapper>());
         }
@@ -52,6 +52,8 @@ namespace Carpool.App.ViewModel
         {
             System.Diagnostics.Debug.WriteLine("Logging In As user with Id:" + userId);
             _session.LogUserIn(userId);
+            _mediator.Send(new LoadUserProfileMessage());
+            _mediator.Send(new DisplayUserProfileMessage());
         }
 
         public async Task LoadAsync()

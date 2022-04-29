@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +18,7 @@ namespace Carpool.App.View
     /// <summary>
     /// Interaction logic for UserProfileControl.xaml
     /// </summary>
-    public partial class UserProfileControl : UserControl
+    public partial class UserProfileControl
     {
         public UserProfileControl()
         {

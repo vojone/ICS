@@ -19,7 +19,9 @@ namespace Carpool.App.ViewModel
 {
     public class CreateUserDetailViewModel : UserDetailViewModelBase, ICreateUserDetailViewModel
     {
-        public CreateUserDetailViewModel(UserFacade userFacade, IMediator mediator) : base(userFacade, mediator)
+        public CreateUserDetailViewModel(
+            UserFacade userFacade, 
+            IMediator mediator) : base(userFacade, mediator)
         {
             CancelCommand = new RelayCommand(DisplayLoginScreenControl);
 
@@ -28,13 +30,14 @@ namespace Carpool.App.ViewModel
             mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
         }
 
+        public ICommand SaveUserCommand { get; set; }
 
         public ICommand CancelCommand { get; set; }
 
 
         private void DisplayLoginScreenControl()
         {
-            _mediator.Send(new DisplayLoginScreenMessage());
+            Mediator.Send(new DisplayLoginScreenMessage());
         }
 
         protected new async Task OnSaveUser()
