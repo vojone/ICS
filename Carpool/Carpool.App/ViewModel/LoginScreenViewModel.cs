@@ -20,19 +20,24 @@ namespace Carpool.App.ViewModel
 
         private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
+        private readonly ISession _session;
 
 
-        public LoginScreenViewModel(UserFacade userFacade, IMediator mediator)
+        public LoginScreenViewModel(UserFacade userFacade, IMediator mediator, ISession session)
         {
             _userFacade = userFacade;
             _mediator = mediator;
+            _session = session;
 
             DisplayUserCreateScreenCommand = new RelayCommand(DisplayUserCreateScreen);
+            LogInCommand = new RelayCommand<Guid>(LogUserIn);
         }
 
         public ICommand DisplayUserCreateScreenCommand { get; set; }
 
         public ObservableCollection<UserListModel> Users { get; set; } = new();
+
+        public ICommand LogInCommand { get; set; }
 
 
         private void DisplayUserCreateScreen()
@@ -40,6 +45,11 @@ namespace Carpool.App.ViewModel
             System.Diagnostics.Debug.WriteLine("Sending message");
             _mediator.Send(new DisplayUserCreateScreenMessage());
             _mediator.Send(new NewMessage<UserWrapper>());
+        }
+
+        private void LogUserIn(Guid userId)
+        {
+            _session.LogUserIn(userId);
         }
 
         public async Task LoadAsync()

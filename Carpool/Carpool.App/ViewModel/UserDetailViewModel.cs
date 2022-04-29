@@ -14,7 +14,6 @@ using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
 using Microsoft.VisualStudio.TestPlatform.ObjectModel;
-using static System.String;
 
 namespace Carpool.App.ViewModel
 {
@@ -31,7 +30,7 @@ namespace Carpool.App.ViewModel
 
             DisplayLoginScreenCommand = new RelayCommand(DisplayLoginScreen);
 
-            SaveUserCommand = new AsyncRelayCommand(SaveAsync, CanSaveUser);
+            SaveUserCommand = new AsyncRelayCommand(OnSaveUser, CanSaveUser);
 
             mediator.Register<NewMessage<UserWrapper>>(OnUserNewMessage);
         }
@@ -45,6 +44,12 @@ namespace Carpool.App.ViewModel
         private void DisplayLoginScreen()
         {
             _mediator.Send(new DisplayLoginScreenMessage());
+        }
+
+        private async Task OnSaveUser()
+        {
+            await SaveAsync();
+            DisplayLoginScreen();
         }
 
         private void OnUserNewMessage(NewMessage<UserWrapper> _)
@@ -84,11 +89,6 @@ namespace Carpool.App.ViewModel
             return !(Model.HasErrors);
         }
 
-
-        private void OnSaveUser()
-        {
-            
-        }
 
 
         public async Task DeleteAsync()

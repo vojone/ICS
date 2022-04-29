@@ -29,7 +29,6 @@ namespace Carpool.App.ViewModel
             LoginScreenViewModel = loginScreenViewModel;
             UserDetailViewModel = userDetailViewModel;
 
-
             CurrentViewModel = LoginScreenViewModel;
 
             mediator.Register<DisplayUserCreateScreenMessage>(OnDisplayUserCreateScreen);
@@ -51,7 +50,11 @@ namespace Carpool.App.ViewModel
         public IUserDetailViewModel UserDetailViewModel { get; set; }
 
 
+        public void OnDisplayUserProfile(DisplayUserCreateScreenMessage msg)
+        {
 
+            CurrentViewModel = UserDetailViewModel;
+        }
 
 
         public void OnDisplayUserCreateScreen(DisplayUserCreateScreenMessage msg)

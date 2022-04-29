@@ -63,7 +63,7 @@
             Height="25" 
             Margin="70,20,67,9" 
             TextAlignment="Center" RenderTransformOrigin="0.503,0.306"
-            Text="{Binding Model.Surname}"/>
+            Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <TextBox
             x:Name="TextBoxCountry" 
@@ -127,6 +127,7 @@
             Height="26" Grid.Row="2" FontSize="13"/>
 
         <Label
+            Name="RegistrationDateLabel"
             Margin="0,6,0,0" 
             Content="Date of registration" 
             Background="{x:Null}" 
