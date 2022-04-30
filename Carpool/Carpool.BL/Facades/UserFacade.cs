@@ -7,6 +7,7 @@ using AutoMapper;
 using Carpool.BL.Models;
 using Carpool.DAL.Entities;
 using Carpool.DAL.UnitOfWork;
+using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.BL.Facades
 {
