@@ -18,13 +18,13 @@ using Microsoft.Win32;
 
 namespace Carpool.App.ViewModel
 {
-    public class UserDetailViewModelBase : ViewModelBase, IUserDetailViewModelBase
+    public abstract class UserDetailViewModelBase : ViewModelBase, IUserDetailViewModelBase
     {
 
         protected readonly UserFacade UserFacade;
         protected readonly IMediator Mediator;
 
-        public UserDetailViewModelBase(UserFacade userFacade, IMediator mediator)
+        protected UserDetailViewModelBase(UserFacade userFacade, IMediator mediator)
         {
             UserFacade = userFacade;
             Mediator = mediator;
@@ -110,11 +110,6 @@ namespace Carpool.App.ViewModel
                 {
                     //TODO showing error msg
                 }
-
-                Mediator.Send(new DeleteMessage<UserWrapper>
-                {
-                    Model = Model
-                });
             }
         }
     }

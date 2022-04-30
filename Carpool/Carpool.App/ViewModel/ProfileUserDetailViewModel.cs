@@ -21,7 +21,7 @@ namespace Carpool.App.ViewModel
         private readonly ISession _session;
 
         private UserDetailModel? _origModel;
-
+        
 
         public ProfileUserDetailViewModel(
             UserFacade userFacade, 
@@ -97,17 +97,17 @@ namespace Carpool.App.ViewModel
 
         private void OnDisplayCarEdit()
         {
-
+            Mediator.Send(new DisplayCarInfoMessage());
         }
 
 
         private void OnDisplayRideList()
         {
-
+            Mediator.Send(new DisplayRideListMessage());
         }
 
 
-        private void SaveCurrentModel()
+        private void RememberCurrentModel()
         {
             if (Model == null)
             {
@@ -134,14 +134,14 @@ namespace Carpool.App.ViewModel
             }
 
             OnPropertyChanged();
-            SaveCurrentModel();
+            RememberCurrentModel();
         }
 
 
         //In this case "default" means profile of logged user or empty profile if there is no logged user
         private async Task LoadDefaultProfile()
         {
-            var loggedUserId = _session.GetLoggedUser();
+            var loggedUserId = _session.GetLoggedUserId();
 
             if (loggedUserId != null)
             {

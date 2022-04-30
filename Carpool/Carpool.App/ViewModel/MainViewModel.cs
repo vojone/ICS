@@ -21,21 +21,29 @@ namespace Carpool.App.ViewModel
 
         private IViewModel? _currentViewModel;
 
+        private ISession _session;
+
         public MainViewModel(
             ILoginScreenViewModel loginScreenViewModel,
             ICreateUserDetailViewModel createUserDetailViewModel,
             IProfileUserDetailViewModel profileUserDetailViewModel,
-            IMediator mediator)
+            ICarInfoViewModel carInfoViewModel,
+            IMediator mediator,
+            ISession session)
         {
+            _session = session;
+
             LoginScreenViewModel = loginScreenViewModel;
             CreateUserDetailViewModel = createUserDetailViewModel;
             ProfileUserDetailViewModel = profileUserDetailViewModel;
+            CarInfoViewModel = carInfoViewModel;
 
             CurrentViewModel = LoginScreenViewModel;
 
             mediator.Register<DisplayUserCreateScreenMessage>(OnDisplayUserCreateScreen);
             mediator.Register<DisplayLoginScreenMessage>(OnDisplayLoginScreen);
             mediator.Register<DisplayUserProfileMessage>(OnDisplayUserProfile);
+            mediator.Register<DisplayCarInfoMessage>(OnDisplayCarInfo);
         }
 
         public IViewModel? CurrentViewModel
@@ -54,23 +62,46 @@ namespace Carpool.App.ViewModel
 
         public IProfileUserDetailViewModel ProfileUserDetailViewModel { get; set; }
 
+        public ICarInfoViewModel CarInfoViewModel { get; set; }
 
+
+        public void OnDisplay(IViewModel viewModel)
+        {
+            if (CurrentViewModel != null)
+            {
+                _session.PushViewModel(CurrentViewModel);
+            }
+
+            CurrentViewModel = viewModel;
+        }
+
+
+        public void OnGoBack()
+        {
+            CurrentViewModel = _session.GetLastViewModel() ?? CurrentViewModel;
+        }
+
+
+        public void OnDisplayCarInfo(DisplayCarInfoMessage msg)
+        {
+            OnDisplay(CarInfoViewModel);
+        }
 
         public void OnDisplayUserProfile(DisplayUserProfileMessage msg)
         {
-            CurrentViewModel = ProfileUserDetailViewModel;
+            OnDisplay(ProfileUserDetailViewModel);
         }
 
         public void OnDisplayUserCreateScreen(DisplayUserCreateScreenMessage msg)
         {
-            
-            CurrentViewModel = CreateUserDetailViewModel;
+
+            OnDisplay(CreateUserDetailViewModel);
         }
 
         public void OnDisplayLoginScreen(DisplayLoginScreenMessage msg)
         {
 
-            CurrentViewModel = LoginScreenViewModel;
+            OnDisplay(LoginScreenViewModel);
         }
 
     }

@@ -20,6 +20,9 @@
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:ProfileUserDetailViewModel}">
             <local:UserProfileControl></local:UserProfileControl>
         </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:CarInfoViewModel}">
+            <local:CarInfoControl></local:CarInfoControl>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>

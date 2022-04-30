@@ -13,9 +13,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="65*"/>
             <RowDefinition Height="52*"/>
-            <RowDefinition Height="188*"/>
-            <RowDefinition Height="58*"/>
-            <RowDefinition Height="71*"/>
+            <RowDefinition Height="118*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -30,43 +31,66 @@
 
         <Label
             Margin="70,0,0,0" 
-            Content="Please select the user" 
+            Content="Your Cars" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
-            Width="209" 
+            Width="197" 
             VerticalAlignment="Center"
             Grid.Column="0" Grid.ColumnSpan="2"/>
 
-        <Label
-            x:Name="LoggedUserName"
-            Grid.Column="2"
-            Margin="185,0,0,0" 
-            Content="Jméno usera" 
-            Background="{x:Null}" 
-            BorderBrush="{x:Null}" 
-            VerticalAlignment="Center" 
-            Height="25" 
-            HorizontalAlignment="Right" 
-            Width="82"/>
+        <Grid
+            Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="0"
+                Validation.ErrorTemplate="{x:Null}"
+                x:Name="LoggedUsername" 
+                Content="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}" 
+                VerticalAlignment="Center" 
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                FontSize="14"
+                Padding="3,0"
+                Height="34" HorizontalAlignment="Stretch"/>
+
+            <Label
+                Grid.Column="1"
+                Validation.ErrorTemplate="{x:Null}"
+                x:Name="LoggedSurname" 
+                Content="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}" 
+                VerticalAlignment="Center" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                FontSize="14"
+                Padding="3,0"
+                Height="34" HorizontalAlignment="Stretch"/>
+        </Grid>
 
         <Button 
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
+            Grid.Column="2"
             x:Name="ButtonCreateRide"
             Content="Create Ride" 
-            Margin="216,0,108,0" 
+            Margin="71,0,0,0" 
             Background="#FF005FB8" 
-            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130"/>
+            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Left" Width="130"/>
 
         <Button
             x:Name="ButtonNewCar" 
             Content="New Car" 
-            Margin="70,7,0,0" 
-            Background="#FF005FB8" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="1"/>
+            Margin="65,0,0,0" 
+            Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="1"/>
 
-        <ComboBox x:Name="SelectedCarCombobox" HorizontalAlignment="Left" Height="25" Margin="70,20,0,0" Grid.Row="2" VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
+        <ComboBox x:Name="SelectedCarCombobox" HorizontalAlignment="Left" Height="25" Margin="65,58,0,0" Grid.Row="2" VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#DBDBDBDB"/>
@@ -75,22 +99,17 @@
             </ComboBox.Background>
         </ComboBox>
 
-        <TextBox x:Name="CarName" Grid.Row="3" Width="130" Height="25" Margin="68,27,68,7" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBox x:Name="CarName" Grid.Row="3" Width="130" Height="25" Margin="66,35,0,0" TextAlignment="Center" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
-        <DatePicker x:Name="CarRegistrationDate" HorizontalAlignment="Center" Height="25" Grid.Row="4" VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}" Margin="0,33,0,0"/>
+        <DatePicker Grid.Column="1" x:Name="CarRegistrationDate" HorizontalAlignment="Center" Height="25" Grid.Row="4" VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}" Margin="0,33,0,0"/>
 
-        <ComboBox  x:Name="CarMakeCombobox" HorizontalAlignment="Left" Height="25" Margin="70,20,0,0" Grid.Row="3" Grid.Column="1" 
-                  VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#DBDBDBDB"/>
-                    <GradientStop Color="#DBDBDBDB" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-        </ComboBox>
+        <TextBox  x:Name="CarMakeCombobox" HorizontalAlignment="Left" Height="25" Margin="66,33,0,0" Grid.Row="4" Grid.Column="0" 
+                  VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}">
 
-        <ComboBox x:Name="CarTypeCombobox" HorizontalAlignment="Right" Height="25" Margin="70,20,68,0" Grid.Row="3" Grid.Column="2" 
-                  VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
+        </TextBox>
+
+        <ComboBox x:Name="CarTypeCombobox" HorizontalAlignment="Left" Height="25" Margin="67,33,0,0" Grid.Row="5" Grid.Column="0" 
+                  VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#DBDBDBDB"/>
@@ -100,55 +119,55 @@
         </ComboBox>
 
         <Button
+            x:Name="SaveChanges" 
+            Content="Save Changes" 
+            Margin="71,0,0,0" 
+            Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="4" Grid.Column="2"/>
+
+        <Button
             x:Name="ButtonDeleteCar" 
             Content="Delete Car" 
-            Margin="70,0,68,0" 
-            Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130" Grid.Row="4" Grid.Column="3"/>
+            Margin="71,0,0,0" 
+            Background="#FFC51111" VerticalAlignment="Center" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="5" Grid.Column="2"/>
 
-        <ComboBox x:Name="CarSeatsCombobox" HorizontalAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="4" Grid.Column="1" 
+        <TextBox x:Name="CarSeatsTextBox" HorizontalAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="5" Grid.Column="1" 
                   VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}">
-            <ComboBox.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#DBDBDBDB"/>
-                    <GradientStop Color="#DBDBDBDB" Offset="1"/>
-                </LinearGradientBrush>
-            </ComboBox.Background>
-        </ComboBox>
+        </TextBox>
         <TextBox
             IsReadOnly="True" 
-            Margin="70,4,0,28" 
+            Margin="68,10,0,0" 
             TextWrapping="Wrap" 
             Text="Name" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="127" 
-            VerticalAlignment="Center" 
+            VerticalAlignment="Top" 
             Height="26" Grid.Row="3" FontSize="13" TextAlignment="Left"
     />
-        <TextBox
-            IsReadOnly="True" 
-            Margin="71,4,0,0" 
-            TextWrapping="Wrap" 
-            Text="Make" 
+        <Label
+            Margin="68,4,0,0" 
+            Content="Brand" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="26" Grid.Row="3" FontSize="13" Grid.Column="1"
+            Height="26" Grid.Row="4" FontSize="13" Grid.Column="0"
     />
+
         <Label
-            Margin="71,-27,69,0" 
+            Margin="68,7,0,0" 
             Content="Type" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Right" 
+            HorizontalAlignment="Left" 
             Width="127" 
-            VerticalAlignment="Center" 
-            Height="26" Grid.Row="3" FontSize="13" Grid.Column="2"
+            VerticalAlignment="Top" 
+            Height="26" Grid.Row="5" FontSize="13" Grid.Column="0"
     />
         <Label 
+            Grid.Column="1"
             Content="Registration date" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
@@ -164,26 +183,29 @@
             HorizontalAlignment="Center" 
             Width="127" 
             VerticalAlignment="Center" 
-            Height="26" Grid.Row="4" FontSize="13" Grid.Column="1" Margin="0,4,0,34"
+            Height="26" Grid.Row="5" FontSize="13" Grid.Column="1" Margin="0,4,0,34"
     />
         <Label
-            Margin="71,-30,0,0" 
-            Content="Selected car" 
+            Margin="67,32,0,0" 
+            Content="Select existing car" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="127" 
-            VerticalAlignment="Center" 
+            VerticalAlignment="Top" 
             Height="26" Grid.Row="2" FontSize="13"
     />
         <Button
             x:Name="ButtonNewCar_Copy" 
-            Content="&lt;=" 
             Margin="8,0,0,0" 
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="40" 
             HorizontalAlignment="Left" 
-            Width="56"/>
+            Width="56">
+            <Button.Content>
+                <TextBlock Text="Back" FontWeight="Bold"></TextBlock>
+            </Button.Content>
+        </Button>
     </Grid>
 </UserControl>
