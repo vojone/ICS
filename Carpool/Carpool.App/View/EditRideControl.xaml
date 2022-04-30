@@ -191,5 +191,7 @@
             Content="Departure"
             Background="{x:Null}"
             BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
+        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="68" Margin="237,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Fill="#FF919191"/>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="68" Margin="237,54,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"><Run Language="cs-cz" Text="Edit photo"/></TextBlock>
     </Grid>
 </UserControl>

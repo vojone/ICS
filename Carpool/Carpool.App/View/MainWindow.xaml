@@ -24,7 +24,7 @@
             <local:RideListControl></local:RideListControl>
         </DataTemplate>
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:RideDetailViewModel}">
-            <local:CreateRideControl></local:CreateRideControl>
+            <local:BookRideControl></local:BookRideControl>
         </DataTemplate>
     </Window.Resources>
 
