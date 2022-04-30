@@ -170,7 +170,7 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
-            Width="50" BorderBrush="{x:Null}"/>
+            Width="50" BorderBrush="{x:Null}" FontSize="17"/>
         <Button
             x:Name="ButtonCreateUser_Copy" 
             Content="Create Ride" 

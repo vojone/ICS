@@ -48,7 +48,7 @@
             Content="Create Ride" 
             Margin="0,0,150,0" 
             Background="#FF919191" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98" Grid.Column="1"
-            Command="{Binding PrintDataCommand}"/>
+            Command="{Binding PrintDataCommand}" FontSize="17"/>
         <Rectangle
             HorizontalAlignment="Right" 
             Width="267" Fill="#FFC4C4C4" 
@@ -65,7 +65,7 @@
             HorizontalAlignment="Right"
             Width="264"
             Grid.Column="1" Grid.Row="1"
-            Command="{Binding CreateRideCommand}"/>
+            Command="{Binding CreateRideCommand}" FontSize="17"/>
         <ComboBox
             x:Name="ComboBoxCreateRideSeats"
             DisplayMemberPath="Source"
@@ -137,6 +137,6 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
-            Width="50" BorderBrush="{x:Null}"/>
+            Width="50" BorderBrush="{x:Null}" FontSize="17"/>
     </Grid>
 </local:UserControlBase>

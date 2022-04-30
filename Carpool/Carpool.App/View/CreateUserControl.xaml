@@ -23,7 +23,7 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        
+
         <Rectangle 
             Fill="#FFC4C4C4" 
             Grid.Row="0"
@@ -126,7 +126,7 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding SaveUserCommand}"/>
+            Command="{Binding SaveUserCommand}" FontSize="17"/>
 
         <Button 
             Grid.Row="4"
@@ -139,7 +139,7 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding CancelCommand}"/>
+            Command="{Binding CancelCommand}" FontSize="17"/>
 
         <Label
             Margin="0,2,0,0" 

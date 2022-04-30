@@ -58,13 +58,13 @@
             Content="Create Ride" 
             Margin="216,0,108,0" 
             Background="#FF005FB8" 
-            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130"/>
+            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130" FontSize="17"/>
 
         <Button
             x:Name="ButtonNewCar" 
             Content="New Car" 
             Margin="70,7,0,0" 
-            Background="#FF005FB8" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="1"/>
+            Background="#FF005FB8" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="1" FontSize="17"/>
 
         <ComboBox x:Name="SelectedCarCombobox" HorizontalAlignment="Left" Height="25" Margin="70,20,0,0" Grid.Row="2" VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
             <ComboBox.Background>
@@ -103,7 +103,7 @@
             x:Name="ButtonDeleteCar" 
             Content="Delete Car" 
             Margin="70,0,68,0" 
-            Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130" Grid.Row="4" Grid.Column="3"/>
+            Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130" Grid.Row="4" Grid.Column="3" FontSize="17"/>
 
         <ComboBox x:Name="CarSeatsCombobox" HorizontalAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="4" Grid.Column="1" 
                   VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}">
@@ -184,6 +184,6 @@
             VerticalAlignment="Center" 
             Height="40" 
             HorizontalAlignment="Left" 
-            Width="56"/>
+            Width="56" FontSize="17"/>
     </Grid>
 </UserControl>
