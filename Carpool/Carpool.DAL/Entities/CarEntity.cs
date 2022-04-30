@@ -20,6 +20,6 @@ public record CarEntity(
 #nullable enable
 
     public UserEntity? Owner { get; set; }
-    public ICollection<CarPhotoEntity> Photos { get; init; } = new List<CarPhotoEntity>();
+    /*public ICollection<CarPhotoEntity> Photos { get; init; } = new List<CarPhotoEntity>();*/
 }
 

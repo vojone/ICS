@@ -59,11 +59,11 @@ namespace Carpool.DAL
 
 
 
-            modelBuilder.Entity<CarEntity>()
+            /*modelBuilder.Entity<CarEntity>()
                 .HasMany(i => i.Photos)
                 .WithOne(i => i.Car)
                 .HasForeignKey(i => i.CarId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade);*/
 
             if (!_seedDemoData) return;
 

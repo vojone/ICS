@@ -77,19 +77,19 @@ public static class CarSeeds
         OwnerId: default
     );
 
-    static CarSeeds()
+    /*static CarSeeds()
     {
         Kia.Photos.Add(CarPhotoSeeds.CarPhoto);
         DeleteKia.Photos.Add(CarPhotoSeeds.DeleteCarPhoto);
     }
-
+*/
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(
-            UpdateKia with { Owner = null, Photos = Array.Empty<CarPhotoEntity>() },
-            Hyundai with { Owner = null, Photos = Array.Empty<CarPhotoEntity>() },
-            Kia with { Owner = null, Photos = Array.Empty<CarPhotoEntity>() },
-            DeleteKia with { Owner = null, Photos = Array.Empty<CarPhotoEntity>() }
+            UpdateKia with { Owner = null},
+            Hyundai with { Owner = null},
+            Kia with { Owner = null},
+            DeleteKia with { Owner = null}
         );
     }
 }

@@ -12,6 +12,7 @@ namespace Carpool.BL.Models
     public record CarDetailModel(
         string Name,
         string Brand,
+        string Photo,
         CarType Type,
         DateTime Registration,
         uint Seats
@@ -19,10 +20,10 @@ namespace Carpool.BL.Models
     {
         public string Name { get; set; } = Name;
         public string Brand { get; set; } = Brand;
+        public string Photo { get; set; } = Photo;
         public CarType Type { get; set; } = Type;
         public DateTime Registration { get; set; } = Registration;
         public uint Seats { get; set; } = Seats;
-        public List<CarPhotoModel> Photos { get; init; } = new();
         public class MapperProfile : Profile
         {
             public MapperProfile()
@@ -34,6 +35,7 @@ namespace Carpool.BL.Models
 
         public static CarDetailModel Empty =>
             new(string.Empty,
+                string.Empty,
                 string.Empty,
                 CarType.None,
                 default,

@@ -28,6 +28,7 @@ namespace Carpool.BL.Tests
             var car = new CarDetailModel(
                 Name: @"Fabia",
                 Brand: @"Škoda",
+                Photo: @"TestUrl",
                 Type: CarType.Sport,
                 Registration: new DateTime(2005, 5, 4),
                 Seats: 4
@@ -113,7 +114,7 @@ namespace Carpool.BL.Tests
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
         }
 
-        [Fact]
+       /* [Fact]
         public async Task InsertOrUpdate_UpdateKiaAddNonExistingPhoto_Throws()
         {
             //Arrange
@@ -125,10 +126,10 @@ namespace Carpool.BL.Tests
             _ = await Assert.ThrowsAsync<DbUpdateException>(
                 async () => await _carFacadeSut.SaveAsync(car)
             );
-        }
+        }*/
 
 
-        [Fact]
+        /*[Fact]
         public async Task Delete_PhotosOfDeleteKia()
         {
             //Arrange
@@ -148,10 +149,10 @@ namespace Carpool.BL.Tests
                 .SingleAsync(i => i.Id == car.Id);
 
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
-        }
+        }*/
 
 
-        [Fact]
+        /*[Fact]
         public async Task InsertOrUpdate_NewPhotosOfUpdateKia()
         {
             //Arrange
@@ -174,6 +175,6 @@ namespace Carpool.BL.Tests
 
             Assert.Contains(carFromDb.Photos, i => i.Url == urlOfNewPhoto1);
             Assert.Contains(carFromDb.Photos, i => i.Url == urlOfNewPhoto2);
-        }
+        }*/
     }
 }
