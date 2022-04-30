@@ -26,6 +26,9 @@
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:CreateRideDetailViewModel}">
             <local:CreateRideControl></local:CreateRideControl>
         </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:BookRideDetailViewModel}">
+            <local:BookRideControl></local:BookRideControl>
+        </DataTemplate>
     </Window.Resources>
 
     <Grid>

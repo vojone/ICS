@@ -6,44 +6,42 @@
              xmlns:local="clr-namespace:Carpool.App.View"
              xmlns:ViewModel="clr-namespace:Carpool.App.ViewModel" x:Class="Carpool.App.View.BookRideControl"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             d:DataContext= "{d:DesignInstance {x:Type ViewModel:BookRideDetailViewModel}}">
     <Grid>
+        <Grid Background="#FFA1A1A1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="26*"/>
+                <RowDefinition Height="199*"/>
 
-        <UserControl
-            d:DataContext= "{d:DesignInstance {x:Type ViewModel:RideDetailViewModel}}" 
-            d:DesignHeight="450" d:DesignWidth="800" Margin="1,1,-1,-1">
-            <Grid Background="#FFA1A1A1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="26*"/>
-                    <RowDefinition Height="199*"/>
-
-                </Grid.RowDefinitions>
-                <Rectangle Margin="27,178,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
+            </Grid.RowDefinitions>
+            <Rectangle Margin="27,178,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
          
         />
-                <TextBox
+            <TextBox
                     IsEnabled="False"
                     x:Name="TextBoxArrivalCreateRides_Copy" Margin="44,214,0,0"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
-                    BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"/>
-                <DatePicker
+                    BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"
+                    Text="{Binding Model.ArrivalL, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker
                     IsEnabled="False"
                     Grid.Column="0"
                     x:Name="TextBoxDate_arrCreateRides_Copy"
                     Margin="45,277,0,0"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
-        />
+                    SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <Rectangle 
+            <Rectangle 
                     x:Name="TopBar" 
                     Fill="#FFC4C4C4" Grid.ColumnSpan="2" Height="52" VerticalAlignment="Top"/>
 
-                <Label
+            <Label
                     x:Name="TextBox1" 
                     Margin="24,9,0,0" 
                     Content="Book a ride" 
@@ -56,7 +54,7 @@
                     Height="34" 
                     Grid.Column="0"/>
 
-                <Label
+            <Label
                     Margin="249,13,0,0" 
                     Content="Jméno usera" 
                     Background="{x:Null}" 
@@ -65,46 +63,47 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="1"/>
 
-                <Image
+            <Image
                     Grid.Row="0"
                     Height="60" 
                     Margin="348,17,10,0" 
                     VerticalAlignment="Top" Grid.Column="3" Grid.RowSpan="2"/>
-                <Button
+            <Button
                     x:Name="ButtonCreateUser" 
                     Content="Create Ride" 
                     Margin="69,9,0,0" 
                     Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" Grid.Column="1"/>
 
-                <Button
+            <Button
                     x:Name="ButtonEditRideSaveChanges" 
                     Content="Book" 
                     Margin="68,327,0,0" 
                     FontSize="20"
-                    Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264" Grid.Column="1" Grid.Row="1" Click="ButtonEditRideSaveChanges_Click" />
+                    Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="264" Grid.Column="1" Grid.Row="1" Click="ButtonEditRideSaveChanges_Click" 
+                    Command="{Binding BookRideCommand}"/>
 
-                <ListView Grid.Column="1" Grid.Row="1"
+            <ListView Grid.Column="1" Grid.Row="1"
                     Background="#FFC4C4C4"
                     Height="122"
                     VerticalAlignment="Top" HorizontalAlignment="Left"
                     Width="266"
                     ItemsSource="{Binding Model.Participants}" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="67,195,0,0">
 
-                    <ListView.ItemTemplate >
-                        <DataTemplate >
-                            <StackPanel Grid.Column="1" Grid.Row="1" Height="23" Width="216">
-                                <Label 
+                <ListView.ItemTemplate >
+                    <DataTemplate >
+                        <StackPanel Grid.Column="1" Grid.Row="1" Height="23" Width="216">
+                            <Label 
                                     Content="{Binding UserName}" 
                                     Background="#d1d1d1" 
                                     Height="24" 
                                     BorderBrush="{x:Null}"/>
-                            </StackPanel>
-                        </DataTemplate>
+                        </StackPanel>
+                    </DataTemplate>
 
-                    </ListView.ItemTemplate>
-                </ListView>
+                </ListView.ItemTemplate>
+            </ListView>
 
-                <Rectangle
+            <Rectangle
                     Fill="#FF919191"
                     HorizontalAlignment="Left"
                     Height="126" 
@@ -115,7 +114,7 @@
                     Grid.Column="1" Grid.Row="1" Margin="64,24,0,0"
             />
 
-                <Label
+            <Label
                     Width="67"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
@@ -127,56 +126,59 @@
                     Height="24" 
                     VerticalAlignment="Top" 
             />
-                <Label
+            <Label
                     Margin="44,184,0,0"
                     Content="Arrival"
                     Background="{x:Null}"
-                    BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="48" />
-                <Rectangle Margin="27,15,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
+                    BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="48" 
+                    />
+            <Rectangle Margin="27,15,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
          
         />
-                <TextBox
+            <TextBox
                     IsEnabled="False"
                     x:Name="TextBoxArrivalCreateRides_Copy1" Margin="44,51,0,0"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
-                    BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="296" TextChanged="TextBoxArrivalCreateRides_Copy1_TextChanged"/>
-                <DatePicker
+                    BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="296" TextChanged="TextBoxArrivalCreateRides_Copy1_TextChanged"
+                    Text="{Binding Model.DepartureL, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker
                     IsEnabled="False"
                     Grid.Column="0"
                     x:Name="TextBoxDate_arrCreateRides_Copy1"
                     Margin="45,114,0,0"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
-        />
-                <Label
+                    SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label
                     Margin="44,21,0,0"
                     Content="Departure"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="66" />
-                <Label
+            <Label
                     Margin="27,327,0,0"
                     Content="Driver"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}" Height="28" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="66" />
-                <Label
+            <Label
                     Margin="244,327,0,0"
                     Content="Car"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}" Height="28" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="66" />
-                <TextBox
+            <TextBox
                     IsEnabled="False"
                     x:Name="TextBoxArrivalCreateRides_Copy2" Margin="27,350,0,0"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
-                    BorderBrush="{x:Null}" Grid.Row="1" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="129"/>
-                <TextBox
+                    BorderBrush="{x:Null}" Grid.Row="1" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="129"
+                    Text="{Binding Model.Driver.Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox
                     IsEnabled="False"
                     x:Name="TextBoxArrivalCreateRides_Copy3" Margin="244,350,0,0"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
-                    BorderBrush="{x:Null}" Grid.Row="1" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="129"/>
-            </Grid>
-        </UserControl>
+                    BorderBrush="{x:Null}" Grid.Row="1" Height="28" VerticalAlignment="Top" HorizontalAlignment="Left" Width="129"
+                    Text="{Binding Model.Car.Name, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
 
     </Grid>
 </UserControl>

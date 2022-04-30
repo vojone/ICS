@@ -73,7 +73,7 @@
             Command="{Binding DisplayCreateRideCommand}"/>
 
         <ListView 
-            ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,122,0,0" Height="318">
+            ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,122,0,0" Height="318" SelectionChanged="ListView_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Width="560" Background="#FFD1D1D1" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -174,7 +174,8 @@
                                 Grid.Column="3"
                                 x:Name="ButtonBook" 
                                 Content="Book" 
-
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.DisplayBookRideCommand}"
+                                CommandParameter="{Binding Id}"
                                 Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}"/>
                         </Grid>
                     </StackPanel>

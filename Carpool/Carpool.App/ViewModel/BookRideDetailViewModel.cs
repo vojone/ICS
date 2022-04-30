@@ -36,25 +36,25 @@ namespace Carpool.App.ViewModel
             _mediator = mediator;
             _session = session;
             
-            CreateRideCommand = new RelayCommand(OnCreateRide);
+            BookRideCommand = new RelayCommand(OnBookRide);
             //Model = RideDetailModel.Empty;
 
-            _mediator.Register<DisplayCreateRideMessage>(OnDisplayBookRide);
+            _mediator.Register<DisplayBookRideMessage>(OnDisplayBookRide);
         }
 
         public ICommand PrintDataCommand { get; set; }
 
-        public ICommand CreateRideCommand { get; set; }
+        public ICommand BookRideCommand { get; set; }
 
 
-        private void OnCreateRide()
+        private void OnBookRide()
         {
             _mediator.Send(new DisplayRideListMessage());
         }
 
-        private async void OnDisplayBookRide(DisplayCreateRideMessage m)
+        private async void OnDisplayBookRide(DisplayBookRideMessage m)
         {
-            
+            await LoadAsync(m.rideId);
             OnPropertyChanged();
         }
     }
