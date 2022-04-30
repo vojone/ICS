@@ -30,14 +30,39 @@ namespace Carpool.DAL.Tests
         }
 
         [Fact]
-        public async Task AddNew_Car_Persisted()
+        public async Task AddNew_Car_without_Photo_Persisted()
         {
             //Arrange
             CarEntity entity = new(
                 Id:Guid.Parse("142C54E5-B10F-4956-AB0B-B80007670E3C"),
+                Name: "Octavia",
+                Brand: "Skoda",
+                Photo: null,
+                Type: CarType.Sport,
+                Registration: DateTime.MinValue,
+                Seats: 4,
+                OwnerId: UserSeeds.Chuck.Id
+            );
+
+            //Act
+            CarpoolDbContextSut.Cars.Add(entity);
+            await CarpoolDbContextSut.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntities = await dbx.Cars.SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(entity, actualEntities);
+        }
+        
+        [Fact]
+        public async Task AddNew_Car_Persisted()
+        {
+            //Arrange
+            CarEntity entity = new(
+                Id:Guid.Parse("122C54E5-B10F-4956-AB0B-B80007670E3C"),
                 Name: "Rapid",
                 Brand: "Skoda",
-                Photo: "Test",
+                Photo: @"New_photo_1_of\update\skoda\URL.png",
                 Type: CarType.Sport,
                 Registration: DateTime.MinValue,
                 Seats: 4,

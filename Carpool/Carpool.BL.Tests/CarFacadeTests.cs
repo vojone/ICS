@@ -114,29 +114,14 @@ namespace Carpool.BL.Tests
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
         }
 
-       /* [Fact]
-        public async Task InsertOrUpdate_UpdateKiaAddNonExistingPhoto_Throws()
-        {
-            //Arrange
-            var car = Mapper.Map<CarDetailModel>(CarSeeds.UpdateKia);
-
-            car.Photos.Add(Mapper.Map<CarPhotoModel>(CarPhotoSeeds.EmptyPhoto));
-
-            //Act & Assert
-            _ = await Assert.ThrowsAsync<DbUpdateException>(
-                async () => await _carFacadeSut.SaveAsync(car)
-            );
-        }*/
-
-
-        /*[Fact]
+        [Fact]
         public async Task Delete_PhotosOfDeleteKia()
         {
             //Arrange
             var car = Mapper.Map<CarDetailModel>(CarSeeds.DeleteKia);
-            Assert.NotEmpty(car.Photos);
+            Assert.NotEmpty(car.Photo);
 
-            car.Photos.Clear();
+            car.Photo = null;
 
             //Act
             await _carFacadeSut.SaveAsync(car);
@@ -145,23 +130,22 @@ namespace Carpool.BL.Tests
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             var carFromDb = await dbxAssert.Cars
                 .Include(i => i.Owner)
-                .Include(i => i.Photos)
                 .SingleAsync(i => i.Id == car.Id);
 
             DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
-        }*/
+        }
 
 
-        /*[Fact]
+        [Fact]
         public async Task InsertOrUpdate_NewPhotosOfUpdateKia()
         {
             //Arrange
             const string urlOfNewPhoto1 = @"New_photo_1_of\update\kia\URL.png";
-            const string urlOfNewPhoto2 = @"New_photo_2_of\update\kia\URL.jpg";
 
             var car = Mapper.Map<CarDetailModel>(CarSeeds.UpdateKia);
-            car.Photos.Add(new CarPhotoModel(urlOfNewPhoto1));
-            car.Photos.Add(new CarPhotoModel(urlOfNewPhoto2));
+            /*car.Photos.Add(new CarPhotoModel(urlOfNewPhoto1));
+            car.Photos.Add(new CarPhotoModel(urlOfNewPhoto2));*/
+            car.Photo = urlOfNewPhoto1;
 
             //Act
             await _carFacadeSut.SaveAsync(car);
@@ -170,11 +154,9 @@ namespace Carpool.BL.Tests
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             var carFromDb = await dbxAssert.Cars
                 .Include(i => i.Owner)
-                .Include(i => i.Photos)
                 .SingleAsync(i => i.Id == car.Id);
+            DeepAssert.Equal(car, Mapper.Map<CarDetailModel>(carFromDb));
 
-            Assert.Contains(carFromDb.Photos, i => i.Url == urlOfNewPhoto1);
-            Assert.Contains(carFromDb.Photos, i => i.Url == urlOfNewPhoto2);
-        }*/
+        }
     }
 }

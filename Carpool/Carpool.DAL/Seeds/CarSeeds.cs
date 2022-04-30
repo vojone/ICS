@@ -77,12 +77,6 @@ public static class CarSeeds
         OwnerId: default
     );
 
-    /*static CarSeeds()
-    {
-        Kia.Photos.Add(CarPhotoSeeds.CarPhoto);
-        DeleteKia.Photos.Add(CarPhotoSeeds.DeleteCarPhoto);
-    }
-*/
     public static void Seed(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<CarEntity>().HasData(

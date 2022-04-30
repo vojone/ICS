@@ -6,7 +6,7 @@ public record CarEntity(
     Guid Id,
     string Name,
     string Brand,
-    string Photo,
+    string? Photo,
     CarType Type,
     DateTime Registration,
     uint Seats,
