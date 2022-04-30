@@ -13,13 +13,13 @@
 
     <Grid Background="#FFA1A1A1">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60*"/>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="70*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="73*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -34,15 +34,13 @@
             Margin="0,8,0,8"/>
 
         <Label
-            Margin="48,10,0,0" 
+            Margin="0,0,20,0" 
             Content="Your user profile" 
             Background="{x:Null}" 
-            FontSize="18" 
+            FontSize="17" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Left" 
-            Width="209" 
-            VerticalAlignment="Top" 
-            Height="33"/>
+            HorizontalAlignment="Center" 
+            Width="210" VerticalAlignment="Center"/>
 
         <Label
             Grid.Column="1"
@@ -53,15 +51,15 @@
             VerticalAlignment="Center" 
             HorizontalContentAlignment="Right"
             VerticalContentAlignment="Center"
-            FontSize="14"
+            FontSize="16"
             Padding="5,0"
-            Height="34" HorizontalAlignment="Left" Width="135"/>
+            Height="34" HorizontalAlignment="Center" Width="135" Margin="0,0,130,0"/>
 
         <Label
             Grid.Column="1"
             Validation.ErrorTemplate="{x:Null}"
             x:Name="LoggedSurname"
-            Margin="135,0,0,0" 
+            Margin="130,0,0,0" 
             Content="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}"
@@ -69,8 +67,8 @@
             HorizontalContentAlignment="Left"
             VerticalContentAlignment="Center"
             Padding="5,0"
-            FontSize="14"
-            Height="34" HorizontalAlignment="Left" Width="131"/>
+            FontSize="16"
+            Height="34" HorizontalAlignment="Center" Width="131"/>
 
         <Button 
             Grid.Column="2"
@@ -78,7 +76,8 @@
             x:Name="ButtonCreateRideProfile" 
             Content="Create Ride" 
             Background="#FF005FB8" 
-            Height="34" 
+            Height="40
+" 
             HorizontalAlignment="Center" 
             Width="130" VerticalAlignment="Center"/>
 
@@ -86,9 +85,7 @@
             x:Name="TextBoxFirstName" 
             Grid.Column="0"
             Grid.Row="4" 
-            Width="130" 
-            Height="25" 
-            Margin="70,20,67,9" 
+            Margin="70,29,67,19" 
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Left"
             Text="{Binding Model.Name, Mode=TwoWay}"/>
@@ -97,18 +94,16 @@
             x:Name="TextBoxLastName" 
             Grid.Column="0"
             Grid.Row="5" 
-            Width="130" 
-            Height="25" 
-            Margin="70,20,67,9" 
+            Margin="70,29,67,19" 
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Left"
             Text="{Binding Model.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Grid
             Grid.Row="2"
-            Grid.RowSpan="3"
+            Grid.RowSpan="4"
             Grid.Column="1"
-            ToolTip="Click to change profile image..."
+            ToolTip="Click to change profile image..." Margin="0,3,0,73"
         >
             <Ellipse Height="200" Width="200">
                 <Ellipse.Fill>
@@ -122,9 +117,7 @@
             x:Name="TextBoxCountry" 
             Grid.Column="1"
             Grid.Row="5" 
-            Width="130" 
-            Height="25" 
-            Margin="70,20,67,9"
+            Margin="70,29,66,19"
             TextAlignment="Center"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
@@ -134,21 +127,17 @@
             x:Name="TextBoxRating" 
             Grid.Column="1"
             Grid.Row="6" 
-            Width="130" 
-            Height="25" 
             FontWeight="Bold"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             IsHitTestVisible="False"
-            Content="{Binding Model.Rating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            Content="{Binding Model.Rating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="68,16,68,24"/>
 
         <DatePickerTextBox 
             x:Name="RegistrationDate"
             Grid.Row="6" 
-            Height="25" 
-            Width="130" 
             IsReadOnly="True"
-            Margin="70,20,67,9"
+            Margin="70,29,67,19"
             Background="LightGray"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
@@ -160,7 +149,6 @@
             Grid.Column="2"
             x:Name="ButtonSaveChanges" 
             Content="Save Changes" 
-            Margin="0,0,0,0" 
             Background="#FF005FB8" 
             HorizontalAlignment="Center" 
             Height="40" 
@@ -173,7 +161,6 @@
             Grid.Column="2"
             x:Name="ButtonRidesProfile" 
             Content="Rides" 
-            Margin="0,0,0,0" 
             Background="#FF005FB8" 
             HorizontalAlignment="Center" 
             Height="40" 
@@ -186,7 +173,6 @@
             Grid.Column="2"
             x:Name="ButtonEditCarsProfile" 
             Content="Edit cars" 
-            Margin="0,0,0,0" 
             Background="#FF005FB8" 
             HorizontalAlignment="Center" 
             Height="40" 
@@ -199,8 +185,6 @@
             Grid.Column="2"
             x:Name="ButtonDelete" 
             Content="Delete account" 
-            
-            Margin="0,0,0,0" 
             Background="#FFC51111" 
             HorizontalAlignment="Center" 
             Height="40" 
@@ -213,7 +197,6 @@
             Grid.Column="2"
             x:Name="ButtonLogout" 
             Content="Logout" 
-            Margin="0,0,0,0" 
             Background="#FF005FB8" 
             HorizontalAlignment="Center" 
             Height="40" 

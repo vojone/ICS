@@ -23,23 +23,23 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
+        
         <Rectangle 
             Fill="#FFC4C4C4" 
             Grid.Row="0"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Margin="0,8,0,4"/>
+            Margin="0,5,0,5" Height="35"/>
 
         <Label
-            Margin="59,13,0,0" 
+            Margin="10,0,0,0" 
             Content="Create user profile" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
-            VerticalAlignment="Top" 
-            Height="39" Grid.ColumnSpan="2"/>
+            VerticalAlignment="Center" Grid.ColumnSpan="2"/>
 
         <TextBox
             x:Name="TextBoxFirstName" 

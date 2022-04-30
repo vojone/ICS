@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <Rectangle 
             x:Name="TopBar" 
-            Fill="#FFC4C4C4"/>
+            Fill="#FFC4C4C4" Margin="0,5,0,5" Height="35"/>
         
         <Button 
             x:Name="ButtonCreateUser" 
