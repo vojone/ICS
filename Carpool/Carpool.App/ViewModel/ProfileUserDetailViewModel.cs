@@ -79,7 +79,7 @@ namespace Carpool.App.ViewModel
 
         private void OnDisplayRideList()
         {
-
+            Mediator.Send(new DisplayRideListMessage());
         }
 
 

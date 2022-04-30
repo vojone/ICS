@@ -30,16 +30,24 @@ namespace Carpool.App.ViewModel
 
             //mediator.Register<UpdateMessage<RideWrapper>>(RideUpdated);
             //mediator.Register<DeleteMessage<RideWrapper>>(RideDeleted);
-            FilterRidesCommand = new RelayCommand(FilterRides);
+            FilterRidesCommand = new RelayCommand(OnFilterRides);
+            DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRide);
         }
 
         public ICommand FilterRidesCommand { get; set; }
 
+        public ICommand DisplayCreateRideCommand { get; set; }
+
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
 
-        private void FilterRides()
+        private void OnFilterRides()
         {
             LoadAsync();
+        }
+
+        private void OnDisplayCreateRide()
+        {
+            _mediator.Send(new DisplayCreateRideMessage());
         }
 
         public async Task LoadAsync()

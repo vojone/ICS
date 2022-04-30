@@ -69,7 +69,8 @@
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
             Margin="0,18,183,0" 
-            Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98"/>
+            Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98"
+            Command="{Binding DisplayCreateRideCommand}"/>
 
         <ListView 
             ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,122,0,0" Height="318">

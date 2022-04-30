@@ -25,22 +25,31 @@ namespace Carpool.App.ViewModel
             _rideFacade = rideFacade;
             _mediator = mediator;
 
-            PrintDataCommand = new RelayCommand(PrintData);
-            Model = RideDetailModel.Empty;
+            PrintDataCommand = new RelayCommand(OnPrintData);
+            CreateRideCommand = new RelayCommand(OnCreateRide);
+            //Model = RideDetailModel.Empty;
             
+            _mediator.Register<DisplayCreateRideMessage>(OnDisplayCreateRide);
         }
 
         public RideWrapper Model { get; private set; }
 
         public ICommand PrintDataCommand { get; set; }
 
-        private void PrintData()
+        public ICommand CreateRideCommand { get; set; }
+
+        private void OnPrintData()
         {
             Debug.WriteLine("-----Ride Debug print-----");
             Debug.WriteLine("DepartureL: "+(Model != null ? Model.DepartureL :  "EMPTY"));
             Debug.WriteLine("ArrivalL: " + (Model != null ? Model.ArrivalL : "EMPTY"));
             Debug.WriteLine("DepartureT: " + (Model != null ? Model.DepartureT : "EMPTY"));
             Debug.WriteLine("ArrivalT: " + (Model != null ? Model.ArrivalT : "EMPTY"));
+        }
+
+        private void OnCreateRide()
+        {
+            _mediator.Send(new DisplayRideListMessage());
         }
 
         public async Task LoadAsync(Guid id)
@@ -87,6 +96,11 @@ namespace Carpool.App.ViewModel
                     Model = Model
                 });
             }
+        }
+
+        private void OnDisplayCreateRide(DisplayCreateRideMessage m)
+        {
+            Model = RideDetailModel.Empty;
         }
     }
 }

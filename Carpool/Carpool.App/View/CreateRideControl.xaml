@@ -70,7 +70,8 @@
             VerticalAlignment="Top"
             HorizontalAlignment="Left"
             Width="264"
-            Grid.Column="1" Grid.Row="1"/>
+            Grid.Column="1" Grid.Row="1"
+            Command="{Binding CreateRideCommand}"/>
         <ComboBox
             x:Name="ComboBoxCreateRideSeats"
             DisplayMemberPath="Source"
