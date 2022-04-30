@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Formats.Asn1;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Model;
 using Carpool.App.Services;
@@ -21,14 +24,32 @@ namespace Carpool.App.ViewModel
         {
             _rideFacade = rideFacade;
             _mediator = mediator;
+
+            PrintDataCommand = new RelayCommand(PrintData);
+            Model = RideDetailModel.Empty;
+            
         }
 
         public RideWrapper Model { get; private set; }
 
+        public ICommand PrintDataCommand { get; set; }
+
+        private void PrintData()
+        {
+            Debug.WriteLine("-----Ride Debug print-----");
+            Debug.WriteLine("DepartureL: "+(Model != null ? Model.DepartureL :  "EMPTY"));
+            Debug.WriteLine("ArrivalL: " + (Model != null ? Model.ArrivalL : "EMPTY"));
+            Debug.WriteLine("DepartureT: " + (Model != null ? Model.DepartureT : "EMPTY"));
+            Debug.WriteLine("ArrivalT: " + (Model != null ? Model.ArrivalT : "EMPTY"));
+        }
+
         public async Task LoadAsync(Guid id)
         {
+            //not running for some reason
+            Debug.WriteLine("load async running");
             Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
         }
+
 
         public async Task SaveAsync()
         {

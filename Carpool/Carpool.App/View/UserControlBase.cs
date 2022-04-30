@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Carpool.App.ViewModel;
+using Carpool.App.Wrapper;
 
 namespace Carpool.App.View
 {

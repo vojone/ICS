@@ -18,7 +18,7 @@ namespace Carpool.App.View
     /// <summary>
     /// Interaction logic for CreateRideControl.xaml
     /// </summary>
-    public partial class CreateRideControl : UserControl
+    public partial class CreateRideControl : UserControlBase
     {
         public CreateRideControl()
         {
