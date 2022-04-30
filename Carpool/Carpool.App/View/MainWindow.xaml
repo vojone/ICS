@@ -14,8 +14,11 @@
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:LoginScreenViewModel}">
             <local:LoginScreenControl></local:LoginScreenControl>
         </DataTemplate>
-        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:UserDetailViewModel}">
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:CreateUserDetailViewModel}">
             <local:CreateUserControl></local:CreateUserControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:ProfileUserDetailViewModel}">
+            <local:UserProfileControl></local:UserProfileControl>
         </DataTemplate>
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:RideListViewModel}">
             <local:RideListControl></local:RideListControl>

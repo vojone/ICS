@@ -33,23 +33,27 @@ namespace Carpool.App.ViewModel
             LogInCommand = new RelayCommand<Guid>(LogUserIn);
         }
 
-        public ICommand DisplayUserCreateScreenCommand { get; set; }
-
         public ObservableCollection<UserListModel> Users { get; set; } = new();
+
+
+        public ICommand DisplayUserCreateScreenCommand { get; set; }
 
         public ICommand LogInCommand { get; set; }
 
 
         private void DisplayUserCreateScreen()
         {
-            System.Diagnostics.Debug.WriteLine("Sending message");
+            System.Diagnostics.Debug.WriteLine("Going to User Create, sending");
             _mediator.Send(new DisplayUserCreateScreenMessage());
             _mediator.Send(new NewMessage<UserWrapper>());
         }
 
         private void LogUserIn(Guid userId)
         {
+            System.Diagnostics.Debug.WriteLine("Logging In As user with Id:" + userId);
             _session.LogUserIn(userId);
+            _mediator.Send(new LoadUserProfileMessage());
+            _mediator.Send(new DisplayUserProfileMessage());
         }
 
         public async Task LoadAsync()

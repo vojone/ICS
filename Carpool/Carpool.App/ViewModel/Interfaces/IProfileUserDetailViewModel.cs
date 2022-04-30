@@ -7,7 +7,7 @@ using Carpool.App.Wrapper;
 
 namespace Carpool.App.ViewModel
 {
-    public interface IUserDetailViewModel : IDetailViewModel<UserWrapper>
+    public interface IProfileUserDetailViewModel : IUserDetailViewModelBase
     {
     }
 }

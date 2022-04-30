@@ -23,6 +23,8 @@ namespace Carpool.App.ViewModel
 
         public MainViewModel(
             ILoginScreenViewModel loginScreenViewModel,
+            ICreateUserDetailViewModel createUserDetailViewModel,
+            IProfileUserDetailViewModel profileUserDetailViewModel,
             IUserDetailViewModel userDetailViewModel,
             IRideListViewModel rideListViewModel,
             IRideDetailViewModel rideDetailViewModel,
@@ -32,11 +34,14 @@ namespace Carpool.App.ViewModel
             UserDetailViewModel = userDetailViewModel;
             RideListViewModel = rideListViewModel;
             RideDetailViewModel = rideDetailViewModel;
+            CreateUserDetailViewModel = createUserDetailViewModel;
+            ProfileUserDetailViewModel = profileUserDetailViewModel;
 
             CurrentViewModel = LoginScreenViewModel;
 
             mediator.Register<DisplayUserCreateScreenMessage>(OnDisplayUserCreateScreen);
             mediator.Register<DisplayLoginScreenMessage>(OnDisplayLoginScreen);
+            mediator.Register<DisplayUserProfileMessage>(OnDisplayUserProfile);
         }
 
         public IViewModel? CurrentViewModel
@@ -51,24 +56,25 @@ namespace Carpool.App.ViewModel
 
         public ILoginScreenViewModel LoginScreenViewModel { get; set; }
 
-        public IUserDetailViewModel UserDetailViewModel { get; set; }
+        public ICreateUserDetailViewModel CreateUserDetailViewModel { get; set; }
+
+        public IProfileUserDetailViewModel ProfileUserDetailViewModel { get; set; }
+
 
         public IRideListViewModel RideListViewModel{ get; set; }
 
         public IRideDetailViewModel RideDetailViewModel { get; set; }
 
 
-        public void OnDisplayUserProfile(DisplayUserCreateScreenMessage msg)
+        public void OnDisplayUserProfile(DisplayUserProfileMessage msg)
         {
-
-            CurrentViewModel = UserDetailViewModel;
+            CurrentViewModel = ProfileUserDetailViewModel;
         }
-
 
         public void OnDisplayUserCreateScreen(DisplayUserCreateScreenMessage msg)
         {
             
-            CurrentViewModel = RideDetailViewModel;
+            CurrentViewModel = CreateUserDetailViewModel;
         }
 
         public void OnDisplayLoginScreen(DisplayLoginScreenMessage msg)

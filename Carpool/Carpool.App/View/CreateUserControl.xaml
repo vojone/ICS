@@ -8,12 +8,8 @@
              xmlns:validators="clr-namespace:Carpool.App.Services"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
-             d:DataContext="{d:DesignInstance viewModels:UserDetailViewModel}">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
-        </ResourceDictionary>
-    </UserControl.Resources>
+             d:DataContext="{d:DesignInstance viewModels:CreateUserDetailViewModel}">
+
     <Grid Background="#FFA1A1A1" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"/>
@@ -114,7 +110,7 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding DisplayLoginScreenCommand}"/>
+            Command="{Binding CancelCommand}"/>
 
         <Label
             Margin="0,2,0,0" 
