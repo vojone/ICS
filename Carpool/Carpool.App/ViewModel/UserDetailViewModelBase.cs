@@ -13,6 +13,7 @@ using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using Microsoft.Win32;
 
 
 namespace Carpool.App.ViewModel
@@ -27,9 +28,33 @@ namespace Carpool.App.ViewModel
         {
             UserFacade = userFacade;
             Mediator = mediator;
+
+            SelectPhotoCommand = new RelayCommand(OnSelectPhoto);
         }
 
         public UserWrapper? Model { get; protected set; }
+
+        public ICommand SelectPhotoCommand { get; set; }
+
+
+        private void OnSelectPhoto()
+        {
+            if (Model == null)
+                return;
+                
+            OpenFileDialog file = new OpenFileDialog
+            {
+                DefaultExt = ".jpg",
+                Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif"
+            };
+
+            var wasFileChosen = file.ShowDialog();
+
+            if (wasFileChosen == true)
+            {
+                Model.PhotoUrl = file.FileName;
+            }
+        }
 
 
         protected async Task OnSaveUser()

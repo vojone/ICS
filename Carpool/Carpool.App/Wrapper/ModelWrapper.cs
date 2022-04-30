@@ -82,6 +82,11 @@ namespace Carpool.App.Wrapper
             };
         }
 
+        public ModelWrapper<T> Copy()
+        {
+            return (ModelWrapper<T>)this.MemberwiseClone();
+        }
+
 
         //Validation is based on https://www.youtube.com/watch?v=XW88Aa12mx8
         private readonly Dictionary<string?, List<string>> _propNameToErrorsDict = new Dictionary<string?, List<string>>();

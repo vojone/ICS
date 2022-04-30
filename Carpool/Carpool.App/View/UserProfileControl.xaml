@@ -44,33 +44,42 @@
             VerticalAlignment="Top" 
             Height="33"/>
 
-        <Label
-            Grid.Column="1"
-            x:Name="LoggedUsername" 
-            Content="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" 
-            Background="{x:Null}" 
-            BorderBrush="{x:Null}" 
-            VerticalAlignment="Center" 
-            HorizontalContentAlignment="Right"
-            VerticalContentAlignment="Center"
-            FontSize="14"
-            Padding="5,0"
-            Height="34" HorizontalAlignment="Left" Width="135"/>
+        <Grid
+            Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
-        <Label
-            Grid.Column="1"
-            Validation.ErrorTemplate="{x:Null}"
-            x:Name="LoggedSurname"
-            Margin="135,0,0,0" 
-            Content="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" 
-            Background="{x:Null}" 
-            BorderBrush="{x:Null}"
-            VerticalAlignment="Center" 
-            HorizontalContentAlignment="Left"
-            VerticalContentAlignment="Center"
-            Padding="5,0"
-            FontSize="14"
-            Height="34" HorizontalAlignment="Left" Width="131"/>
+            <Label
+                Grid.Column="0"
+                Validation.ErrorTemplate="{x:Null}"
+                x:Name="LoggedUsername" 
+                Content="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}" 
+                VerticalAlignment="Center" 
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                FontSize="14"
+                Padding="3,0"
+                Height="34" HorizontalAlignment="Stretch"/>
+
+            <Label
+                Grid.Column="1"
+                Validation.ErrorTemplate="{x:Null}"
+                x:Name="LoggedSurname" 
+                Content="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" 
+                Background="{x:Null}" 
+                BorderBrush="{x:Null}" 
+                VerticalAlignment="Center" 
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Center"
+                FontSize="14"
+                Padding="3,0"
+                Height="34" HorizontalAlignment="Stretch"/>
+        </Grid>
+
 
         <Button 
             Grid.Column="2"
@@ -108,14 +117,29 @@
             Grid.Row="2"
             Grid.RowSpan="3"
             Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
             ToolTip="Click to change profile image..."
         >
-            <Ellipse Height="200" Width="200">
+            <!-- Background when image is not set -->
+            <Ellipse Height="200" 
+                     Width="200" 
+                     Margin="0,-16,0,16">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg"/>
+                    <SolidColorBrush Color="#FF8A8383" />
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Ellipse Height="200" Width="200" Margin="0,-16,0,16" Cursor="Hand">
+                <Ellipse.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectPhotoCommand}"/>
+                </Ellipse.InputBindings>
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
                 </Ellipse.Fill>
             </Ellipse>
         </Grid>
+
 
 
         <TextBox

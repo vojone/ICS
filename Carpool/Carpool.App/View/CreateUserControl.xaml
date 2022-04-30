@@ -41,6 +41,33 @@
             VerticalAlignment="Top" 
             Height="39" Grid.ColumnSpan="2"/>
 
+        <Grid
+            Grid.Row="1"
+            Grid.RowSpan="3"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            ToolTip="Click to change profile image..."
+        >
+            <!-- Background when image is not set -->
+            <Ellipse Height="200" 
+                     Width="200" 
+                     Margin="0,-16,0,16">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="#FF8A8383" />
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Ellipse Height="200" Width="200" Margin="0,-16,0,16" Cursor="Hand">
+                <Ellipse.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectPhotoCommand}"/>
+                </Ellipse.InputBindings>
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+
         <TextBox
             x:Name="TextBoxFirstName" 
             Grid.Column="0"
@@ -48,7 +75,8 @@
             Width="130" 
             Height="25" 
             Margin="70,20,67,9" 
-            TextAlignment="Center" RenderTransformOrigin="0.503,0.306"
+            TextAlignment="Left"
+            VerticalContentAlignment="Center"
             Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <TextBox
@@ -58,7 +86,8 @@
             Width="130" 
             Height="25" 
             Margin="70,20,67,9" 
-            TextAlignment="Center" RenderTransformOrigin="0.503,0.306"
+            TextAlignment="Left"
+            VerticalContentAlignment="Center"
             Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <TextBox
