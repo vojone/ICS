@@ -20,6 +20,8 @@ namespace Carpool.App.ViewModel
     {
         private readonly ISession _session;
 
+        private UserDetailModel? _origModel;
+
 
         public ProfileUserDetailViewModel(
             UserFacade userFacade, 
@@ -51,7 +53,15 @@ namespace Carpool.App.ViewModel
 
         private bool CanSave()
         {
-            return Model is {HasErrors: false};
+
+            if (Model == null)
+            {
+                return true;
+            }
+
+            bool hasChanged = !_origModel?.DataEquals(Model.Model) ?? true;
+
+            return !Model.HasErrors && hasChanged;
         }
 
         private async Task OnSaveChanges()
@@ -96,6 +106,22 @@ namespace Carpool.App.ViewModel
 
         }
 
+
+        private void SaveCurrentModel()
+        {
+            if (Model == null)
+            {
+                return;
+            }
+
+            _origModel = new UserDetailModel(
+                Model.Name ?? string.Empty, Model.Surname ?? string.Empty,
+                Model.RegistrationDate, Model.PhotoUrl,
+                Model.Country, Model.Rating);
+
+        }
+
+
         private async void OnLoadUserProfileMessage(LoadUserProfileMessage message)
         {
             if (message.UserId != null)
@@ -108,6 +134,7 @@ namespace Carpool.App.ViewModel
             }
 
             OnPropertyChanged();
+            SaveCurrentModel();
         }
 
 
