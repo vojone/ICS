@@ -4,6 +4,7 @@ using Carpool.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Carpool.DAL.Migrations
 {
     [DbContext(typeof(CarpoolDbContext))]
-    partial class CarpoolDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220430184811_CarEntityPhotoToStrinEdit")]
+    partial class CarEntityPhotoToStrinEdit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +57,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Cars", (string)null);
+                    b.ToTable("Cars");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.ParticipantEntity", b =>
@@ -79,7 +81,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Participants", (string)null);
+                    b.ToTable("Participants");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.RideEntity", b =>
@@ -126,7 +128,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("DriverId");
 
-                    b.ToTable("Rides", (string)null);
+                    b.ToTable("Rides");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.UserEntity", b =>
@@ -157,7 +159,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.CarEntity", b =>
