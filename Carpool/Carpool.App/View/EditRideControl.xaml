@@ -133,7 +133,6 @@
             />
         <ComboBox
             x:Name="ComboBoxEditRideCar"
-            DisplayMemberPath="Source"
             Grid.Column="1" 
             Grid.Row="1" 
             Margin="0,65,198,0" 
@@ -141,13 +140,15 @@
             Width="121" 
             Height="22" 
             VerticalAlignment="Top"
-            />
-        <ComboBox
+            ItemsSource="{Binding Path=Driver.Cars}"
+            SelectedItem="{Binding Car, UpdateSourceTrigger=PropertyChanged}"
+            DisplayMemberPath="Brand"/>
+        <TextBox
             x:Name="ComboBoxEditRideSeats"
-            DisplayMemberPath="Source"
             VerticalAlignment="Top"
             Grid.Column="1" Grid.Row="1"
             Margin="0,119,254,0" HorizontalAlignment="Right" Width="65"
+            Text="{Binding Model.InitialCapacity, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
             />
 
         <Label

@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Carpool.App.Extensions;
 using Carpool.BL.Models;
 using Carpool.Common;
 
@@ -75,7 +76,18 @@ namespace Carpool.App.Wrapper
             get => GetValue<CarWrapper>(); 
             set => SetValue(value);
         }
-        
+
+        /*private void InitializeCollectionProperties(UserDetailModel model)
+        {
+            if (model.Cars == null)
+            {
+                throw new ArgumentException("Cars cannot be null");
+            }
+            Participants.AddRange(model.Participants.Select(e => new ParticipantWrapper(e)));
+
+            RegisterCollection(Participants, model.Participants);
+        }*/
+
         //not 100% sure about these wrappers inside a wrapper, but hope its ok
         public UserWrapper? Driver
         {

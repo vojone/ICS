@@ -23,6 +23,7 @@ namespace Carpool.App.ViewModel
     {
         private readonly RideFacade _rideFacade;
         private readonly UserFacade _userFacade;
+        private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
         private readonly ISession _session;
 
@@ -50,6 +51,10 @@ namespace Carpool.App.ViewModel
         public ICommand CreateRideCommand { get; set; }
 
         public ICommand DisplayUserProfileCommand { get; set; }
+
+        public UserWrapper Driver { get; set; }
+
+        public CarWrapper Car { get; set; }
 
         private void OnDisplayUserProfile()
         {
@@ -79,40 +84,32 @@ namespace Carpool.App.ViewModel
             Debug.WriteLine("ArrivalT: " + (Model != null ? Model.ArrivalT : "EMPTY"));
         }
 
-        private void OnCreateRide()
+        private async void OnCreateRide()
         {
+            Model.CarId = Car.Id;
+            Model.DriverId = Driver.Id;
+            await SaveAsync();
             _mediator.Send(new DisplayRideListMessage());
         }
 
         private async void OnDisplayCreateRide(DisplayCreateRideMessage m)
         {
-            Model = RideDetailModel.Empty;
-            UserWrapper nullUser = UserDetailModel.Empty;
 
             var loggedUserId = _session.GetLoggedUser();
             Debug.WriteLine("User id: " + loggedUserId);
 
             if (loggedUserId != null)
             {
-                UserWrapper? driver = await _userFacade.GetAsync((Guid)loggedUserId);
-                UserDetailModel driverModel = driver.Model;
-                if (driver != null)
-                {
-                    Debug.WriteLine("type of driver is: " + driver.GetType());
-                    //Debug.WriteLine("type of driver is: " + Model.Driver.GetType());
-                    //PropertyInfo driverPropertyInfoInfo = Model.GetType().GetProperty("Driver");
-                    //driverPropertyInfoInfo.SetValue(Model, Convert.ChangeType(driverModel, driverPropertyInfoInfo.PropertyType));
-                    //Model.Driver = driver;
-                }
-                else
-                {
-                    //error could not get driver by id from session
-                }
+                UserDetailModel? driver = await _userFacade.GetAsync((Guid)loggedUserId);
+                Driver = driver;
+                Debug.WriteLine("User has cars: "+Driver.Cars.Count);
             }
             else
             {
                 //error message not logged in
             }
+
+            base.Model = RideDetailModel.Empty;
             OnPropertyChanged();
         }
     }
