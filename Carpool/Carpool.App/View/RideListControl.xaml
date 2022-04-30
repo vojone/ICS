@@ -8,26 +8,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModel:RideListViewModel}" >
-    <Grid Margin="0,0,21,0" Height="450" Width="800">
-
+    <Grid Margin="0,0,21,0" 
+          Background="#FFA1A1A1"
+          Height="auto" Width="auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="199*"/>
+        </Grid.RowDefinitions>
 
         <Rectangle 
-            x:Name="BG_1" 
-            Fill="#A1A1A1"
-            Width="auto"
-            Height="auto"
-            />
-        <Rectangle 
+            Grid.Row = "0"
             x:Name="TopBar" 
             Fill="#FFC4C4C4" 
-            Margin="0,8,0,389"
+            Margin="0,6,0,6"
             Width="auto"
             />
 
         <TextBox
+            Grid.Row = "0"
             IsReadOnly="True" 
             x:Name="TextBox1" 
-            Margin="70,-382,0,0" 
+            Margin="70,0,0,0" 
             TextWrapping="Wrap" 
             Text="Please select the user" 
             Background="{x:Null}" 
@@ -37,43 +38,43 @@
             Width="209" 
             VerticalAlignment="Center" 
             Height="26"/>
+
         <TextBox
-            Grid.Row="0"
             IsReadOnly="True" 
-            Margin="0,-382,86,0" 
+            Margin="0,0,0,0" 
             TextWrapping="Wrap" 
             Text="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" Height="18" Width="72"/>
         <Image
-            Grid.Row="0"
+            Grid.Row="1"
             Height="40" 
             Margin="735,18,25,0" 
             VerticalAlignment="Top"/>
         <Button 
             x:Name="ButtonCreateUser_Copy" 
             Content="Filter rides" 
-            Margin="0,74,77,0" 
+            Margin="0,33,77,0" 
             Background="#FFDBDBDB" 
             BorderBrush="{x:Null}" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="90"
-            Command="{Binding FilterRidesCommand}"/>
+            Command="{Binding FilterRidesCommand}" Grid.Row="1"/>
         <Button 
             x:Name="ButtonCreateUser_Copy1" 
             Content="Ride History" 
-            Margin="70,79,0,0" 
+            Margin="77,33,0,0" 
             Background="#FFDBDBDB" 
             HorizontalAlignment="Left" 
-            BorderBrush="{x:Null}" Width="90" VerticalAlignment="Top" Height="28"/>
+            BorderBrush="{x:Null}" Width="90" VerticalAlignment="Top" Height="28" Grid.Row="1"/>
         <Button 
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
-            Margin="0,-382,183,0" 
+            Margin="0,0,150,0" 
             Background="#FF005FB8" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98"
-            Command="{Binding DisplayCreateRideCommand}"/>
+            Command="{Binding DisplayCreateRideCommand}" BorderBrush="{x:Null}"/>
 
         <ListView 
-            ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,122,0,0" Height="318" SelectionChanged="ListView_SelectionChanged">
+            ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,81,0,0" Height="318" SelectionChanged="ListView_SelectionChanged" Grid.Row="1" Width="591">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Width="560" Background="#FFD1D1D1" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -185,11 +186,11 @@
         <Button
             x:Name="ButtonNewCar_Copy" 
             Content="&lt;=" 
-            Margin="8,-382,0,0" 
+            Margin="10,0,0,0" 
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
-            Height="40" 
+            Height="34" 
             HorizontalAlignment="Left" 
-            Width="56"/>
+            Width="50" BorderBrush="{x:Null}"/>
     </Grid>
 </local:UserControlBase>

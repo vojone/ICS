@@ -23,75 +23,69 @@
 
         <Rectangle 
             x:Name="TopBar" 
-            Fill="#FFC4C4C4" Grid.ColumnSpan="2" Height="52" VerticalAlignment="Top"/>
+            Fill="#FFC4C4C4" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="0,5,0,5"/>
 
         <Label
             x:Name="TextBox1" 
-            Margin="54,6,0,0" 
+            Margin="70,0,0,0" 
             Content="Create a ride" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Center" 
             Height="40"/>
 
         <Label
-            Margin="249,13,0,0" 
+            Margin="0,0,0,0" 
             Content="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1"/>
-        <Image
-            Grid.Row="0"
-            Height="60" 
-            Margin="348,17,10,0" 
-            VerticalAlignment="Top" Grid.Column="1" Grid.RowSpan="2"/>
-        <Rectangle HorizontalAlignment="Left" Margin="50,0,0,0" Width="135" Fill="#FFA1A1A1" Grid.Column="1" Height="52" VerticalAlignment="Top"/>
+            VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1"/>
         <Button
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
-            Margin="69,9,0,0" 
-            Background="#FF919191" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" Grid.Column="1"
+            Margin="0,0,150,0" 
+            Background="#FF919191" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98" Grid.Column="1"
             Command="{Binding PrintDataCommand}"/>
         <Rectangle
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Right" 
             Width="267" Fill="#FFC4C4C4" 
             RadiusX="10" 
             RadiusY="10"  
-            Grid.Column="1" Grid.Row="1" Margin="79,34,0,0" Height="278" VerticalAlignment="Top"/>
+            Grid.Column="1" Grid.Row="1" Margin="0,41,67,0" Height="278" VerticalAlignment="Top"/>
         <Button
             x:Name="ButtonCreateRide" 
             Content="Create Ride" 
-            Margin="83,336,0,0" 
+            Margin="0,336,67,0" 
             Background="#FF005FB8"
             Height="34"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             Width="264"
             Grid.Column="1" Grid.Row="1"
             Command="{Binding CreateRideCommand}"/>
         <ComboBox
             x:Name="ComboBoxCreateRideSeats"
             DisplayMemberPath="Source"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             Width="70"
-            Grid.Column="1" Grid.Row="1" Margin="94,276,0,0" Height="22" VerticalAlignment="Top" />
+            Grid.Column="1" Grid.Row="1" Margin="0,288,232,0" Height="22" VerticalAlignment="Top" />
         <ComboBox
             x:Name="ComboBoxCreateRideCar"
             DisplayMemberPath="Source"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="1" Margin="112,62,0,0" Width="204"/>
+            HorizontalAlignment="Right"
+            Grid.Column="1" Grid.Row="1" Margin="0,54,100,0" Width="204"/>
         <Rectangle
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             Height="172" 
             VerticalAlignment="Top" 
             Width="204" Fill="#FF919191" 
             RadiusX="10" 
             RadiusY="10"  
-            Grid.Column="1" Grid.Row="1" Margin="112,88,0,0"/>
+            Grid.Column="1" Grid.Row="1" Margin="0,94,100,0"/>
         <Rectangle Margin="30,224,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
          
         />
@@ -134,5 +128,15 @@
             Content="Departure"
             Background="{x:Null}"
             BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
+        <Button
+            Grid.Column="0"
+            x:Name="ButtonNewCar_Copy" 
+            Content="&lt;=" 
+            Margin="10,0,0,0" 
+            Background="#FF005FB8" 
+            VerticalAlignment="Center" 
+            Height="34" 
+            HorizontalAlignment="Left" 
+            Width="50" BorderBrush="{x:Null}"/>
     </Grid>
 </local:UserControlBase>
