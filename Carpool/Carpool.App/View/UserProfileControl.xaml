@@ -1,13 +1,15 @@
-<local:UserControlBase x:Class="Carpool.App.View.UserProfileControl"
+<UserControl x:Class="Carpool.App.View.UserProfileControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Carpool.App.View"
+             xmlns:converters="clr-namespace:Carpool.App.Converters"
+             xmlns:validators="clr-namespace:Carpool.App.Services"
+             mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModels:ProfileUserDetailViewModel}">
+
     <Grid Background="#FFA1A1A1">
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"/>
@@ -43,15 +45,15 @@
 
         <Label
             Grid.Column="2"
-            x:Name="LogedUsername"
-            Margin="169,0,0,0" 
-            Content="Jméno usera" 
+            x:Name="LoggedUsername"
+            Margin="169,0,5,0" 
+            Content="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             VerticalAlignment="Center" 
             HorizontalContentAlignment="Right"
             FontSize="12"
-            Height="25" HorizontalAlignment="Left" Width="90
+            Height="25" HorizontalAlignment="Right" Width="90
             "/>
 
         <Button 
@@ -71,7 +73,6 @@
             Width="130" 
             Height="25" 
             Margin="70,20,67,9" 
-            Padding="5, 5, 5, 5"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Left"
             Text="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -84,28 +85,23 @@
             Height="25" 
             Margin="70,20,67,9" 
             TextAlignment="Center"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Left"
             Text="{Binding Model.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-
-
-        <!--
-        <Image
+        <Grid
             Grid.Row="2"
             Grid.RowSpan="3"
             Grid.Column="1"
-            Width="200"
-            Height="200" Margin="35,0,31,19"
-            Source="https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg">
-            <Image.Clip>
-                <EllipseGeometry RadiusX="100" RadiusY="100">
-                    <EllipseGeometry.Transform>
-                        <TranslateTransform X="100" Y="75"/>
-                    </EllipseGeometry.Transform>
-                </EllipseGeometry>
-            </Image.Clip>
-        </Image>
-        
-        -->
+            ToolTip="Click to change profile image..."
+        >
+            <Ellipse Height="200" Width="200">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+        </Grid>
+
 
         <TextBox
             x:Name="TextBoxCountry" 
@@ -116,27 +112,43 @@
             Margin="70,20,67,9" 
             Text="{Binding Model.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <TextBox
+        <Label
             x:Name="TextBoxRating" 
             Grid.Column="1"
             Grid.Row="6" 
             Width="130" 
             Height="25" 
-            Margin="70,20,67,9" 
-            TextAlignment="Center"
-            IsReadOnly="True"
+            FontWeight="Bold"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
             IsHitTestVisible="False"
-            Text="{Binding Model.Rating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            Content="{Binding Model.Rating, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <DatePickerTextBox 
             x:Name="RegistrationDate"
             Grid.Row="6" 
-            HorizontalAlignment="Center" 
             Height="25" 
-            Width="130"
-            Margin="70,20,67,9" 
+            Width="130" 
+            IsReadOnly="True"
+            Margin="70,20,67,9"
+            Background="LightGray"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
             Style="{StaticResource ReadOnlyDateTextBoxStyle}"
-            Text="{Binding Model.RegistrationDate}"/>
+            Text="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}" FontSize="14"/>
+
+        <Button 
+            Grid.Row="2"
+            Grid.Column="2"
+            x:Name="ButtonSaveChanges" 
+            Content="Save Changes" 
+            Margin="0,0,0,0" 
+            Background="#FF005FB8" 
+            HorizontalAlignment="Center" 
+            Height="40" 
+            VerticalAlignment="Center"
+            Width="130"
+            Command="{Binding SaveChangesCommand}"/>
 
         <Button 
             Grid.Row="3"
@@ -175,7 +187,8 @@
             HorizontalAlignment="Center" 
             Height="40" 
             VerticalAlignment="Center"
-            Width="130"/>
+            Width="130"
+            Command="{Binding DeleteAccountCommand}"/>
 
         <Button 
             Grid.Row="6"
@@ -187,7 +200,8 @@
             HorizontalAlignment="Center" 
             Height="40" 
             VerticalAlignment="Center"
-            Width="130"/>
+            Width="130"
+            Command="{Binding LogOutCommand}"/>
 
 
         <Label 
@@ -246,4 +260,4 @@
             Grid.Column="1"
     />
     </Grid>
-</local:UserControlBase>
+</UserControl>

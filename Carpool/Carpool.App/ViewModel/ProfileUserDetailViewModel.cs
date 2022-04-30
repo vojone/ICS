@@ -25,11 +25,17 @@ namespace Carpool.App.ViewModel
 
             mediator.Register<LoadUserProfileMessage>(OnLoadUserProfileMessage);
 
+            SaveChangesCommand = new AsyncRelayCommand(OnSaveChanges, CanSave);
+            DeleteAccountCommand = new AsyncRelayCommand(OnDeleteAccount);
             LogOutCommand = new RelayCommand(OnLogOut);
-            DisplayCarEditCommand = new RelayCommand(OnDisplayCarEdit);
+            DisplayCarEditCommand = new AsyncRelayCommand(OnDisplayCarEdit);
             DisplayRideListCommand = new RelayCommand(OnDisplayRideList);
         }
 
+
+        public ICommand SaveChangesCommand { get; set; }
+
+        public ICommand DeleteAccountCommand { get; set; }
 
         public ICommand LogOutCommand { get; set; }
 
@@ -38,16 +44,36 @@ namespace Carpool.App.ViewModel
         public ICommand DisplayRideListCommand { get; set; }
 
 
+        private bool CanSave()
+        {
+            return Model is {HasErrors: false};
+        }
+
+
+        private async Task OnSaveChanges()
+        {
+            await SaveAsync();
+        }
+
+
+        private async Task OnDeleteAccount()
+        {
+            await DeleteAsync();
+            Mediator.Send(new DisplayLoginScreenMessage());
+        }
+
+
         private void OnLogOut()
         {
+            System.Diagnostics.Debug.WriteLine("Log Out...");
             _session.LogUserOut();
             Mediator.Send(new DisplayLoginScreenMessage());
         }
 
 
-        private void OnDisplayCarEdit()
+        private async Task OnDisplayCarEdit()
         {
-
+            await LoadDefaultProfile();
         }
 
 
