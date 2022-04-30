@@ -37,6 +37,7 @@ namespace Carpool.DAL.Tests
                 Id:Guid.Parse("142C54E5-B10F-4956-AB0B-B80007670E3C"),
                 Name: "Rapid",
                 Brand: "Skoda",
+                Photo: "Test",
                 Type: CarType.Sport,
                 Registration: DateTime.MinValue,
                 Seats: 4,
