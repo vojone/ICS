@@ -26,12 +26,14 @@ namespace Carpool.App.ViewModel
             ICreateUserDetailViewModel createUserDetailViewModel,
             IProfileUserDetailViewModel profileUserDetailViewModel,
             IRideListViewModel rideListViewModel,
-            IRideDetailViewModel rideDetailViewModel,
+            ICreateRideDetailViewModel createRideDetailViewModel,
+            IBookRideDetailViewModel bookRideDetailViewModel,
             IMediator mediator)
         {
             LoginScreenViewModel = loginScreenViewModel;
             RideListViewModel = rideListViewModel;
-            RideDetailViewModel = rideDetailViewModel;
+            CreateRideDetailViewModel = createRideDetailViewModel;
+            BookRideDetailViewModel = bookRideDetailViewModel;
             CreateUserDetailViewModel = createUserDetailViewModel;
             ProfileUserDetailViewModel = profileUserDetailViewModel;
 
@@ -60,10 +62,11 @@ namespace Carpool.App.ViewModel
 
         public IProfileUserDetailViewModel ProfileUserDetailViewModel { get; set; }
 
-
         public IRideListViewModel RideListViewModel{ get; set; }
 
-        public IRideDetailViewModel RideDetailViewModel { get; set; }
+        public ICreateRideDetailViewModel CreateRideDetailViewModel { get; set; }
+
+        public IBookRideDetailViewModel BookRideDetailViewModel { get; set; }
 
 
         public void OnDisplayUserProfile(DisplayUserProfileMessage msg)
@@ -92,7 +95,7 @@ namespace Carpool.App.ViewModel
         public void OnDisplayCreateRide(DisplayCreateRideMessage msg)
         {
 
-            CurrentViewModel = RideDetailViewModel;
+            CurrentViewModel = CreateRideDetailViewModel;
         }
 
     }

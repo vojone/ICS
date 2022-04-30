@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Formats.Asn1;
 using System.Linq;
+using System.Media;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,36 +18,25 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.ViewModel
 {
-    public class RideDetailViewModel : ViewModelBase, IRideDetailViewModel
+    public class RideDetailViewModelBase : ViewModelBase, IRideDetailViewModelBase
     {
         private readonly RideFacade _rideFacade;
+        private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
-        public RideDetailViewModel(RideFacade rideFacade, IMediator mediator)
+        private readonly ISession _session;
+        
+        public RideDetailViewModelBase(
+            RideFacade rideFacade,
+            UserFacade userFacade,
+            IMediator mediator)
         {
             _rideFacade = rideFacade;
+            _userFacade = userFacade;
             _mediator = mediator;
-
-            PrintDataCommand = new RelayCommand(OnPrintData);
-            CreateRideCommand = new RelayCommand(OnCreateRide);
             //Model = RideDetailModel.Empty;
-            
-            _mediator.Register<DisplayCreateRideMessage>(OnDisplayCreateRide);
         }
 
-        public RideWrapper Model { get; private set; }
-
-        public ICommand PrintDataCommand { get; set; }
-
-        public ICommand CreateRideCommand { get; set; }
-
-        private void OnPrintData()
-        {
-            Debug.WriteLine("-----Ride Debug print-----");
-            Debug.WriteLine("DepartureL: "+(Model != null ? Model.DepartureL :  "EMPTY"));
-            Debug.WriteLine("ArrivalL: " + (Model != null ? Model.ArrivalL : "EMPTY"));
-            Debug.WriteLine("DepartureT: " + (Model != null ? Model.DepartureT : "EMPTY"));
-            Debug.WriteLine("ArrivalT: " + (Model != null ? Model.ArrivalT : "EMPTY"));
-        }
+        public RideWrapper Model { get; set; }
 
         private void OnCreateRide()
         {
@@ -96,11 +87,6 @@ namespace Carpool.App.ViewModel
                     Model = Model
                 });
             }
-        }
-
-        private void OnDisplayCreateRide(DisplayCreateRideMessage m)
-        {
-            Model = RideDetailModel.Empty;
         }
     }
 }
