@@ -7,6 +7,7 @@ using System.Media;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
@@ -57,9 +58,20 @@ namespace Carpool.App.ViewModel
 
         private void OnPrintData()
         {
-            SoundPlayer player = new SoundPlayer(@"https://www.dropbox.com/s/co1v1mhpf1vrzq2/giga-chad-theme.wav?dl=1");
-            player.Load();
-            player.Play();
+            var answer = MessageBox.Show(
+                "Ahoy me mate.\nPlease turn the volume down a bit, a short waveform audio file be played.\nJolly be off, then!",
+                "Greetin' mate",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning,
+                MessageBoxResult.No);
+
+            if (answer == MessageBoxResult.Yes)
+            {
+                SoundPlayer player = new SoundPlayer(@"https://www.dropbox.com/s/co1v1mhpf1vrzq2/giga-chad-theme.wav?dl=1");
+                player.Load();
+                player.Play();
+            }
+            
             Debug.WriteLine("-----Ride Debug print-----");
             Debug.WriteLine("DepartureL: " + (Model != null ? Model.DepartureL : "EMPTY"));
             Debug.WriteLine("ArrivalL: " + (Model != null ? Model.ArrivalL : "EMPTY"));

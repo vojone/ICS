@@ -38,7 +38,7 @@ namespace Carpool.App.ViewModel
             FilterRidesCommand = new RelayCommand(OnFilterRides);
             DisplayRideHistoryCommand = new RelayCommand(OnDisplayRideHistory);
             DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRide);
-            DisplayBookRideCommand = new RelayCommand<Guid>(OnDisplayBookRide);
+            OpenRideCommand = new RelayCommand<Guid>(OnOpenRide);
             DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
         }
 
@@ -48,7 +48,7 @@ namespace Carpool.App.ViewModel
 
         public ICommand DisplayCreateRideCommand { get; set; }
 
-        public ICommand DisplayBookRideCommand { get; set; }
+        public ICommand OpenRideCommand { get; set; }
 
         public ICommand DisplayUserProfileCommand { get; set; }
 
@@ -81,10 +81,8 @@ namespace Carpool.App.ViewModel
             Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
             return ride.DriverId == currentUserId;
         }
-        public String ButtonText()
-        {
-            return "Book ride";
-        }
+
+        public String ButtonText = "Book";
         private void OnFilterRides()
         {
             LoadAsync();
@@ -95,13 +93,35 @@ namespace Carpool.App.ViewModel
             _mediator.Send(new DisplayCreateRideMessage());
         }
         
-        private async void OnDisplayBookRide(Guid rideId)
+        private async void OnOpenRide(Guid rideId)
         {
-            Debug.WriteLine("Booking ride with id: "+rideId);
+            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
+            RideWrapper ride = await _rideFacade.GetAsync(rideId) ?? RideDetailModel.Empty;
+;
+            if (ride.DriverId == currentUserId)
+            {
+                Debug.WriteLine("Editing ride with id: " + rideId);
+                DisplayEditRideMessage msg = new DisplayEditRideMessage();
+                msg.rideId = rideId;
+                _mediator.Send(msg);
+            }
+            else
+            {
+                if (IsParticipant(ride, currentUserId))
+                {
+                    //leave ride
+                    Debug.WriteLine("Leaving ride with id: " + rideId);
+                }
+                else
+                {
+                    Debug.WriteLine("Booking ride with id: " + rideId);
+                    DisplayBookRideMessage msg = new DisplayBookRideMessage();
+                    msg.rideId = rideId;
+                    _mediator.Send(msg);
+                }
+            }
             //RideWrapper ride = await _rideFacade.GetAsync(rideId);
-            DisplayBookRideMessage msg = new DisplayBookRideMessage();
-            msg.rideId = rideId;
-            _mediator.Send(msg);
+            
         }
 
         private void OnDisplayUserProfile()

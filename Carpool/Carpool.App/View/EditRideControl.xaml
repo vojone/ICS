@@ -35,12 +35,14 @@
             x:Name="TextBoxArrivalCreateRides_Copy" Margin="47,0,0,88"
             TextWrapping="Wrap"
             Background="#FFEDEDED"
-            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="297"/>
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="297"
+            Text="{Binding Model.ArrivalL, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy"
             Margin="48,0,0,50"
             BorderBrush="{x:Null}" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="212"
+            SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
         />
 
         <Rectangle 
@@ -78,12 +80,14 @@
             x:Name="ButtonEditRideSaveChanges" 
             Content="Save changes" 
             Margin="0,327,238,0" 
-            Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98" Grid.Column="1" Grid.Row="1" FontSize="17" />
+            Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98" Grid.Column="1" Grid.Row="1" FontSize="17" 
+            Command="{Binding SaveRideCommand}"/>
         <Button
             x:Name="ButtonEditRideDeleteRide"
             Content="Delete Ride" 
             Margin="0,327,70,0" 
-            Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98" Grid.Column="1" Grid.Row="1" FontSize="17"/>
+            Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98" Grid.Column="1" Grid.Row="1" FontSize="17"
+            Command="{Binding DeleteRideCommand}"/>
 
         <ListView Grid.Column="1" Grid.Row="1"
                   Background="#FFC4C4C4"
@@ -183,12 +187,14 @@
             x:Name="TextBoxArrivalCreateRides_Copy1" Margin="48,61,56,279"
             TextWrapping="Wrap"
             Background="#FFEDEDED"
-            BorderBrush="{x:Null}" Grid.Row="1" Height="50"/>
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50"
+            Text="{Binding Model.DepartureL, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy1"
             Margin="49,124,140,241"
             BorderBrush="{x:Null}" Grid.Row="1"
+            SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
         />
         <Label
             Margin="47,31,221,0"
@@ -205,6 +211,7 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
-            Width="50" BorderBrush="{x:Null}" FontSize="17"/>
+            Width="50" BorderBrush="{x:Null}" FontSize="17"
+            Command="{Binding DisplayRideListCommand}"/>
     </Grid>
 </UserControl>

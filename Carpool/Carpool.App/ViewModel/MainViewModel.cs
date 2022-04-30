@@ -50,6 +50,7 @@ namespace Carpool.App.ViewModel
             mediator.Register<DisplayRideHistoryMessage>(OnDisplayRideHistory);
             mediator.Register<DisplayCreateRideMessage>(OnDisplayCreateRide);
             mediator.Register<DisplayBookRideMessage>(OnDisplayBookRide);
+            mediator.Register<DisplayEditRideMessage>(OnDisplayEditRide);
         }
 
         public IViewModel? CurrentViewModel
@@ -112,6 +113,11 @@ namespace Carpool.App.ViewModel
         public void OnDisplayBookRide(DisplayBookRideMessage msg)
         {
             CurrentViewModel = BookRideDetailViewModel;
+        }
+
+        public void OnDisplayEditRide(DisplayEditRideMessage msg)
+        {
+            CurrentViewModel = EditRideDetailViewModel;
         }
 
     }

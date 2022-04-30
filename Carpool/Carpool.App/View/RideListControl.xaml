@@ -175,8 +175,8 @@
                                 Grid.Row="0" Grid.RowSpan="3"
                                 Grid.Column="3"
                                 x:Name="ButtonBook" 
-                                Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.ButtonText}" 
-                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.DisplayBookRideCommand}"
+                                Content="Book" 
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.OpenRideCommand}"
                                 CommandParameter="{Binding Id}"
                                 Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}"/>
                         </Grid>
