@@ -50,9 +50,23 @@ public static class CarSeeds
         Owner = UserSeeds.Jack
     };
 
-
+    
     public static readonly CarEntity UpdateKia = new(
         Id: Guid.Parse("13B84DC5-B61E-4A57-8E68-354ECC328301"),
+        Name: "Update",
+        Brand: "Kia",
+        Photo: "Test",
+        Type: CarType.Minivan,
+        Registration: new DateTime(2002, 11, 04),
+        Seats: 4,
+        OwnerId: UserSeeds.UpdateLeonardo.Id
+    )
+    {
+        Owner = UserSeeds.UpdateLeonardo
+    };
+
+    public static readonly CarEntity DeleteteKiaPhoto = new(
+        Id: Guid.Parse("33B84DC5-B61E-4A57-8E68-354ECC328301"),
         Name: "Update",
         Brand: "Kia",
         Photo: "Test",
@@ -83,7 +97,8 @@ public static class CarSeeds
             UpdateKia with { Owner = null},
             Hyundai with { Owner = null},
             Kia with { Owner = null},
-            DeleteKia with { Owner = null}
+            DeleteKia with { Owner = null},
+            DeleteteKiaPhoto with{Owner = null}
         );
     }
 }

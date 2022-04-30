@@ -18,7 +18,6 @@ namespace Carpool.DAL
         public DbSet<RideEntity> Rides => Set<RideEntity>();
         public DbSet<CarEntity> Cars => Set<CarEntity>();
         public DbSet<ParticipantEntity> Participants => Set<ParticipantEntity>();
-        public DbSet<CarPhotoEntity> CarPhotos => Set<CarPhotoEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,8 +69,7 @@ namespace Carpool.DAL
             UserSeeds.Seed(modelBuilder);
 
             CarSeeds.Seed(modelBuilder);
-            CarPhotoSeeds.Seed(modelBuilder);
-            
+
             RideSeeds.Seed(modelBuilder);
 
             ParticipantSeeds.Seed(modelBuilder);

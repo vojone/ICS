@@ -90,8 +90,6 @@ namespace Carpool.BL.Tests
             //Assert
             await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
             Assert.False(await dbxAssert.Cars.AnyAsync(i => i.Id == toBeDeleted.Id));
-
-            Assert.False(await dbxAssert.CarPhotos.AnyAsync(i => i.CarId == toBeDeleted.Id));
         }
 
         [Fact]
