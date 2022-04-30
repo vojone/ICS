@@ -30,19 +30,30 @@ namespace Carpool.App.ViewModel
             Mediator = mediator;
 
             SelectPhotoCommand = new RelayCommand(OnSelectPhoto);
+            ClearPhotoCommand = new RelayCommand(OnClearPhoto);
         }
 
         public UserWrapper? Model { get; protected set; }
 
         public ICommand SelectPhotoCommand { get; set; }
 
+        public ICommand ClearPhotoCommand { get; set; }
+
+
+        private void OnClearPhoto()
+        {
+            if (Model != null)
+            {
+                Model.PhotoUrl = null;
+            }
+        }
 
         private void OnSelectPhoto()
         {
             if (Model == null)
                 return;
                 
-            OpenFileDialog file = new OpenFileDialog
+            var file = new OpenFileDialog
             {
                 DefaultExt = ".jpg",
                 Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif"

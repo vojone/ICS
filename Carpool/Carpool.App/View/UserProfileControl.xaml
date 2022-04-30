@@ -111,19 +111,20 @@
             Grid.RowSpan="4"
             Grid.Column="1"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            ToolTip="Click to change profile image...">
+            VerticalAlignment="Top"
+            ToolTip="Click to change profile image..." Margin="0,5,0,0">
 
 
             <!-- Background when image is not set -->
-            <Ellipse Height="200" 
-                     Width="200">
+            <Ellipse Height="190" 
+                     Width="190" Margin="0,-10,0,10"
+                     Name="UserPhotoBackground">
                 <Ellipse.Fill>
                     <SolidColorBrush Color="#FF8A8383" />
                 </Ellipse.Fill>
             </Ellipse>
 
-            <Ellipse Height="200" Width="200" Cursor="Hand">
+            <Ellipse Height="190" Width="190" Cursor="Hand" Margin="0,-10,0,10" Name="UserPhoto">
                 <Ellipse.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding SelectPhotoCommand}"/>
                 </Ellipse.InputBindings>
@@ -131,6 +132,12 @@
                     <ImageBrush ImageSource="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
                 </Ellipse.Fill>
             </Ellipse>
+            <Button Margin="74,192,74,-7" 
+                    Content="Clear photo"
+                    Name="ClearUserPhoto" 
+                    Visibility="{Binding Model.PhotoUrl, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding ClearPhotoCommand}">
+            </Button>
         </Grid>
 
 

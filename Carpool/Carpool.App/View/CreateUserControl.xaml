@@ -51,14 +51,14 @@
         >
             <!-- Background when image is not set -->
             <Ellipse Height="200" 
-                     Width="200" 
-                     Margin="0,-16,0,16">
+                     Width="200" Margin="0,-15,0,15"
+                     Name="UserPhotoBackground">
                 <Ellipse.Fill>
                     <SolidColorBrush Color="#FF8A8383" />
                 </Ellipse.Fill>
             </Ellipse>
 
-            <Ellipse Height="200" Width="200" Margin="0,-16,0,16" Cursor="Hand">
+            <Ellipse Height="200" Width="200" Cursor="Hand" Margin="0,-15,0,15" Name="UserPhoto">
                 <Ellipse.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding SelectPhotoCommand}"/>
                 </Ellipse.InputBindings>
@@ -66,6 +66,12 @@
                     <ImageBrush ImageSource="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
                 </Ellipse.Fill>
             </Ellipse>
+            <Button Margin="74,190,74,-4" 
+                    Content="Clear photo"
+                    Name="ClearUserPhoto" 
+                    Visibility="{Binding Model.PhotoUrl, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding ClearPhotoCommand}">
+            </Button>
         </Grid>
 
         <TextBox
