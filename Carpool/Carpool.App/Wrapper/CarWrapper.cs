@@ -50,13 +50,6 @@ namespace Carpool.App.Wrapper
             set => SetValue(value);
         }
 
-        /*public List<CarPhotoModel> Photos
-        {
-            get => GetValue<List<CarPhotoModel>>();
-            set => SetValue(value);
-        }*/
-        /*private ObservableCollection<CarPhotoWrapper> Photos = new();*/
-
         public static implicit operator CarWrapper(CarDetailModel detailModel) => new(detailModel);
 
         public static implicit operator CarDetailModel(CarWrapper wrapper) => wrapper.Model;

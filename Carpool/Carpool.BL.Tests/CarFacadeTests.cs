@@ -141,8 +141,7 @@ namespace Carpool.BL.Tests
             const string urlOfNewPhoto1 = @"New_photo_1_of\update\kia\URL.png";
 
             var car = Mapper.Map<CarDetailModel>(CarSeeds.UpdateKia);
-            /*car.Photos.Add(new CarPhotoModel(urlOfNewPhoto1));
-            car.Photos.Add(new CarPhotoModel(urlOfNewPhoto2));*/
+            
             car.Photo = urlOfNewPhoto1;
 
             //Act
