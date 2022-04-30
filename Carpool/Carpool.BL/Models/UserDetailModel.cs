@@ -40,5 +40,16 @@ namespace Carpool.BL.Models
                 DateTime.Now,
                 string.Empty,
                 string.Empty);
+
+
+        public bool DataEquals(UserDetailModel model)
+        {
+            return this.Country == model.Country &&
+                   this.Name == model.Name &&
+                   this.PhotoUrl == model.PhotoUrl &&
+                   this.Surname == model.Surname &&
+                   this.RegistrationDate == model.RegistrationDate &&
+                   this.Rating == model.Rating;
+        }
     }
 }

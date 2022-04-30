@@ -1,4 +1,3 @@
-<!-- Copy of the original style without watermark border, based on https://stackoverflow.com/questions/44020869/wpf-datepicker-textbox-white-border-not-editable -->
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style x:Key="ReadOnlyDateTextBoxStyle" TargetType="{x:Type DatePickerTextBox}">

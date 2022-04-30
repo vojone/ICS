@@ -1,20 +1,27 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
+using Carpool.BL.Models;
+using Microsoft.Win32;
 
 namespace Carpool.App.ViewModel
 {
     public class ProfileUserDetailViewModel : UserDetailViewModelBase, IProfileUserDetailViewModel
     {
         private readonly ISession _session;
+
+        private UserDetailModel? _origModel;
+
 
         public ProfileUserDetailViewModel(
             UserFacade userFacade, 
@@ -28,7 +35,7 @@ namespace Carpool.App.ViewModel
             SaveChangesCommand = new AsyncRelayCommand(OnSaveChanges, CanSave);
             DeleteAccountCommand = new AsyncRelayCommand(OnDeleteAccount);
             LogOutCommand = new RelayCommand(OnLogOut);
-            DisplayCarEditCommand = new AsyncRelayCommand(OnDisplayCarEdit);
+            DisplayCarEditCommand = new RelayCommand(OnDisplayCarEdit);
             DisplayRideListCommand = new RelayCommand(OnDisplayRideList);
         }
 
@@ -46,9 +53,16 @@ namespace Carpool.App.ViewModel
 
         private bool CanSave()
         {
-            return Model is {HasErrors: false};
-        }
 
+            if (Model == null)
+            {
+                return true;
+            }
+
+            bool hasChanged = !_origModel?.DataEquals(Model.Model) ?? true;
+
+            return !Model.HasErrors && hasChanged;
+        }
 
         private async Task OnSaveChanges()
         {
@@ -58,28 +72,53 @@ namespace Carpool.App.ViewModel
 
         private async Task OnDeleteAccount()
         {
-            await DeleteAsync();
-            Mediator.Send(new DisplayLoginScreenMessage());
+            var answer = MessageBox.Show(
+                "The " + Model?.Name + " " + Model?.Surname + " will be deleted forever.\nAre you sure?",
+                "Delete account",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning,
+                MessageBoxResult.No);
+
+            if (answer == MessageBoxResult.Yes && Model != null)
+            {
+                await DeleteAsync();
+                Mediator.Send(new DisplayLoginScreenMessage());
+            }
         }
 
 
         private void OnLogOut()
         {
-            System.Diagnostics.Debug.WriteLine("Log Out...");
             _session.LogUserOut();
             Mediator.Send(new DisplayLoginScreenMessage());
+            Model = GetEmptyUser();
         }
 
 
-        private async Task OnDisplayCarEdit()
+        private void OnDisplayCarEdit()
         {
-            await LoadDefaultProfile();
+
         }
 
 
         private void OnDisplayRideList()
         {
             Mediator.Send(new DisplayRideListMessage());
+        }
+
+
+        private void SaveCurrentModel()
+        {
+            if (Model == null)
+            {
+                return;
+            }
+
+            _origModel = new UserDetailModel(
+                Model.Name ?? string.Empty, Model.Surname ?? string.Empty,
+                Model.RegistrationDate, Model.PhotoUrl,
+                Model.Country, Model.Rating);
+
         }
 
 
@@ -93,6 +132,9 @@ namespace Carpool.App.ViewModel
             {
                 await LoadDefaultProfile();
             }
+
+            OnPropertyChanged();
+            SaveCurrentModel();
         }
 
 
@@ -109,8 +151,6 @@ namespace Carpool.App.ViewModel
             {
                 Model = GetEmptyUser();
             }
-
-            OnPropertyChanged();
         }
     }
 }

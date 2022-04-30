@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Carpool.App.View"
              xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
-             d:DataContext= "{d:DesignInstance viewModel:RideDetailViewModel}"
+             d:DataContext= "{d:DesignInstance viewModel:CreateRideDetailViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFA1A1A1">
@@ -14,50 +14,50 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="26*"/>
-            <RowDefinition Height="199*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
-        <Rectangle Margin="30,216,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
+        <Rectangle Margin="30,216,24,30" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1"
          
         />
         <TextBox
-            x:Name="TextBoxArrivalCreateRides_Copy" Margin="47,252,0,0"
+            x:Name="TextBoxArrivalCreateRides_Copy" Margin="47,252,73,88"
             TextWrapping="Wrap"
             Background="#FFEDEDED"
-            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"/>
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50"/>
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy"
-            Margin="48,315,0,0"
-            BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
+            Margin="48,315,141,50"
+            BorderBrush="{x:Null}" Grid.Row="1"
         />
 
         <Rectangle 
             x:Name="TopBar" 
-            Fill="#FFC4C4C4" Grid.ColumnSpan="2" Height="52" VerticalAlignment="Top"/>
+            Fill="#FFC4C4C4" Grid.ColumnSpan="4"/>
 
         <Label
             x:Name="TextBox1" 
-            Margin="24,9,0,0" 
+            Margin="24,0,0,0" 
             Content="Edit a ride" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Center" 
             Height="34" 
             Grid.Column="0"/>
 
         <Label
-            Margin="249,13,0,0" 
+            Margin="249,0,0,0" 
             Content="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Center" 
             HorizontalAlignment="Left" 
-            Grid.Column="1"/>
+            Grid.Column="3"/>
 
         <Image
             Grid.Row="0"
@@ -67,8 +67,8 @@
         <Button
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
-            Margin="69,9,0,0" 
-            Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Left" Width="98" Grid.Column="1"/>
+            Margin="69,0,0,0" 
+            Background="#FF005FB8" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="98" Grid.Column="3"/>
 
         <Button
             x:Name="ButtonEditRideSaveChanges" 
@@ -84,15 +84,15 @@
         <ListView Grid.Column="1" Grid.Row="1"
                   Background="#FFC4C4C4"
                   Height="122"
-                  VerticalAlignment="Top" HorizontalAlignment="Left"
+                  VerticalAlignment="Top" HorizontalAlignment="Center"
                   Width="266"
-                  ItemsSource="{Binding Model.Participants}" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="67,195,0,0">
+                  ItemsSource="{Binding EditRide}" d:ItemsSource="{d:SampleData ItemCount=3}" Margin="0,195,0,0">
 
             <ListView.ItemTemplate >
                 <DataTemplate >
                     <StackPanel Grid.Column="1" Grid.Row="1" Height="23" Width="216">
                         <Label 
-                            Content="{Binding UserName}" 
+                            Content="{Binding CoDriver}" 
                             Background="#d1d1d1" 
                             Height="24" 
                             BorderBrush="{x:Null}"/>
@@ -168,30 +168,28 @@
             VerticalAlignment="Top" 
             />
         <Label
-            Margin="47,222,0,0"
+            Margin="47,222,221,0"
             Content="Arrival"
             Background="{x:Null}"
-            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
-        <Rectangle Margin="31,25,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" />
+        <Rectangle Margin="31,25,23,221" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1"
          
         />
         <TextBox
-            x:Name="TextBoxArrivalCreateRides_Copy1" Margin="48,61,0,0"
+            x:Name="TextBoxArrivalCreateRides_Copy1" Margin="48,61,56,279"
             TextWrapping="Wrap"
             Background="#FFEDEDED"
-            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="296"/>
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50"/>
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy1"
-            Margin="49,124,0,0"
-            BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
+            Margin="49,124,140,241"
+            BorderBrush="{x:Null}" Grid.Row="1"
         />
         <Label
-            Margin="48,31,0,0"
+            Margin="48,31,220,0"
             Content="Departure"
             Background="{x:Null}"
-            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
-        <Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="68" Margin="237,54,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Fill="#FF919191"/>
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Height="68" Margin="237,54,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="75"><Run Language="cs-cz" Text="Edit photo"/></TextBlock>
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" />
     </Grid>
 </UserControl>

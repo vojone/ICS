@@ -29,15 +29,14 @@
             Grid.ColumnSpan="3"/>
 
         <Label
-            Margin="60,0,0,0" 
+            Margin="70,0,0,0" 
             Content="Please select the user" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
-            VerticalAlignment="Center" 
-            Height="40"
+            VerticalAlignment="Center"
             Grid.Column="0" Grid.ColumnSpan="2"/>
 
         <Label
@@ -49,7 +48,7 @@
             BorderBrush="{x:Null}" 
             VerticalAlignment="Center" 
             Height="25" 
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Right" 
             Width="82"/>
 
         <Button 
@@ -57,9 +56,9 @@
             Grid.ColumnSpan="2"
             x:Name="ButtonCreateRide"
             Content="Create Ride" 
-            Margin="216,13,108,0" 
+            Margin="216,0,108,0" 
             Background="#FF005FB8" 
-            BorderBrush="{x:Null}" VerticalAlignment="Top" Height="40" HorizontalAlignment="Right" Width="130"/>
+            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130"/>
 
         <Button
             x:Name="ButtonNewCar" 
@@ -180,11 +179,11 @@
         <Button
             x:Name="ButtonNewCar_Copy" 
             Content="&lt;=" 
-            Margin="8,14,0,0" 
+            Margin="8,0,0,0" 
             Background="#FF005FB8" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Center" 
             Height="40" 
             HorizontalAlignment="Left" 
-            Width="47"/>
+            Width="56"/>
     </Grid>
 </UserControl>

@@ -72,7 +72,6 @@ public class UserWrapper : ModelWrapper<UserDetailModel>
     }
     public ObservableCollection<CarWrapper> Cars { get; init; } = new();
 
-
     public static implicit operator UserWrapper(UserDetailModel detailModel) => new(detailModel);
 
     public static implicit operator UserDetailModel(UserWrapper wrapper) => wrapper.Model;

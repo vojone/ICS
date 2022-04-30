@@ -19,25 +19,25 @@
             Margin="0,8,0,0" VerticalAlignment="Top" Height="52"/>
 
         <Label
-            Margin="60,17,0,0" 
+            Margin="70,-382,0,0" 
             Content="Please select user"
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="210" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Center" 
             Height="34"/>
 
         <TextBox
             x:Name="LogedUsername"
             IsReadOnly="True" 
-            Margin="0,26,48,0" 
+            Margin="0,-382,48,0" 
             TextWrapping="Wrap" 
             Text="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            TextAlignment="Center" VerticalAlignment="Top" Height="17" HorizontalAlignment="Right" Width="82"/>
+            TextAlignment="Center" VerticalAlignment="Center" Height="17" HorizontalAlignment="Right" Width="82"/>
         <Button  
             Content="Filter rides" 
             Margin="0,80,70,0" 
@@ -53,8 +53,8 @@
         <Button 
             x:Name="ButtonCreateRide" 
             Content="Create Ride" 
-            Margin="0,19,158,397" 
-            Background="#FF005FB8" Height="34" HorizontalAlignment="Right" Width="80"/>
+            Margin="0,-382,158,0" 
+            Background="#FF005FB8" Height="34" HorizontalAlignment="Right" Width="80" VerticalAlignment="Center"/>
 
         <ListView 
             ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,126,0,0" Height="324">
@@ -105,13 +105,13 @@
             </ListView.ItemTemplate>
         </ListView>
         <Button
-            x:Name="ButtonNewCar_Copy" 
+            x:Name="ButtonNewCar_Copy1" 
             Content="&lt;=" 
-            Margin="8,14,0,0" 
+            Margin="10,-382,0,0" 
             Background="#FF005FB8" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Center" 
             Height="40" 
             HorizontalAlignment="Left" 
-            Width="47"/>
+            Width="56"/>
     </Grid>
 </UserControl>

@@ -14,20 +14,33 @@
             <RowDefinition Height="4*"/>
             <RowDefinition Height="27*"/>
         </Grid.RowDefinitions>
+
         <Rectangle 
-            x:Name="TopBar" 
-            Fill="#FFC4C4C4"/>
-        
+            Fill="#FFC4C4C4" 
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="0,8,0,8"/>
+
+        <Label
+            Margin="10,0,0,0" 
+            Content="Please select the user" 
+            Background="{x:Null}" 
+            FontSize="17" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="210" VerticalAlignment="Center"/>
+
         <Button 
-            x:Name="ButtonCreateUser" 
+            x:Name="ButtonCreateRideProfile" 
             Content="Create New User" 
-            Margin="0,12,10,12" 
             Background="#FF005FB8" 
-            HorizontalAlignment="Right" 
-            Width="105"
+            HorizontalAlignment="Right"
+            Margin="0,0,20,0"
+            Width="120" 
+            Height="30"
+            VerticalAlignment="Center"
             Command="{Binding DisplayUserCreateScreenCommand}"/>
 
-        <Label x:Name="TextBox1" Margin="10,0,0,0"  Content="Please select the user" Background="{x:Null}" FontSize="18" BorderBrush="{x:Null}" HorizontalAlignment="Left" Width="209" VerticalAlignment="Center"/>
         <Grid Row="1">
             <ListView 
                 ItemsSource="{Binding Users}" Margin="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
@@ -61,5 +74,5 @@
             </ListView>
         </Grid>
     </Grid>
-    
+
 </local:UserControlBase>
