@@ -18,14 +18,14 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.ViewModel
 {
-    public class BookRideDetailViewModel : RideDetailViewModelBase, IBookRideDetailViewModel
+    public class EditRideDetailViewModel : RideDetailViewModelBase, IEditRideDetailViewModel
     {
         private readonly RideFacade _rideFacade;
         private readonly UserFacade _userFacade;
         private readonly IMediator _mediator;
         private readonly ISession _session;
 
-        public BookRideDetailViewModel(
+        public EditRideDetailViewModel(
             RideFacade rideFacade,
             UserFacade userFacade,
             IMediator mediator,
@@ -35,8 +35,8 @@ namespace Carpool.App.ViewModel
             _userFacade = userFacade;
             _mediator = mediator;
             _session = session;
-            
-            BookRideCommand = new RelayCommand(OnBookRide);
+
+            EditRideCommand = new RelayCommand(OnEditRide);
             DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
             //Model = RideDetailModel.Empty;
 
@@ -45,11 +45,11 @@ namespace Carpool.App.ViewModel
 
         public ICommand PrintDataCommand { get; set; }
 
-        public ICommand BookRideCommand { get; set; }
+        public ICommand EditRideCommand { get; set; }
 
         public ICommand DisplayUserProfileCommand { get; set; }
 
-        private void OnBookRide()
+        private void OnEditRide()
         {
             _mediator.Send(new DisplayRideListMessage());
         }

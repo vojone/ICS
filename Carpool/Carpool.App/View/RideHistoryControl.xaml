@@ -20,7 +20,7 @@
 
         <Label
             Margin="70,-382,0,0" 
-            Content="Please select user"
+            Content="Review a ride"
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
@@ -112,6 +112,7 @@
             VerticalAlignment="Center" 
             Height="40" 
             HorizontalAlignment="Left" 
-            Width="56" FontSize="17"/>
+            Width="56" FontSize="17"
+            Command="{Binding DisplayRideListCommand}"/>
     </Grid>
 </UserControl>

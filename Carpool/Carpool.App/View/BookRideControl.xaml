@@ -170,6 +170,7 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
+            Command="{Binding DisplayUserProfileCommand}"
             Width="50" BorderBrush="{x:Null}" FontSize="17"/>
         <Button
             x:Name="ButtonCreateUser_Copy" 

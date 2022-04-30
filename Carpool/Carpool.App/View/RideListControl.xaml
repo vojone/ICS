@@ -30,7 +30,7 @@
             x:Name="TextBox1" 
             Margin="70,0,0,0" 
             TextWrapping="Wrap" 
-            Text="Please select the user" 
+            Text="Please book a ride" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
@@ -65,7 +65,8 @@
             Margin="77,33,0,0" 
             Background="#FFDBDBDB" 
             HorizontalAlignment="Left" 
-            BorderBrush="{x:Null}" Width="90" VerticalAlignment="Top" Height="28" Grid.Row="1" FontSize="17"/>
+            BorderBrush="{x:Null}" Width="90" VerticalAlignment="Top" Height="28" Grid.Row="1" FontSize="17"
+            Command="{Binding DisplayRideHistoryCommand}"/>
         <Button 
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
@@ -174,7 +175,7 @@
                                 Grid.Row="0" Grid.RowSpan="3"
                                 Grid.Column="3"
                                 x:Name="ButtonBook" 
-                                Content="Book" 
+                                Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.ButtonText}" 
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.DisplayBookRideCommand}"
                                 CommandParameter="{Binding Id}"
                                 Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}"/>
@@ -191,6 +192,7 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
+            Command="{Binding DisplayUserProfileCommand}"
             Width="50" BorderBrush="{x:Null}" FontSize="17"/>
     </Grid>
 </local:UserControlBase>

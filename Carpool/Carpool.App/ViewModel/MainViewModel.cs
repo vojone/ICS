@@ -26,14 +26,18 @@ namespace Carpool.App.ViewModel
             ICreateUserDetailViewModel createUserDetailViewModel,
             IProfileUserDetailViewModel profileUserDetailViewModel,
             IRideListViewModel rideListViewModel,
+            IRideHistoryViewModel rideHistoryViewModel,
             ICreateRideDetailViewModel createRideDetailViewModel,
+            IEditRideDetailViewModel editRideDetailViewModel,
             IBookRideDetailViewModel bookRideDetailViewModel,
             IMediator mediator)
         {
             LoginScreenViewModel = loginScreenViewModel;
             RideListViewModel = rideListViewModel;
+            RideHistoryViewModel = rideHistoryViewModel;
             CreateRideDetailViewModel = createRideDetailViewModel;
             BookRideDetailViewModel = bookRideDetailViewModel;
+            EditRideDetailViewModel = editRideDetailViewModel;
             CreateUserDetailViewModel = createUserDetailViewModel;
             ProfileUserDetailViewModel = profileUserDetailViewModel;
 
@@ -43,6 +47,7 @@ namespace Carpool.App.ViewModel
             mediator.Register<DisplayLoginScreenMessage>(OnDisplayLoginScreen);
             mediator.Register<DisplayUserProfileMessage>(OnDisplayUserProfile);
             mediator.Register<DisplayRideListMessage>(OnDisplayRideList);
+            mediator.Register<DisplayRideHistoryMessage>(OnDisplayRideHistory);
             mediator.Register<DisplayCreateRideMessage>(OnDisplayCreateRide);
             mediator.Register<DisplayBookRideMessage>(OnDisplayBookRide);
         }
@@ -65,7 +70,11 @@ namespace Carpool.App.ViewModel
 
         public IRideListViewModel RideListViewModel{ get; set; }
 
+        public IRideHistoryViewModel RideHistoryViewModel { get; set; }
+
         public ICreateRideDetailViewModel CreateRideDetailViewModel { get; set; }
+
+        public IEditRideDetailViewModel EditRideDetailViewModel { get; set; }
 
         public IBookRideDetailViewModel BookRideDetailViewModel { get; set; }
 
@@ -77,31 +86,31 @@ namespace Carpool.App.ViewModel
 
         public void OnDisplayUserCreateScreen(DisplayUserCreateScreenMessage msg)
         {
-            
             CurrentViewModel = CreateUserDetailViewModel;
         }
 
         public void OnDisplayLoginScreen(DisplayLoginScreenMessage msg)
         {
-
             CurrentViewModel = LoginScreenViewModel;
         }
 
         public void OnDisplayRideList(DisplayRideListMessage msg)
         {
-
             CurrentViewModel = RideListViewModel;
+        }
+
+        public void OnDisplayRideHistory(DisplayRideHistoryMessage msg)
+        {
+            CurrentViewModel = RideHistoryViewModel;
         }
 
         public void OnDisplayCreateRide(DisplayCreateRideMessage msg)
         {
-
             CurrentViewModel = CreateRideDetailViewModel;
         }
 
         public void OnDisplayBookRide(DisplayBookRideMessage msg)
         {
-
             CurrentViewModel = BookRideDetailViewModel;
         }
 

@@ -41,15 +41,23 @@ namespace Carpool.App.ViewModel
             //Model = RideDetailModel.Empty;
 
             _mediator.Register<DisplayCreateRideMessage>(OnDisplayCreateRide);
+            DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
         }
 
         public ICommand PrintDataCommand { get; set; }
 
         public ICommand CreateRideCommand { get; set; }
 
+        public ICommand DisplayUserProfileCommand { get; set; }
+
+        private void OnDisplayUserProfile()
+        {
+            _mediator.Send(new DisplayUserProfileMessage());
+        }
+
         private void OnPrintData()
         {
-            SoundPlayer player = new SoundPlayer(@"https://s113.convertio.me/p/m9QzVGKE5T-f6SJrcxMBfw/8c9efaec2afde7670841b423072929a6/giga-chad-theme.wav");
+            SoundPlayer player = new SoundPlayer(@"https://www.dropbox.com/s/co1v1mhpf1vrzq2/giga-chad-theme.wav?dl=1");
             player.Load();
             player.Play();
             Debug.WriteLine("-----Ride Debug print-----");

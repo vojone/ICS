@@ -23,11 +23,17 @@
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:RideListViewModel}">
             <local:RideListControl></local:RideListControl>
         </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:RideHistoryViewModel}">
+            <local:RideHistoryControl></local:RideHistoryControl>
+        </DataTemplate>
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:CreateRideDetailViewModel}">
             <local:CreateRideControl></local:CreateRideControl>
         </DataTemplate>
         <DataTemplate x:Shared="False" DataType="{x:Type viewModel:BookRideDetailViewModel}">
             <local:BookRideControl></local:BookRideControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:EditRideDetailViewModel}">
+            <local:EditRideControl></local:EditRideControl>
         </DataTemplate>
     </Window.Resources>
 

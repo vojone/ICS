@@ -34,14 +34,10 @@ namespace Carpool.App.ViewModel
             _userFacade = userFacade;
             _mediator = mediator;
             //Model = RideDetailModel.Empty;
+            
         }
 
         public RideWrapper Model { get; set; }
-
-        private void OnCreateRide()
-        {
-            _mediator.Send(new DisplayRideListMessage());
-        }
 
         public async Task LoadAsync(Guid id)
         {

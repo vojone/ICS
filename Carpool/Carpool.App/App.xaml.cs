@@ -65,10 +65,12 @@ namespace Carpool.App
             services.AddSingleton<MainViewModel>();
             services.AddFactory<ILoginScreenViewModel, LoginScreenViewModel>();
             services.AddFactory<IRideListViewModel, RideListViewModel>();
+            services.AddFactory<IRideHistoryViewModel, RideHistoryViewModel>();
             services.AddFactory<ICarInfoViewModel, CarDetailViewModel>();
             services.AddFactory<ICreateRideDetailViewModel, CreateRideDetailViewModel>();
             services.AddFactory<IBookRideDetailViewModel, BookRideDetailViewModel>();
             services.AddFactory<ICreateUserDetailViewModel, CreateUserDetailViewModel>();
+            services.AddFactory<IEditRideDetailViewModel, EditRideDetailViewModel>();
             services.AddFactory<IProfileUserDetailViewModel, ProfileUserDetailViewModel>();
         }
 

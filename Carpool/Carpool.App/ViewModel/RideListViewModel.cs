@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
@@ -22,10 +23,12 @@ namespace Carpool.App.ViewModel
     {
         private readonly RideFacade _rideFacade;
         private readonly IMediator _mediator;
-        public RideListViewModel(RideFacade rideFacade, IMediator mediator)
+        private readonly ISession _session;
+        public RideListViewModel(RideFacade rideFacade, IMediator mediator, ISession session)
         {
             _rideFacade = rideFacade;
             _mediator = mediator;
+            _session = session;
 
             //RideSelectedCommand = new RelayCommand<RideListModel>(RideSelected); 
             //RideNewCommand = new RelayCommand(RideNew);
@@ -33,18 +36,55 @@ namespace Carpool.App.ViewModel
             //mediator.Register<UpdateMessage<RideWrapper>>(RideUpdated);
             //mediator.Register<DeleteMessage<RideWrapper>>(RideDeleted);
             FilterRidesCommand = new RelayCommand(OnFilterRides);
+            DisplayRideHistoryCommand = new RelayCommand(OnDisplayRideHistory);
             DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRide);
             DisplayBookRideCommand = new RelayCommand<Guid>(OnDisplayBookRide);
+            DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
         }
 
         public ICommand FilterRidesCommand { get; set; }
+
+        public ICommand DisplayRideHistoryCommand { get; set; }
 
         public ICommand DisplayCreateRideCommand { get; set; }
 
         public ICommand DisplayBookRideCommand { get; set; }
 
+        public ICommand DisplayUserProfileCommand { get; set; }
+
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
 
+        private bool IsParticipant(RideWrapper ride, Guid userId)
+        {
+            ParticipantWrapper? participant = ride.Participants.FirstOrDefault(p => p.UserId == userId);
+            if (participant != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private bool BookButtonVisible(RideWrapper ride)
+        {
+            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
+            return !IsParticipant(ride, currentUserId);
+        }
+        private bool LeaveButtonVisible(RideWrapper ride)
+        {
+            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
+            return IsParticipant(ride, currentUserId);
+        }
+        private bool EditButtonVisible(RideWrapper ride)
+        {
+            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
+            return ride.DriverId == currentUserId;
+        }
+        public String ButtonText()
+        {
+            return "Book ride";
+        }
         private void OnFilterRides()
         {
             LoadAsync();
@@ -64,6 +104,16 @@ namespace Carpool.App.ViewModel
             _mediator.Send(msg);
         }
 
+        private void OnDisplayUserProfile()
+        {
+            _mediator.Send(new DisplayUserProfileMessage());
+        }
+
+        private void OnDisplayRideHistory()
+        {
+            _mediator.Send(new DisplayRideHistoryMessage());
+        }
+
         public async Task LoadAsync()
         {
             Rides.Clear();
@@ -73,6 +123,7 @@ namespace Carpool.App.ViewModel
             {
                 Rides.Add(item);
             }
+
         }
 
     }

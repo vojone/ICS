@@ -7,6 +7,8 @@
              xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              d:DataContext="{d:DesignInstance viewModel:CreateRideDetailViewModel}"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFA1A1A1">
@@ -66,12 +68,12 @@
             Width="264"
             Grid.Column="1" Grid.Row="1"
             Command="{Binding CreateRideCommand}" FontSize="17"/>
-        <ComboBox
+        <TextBox
             x:Name="ComboBoxCreateRideSeats"
-            DisplayMemberPath="Source"
             HorizontalAlignment="Right"
             Width="70"
-            Grid.Column="1" Grid.Row="1" Margin="0,288,232,0" Height="22" VerticalAlignment="Top" />
+            Grid.Column="1" Grid.Row="1" Margin="0,288,232,0" Height="22" VerticalAlignment="Top" 
+            Text="{Binding Model.InitialCapacity, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
         <ComboBox
             x:Name="ComboBoxCreateRideCar"
             DisplayMemberPath="Source"
@@ -137,6 +139,7 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
-            Width="50" BorderBrush="{x:Null}" FontSize="17"/>
+            Width="50" BorderBrush="{x:Null}" FontSize="17"
+            Command="{Binding DisplayUserProfileCommand}"/>
     </Grid>
 </local:UserControlBase>
