@@ -109,6 +109,8 @@ namespace Carpool.App.ViewModel
             {
                 Model = GetEmptyUser();
             }
+
+            OnPropertyChanged();
         }
     }
 }

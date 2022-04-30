@@ -8,7 +8,8 @@
              xmlns:validators="clr-namespace:Carpool.App.Services"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
-             d:DataContext="{d:DesignInstance viewModels:ProfileUserDetailViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:ProfileUserDetailViewModel}"
+             d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid Background="#FFA1A1A1">
         <Grid.RowDefinitions>
@@ -44,26 +45,41 @@
             Height="33"/>
 
         <Label
-            Grid.Column="2"
-            x:Name="LoggedUsername"
-            Margin="169,0,5,0" 
-            Content="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            Grid.Column="1"
+            x:Name="LoggedUsername" 
+            Content="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged}" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
             VerticalAlignment="Center" 
             HorizontalContentAlignment="Right"
-            FontSize="12"
-            Height="25" HorizontalAlignment="Right" Width="90
-            "/>
+            VerticalContentAlignment="Center"
+            FontSize="14"
+            Padding="5,0"
+            Height="34" HorizontalAlignment="Left" Width="135"/>
+
+        <Label
+            Grid.Column="1"
+            Validation.ErrorTemplate="{x:Null}"
+            x:Name="LoggedSurname"
+            Margin="135,0,0,0" 
+            Content="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged}" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}"
+            VerticalAlignment="Center" 
+            HorizontalContentAlignment="Left"
+            VerticalContentAlignment="Center"
+            Padding="5,0"
+            FontSize="14"
+            Height="34" HorizontalAlignment="Left" Width="131"/>
 
         <Button 
             Grid.Column="2"
+            Validation.ErrorTemplate="{x:Null}"
             x:Name="ButtonCreateRideProfile" 
             Content="Create Ride" 
-            Margin="34,0,100,0" 
             Background="#FF005FB8" 
             Height="34" 
-            HorizontalAlignment="right" 
+            HorizontalAlignment="Center" 
             Width="130" VerticalAlignment="Center"/>
 
         <TextBox
@@ -75,7 +91,7 @@
             Margin="70,20,67,9" 
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Left"
-            Text="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Model.Name, Mode=TwoWay}"/>
 
         <TextBox
             x:Name="TextBoxLastName" 
@@ -84,7 +100,6 @@
             Width="130" 
             Height="25" 
             Margin="70,20,67,9" 
-            TextAlignment="Center"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Left"
             Text="{Binding Model.Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -109,7 +124,10 @@
             Grid.Row="5" 
             Width="130" 
             Height="25" 
-            Margin="70,20,67,9" 
+            Margin="70,20,67,9"
+            TextAlignment="Center"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
             Text="{Binding Model.Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label

@@ -18,7 +18,7 @@ namespace Carpool.App.View
     /// <summary>
     /// Interaction logic for UserProfileControl.xaml
     /// </summary>
-    public partial class UserProfileControl
+    public partial class UserProfileControl : UserControl
     {
         public UserProfileControl()
         {
