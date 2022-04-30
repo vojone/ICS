@@ -15,26 +15,51 @@ namespace Carpool.App.ViewModel
     public class CarInfoViewModel : ViewModelBase, ICarInfoViewModel
     {
         private readonly CarFacade _carFacade;
+
         private readonly IMediator _mediator;
 
-        public CarInfoViewModel(CarFacade carFacade, IMediator mediator)
+        public UserWrapper? CurrentUserModel { get; private set; }
+
+
+        public CarInfoViewModel(
+            CarFacade carFacade, 
+            UserFacade userFacade,
+            ISession session,
+            IMediator mediator)
         {
             _carFacade = carFacade;
             _mediator = mediator;
+            
 
             SaveCommand = new AsyncRelayCommand(OnSave);
             DeleteCommand = new AsyncRelayCommand(OnDelete);
+            NewCarCommand = new RelayCommand(OnNewCar);
+            GoBackCommand = new RelayCommand(OnGoBack);
+
+            _mediator.Register<LoadedMessage<UserWrapper>>(OnUpdateUser);
         }
 
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
+        public ICommand GoBackCommand { get; }
+        public ICommand NewCarCommand { get; }
 
         public CarWrapper? Model { get; private set; }
+
+        private void OnUpdateUser(LoadedMessage<UserWrapper> msg)
+        {
+            if (msg.Model != null)
+            {
+                CurrentUserModel = msg.Model;
+                OnPropertyChanged();
+            }
+        }
 
         private async Task OnSave()
         {
             await SaveAsync();
         }
+
         private async Task OnDelete()
         {
             var answer = MessageBox.Show(
@@ -49,6 +74,16 @@ namespace Carpool.App.ViewModel
                 await DeleteAsync();
                 _mediator.Send(new DisplayUserProfileMessage());
             }
+        }
+
+        private void OnNewCar()
+        {
+            Model = CarDetailModel.Empty;
+        }
+
+        private void OnGoBack()
+        {
+            _mediator.Send(new DisplayLastMessage());
         }
 
         public async Task LoadAsync(Guid id)

@@ -34,10 +34,9 @@ namespace Carpool.App.ViewModel
         }
 
         public UserWrapper? Model { get; protected set; }
-
         public ICommand SelectPhotoCommand { get; set; }
-
         public ICommand ClearPhotoCommand { get; set; }
+
 
 
         private void OnClearPhoto()
@@ -70,6 +69,7 @@ namespace Carpool.App.ViewModel
 
         protected async Task OnSaveUser()
         {
+            Mediator.Send(new UpdateMessage<UserWrapper>());
             await SaveAsync();
         }
 

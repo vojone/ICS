@@ -30,7 +30,7 @@ namespace Carpool.App.ViewModel
         {
             _session = session;
 
-            mediator.Register<LoadUserProfileMessage>(OnLoadUserProfileMessage);
+            mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
 
             SaveChangesCommand = new AsyncRelayCommand(OnSaveChanges, CanSave);
             DeleteAccountCommand = new AsyncRelayCommand(OnDeleteAccount);
@@ -122,17 +122,18 @@ namespace Carpool.App.ViewModel
         }
 
 
-        private async void OnLoadUserProfileMessage(LoadUserProfileMessage message)
+        private async void OnUserSelected(SelectedMessage<UserWrapper> message)
         {
-            if (message.UserId != null)
+            if (message.Id != null)
             {
-                await LoadAsync((Guid)message.UserId);
+                await LoadAsync((Guid)message.Id);
             }
             else
             {
                 await LoadDefaultProfile();
             }
 
+            Mediator.Send(new LoadedMessage<UserWrapper>() { Model = Model});
             OnPropertyChanged();
             RememberCurrentModel();
         }

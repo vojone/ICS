@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Carpool.App.View"
         xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="550" Width="900"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
         DataContext="{Binding}">
 
@@ -27,7 +27,7 @@
 
     <Grid>
 
-        <ContentControl Content="{Binding CurrentViewModel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
+        <ContentControl Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
         <!--<local:LoginWindow HorizontalContentAlignment="Stretch" DataContext="{Binding LoginScreenViewModel}"/>-->
     </Grid>
 </Window>

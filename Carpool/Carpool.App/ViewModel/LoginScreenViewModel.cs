@@ -52,7 +52,7 @@ namespace Carpool.App.ViewModel
         {
             System.Diagnostics.Debug.WriteLine("Logging In As user with Id:" + userId);
             _session.LogUserIn(userId);
-            _mediator.Send(new LoadUserProfileMessage());
+            _mediator.Send(new SelectedMessage<UserWrapper>() {Id = userId});
             _mediator.Send(new DisplayUserProfileMessage());
         }
 

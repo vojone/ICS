@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace Carpool.App.ViewModel
 
         private IViewModel? _currentViewModel;
 
-        private ISession _session;
+        private readonly ISession _session;
 
         public MainViewModel(
             ILoginScreenViewModel loginScreenViewModel,
@@ -44,6 +45,7 @@ namespace Carpool.App.ViewModel
             mediator.Register<DisplayLoginScreenMessage>(OnDisplayLoginScreen);
             mediator.Register<DisplayUserProfileMessage>(OnDisplayUserProfile);
             mediator.Register<DisplayCarInfoMessage>(OnDisplayCarInfo);
+            mediator.Register<DisplayLastMessage>(OnDisplayLast);
         }
 
         public IViewModel? CurrentViewModel
@@ -76,8 +78,9 @@ namespace Carpool.App.ViewModel
         }
 
 
-        public void OnGoBack()
+        public void OnDisplayLast(DisplayLastMessage msg)
         {
+            Debug.WriteLine("Received go back message!");
             CurrentViewModel = _session.GetLastViewModel() ?? CurrentViewModel;
         }
 
