@@ -8,7 +8,8 @@
              xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
              d:DataContext= "{d:DesignInstance viewModel:EditRideDetailViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <Grid Background="#FFA1A1A1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -43,7 +44,7 @@
             x:Name="TextBoxDate_arrCreateRides_Copy"
             Cursor="Hand"
             Margin="48,0,0,50"
-            BorderBrush="{x:Null}" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="212"
+            BorderBrush="{x:Null}" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="191"
             SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
         />
 
@@ -188,7 +189,7 @@
             Cursor="Hand"
             Margin="48,130,0,0"
             BorderBrush="{x:Null}" Grid.Row="1"
-            SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" HorizontalAlignment="Left" Width="211" VerticalAlignment="Top"
+            SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}" HorizontalAlignment="Left" Width="191" VerticalAlignment="Top"
         />
         <Label
             Margin="48,31,0,0"
@@ -208,5 +209,25 @@
             HorizontalAlignment="Left" 
             Width="50" BorderBrush="{x:Null}" FontSize="17"
             Command="{Binding GoBackCommand}"/>
+
+        <xctk:TimePicker 
+            x:Name="TimePickerEditRideDeparture"
+            Height="24" 
+            Width="100" 
+            Value="{Binding CurrentDateTime}" 
+            Margin="240,130,0,0" 
+            Grid.Row="1"
+            Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <xctk:TimePicker 
+            x:Name="TimePickerEditRideArrival"
+            Height="24" 
+            Width="100" 
+            Value="{Binding CurrentDateTime}" 
+            Margin="240,130,0,50" 
+            Grid.Row="1"
+            Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+
+
     </Grid>
 </UserControl>
