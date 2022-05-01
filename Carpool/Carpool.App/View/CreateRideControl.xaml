@@ -46,6 +46,7 @@
             BorderBrush="{x:Null}" 
             VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1"/>
         <Button
+            Visibility="Hidden"
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
             Margin="0,0,150,0" 
