@@ -64,11 +64,26 @@
             Grid.Column="1" Grid.Row="1"
             Cursor="Hand"
             Command="{Binding CreateRideCommand}" FontSize="17"/>
+
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            x:Name="TextBox2" 
+            Margin="0,281,110,0" 
+            Content="Seats" 
+            Background="{x:Null}" 
+            FontSize="16" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Right" 
+            Width="209" 
+            VerticalAlignment="Top" 
+            Height="40"/>
+
         <TextBox
             x:Name="ComboBoxCreateRideSeats"
             HorizontalAlignment="Right"
             Width="70"
-            Grid.Column="1" Grid.Row="1" Margin="0,288,232,0" Height="22" VerticalAlignment="Top" 
+            Grid.Column="1" Grid.Row="1" Margin="0,288,190,0" Height="22" VerticalAlignment="Top" 
             Text="{Binding Model.InitialCapacity, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
         <ComboBox
             x:Name="ComboBoxCreateRideCar"
@@ -93,7 +108,7 @@
             x:Name="TextBoxDate_arrCreateRides_Copy2"
             Cursor="Hand"
             Margin="48,323,0,0"
-            BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="155"
             SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, NotifyOnValidationError=True}"
         />
         <Label
@@ -142,5 +157,25 @@
                 <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
+
+        <xctk:TimePicker 
+            x:Name="TimePickerEditRideDeparture"
+            Height="24" 
+            Width="100" 
+            Value="{Binding CurrentDateTime}" 
+            Margin="225,132,0,0" 
+            Grid.Row="1"
+            Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <xctk:TimePicker 
+            x:Name="TimePickerEditRideArrival"
+            Height="24" 
+            Width="100" 
+            Value="{Binding CurrentDateTime}" 
+            Margin="225,323,0,0" 
+            Grid.Row="1"
+            Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+
     </Grid>
 </local:UserControlBase>
