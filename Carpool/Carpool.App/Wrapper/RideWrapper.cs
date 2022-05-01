@@ -22,13 +22,13 @@ namespace Carpool.App.Wrapper
 
         public string? DepartureL
         {
-            get => GetValue<String>(); 
+            get => GetValue<string>(); 
             set => SetValue(value);
         }
 
         public string? ArrivalL
         {
-            get => GetValue<String>(); 
+            get => GetValue<string>(); 
             set => SetValue(value);
         }
 
@@ -120,6 +120,22 @@ namespace Carpool.App.Wrapper
                 if (Car == CarDetailModel.Empty || Car == null)
                 {
                     AddError(nameof(Car), "A car must be selected!");
+                }
+            }
+
+            if (propertyName is null or nameof(ArrivalT))
+            {
+                if (ArrivalT < DepartureT)
+                {
+                    AddError(nameof(ArrivalT), "Arrival time must be greater than departure time!");
+                }
+            }
+
+            if (propertyName is null or nameof(DepartureT))
+            {
+                if (ArrivalT >= DepartureT)
+                {
+                    AddError(nameof(DepartureT), "Arrival time must be lower than departure time!");
                 }
             }
         }

@@ -53,6 +53,7 @@ namespace Carpool.App.ViewModel
 
         public ICommand GoBackCommand { get; set; }
 
+
         private async void OnSaveRide()
         {
             try
