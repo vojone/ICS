@@ -96,22 +96,29 @@ namespace Carpool.App.ViewModel
                         UserModel.Cars.Add(car);
                     }
 
-                    SetDefaultCar();
                 }
 
                 OnPropertyChanged();
             }
         }
 
-        private void SetDefaultCar()
+        private async Task SetDefaultCar()
         {
-            Model = UserModel?.Cars.Count > 0 ? UserModel.Cars[0] : CarDetailModel.Empty;
+            if (UserModel?.Cars.Count > 0)
+            {
+                await OnSelectCar(UserModel.Cars[0].Id);
+            }
+            else
+            {
+                OnNewCar();
+            }
         }
 
 
-        private void OnSendToEdit(SendModelToEditMessage<UserWrapper> message)
+        private async void OnSendToEdit(SendModelToEditMessage<UserWrapper> message)
         {
             UserModel = message.Model;
+            await SetDefaultCar();
         }
 
         private void OnGoBack()
@@ -205,8 +212,10 @@ namespace Carpool.App.ViewModel
         private async Task OnSelectCar(Guid carId)
         {
             await LoadAsync(carId);
+            _isPersisted = true;
             SelectCarCommand.NotifyCanExecuteChanged();
             RememberCurrentModel();
+            SaveCommand.NotifyCanExecuteChanged();
         }
 
         private bool CanSelect(Guid carId)
@@ -251,9 +260,12 @@ namespace Carpool.App.ViewModel
             else
             {
                 await _carFacade.DeleteAsync(Model);
-            }
 
-            _mediator.Send(new LoadToEditMessage<UserWrapper> { Id = UserModel?.Id });
+                _mediator.Send(new LoadToEditMessage<UserWrapper> { Id = UserModel?.Id });
+
+                SaveCommand.NotifyCanExecuteChanged();
+                RememberCurrentModel();
+            }
         }
     }
 }
