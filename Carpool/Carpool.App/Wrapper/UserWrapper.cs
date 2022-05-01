@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using Carpool.App.Extensions;
 using Carpool.App.Services;
 using Carpool.BL.Models;
 
@@ -13,6 +14,7 @@ public class UserWrapper : ModelWrapper<UserDetailModel>
 {
     public UserWrapper(UserDetailModel model) : base(model)
     {
+        InitializeCollectionProperties(model);
     }
 
     public override void Validate(string? propertyName = null)
@@ -70,10 +72,22 @@ public class UserWrapper : ModelWrapper<UserDetailModel>
         get => GetValue<string>(); 
         set => SetValue(value);
     }
-    public ObservableCollection<CarDetailModel> Cars { get; init; } = new();
+
+    private void InitializeCollectionProperties(UserDetailModel model)
+    {
+        if (model.Cars == null)
+        {
+            throw new ArgumentException("Cars cannot be null");
+        }
+        Cars.AddRange(model.Cars.Select(e => new CarWrapper(e)));
+
+        RegisterCollection(Cars, model.Cars);
+    }
+
+    public ObservableCollection<CarWrapper> Cars { get; init; } = new();
 
     public static implicit operator UserWrapper(UserDetailModel detailModel) => new(detailModel);
 
+    public static implicit operator UserDetailModel(UserWrapper wrapper) => wrapper.Model;
 
-    
 }

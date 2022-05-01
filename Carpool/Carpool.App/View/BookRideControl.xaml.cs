@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,27 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Carpool.App.ViewModel;
 
 namespace Carpool.App.View
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for BookRideControl.xaml
     /// </summary>
-    public partial class LoginScreenControl : UserControlBase
+    public partial class BookRideControl : UserControl
     {
- 
-        public LoginScreenControl()
+        public BookRideControl()
         {
             InitializeComponent();
         }
 
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void TextBoxArrivalCreateRides_Copy1_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
 
-        private void ListView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        private void ButtonEditRideSaveChanges_Click(object sender, RoutedEventArgs e)
         {
 
         }

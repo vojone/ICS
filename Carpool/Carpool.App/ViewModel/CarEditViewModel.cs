@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using System.Windows;
@@ -88,15 +89,6 @@ namespace Carpool.App.ViewModel
             {
                 _userModel = value;
 
-                
-                if (value?.Model.Cars != null && UserModel != null)
-                {
-                    foreach (var car in value.Model.Cars)
-                    {
-                        UserModel.Cars.Add(car);
-                    }
-
-                }
 
                 OnPropertyChanged();
             }

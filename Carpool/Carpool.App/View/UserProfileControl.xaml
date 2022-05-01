@@ -86,7 +86,7 @@
             Height="40
 " 
             HorizontalAlignment="Center" 
-            Width="130" VerticalAlignment="Center"/>
+            Width="130" VerticalAlignment="Center" FontSize="17"/>
 
         <TextBox
             x:Name="TextBoxFirstName" 
@@ -189,7 +189,8 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding SaveChangesCommand, UpdateSourceTrigger=PropertyChanged}"/>
+            Command="{Binding SaveChangesCommand, UpdateSourceTrigger=PropertyChanged}"
+            FontSize="17"/>
 
         <Button 
             Grid.Row="3"
@@ -201,7 +202,7 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding DisplayRideListCommand}"/>
+            Command="{Binding DisplayRideListCommand}" FontSize="17"/>
 
         <Button 
             Grid.Row="4"
@@ -213,7 +214,7 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding DisplayCarEditCommand}"/>
+            Command="{Binding DisplayCarEditCommand}" FontSize="17"/>
 
         <Button 
             Grid.Row="5"
@@ -225,7 +226,7 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding DeleteAccountCommand}"/>
+            Command="{Binding DeleteAccountCommand}" FontSize="17"/>
 
         <Button 
             Grid.Row="6"
@@ -237,7 +238,7 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding LogOutCommand}"/>
+            Command="{Binding LogOutCommand}" FontSize="17"/>
 
 
         <Label 

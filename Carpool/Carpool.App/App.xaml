@@ -12,6 +12,7 @@
                 <ResourceDictionary Source="Styles/ReadOnlyDateTextBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <converters:RideListButtonTextConverter x:Key="RideListButtonTextConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

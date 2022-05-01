@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Carpool.BL.Models;
 
 namespace Carpool.App.Wrapper;
@@ -38,6 +40,28 @@ public class ParticipantWrapper : ModelWrapper<ParticipantModel>
         set => SetValue(value);
     }
 
+    public override string ToString()
+    {
+        return UserName+" "+UserSurname;
+    }
+
     public static implicit operator ParticipantWrapper(ParticipantModel detailModel) => new(detailModel);
 
+    public static bool IsParticipant(RideWrapper model, Guid userId)
+    {
+        return IsParticipant(model.Participants, userId);
+    }
+
+    private static bool IsParticipant(IEnumerable<ParticipantWrapper> Participants, Guid userId)
+    {
+        ParticipantWrapper? participant = Participants.FirstOrDefault(p => p.UserId == userId);
+        if (participant != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }

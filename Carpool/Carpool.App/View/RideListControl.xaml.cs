@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +18,16 @@ namespace Carpool.App.View
     /// <summary>
     /// Interaction logic for RideListControl.xaml
     /// </summary>
-    public partial class RideListControl : UserControl
+    public partial class RideListControl : UserControlBase
     {
         public RideListControl()
         {
             InitializeComponent();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

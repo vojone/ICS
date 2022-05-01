@@ -27,6 +27,28 @@ namespace Carpool.BL.Models
                     .ForMember(entity => entity.RideId, expression => expression.Ignore());
             }
         }
-        
+
+        public static bool IsParticipant(RideListModel ride, Guid userId)
+        {
+            return IsParticipant(ride.Participants, userId);
+        }
+
+        public static bool IsParticipant(RideDetailModel ride, Guid userId)
+        {
+            return IsParticipant(ride.Participants, userId);
+        }
+
+        public static bool IsParticipant(IEnumerable<ParticipantModel> Participants, Guid userId)
+        {
+            ParticipantModel? participant = Participants.FirstOrDefault(p => p.UserId == userId);
+            if (participant != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

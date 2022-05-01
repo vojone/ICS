@@ -29,12 +29,22 @@ namespace Carpool.App.ViewModel
             ICreateUserDetailViewModel createUserDetailViewModel,
             IProfileUserDetailViewModel profileUserDetailViewModel,
             ICarEditViewModel carEditViewModel,
-            IMediator mediator,
-            ISession session)
+            IRideListViewModel rideListViewModel,
+            IRideHistoryViewModel rideHistoryViewModel,
+            ICreateRideDetailViewModel createRideDetailViewModel,
+            IEditRideDetailViewModel editRideDetailViewModel,
+            IBookRideDetailViewModel bookRideDetailViewModel,
+            ISession session,
+            IMediator mediator)
         {
             _session = session;
 
             LoginScreenViewModel = loginScreenViewModel;
+            RideListViewModel = rideListViewModel;
+            RideHistoryViewModel = rideHistoryViewModel;
+            CreateRideDetailViewModel = createRideDetailViewModel;
+            BookRideDetailViewModel = bookRideDetailViewModel;
+            EditRideDetailViewModel = editRideDetailViewModel;
             CreateUserDetailViewModel = createUserDetailViewModel;
             ProfileUserDetailViewModel = profileUserDetailViewModel;
             CarEditViewModel = carEditViewModel;
@@ -44,8 +54,15 @@ namespace Carpool.App.ViewModel
             mediator.Register<DisplayUserCreateScreenMessage>(OnDisplayUserCreateScreen);
             mediator.Register<DisplayLoginScreenMessage>(OnDisplayLoginScreen);
             mediator.Register<DisplayUserProfileMessage>(OnDisplayUserProfile);
+
             mediator.Register<DisplayCarInfoMessage>(OnDisplayCarInfo);
             mediator.Register<DisplayLastMessage>(OnDisplayLast);
+
+            mediator.Register<DisplayRideListMessage>(OnDisplayRideList);
+            mediator.Register<DisplayRideHistoryMessage>(OnDisplayRideHistory);
+            mediator.Register<DisplayCreateRideMessage>(OnDisplayCreateRide);
+            mediator.Register<DisplayBookRideMessage>(OnDisplayBookRide);
+            mediator.Register<DisplayEditRideMessage>(OnDisplayEditRide);
         }
 
         public IViewModel? CurrentViewModel
@@ -78,6 +95,16 @@ namespace Carpool.App.ViewModel
         }
 
 
+        public IRideListViewModel RideListViewModel{ get; set; }
+
+        public IRideHistoryViewModel RideHistoryViewModel { get; set; }
+
+        public ICreateRideDetailViewModel CreateRideDetailViewModel { get; set; }
+
+        public IEditRideDetailViewModel EditRideDetailViewModel { get; set; }
+
+        public IBookRideDetailViewModel BookRideDetailViewModel { get; set; }
+
         public void OnDisplayLast(DisplayLastMessage msg)
         {
             Debug.WriteLine("Received go back message!");
@@ -97,14 +124,37 @@ namespace Carpool.App.ViewModel
 
         public void OnDisplayUserCreateScreen(DisplayUserCreateScreenMessage msg)
         {
-
             OnDisplay(CreateUserDetailViewModel);
         }
 
         public void OnDisplayLoginScreen(DisplayLoginScreenMessage msg)
         {
-
             OnDisplay(LoginScreenViewModel);
+        }
+
+        public void OnDisplayRideList(DisplayRideListMessage msg)
+        {
+            CurrentViewModel = RideListViewModel;
+        }
+
+        public void OnDisplayRideHistory(DisplayRideHistoryMessage msg)
+        {
+            CurrentViewModel = RideHistoryViewModel;
+        }
+
+        public void OnDisplayCreateRide(DisplayCreateRideMessage msg)
+        {
+            CurrentViewModel = CreateRideDetailViewModel;
+        }
+
+        public void OnDisplayBookRide(DisplayBookRideMessage msg)
+        {
+            CurrentViewModel = BookRideDetailViewModel;
+        }
+
+        public void OnDisplayEditRide(DisplayEditRideMessage msg)
+        {
+            CurrentViewModel = EditRideDetailViewModel;
         }
 
     }

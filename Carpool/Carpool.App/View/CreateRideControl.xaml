@@ -1,4 +1,4 @@
-<UserControl x:Class="Carpool.App.View.CreateRideControl"
+<local:UserControlBase x:Class="Carpool.App.View.CreateRideControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,80 +6,30 @@
              xmlns:local="clr-namespace:Carpool.App.View"
              xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
-             d:DataContext="{d:DesignInstance viewModel:CreateRideViewModel}"
+             d:DataContext="{d:DesignInstance viewModel:CreateRideDetailViewModel}"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="#FFA1A1A1">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="334"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="52*"/>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="48*"/>
-            <RowDefinition Height="16*"/>
-            <RowDefinition Height="18*"/>
-            <RowDefinition Height="30*"/>
-            <RowDefinition Height="76*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="45*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="199*"/>
 
         </Grid.RowDefinitions>
-        <Rectangle 
-            Grid.Row="6"
-            Grid.RowSpan="3" Margin="34,5,1,5" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4"
-         
-         />
-        <TextBox
-            x:Name="TextBoxArrivalCreateRides" Margin="44,13,10,13"
-            TextWrapping="Wrap"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged" Grid.Row="7" Height="50"/>
-
-        <Label
-            Margin="45,5,223,0"
-            Content="Arrival"
-            Background="{x:Null}"
-            BorderBrush="{x:Null}" Grid.Row="6" Height="23" VerticalAlignment="Top" />
-
-        <DatePicker
-            Grid.Column="0"
-            x:Name="TextBoxDate_arrCreateRides"
-            Margin="45,10,144,0"
-            BorderBrush="{x:Null}" Grid.Row="8" Height="23" VerticalAlignment="Top"
-            />
-        <Rectangle
-            Grid.RowSpan="3" Margin="33,10,2,7" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1"
-         
-         />
-        <TextBox
-            x:Name="TextBoxArrivalCreateRides_Copy" Margin="44,10,10,10"
-            TextWrapping="Wrap"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" TextChanged="TextBoxStateCreateRides_TextChanged" Grid.Row="2" Height="50"/>
-
-        <Label
-            Margin="44,15,224,0"
-            Content="Departure"
-            Background="{x:Null}"
-            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" />
-        <DatePicker
-            Grid.Column="0"
-            x:Name="TextBoxDate_arrCreateRides_Copy"
-            Margin="45,5,144,10"
-            BorderBrush="{x:Null}" Grid.Row="3"
-            />
 
         <Rectangle 
             x:Name="TopBar" 
-            Fill="#FFC4C4C4" Grid.ColumnSpan="2"/>
+            Fill="#FFC4C4C4" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="0,5,0,5"/>
 
         <Label
             x:Name="TextBox1" 
-            Margin="54,0,0,0" 
+            Margin="70,0,0,0" 
             Content="Create a ride" 
             Background="{x:Null}" 
             FontSize="18" 
@@ -90,61 +40,108 @@
             Height="40"/>
 
         <Label
-            Margin="249,0,0,0" 
+            Margin="0,0,0,0" 
             Content="Jméno usera" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
-        <Image
-            Grid.Row="0"
-            Height="60" 
-            Margin="348,17,10,0" 
-            VerticalAlignment="Top" Grid.Column="1" Grid.RowSpan="2"/>
-        <Rectangle HorizontalAlignment="Left" Height="60" Margin="50,0,0,0" VerticalAlignment="Center" Width="135" Fill="#FFA1A1A1" Grid.Column="1"/>
+            VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1"/>
         <Button
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
-            Margin="69,0,0,0" 
-            Background="#FF919191" Height="34" VerticalAlignment="Center" HorizontalAlignment="Left" Width="98" Grid.Column="1"/>
+            Margin="0,0,150,0" 
+            Background="#FF919191" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98" Grid.Column="1"
+            Command="{Binding PrintDataCommand}" FontSize="17"/>
         <Rectangle
-            HorizontalAlignment="Left"
-            Height="278" 
-            VerticalAlignment="Top" 
+            HorizontalAlignment="Right" 
             Width="267" Fill="#FFC4C4C4" 
             RadiusX="10" 
             RadiusY="10"  
-            Grid.Column="1" Grid.Row="1" Margin="129,29,0,0" Grid.RowSpan="8"/>
+            Grid.Column="1" Grid.Row="1" Margin="0,41,67,0" Height="278" VerticalAlignment="Top"/>
         <Button
             x:Name="ButtonCreateRide" 
             Content="Create Ride" 
-            Margin="132,16,0,0" 
+            Margin="0,336,67,0" 
             Background="#FF005FB8"
             Height="34"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Right"
             Width="264"
-            Grid.Column="1" Grid.Row="8"/>
-        <ComboBox
+            Grid.Column="1" Grid.Row="1"
+            Command="{Binding CreateRideCommand}" FontSize="17"/>
+        <TextBox
             x:Name="ComboBoxCreateRideSeats"
-            VerticalAlignment="Top"
-            DisplayMemberPath="Source"
-            HorizontalAlignment="Left"
-            Height="22"
+            HorizontalAlignment="Right"
             Width="70"
-            Grid.Column="1" Grid.Row="7" Margin="144,44,0,0" />
+            Grid.Column="1" Grid.Row="1" Margin="0,288,232,0" Height="22" VerticalAlignment="Top" 
+            Text="{Binding Model.InitialCapacity, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
         <ComboBox
             x:Name="ComboBoxCreateRideCar"
-            DisplayMemberPath="Source"
             VerticalAlignment="Top"
-            HorizontalAlignment="Left"
-            Grid.Column="1" Grid.Row="2" Margin="161,0,0,0" Width="204"/>
+            HorizontalAlignment="Right"
+            Grid.Column="1" Grid.Row="1" Margin="0,54,100,0" Width="204"
+            ItemsSource="{Binding Path=Driver.Cars}"
+            SelectedItem="{Binding Car, UpdateSourceTrigger=PropertyChanged}"
+            DisplayMemberPath="Brand"/>
         <Rectangle
-            HorizontalAlignment="Left"
-            Height="171" 
-            VerticalAlignment="Top" 
-            Width="204" Fill="#FF919191" 
-            RadiusX="10" 
-            RadiusY="10"  
-            Grid.Column="1" Grid.Row="2" Margin="162,38,0,0" Grid.RowSpan="6"/>
+                                                                        HorizontalAlignment="Right"
+                                                                        Height="172" 
+                                                                        VerticalAlignment="Top" 
+                                                                        Width="204" Fill="#FF919191" 
+                                                                        RadiusX="10" 
+                                                                        RadiusY="10"  
+                                                                        Grid.Column="1" Grid.Row="1" Margin="0,94,100,0"/>
+        <Rectangle Margin="30,224,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
+         
+        />
+        <TextBox
+            x:Name="TextBoxArrivalCreateRides_Copy2" Margin="47,260,0,0"
+            TextWrapping="Wrap"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="280"
+            Text="{Binding Model.ArrivalL, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDate_arrCreateRides_Copy2"
+            Margin="48,323,0,0"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
+            SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+        />
+        <Label
+            Margin="47,230,0,0"
+            Content="Arrival"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
+        <Rectangle Margin="31,33,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
+         
+        />
+        <TextBox
+            x:Name="TextBoxArrivalCreateRides_Copy1" Margin="48,69,0,0"
+            TextWrapping="Wrap"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="296"
+            Text="{Binding Model.DepartureL, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+        <DatePicker
+            Grid.Column="0"
+            x:Name="TextBoxDate_arrCreateRides_Copy1"
+            Margin="49,132,0,0"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
+            SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
+        />
+        <Label
+            Margin="48,39,0,0"
+            Content="Departure"
+            Background="{x:Null}"
+            BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
+        <Button
+            Grid.Column="0"
+            x:Name="ButtonNewCar_Copy" 
+            Content="&lt;=" 
+            Margin="10,0,0,0" 
+            Background="#FF005FB8" 
+            VerticalAlignment="Center" 
+            Height="34" 
+            HorizontalAlignment="Left" 
+            Width="50" BorderBrush="{x:Null}" FontSize="17"
+            Command="{Binding DisplayUserProfileCommand}"/>
     </Grid>
-</UserControl>
+</local:UserControlBase>
