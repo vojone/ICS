@@ -30,8 +30,9 @@ namespace Carpool.App.ViewModel
         public CreateRideDetailViewModel(
             RideFacade rideFacade,
             UserFacade userFacade,
+            CarFacade carFacade,
             IMediator mediator,
-            ISession session) : base(rideFacade, userFacade, mediator)
+            ISession session) : base(rideFacade, userFacade, carFacade, mediator)
         {
             _rideFacade = rideFacade;
             _userFacade = userFacade;
@@ -43,22 +44,22 @@ namespace Carpool.App.ViewModel
             //Model = RideDetailModel.Empty;
 
             _mediator.Register<DisplayCreateRideMessage>(OnDisplayCreateRide);
-            DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
+            GoBackCommand = new RelayCommand(OnGoBack);
         }
 
         public ICommand PrintDataCommand { get; set; }
 
         public ICommand CreateRideCommand { get; set; }
 
-        public ICommand DisplayUserProfileCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
 
         public UserWrapper Driver { get; set; }
 
         public CarWrapper Car { get; set; }
 
-        private void OnDisplayUserProfile()
+        private void OnGoBack()
         {
-            _mediator.Send(new DisplayUserProfileMessage());
+            _mediator.Send(new DisplayLastMessage());
         }
 
         private void OnPrintData()
@@ -90,8 +91,6 @@ namespace Carpool.App.ViewModel
             {
                 Debug.WriteLine("Can save!");
             }
-            Model.CarId = Car.Id;
-            Model.DriverId = Driver.Id;
             await SaveAsync();
             _mediator.Send(new DisplayRideListMessage());
         }

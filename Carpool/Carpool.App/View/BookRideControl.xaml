@@ -48,11 +48,19 @@
 
         <Button
                     x:Name="ButtonEditRideSaveChanges" 
-                    Content="Book" 
                     Margin="0,0,70,25" 
                     FontSize="20"
+                    Cursor="Hand"
                     Background="#FF005FB8" Height="34" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="267" Grid.Column="1" Grid.Row="1" Click="ButtonEditRideSaveChanges_Click" 
-                    Command="{Binding BookRideCommand}"/>
+                    Command="{Binding BookRideCommand}"
+                    >
+            <Button.Content>
+                <MultiBinding Converter="{StaticResource BookLeaveButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
+                    <Binding UpdateSourceTrigger="PropertyChanged" Path="Model.Model"/>
+                    <Binding UpdateSourceTrigger="PropertyChanged" Path="CurrentUserId"/>
+                </MultiBinding>
+            </Button.Content>
+        </Button>
 
         <ListView Grid.Column="1" Grid.Row="1"
                     Background="#FFC4C4C4"
@@ -75,16 +83,12 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Rectangle
-                    Fill="#FF919191"
-                    HorizontalAlignment="Right"
-                    Height="126" 
-                    VerticalAlignment="Top" 
-                    Width="267"
-                    RadiusX="10" 
-                    RadiusY="10"  
-                    Grid.Column="1" Grid.Row="1" Margin="0,25,70,0"
-            />
+        <Rectangle Grid.Column="1" Grid.Row="1" Margin="0,21,70,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="267" VerticalAlignment="Top" Height="143">
+            
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>
+            </Rectangle.Fill>
+        </Rectangle>
 
         <Label
                     Width="67"
@@ -169,12 +173,14 @@
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="34" 
+            Cursor="Hand"
             HorizontalAlignment="Left" 
-            Command="{Binding DisplayUserProfileCommand}"
+            Command="{Binding GoBackCommand}"
             Width="50" BorderBrush="{x:Null}" FontSize="17"/>
         <Button
             x:Name="ButtonCreateUser_Copy" 
             Content="Create Ride" 
+            Cursor="Hand"
             Margin="0,0,150,0" 
             Background="#FF005FB8" Height="36" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98" BorderBrush="{x:Null}" Grid.Column="1" FontSize="17"/>
         <Label

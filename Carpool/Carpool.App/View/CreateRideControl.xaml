@@ -49,7 +49,8 @@
             Visibility="Visible"
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
-            Margin="0,0,150,0" 
+            Margin="0,0,150,0"
+            Cursor="Hand"
             Background="#FF919191" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98" Grid.Column="1"
             Command="{Binding PrintDataCommand}" FontSize="17"/>
         <Rectangle
@@ -68,6 +69,7 @@
             HorizontalAlignment="Right"
             Width="264"
             Grid.Column="1" Grid.Row="1"
+            Cursor="Hand"
             Command="{Binding CreateRideCommand}" FontSize="17"/>
         <TextBox
             x:Name="ComboBoxCreateRideSeats"
@@ -79,18 +81,11 @@
             x:Name="ComboBoxCreateRideCar"
             VerticalAlignment="Top"
             HorizontalAlignment="Right"
+            Cursor="Hand"
             Grid.Column="1" Grid.Row="1" Margin="0,54,100,0" Width="204"
             ItemsSource="{Binding Path=Driver.Cars}"
             SelectedItem="{Binding Car, UpdateSourceTrigger=PropertyChanged}"
             DisplayMemberPath="Brand"/>
-        <Rectangle
-                                                                        HorizontalAlignment="Right"
-                                                                        Height="172" 
-                                                                        VerticalAlignment="Top" 
-                                                                        Width="204" Fill="#FF919191" 
-                                                                        RadiusX="10" 
-                                                                        RadiusY="10"  
-                                                                        Grid.Column="1" Grid.Row="1" Margin="0,94,100,0"/>
         <Rectangle Margin="30,224,0,0" RadiusX="10" RadiusY="10" Fill="#FFC4C4C4" Grid.Row="1" Height="144" VerticalAlignment="Top" HorizontalAlignment="Left" Width="346"
          
         />
@@ -103,6 +98,7 @@
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy2"
+            Cursor="Hand"
             Margin="48,323,0,0"
             BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
             SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
@@ -124,6 +120,7 @@
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy1"
+            Cursor="Hand"
             Margin="49,132,0,0"
             BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
             SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
@@ -141,8 +138,21 @@
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="34" 
+            Cursor="Hand"
             HorizontalAlignment="Left" 
             Width="50" BorderBrush="{x:Null}" FontSize="17"
-            Command="{Binding DisplayUserProfileCommand}"/>
+            Command="{Binding GoBackCommand}"/>
+        <Rectangle Grid.Column="1" Grid.Row="1" Margin="0,132,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="227" VerticalAlignment="Top" Height="139">
+
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>
+            </Rectangle.Fill>
+        </Rectangle>
+        <TextBox
+            x:Name="TextBoxArrivalCreateRides_Copy" Margin="0,96,100,0"
+            TextWrapping="Wrap"
+            Background="#FFEDEDED"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="204"
+            Text="{Binding Model.DepartureL, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
     </Grid>
 </local:UserControlBase>

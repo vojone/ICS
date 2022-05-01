@@ -134,27 +134,27 @@ namespace Carpool.App.ViewModel
 
         public void OnDisplayRideList(DisplayRideListMessage msg)
         {
-            CurrentViewModel = RideListViewModel;
+            OnDisplay(RideListViewModel);
         }
 
         public void OnDisplayRideHistory(DisplayRideHistoryMessage msg)
         {
-            CurrentViewModel = RideHistoryViewModel;
+            OnDisplay(RideHistoryViewModel);
         }
 
         public void OnDisplayCreateRide(DisplayCreateRideMessage msg)
         {
-            CurrentViewModel = CreateRideDetailViewModel;
+            OnDisplay(CreateRideDetailViewModel);
         }
 
         public void OnDisplayBookRide(DisplayBookRideMessage msg)
         {
-            CurrentViewModel = BookRideDetailViewModel;
+            OnDisplay(BookRideDetailViewModel);
         }
 
         public void OnDisplayEditRide(DisplayEditRideMessage msg)
         {
-            CurrentViewModel = EditRideDetailViewModel;
+            OnDisplay(EditRideDetailViewModel);
         }
 
     }

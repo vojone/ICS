@@ -40,6 +40,7 @@
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy"
+            Cursor="Hand"
             Margin="48,0,0,50"
             BorderBrush="{x:Null}" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="212"
             SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
@@ -74,18 +75,21 @@
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
             Margin="0,0,150,1" 
+            Cursor="Hand"
             Background="#FF005FB8" Height="36" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98" Grid.Column="1" BorderBrush="{x:Null}" FontSize="17"/>
 
         <Button
             x:Name="ButtonEditRideSaveChanges" 
             Content="Save changes" 
             Margin="0,327,238,0" 
+            Cursor="Hand"
             Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98" Grid.Column="1" Grid.Row="1" FontSize="17" 
             Command="{Binding SaveRideCommand}"/>
         <Button
             x:Name="ButtonEditRideDeleteRide"
             Content="Delete Ride" 
             Margin="0,327,70,0" 
+            Cursor="Hand"
             Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98" Grid.Column="1" Grid.Row="1" FontSize="17"
             Command="{Binding DeleteRideCommand}"/>
 
@@ -134,6 +138,7 @@
             />
         <ComboBox
             x:Name="ComboBoxEditRideCar"
+            Cursor="Hand"
             Grid.Column="1" 
             Grid.Row="1" 
             Margin="0,65,198,0" 
@@ -194,6 +199,7 @@
         <DatePicker
             Grid.Column="0"
             x:Name="TextBoxDate_arrCreateRides_Copy1"
+            Cursor="Hand"
             Margin="49,124,140,241"
             BorderBrush="{x:Null}" Grid.Row="1"
             SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"
@@ -207,6 +213,7 @@
             Grid.Column="0"
             Grid.Row="0"
             x:Name="ButtonNewCar_Copy" 
+            Cursor="Hand"
             Content="&lt;=" 
             Margin="10,0,0,0" 
             Background="#FF005FB8" 
@@ -214,6 +221,6 @@
             Height="34" 
             HorizontalAlignment="Left" 
             Width="50" BorderBrush="{x:Null}" FontSize="17"
-            Command="{Binding DisplayRideListCommand}"/>
+            Command="{Binding GoBackCommand}"/>
     </Grid>
 </UserControl>
