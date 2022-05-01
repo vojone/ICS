@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Carpool.App.Extensions;
 using Carpool.BL.Models;
 using Carpool.Common;
@@ -15,7 +16,7 @@ namespace Carpool.App.Wrapper
     {
         public RideWrapper(RideDetailModel model) : base(model)
         {
-
+            InitializeCollectionProperties(model);
         }
 
         public string? DepartureL
@@ -77,16 +78,16 @@ namespace Carpool.App.Wrapper
             set => SetValue(value);
         }
 
-        /*private void InitializeCollectionProperties(UserDetailModel model)
+        private void InitializeCollectionProperties(RideDetailModel model)
         {
-            if (model.Cars == null)
+            if (model.Participants == null)
             {
                 throw new ArgumentException("Cars cannot be null");
             }
             Participants.AddRange(model.Participants.Select(e => new ParticipantWrapper(e)));
 
             RegisterCollection(Participants, model.Participants);
-        }*/
+        }
 
         //not 100% sure about these wrappers inside a wrapper, but hope its ok
         public UserWrapper? Driver

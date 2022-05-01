@@ -111,6 +111,10 @@ namespace Carpool.App.ViewModel
                 {
                     //leave ride
                     Debug.WriteLine("Leaving ride with id: " + rideId);
+                    ParticipantWrapper currentUserParticipant = ride.Participants.First(i => i.UserId == currentUserId);
+                    ride.Participants.Remove(currentUserParticipant);
+                    //cannot leave ride in ListViewModel 
+                    //cannot save
                 }
                 else
                 {

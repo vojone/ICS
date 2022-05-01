@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Formats.Asn1;
 using System.Linq;
@@ -22,17 +23,20 @@ namespace Carpool.App.ViewModel
     {
         private readonly RideFacade _rideFacade;
         private readonly UserFacade _userFacade;
+        private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
         private readonly ISession _session;
 
         public BookRideDetailViewModel(
             RideFacade rideFacade,
             UserFacade userFacade,
+            CarFacade carFacade,
             IMediator mediator,
             ISession session) : base(rideFacade, userFacade, mediator)
         {
             _rideFacade = rideFacade;
             _userFacade = userFacade;
+            _carFacade = carFacade;
             _mediator = mediator;
             _session = session;
             
@@ -49,14 +53,36 @@ namespace Carpool.App.ViewModel
 
         public ICommand DisplayUserProfileCommand { get; set; }
 
-        private void OnBookRide()
+        public UserWrapper Driver { get; set; }
+
+        public CarWrapper? Car { get; set; }
+
+        private async void OnBookRide()
         {
-            _mediator.Send(new DisplayRideListMessage());
+            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
+            if (currentUserId != Guid.Empty)
+            {
+                UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
+
+                ParticipantModel CurrentUserParticipantModel = new ParticipantModel(
+                    currentUserId,
+                    currentUserWrapper.Name,
+                    currentUserWrapper.Surname,
+                    currentUserWrapper.Rating
+                    );
+                ParticipantWrapper CurrentUserParticipantWrapper = new ParticipantWrapper(CurrentUserParticipantModel);
+                Model.Participants.Add(CurrentUserParticipantWrapper);
+                SaveAsync();
+                _mediator.Send(new DisplayRideListMessage());
+            }
+            
         }
 
         private async void OnDisplayBookRide(DisplayBookRideMessage m)
         {
             await LoadAsync(m.rideId);
+            Car = await _carFacade.GetAsync(Model.CarId);
+            Driver = await _userFacade.GetAsync(Model.DriverId);
             OnPropertyChanged();
         }
 

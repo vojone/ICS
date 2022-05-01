@@ -142,14 +142,14 @@
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="129"
-                    Text="{Binding Model.Driver.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding Driver.Name, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox
                     IsEnabled="False"
                     x:Name="TextBoxArrivalCreateRides_Copy3" Margin="244,0,0,20"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="129"
-                    Text="{Binding Model.Car.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding Car.Name, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Label
             Margin="0,0,10,0" 

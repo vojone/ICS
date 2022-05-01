@@ -74,19 +74,19 @@
                                 <RowDefinition Height="24*"/>
                                 <RowDefinition Height="23*"/>
                             </Grid.RowDefinitions>
-                            <TextBox x:Name="TextBoxFromHistory" Grid.Row="1" IsReadOnly="True" Text="{Binding Kam}" FontSize="14" Margin="10,0,10,0" 
+                            <TextBox x:Name="TextBoxFromHistory" Grid.Row="1" IsReadOnly="True" Text="{Binding ArrivalL}" FontSize="14" Margin="10,0,10,0" 
                                      Background="{x:Null}" BorderBrush="{x:Null}" Height="Auto"/>
-                            <TextBox x:Name="TextBoxToHistory" Grid.Row="0" IsReadOnly="True" Text="{Binding Odkud}" FontSize="14" Margin="10,0,10,0" 
+                            <TextBox x:Name="TextBoxToHistory" Grid.Row="0" IsReadOnly="True" Text="{Binding DepartureL}" FontSize="14" Margin="10,0,10,0" 
                                      Background="{x:Null}" BorderBrush="{x:Null}"/>
-                            <TextBox x:Name="TextBoxCarNameHistory" Grid.Column="0" Grid.Row="2" IsReadOnly="True" Text="{Binding Auto}" FontSize="10" Margin="10,3,102,3" 
+                            <TextBox x:Name="TextBoxCarNameHistory" Grid.Column="0" Grid.Row="2" IsReadOnly="True" Text="{Binding Car.Name}" FontSize="10" Margin="10,3,102,3" 
                                 Background="{x:Null}" BorderBrush="{x:Null}"/>
 
-                            <TextBox x:Name="TextBoxDriverHistory" Grid.Row="2" Grid.Column="1" Text="{Binding Ridic}" FontSize="14"
+                            <TextBox x:Name="TextBoxDriverHistory" Grid.Row="2" Grid.Column="1" Text="{Binding Driver.Name}" FontSize="14"
                                      Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
 
-                            <TextBox x:Name="TextBoxDepartureHistory" Grid.Row="0" Grid.Column="2" Text="{Binding OdKdy}" FontSize="14" Margin="10,0,10,0"
+                            <TextBox x:Name="TextBoxDepartureHistory" Grid.Row="0" Grid.Column="2" Text="{Binding DepartureT}" FontSize="14" Margin="10,0,10,0"
                                      Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
-                            <TextBox x:Name="TextBoxArrivalHistory" Grid.Row="0" Grid.Column="3" Text="{Binding DoKdy}" FontSize="14" Margin="10,0,10,0"
+                            <TextBox x:Name="TextBoxArrivalHistory" Grid.Row="0" Grid.Column="3" Text="{Binding ArrivalT}" FontSize="14" Margin="10,0,10,0"
                                      Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
                             <TextBox x:Name="TextBoxDateHistory" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Datum}" FontSize="14" Margin="10,0,10,0"
                                      Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
@@ -96,7 +96,7 @@
                                 Grid.Row="0" Grid.RowSpan="3"
                                 Grid.Column="3"
                                 x:Name="ButtonBook" 
-                                Content="Book" 
+                                Content="Add⭐" 
 
                                 Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}" FontSize="17"/>
                         </Grid>
