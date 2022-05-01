@@ -57,7 +57,7 @@
             Content="Filter rides" 
             Margin="0,33,77,0" 
             Background="#FFDBDBDB" 
-            BorderBrush="{x:Null}" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="90"
+            BorderBrush="{x:Null}" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="100"
             Command="{Binding FilterRidesCommand}" Grid.Row="1" FontSize="17"/>
         <Button 
             x:Name="ButtonCreateUser_Copy1" 
@@ -65,7 +65,7 @@
             Margin="77,33,0,0" 
             Background="#FFDBDBDB" 
             HorizontalAlignment="Left" 
-            BorderBrush="{x:Null}" Width="90" VerticalAlignment="Top" Height="28" Grid.Row="1" FontSize="17"
+            BorderBrush="{x:Null}" Width="100" VerticalAlignment="Top" Height="28" Grid.Row="1" FontSize="17"
             Command="{Binding DisplayRideHistoryCommand}"/>
         <Button 
             x:Name="ButtonCreateUser" 
