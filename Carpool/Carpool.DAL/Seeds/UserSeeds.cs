@@ -56,6 +56,16 @@ public static class UserSeeds
         RegistrationDate: default
     );
 
+    public static readonly UserEntity DeleteChuck = new(
+        Id: Guid.Parse("488651AC-BCE5-4362-9167-B6EF6B00AF36"),
+        Name: "Chuck",
+        Surname: "Norris",
+        RegistrationDate: DateTime.MinValue, 
+        PhotoUrl: "TestUrl",
+        Country: "USA",
+        Rating: 454657894
+    );
+
     public static readonly UserEntity UpdateChuck = Chuck with
     {
         Id = Guid.Parse("82DBAB40-9FF0-4F4E-BC3D-F1C1FCEF42E9"),
@@ -80,6 +90,8 @@ public static class UserSeeds
         Jack.Cars.Add(CarSeeds.DeleteKia);
 
         UpdateLeonardo.Cars.Add(CarSeeds.UpdateKia);
+
+        DeleteChuck.Cars.Add(CarSeeds.DeleteHyundai);
     }
 
     public static void Seed(this ModelBuilder modelBuilder)
@@ -90,6 +102,7 @@ public static class UserSeeds
             Chuck with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
             Leonardo with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
             UpdateChuck with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
+            DeleteChuck with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
             UpdateLeonardo with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() },
             DeleteLeonardo with { Cars = Array.Empty<CarEntity>(), Rides = Array.Empty<ParticipantEntity>() }
         );

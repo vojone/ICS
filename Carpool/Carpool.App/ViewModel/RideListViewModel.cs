@@ -69,7 +69,7 @@ namespace Carpool.App.ViewModel
         
         private async void OnOpenRide(Guid rideId)
         {
-            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
+            Guid currentUserId = _session.GetLoggedUserId() ?? Guid.Empty;
             RideWrapper ride = await _rideFacade.GetAsync(rideId) ?? RideDetailModel.Empty;
 ;
             if (ride.DriverId == currentUserId)
@@ -102,7 +102,7 @@ namespace Carpool.App.ViewModel
 
         public async Task LoadAsync()
         {
-            CurrentUserId = _session.GetLoggedUser();
+            CurrentUserId = _session.GetLoggedUserId();
             Debug.WriteLine("Ride list user id "+CurrentUserId);
             Rides.Clear();
             var rides = await _rideFacade.GetAsync();

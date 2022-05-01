@@ -99,7 +99,7 @@ namespace Carpool.App.ViewModel
         private async void OnDisplayCreateRide(DisplayCreateRideMessage m)
         {
 
-            var loggedUserId = _session.GetLoggedUser();
+            var loggedUserId = _session.GetLoggedUserId();
             Debug.WriteLine("User id: " + loggedUserId);
 
             if (loggedUserId != null)

@@ -8,12 +8,14 @@
              xmlns:validators="clr-namespace:Carpool.App.Services"
              mc:Ignorable="d"
              xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
-             d:DataContext="{d:DesignInstance viewModels:CreateUserDetailViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:CreateUserDetailViewModel}"
+             d:DesignHeight="550" d:DesignWidth="900">
 
     <Grid Background="#FFA1A1A1" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"/>
-            <RowDefinition Height="170*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="70*"/>
             <RowDefinition Height="70*"/>
             <RowDefinition Height="70*"/>
             <RowDefinition Height="70*"/>
@@ -43,22 +45,23 @@
 
         <Grid
             Grid.Row="1"
-            Grid.RowSpan="3"
+            Grid.RowSpan="4"
             Grid.Column="1"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            ToolTip="Click to change profile image..."
+            VerticalAlignment="Top"
+            ToolTip="Click to change profile image..." Margin="0,10,0,0"
         >
             <!-- Background when image is not set -->
-            <Ellipse Height="200" 
-                     Width="200" 
-                     Margin="0,-16,0,16">
+            <!-- Background when image is not set -->
+            <Ellipse Height="300" 
+                     Width="300" Margin="-7,-10,-6,10"
+                     Name="UserPhotoBackground">
                 <Ellipse.Fill>
                     <SolidColorBrush Color="#FF8A8383" />
                 </Ellipse.Fill>
             </Ellipse>
 
-            <Ellipse Height="200" Width="200" Margin="0,-16,0,16" Cursor="Hand">
+            <Ellipse Height="300" Width="300" Cursor="Hand" Margin="-7,-6,-6,14" Name="UserPhoto">
                 <Ellipse.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding SelectPhotoCommand}"/>
                 </Ellipse.InputBindings>
@@ -66,15 +69,21 @@
                     <ImageBrush ImageSource="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
                 </Ellipse.Fill>
             </Ellipse>
+            <Button Margin="104,299,105,-14" 
+                    Content="Clear photo"
+                    Name="ClearUserPhoto"
+                    ToolTip="{Binding Model.PhotoUrl}"
+                    Visibility="{Binding Model.PhotoUrl, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding ClearPhotoCommand}">
+            </Button>
         </Grid>
 
         <TextBox
             x:Name="TextBoxFirstName" 
             Grid.Column="0"
             Grid.Row="2" 
-            Width="130" 
             Height="25" 
-            Margin="70,20,67,9" 
+            Margin="66,28,71,18" 
             TextAlignment="Left"
             VerticalContentAlignment="Center"
             Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
@@ -83,36 +92,33 @@
             x:Name="TextBoxLastName" 
             Grid.Column="0"
             Grid.Row="3" 
-            Width="130" 
             Height="25" 
-            Margin="70,20,67,9" 
+            Margin="70,29,71,18" 
             TextAlignment="Left"
             VerticalContentAlignment="Center"
             Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <TextBox
             x:Name="TextBoxCountry" 
-            Grid.Column="1"
+            Grid.Column="0"
             Grid.Row="4" 
-            Width="130" 
             Height="25" 
-            Margin="70,20,67,9" 
-            TextAlignment="Center"
+            Margin="70,29,70,17" 
+            TextAlignment="Left"
+            HorizontalContentAlignment="Left"
             Text="{Binding Model.Country}"/>
 
         <DatePickerTextBox 
             x:Name="RegistrationDate"
-            Grid.Row="4" 
+            Grid.Row="5" 
             Height="25" 
-            Width="130" 
             IsReadOnly="True"
-            Margin="70,20,67,9"
+            Margin="70,29,70,18"
             Background="LightGray"
             VerticalContentAlignment="Center"
             HorizontalContentAlignment="Center"
             Style="{StaticResource ReadOnlyDateTextBoxStyle}"
-            Text="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}" FontSize="14">
-        </DatePickerTextBox>
+            Text="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}" FontSize="14"/>
 
 
         <Button 
@@ -142,52 +148,52 @@
             Command="{Binding CancelCommand}" FontSize="17"/>
 
         <Label
-            Margin="0,2,0,0" 
+            Margin="70,10,0,0" 
             Content="First name" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Center" 
+            HorizontalAlignment="Left" 
             Width="127" 
             VerticalAlignment="Top" 
             Height="26" Grid.Row="2" FontSize="13"/>
 
         <Label
             Name="RegistrationDateLabel"
-            Margin="0,6,0,0" 
+            Margin="71,6,0,0" 
             Content="Date of registration" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Center" 
-            Width="127" 
+            HorizontalAlignment="Left" 
+            Width="126" 
             VerticalAlignment="Top" 
-            Height="29" 
-            Grid.Row="4" 
+            Height="30" 
+            Grid.Row="5" 
             FontSize="13"/>
 
         <Label
             Content="Last name" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Center" 
+            HorizontalAlignment="Left" 
             Width="127" 
             VerticalAlignment="Top" 
-            Height="25" 
+            Height="24" 
             Grid.Row="3" 
             FontSize="13" 
-            Margin="0,3,0,0"/>
+            Margin="70,10,0,0"/>
 
         <Label
             Content="Country" 
             Background="{x:Null}" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Center" 
+            HorizontalAlignment="Left" 
             Width="127" 
             VerticalAlignment="Top" 
             Height="29" 
             Grid.Row="4" 
             FontSize="13" 
-            Grid.Column="1" 
-            Margin="0,6,0,0"/>
+            Grid.Column="0" 
+            Margin="70,10,0,0"/>
 
     </Grid>
 </UserControl>

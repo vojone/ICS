@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,17 +22,23 @@ namespace Carpool.App.ViewModel
 
         private IViewModel? _currentViewModel;
 
+        private readonly ISession _session;
+
         public MainViewModel(
             ILoginScreenViewModel loginScreenViewModel,
             ICreateUserDetailViewModel createUserDetailViewModel,
             IProfileUserDetailViewModel profileUserDetailViewModel,
+            ICarEditViewModel carEditViewModel,
             IRideListViewModel rideListViewModel,
             IRideHistoryViewModel rideHistoryViewModel,
             ICreateRideDetailViewModel createRideDetailViewModel,
             IEditRideDetailViewModel editRideDetailViewModel,
             IBookRideDetailViewModel bookRideDetailViewModel,
+            ISession session,
             IMediator mediator)
         {
+            _session = session;
+
             LoginScreenViewModel = loginScreenViewModel;
             RideListViewModel = rideListViewModel;
             RideHistoryViewModel = rideHistoryViewModel;
@@ -40,12 +47,17 @@ namespace Carpool.App.ViewModel
             EditRideDetailViewModel = editRideDetailViewModel;
             CreateUserDetailViewModel = createUserDetailViewModel;
             ProfileUserDetailViewModel = profileUserDetailViewModel;
+            CarEditViewModel = carEditViewModel;
 
             CurrentViewModel = LoginScreenViewModel;
 
             mediator.Register<DisplayUserCreateScreenMessage>(OnDisplayUserCreateScreen);
             mediator.Register<DisplayLoginScreenMessage>(OnDisplayLoginScreen);
             mediator.Register<DisplayUserProfileMessage>(OnDisplayUserProfile);
+
+            mediator.Register<DisplayCarInfoMessage>(OnDisplayCarInfo);
+            mediator.Register<DisplayLastMessage>(OnDisplayLast);
+
             mediator.Register<DisplayRideListMessage>(OnDisplayRideList);
             mediator.Register<DisplayRideHistoryMessage>(OnDisplayRideHistory);
             mediator.Register<DisplayCreateRideMessage>(OnDisplayCreateRide);
@@ -69,6 +81,20 @@ namespace Carpool.App.ViewModel
 
         public IProfileUserDetailViewModel ProfileUserDetailViewModel { get; set; }
 
+        public ICarEditViewModel CarEditViewModel { get; set; }
+
+
+        public void OnDisplay(IViewModel viewModel)
+        {
+            if (CurrentViewModel != null)
+            {
+                _session.PushViewModel(CurrentViewModel);
+            }
+
+            CurrentViewModel = viewModel;
+        }
+
+
         public IRideListViewModel RideListViewModel{ get; set; }
 
         public IRideHistoryViewModel RideHistoryViewModel { get; set; }
@@ -79,20 +105,31 @@ namespace Carpool.App.ViewModel
 
         public IBookRideDetailViewModel BookRideDetailViewModel { get; set; }
 
+        public void OnDisplayLast(DisplayLastMessage msg)
+        {
+            Debug.WriteLine("Received go back message!");
+            CurrentViewModel = _session.GetLastViewModel() ?? CurrentViewModel;
+        }
+
+
+        public void OnDisplayCarInfo(DisplayCarInfoMessage msg)
+        {
+            OnDisplay(CarEditViewModel);
+        }
 
         public void OnDisplayUserProfile(DisplayUserProfileMessage msg)
         {
-            CurrentViewModel = ProfileUserDetailViewModel;
+            OnDisplay(ProfileUserDetailViewModel);
         }
 
         public void OnDisplayUserCreateScreen(DisplayUserCreateScreenMessage msg)
         {
-            CurrentViewModel = CreateUserDetailViewModel;
+            OnDisplay(CreateUserDetailViewModel);
         }
 
         public void OnDisplayLoginScreen(DisplayLoginScreenMessage msg)
         {
-            CurrentViewModel = LoginScreenViewModel;
+            OnDisplay(LoginScreenViewModel);
         }
 
         public void OnDisplayRideList(DisplayRideListMessage msg)

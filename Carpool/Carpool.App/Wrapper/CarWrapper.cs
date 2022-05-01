@@ -14,6 +14,25 @@ namespace Carpool.App.Wrapper
             
         }
 
+        public override void Validate(string? propertyName = null)
+        {
+            if (propertyName is null or nameof(Name))
+            {
+                if (Name == string.Empty)
+                {
+                    AddError(nameof(Name), "The car name cannot be empty!");
+                }
+            }
+
+            if (propertyName is null or nameof(Brand))
+            {
+                if (Brand == string.Empty)
+                {
+                    AddError(nameof(Brand), "The brand cannot be empty!");
+                }
+            }
+        }
+
         public string? Name
         {
             get => GetValue<string>();
@@ -21,6 +40,12 @@ namespace Carpool.App.Wrapper
         }
 
         public string? Brand
+        {
+            get => GetValue<string>();
+            set => SetValue(value);
+        }
+
+        public string? Photo
         {
             get => GetValue<string>();
             set => SetValue(value);
@@ -44,17 +69,25 @@ namespace Carpool.App.Wrapper
             set => SetValue(value);
         }
 
-        /*public List<CarPhotoModel> Photos
+        public Guid OwnerId
         {
-            get => GetValue<List<CarPhotoModel>>();
+            get => GetValue<Guid>();
             set => SetValue(value);
-        }*/
-        private ObservableCollection<CarPhotoWrapper> Photos = new();
+        }
 
         public static implicit operator CarWrapper(CarDetailModel detailModel) => new(detailModel);
 
         public static implicit operator CarDetailModel(CarWrapper wrapper) => wrapper.Model;
 
+        public bool DataEquals(CarDetailModel model)
+        {
+            return this.Name == model.Name &&
+                   this.Brand == model.Brand &&
+                   this.Photo == model.Photo &&
+                   this.Registration == model.Registration &&
+                   this.Seats == model.Seats &&
+                   this.Type == model.Type;
+        }
     }
 }
 

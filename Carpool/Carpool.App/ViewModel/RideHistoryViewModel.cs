@@ -53,7 +53,7 @@ namespace Carpool.App.ViewModel
             Rides.Clear();
             var rides = await _rideFacade.GetAsync();
 
-            Guid? currentUserId = _session.GetLoggedUser();
+            Guid? currentUserId = _session.GetLoggedUserId();
 
             foreach (var item in rides)
             {

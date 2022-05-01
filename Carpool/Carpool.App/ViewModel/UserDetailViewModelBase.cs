@@ -18,31 +18,41 @@ using Microsoft.Win32;
 
 namespace Carpool.App.ViewModel
 {
-    public class UserDetailViewModelBase : ViewModelBase, IUserDetailViewModelBase
+    public abstract class UserDetailViewModelBase : ViewModelBase, IUserDetailViewModelBase
     {
 
         protected readonly UserFacade UserFacade;
         protected readonly IMediator Mediator;
 
-        public UserDetailViewModelBase(UserFacade userFacade, IMediator mediator)
+        protected UserDetailViewModelBase(UserFacade userFacade, IMediator mediator)
         {
             UserFacade = userFacade;
             Mediator = mediator;
 
             SelectPhotoCommand = new RelayCommand(OnSelectPhoto);
+            ClearPhotoCommand = new RelayCommand(OnClearPhoto);
         }
 
         public UserWrapper? Model { get; protected set; }
-
         public ICommand SelectPhotoCommand { get; set; }
+        public ICommand ClearPhotoCommand { get; set; }
 
+
+
+        private void OnClearPhoto()
+        {
+            if (Model != null)
+            {
+                Model.PhotoUrl = null;
+            }
+        }
 
         private void OnSelectPhoto()
         {
             if (Model == null)
                 return;
                 
-            OpenFileDialog file = new OpenFileDialog
+            var file = new OpenFileDialog
             {
                 DefaultExt = ".jpg",
                 Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif"
@@ -59,6 +69,7 @@ namespace Carpool.App.ViewModel
 
         protected async Task OnSaveUser()
         {
+            Mediator.Send(new UpdateMessage<UserWrapper>());
             await SaveAsync();
         }
 
@@ -89,7 +100,6 @@ namespace Carpool.App.ViewModel
             }
 
             Model = await UserFacade.SaveAsync(Model.Model);
-            Mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
         }
 
 
@@ -110,11 +120,6 @@ namespace Carpool.App.ViewModel
                 {
                     //TODO showing error msg
                 }
-
-                Mediator.Send(new DeleteMessage<UserWrapper>
-                {
-                    Model = Model
-                });
             }
         }
     }

@@ -83,6 +83,7 @@ public class UserWrapper : ModelWrapper<UserDetailModel>
 
         RegisterCollection(Cars, model.Cars);
     }
+
     public ObservableCollection<CarWrapper> Cars { get; init; } = new();
 
     public static implicit operator UserWrapper(UserDetailModel detailModel) => new(detailModel);

@@ -72,6 +72,7 @@ namespace Carpool.App
             services.AddFactory<ICreateUserDetailViewModel, CreateUserDetailViewModel>();
             services.AddFactory<IEditRideDetailViewModel, EditRideDetailViewModel>();
             services.AddFactory<IProfileUserDetailViewModel, ProfileUserDetailViewModel>();
+            services.AddFactory<ICarEditViewModel, CarEditViewModel>();
         }
 
 

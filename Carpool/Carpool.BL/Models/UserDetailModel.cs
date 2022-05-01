@@ -38,7 +38,7 @@ namespace Carpool.BL.Models
             new(string.Empty,
                 string.Empty,
                 DateTime.Now,
-                string.Empty,
+                null,
                 string.Empty);
 
 

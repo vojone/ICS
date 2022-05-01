@@ -6,13 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Win32;
+using AsyncRelayCommand = Carpool.App.Command.AsyncRelayCommand;
+using RelayCommand = Carpool.App.Command.RelayCommand;
 
 namespace Carpool.App.ViewModel
 {
@@ -21,7 +23,7 @@ namespace Carpool.App.ViewModel
         private readonly ISession _session;
 
         private UserDetailModel? _origModel;
-
+        
 
         public ProfileUserDetailViewModel(
             UserFacade userFacade, 
@@ -30,7 +32,7 @@ namespace Carpool.App.ViewModel
         {
             _session = session;
 
-            mediator.Register<LoadUserProfileMessage>(OnLoadUserProfileMessage);
+            mediator.Register<LoadToEditMessage<UserWrapper>>(OnLoadUser);
 
             SaveChangesCommand = new AsyncRelayCommand(OnSaveChanges, CanSave);
             DeleteAccountCommand = new AsyncRelayCommand(OnDeleteAccount);
@@ -40,15 +42,15 @@ namespace Carpool.App.ViewModel
         }
 
 
-        public ICommand SaveChangesCommand { get; set; }
+        public IAsyncRelayCommand SaveChangesCommand { get; }
 
-        public ICommand DeleteAccountCommand { get; set; }
+        public ICommand DeleteAccountCommand { get; }
 
-        public ICommand LogOutCommand { get; set; }
+        public ICommand LogOutCommand { get; }
 
-        public ICommand DisplayCarEditCommand { get; set; }
+        public ICommand DisplayCarEditCommand { get; }
 
-        public ICommand DisplayRideListCommand { get; set; }
+        public ICommand DisplayRideListCommand { get; }
 
 
         private bool CanSave()
@@ -67,6 +69,8 @@ namespace Carpool.App.ViewModel
         private async Task OnSaveChanges()
         {
             await SaveAsync();
+            RememberCurrentModel();
+            SaveChangesCommand.NotifyCanExecuteChanged();
         }
 
 
@@ -97,7 +101,8 @@ namespace Carpool.App.ViewModel
 
         private void OnDisplayCarEdit()
         {
-
+            Mediator.Send(new DisplayCarInfoMessage());
+            Mediator.Send(new SendModelToEditMessage<UserWrapper>() { Model = this.Model });
         }
 
 
@@ -107,7 +112,24 @@ namespace Carpool.App.ViewModel
         }
 
 
-        private void SaveCurrentModel()
+        //This is event handler so "async void" should be ok
+        private async void OnLoadUser(LoadToEditMessage<UserWrapper> message)
+        {
+            if (message.Id != null)
+            {
+                await LoadAsync((Guid)message.Id);
+            }
+            else
+            {
+                await LoadDefaultProfile();
+            }
+
+            OnPropertyChanged();
+            RememberCurrentModel();
+        }
+
+
+        private void RememberCurrentModel()
         {
             if (Model == null)
             {
@@ -118,30 +140,13 @@ namespace Carpool.App.ViewModel
                 Model.Name ?? string.Empty, Model.Surname ?? string.Empty,
                 Model.RegistrationDate, Model.PhotoUrl,
                 Model.Country, Model.Rating);
-
-        }
-
-
-        private async void OnLoadUserProfileMessage(LoadUserProfileMessage message)
-        {
-            if (message.UserId != null)
-            {
-                await LoadAsync((Guid)message.UserId);
-            }
-            else
-            {
-                await LoadDefaultProfile();
-            }
-
-            OnPropertyChanged();
-            SaveCurrentModel();
         }
 
 
         //In this case "default" means profile of logged user or empty profile if there is no logged user
         private async Task LoadDefaultProfile()
         {
-            var loggedUserId = _session.GetLoggedUser();
+            var loggedUserId = _session.GetLoggedUserId();
 
             if (loggedUserId != null)
             {

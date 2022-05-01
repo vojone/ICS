@@ -6,6 +6,7 @@ public record CarEntity(
     Guid Id,
     string Name,
     string Brand,
+    string? Photo,
     CarType Type,
     DateTime Registration,
     uint Seats,
@@ -15,10 +16,9 @@ public record CarEntity(
 
     //Parameter less constructor, because of AutoMapper
 #nullable disable
-    public CarEntity() : this(default, string.Empty, string.Empty, default, default, default, default) { }
+    public CarEntity() : this(default, string.Empty, string.Empty, string.Empty, default, default, default, default) { }
 #nullable enable
 
     public UserEntity? Owner { get; set; }
-    public ICollection<CarPhotoEntity> Photos { get; init; } = new List<CarPhotoEntity>();
 }
 

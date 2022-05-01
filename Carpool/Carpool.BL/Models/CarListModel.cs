@@ -11,11 +11,13 @@ namespace Carpool.BL.Models
 {
     public record CarListModel(
         string Name,
-        string Brand
+        string Brand,
+        string Photo
     ) : ModelBase
     {
         public string Name { get; set; } = Name;
         public string Brand { get; set; } = Brand;
+        public string Photo { get; set; } = Photo;
 
         public class MapperProfile : Profile
         {

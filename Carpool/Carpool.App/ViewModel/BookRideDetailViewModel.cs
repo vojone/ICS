@@ -59,7 +59,7 @@ namespace Carpool.App.ViewModel
 
         private async void OnBookRide()
         {
-            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
+            Guid currentUserId = _session.GetLoggedUserId() ?? Guid.Empty;
             if (currentUserId != Guid.Empty)
             {
                 if (ParticipantWrapper.IsParticipant( Model, currentUserId))
