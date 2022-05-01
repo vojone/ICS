@@ -29,8 +29,6 @@ namespace Carpool.App.ViewModel
 
         public CarWrapper Car { get; set; }
 
-        public UserWrapper Driver { get; set; }
-
         public EditRideDetailViewModel(
             RideFacade rideFacade,
             UserFacade userFacade,
@@ -46,7 +44,7 @@ namespace Carpool.App.ViewModel
 
             SaveRideCommand = new RelayCommand(OnSaveRide);
             DeleteRideCommand = new RelayCommand(OnDeleteRide);
-            DisplayRideListCommand = new RelayCommand(OnDisplayRideList);
+            GoBackCommand = new RelayCommand(OnGoBack);
             //Model = RideDetailModel.Empty;
 
             _mediator.Register<DisplayEditRideMessage>(OnDisplayEditRide);
@@ -56,7 +54,7 @@ namespace Carpool.App.ViewModel
 
         public ICommand DeleteRideCommand { get; set; }
 
-        public ICommand DisplayRideListCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
 
         private async void OnSaveRide()
         {
@@ -83,13 +81,13 @@ namespace Carpool.App.ViewModel
         private async void OnDisplayEditRide(DisplayEditRideMessage m)
         {
             await LoadAsync(m.rideId);
-            Debug.WriteLine("Editing ride with id: " + Model.Id + "\nDriver: " + Driver.Name);
+            Debug.WriteLine("Editing ride with id: " + Model.Id);
             OnPropertyChanged();
         }
 
-        private void OnDisplayRideList()
+        private void OnGoBack()
         {
-            _mediator.Send(new DisplayRideListMessage());
+            _mediator.Send(new DisplayLastMessage());
         }
     }
 }

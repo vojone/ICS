@@ -114,7 +114,7 @@
                                 x:Name="LabelCarName" 
                                 Grid.Column="0" 
                                 Grid.Row="2" 
-                                Content="{Binding Car.Name}" 
+                                Content="{Binding Path=Car,Converter={StaticResource CarToStringConverter}}"
                                 FontSize="10" 
                                 Margin="10,3,102,-8" 
                                 Background="{x:Null}" 
@@ -123,11 +123,12 @@
                             <Label 
                                 x:Name="LabelRating" 
                                 Grid.Row="1" 
-                                Grid.Column="1" 
-                                Content="{Binding Driver.Rating}"
+                                Grid.Column="0" 
+                                Content="{Binding Path=Driver,Converter={StaticResource UserToStringConverter}}"
                                 Background="{x:Null}" 
                                 BorderBrush="{x:Null}" 
-                                Height="auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,23,0,0" Grid.RowSpan="2"/>
+                                Height="auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,23,0,0" Grid.RowSpan="2"
+                                Grid.ColumnSpan="4"/>
 
                             <Label 
                                 x:Name="LabelDeparture" 
@@ -198,7 +199,7 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
-            Command="{Binding DisplayUserProfileCommand}"
+            Command="{Binding GoBackCommand}"
             Width="50" BorderBrush="{x:Null}" FontSize="17"/>
     </Grid>
 </local:UserControlBase>

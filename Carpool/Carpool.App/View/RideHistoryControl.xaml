@@ -76,8 +76,9 @@
                             <TextBox x:Name="TextBoxCarNameHistory" Grid.Column="0" Grid.Row="2" IsReadOnly="True" Text="{Binding Car.Name}" FontSize="10" Margin="10,3,102,3" 
                                 Background="{x:Null}" BorderBrush="{x:Null}"/>
 
-                            <TextBox x:Name="TextBoxDriverHistory" Grid.Row="2" Grid.Column="1" Text="{Binding Driver.Name}" FontSize="14"
-                                     Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
+                            <TextBox x:Name="TextBoxDriverHistory" Grid.Row="2" Grid.Column="0" Text="{Binding Driver.Name}" FontSize="14"
+                                     Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"
+                                     Grid.ColumnSpan="4"/>
 
                             <TextBox x:Name="TextBoxDepartureHistory" Grid.Row="0" Grid.Column="2" Text="{Binding DepartureT}" FontSize="14" Margin="5,0,5,0"
                                      Background="{x:Null}" BorderBrush="{x:Null}" Height="auto" TextAlignment="Center"/>
@@ -109,7 +110,7 @@
             Height="34" 
             HorizontalAlignment="Left" 
             Width="50" FontSize="17"
-            Command="{Binding DisplayRideListCommand}"/>
+            Command="{Binding GoBackCommand}"/>
         <Label
             Margin="70,0,0,0" 
             Content="Review a ride"

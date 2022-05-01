@@ -29,17 +29,17 @@ namespace Carpool.App.ViewModel
             _mediator = mediator;
             _session = session;
 
-            DisplayRideListCommand = new RelayCommand(OnDisplayRideList);
+            GoBackCommand = new RelayCommand(OnGoBack);
             _mediator.Register<DisplayRideHistoryMessage>(OnDisplayRideHistory);
         }
 
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
 
-        public ICommand DisplayRideListCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
 
-        private void OnDisplayRideList()
+        private void OnGoBack()
         {
-            _mediator.Send(new DisplayRideListMessage());
+            _mediator.Send(new DisplayLastMessage());
         }
 
         private async void OnDisplayRideHistory(DisplayRideHistoryMessage m)

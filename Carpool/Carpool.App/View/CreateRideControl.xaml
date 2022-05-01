@@ -143,6 +143,6 @@
             Height="34" 
             HorizontalAlignment="Left" 
             Width="50" BorderBrush="{x:Null}" FontSize="17"
-            Command="{Binding DisplayUserProfileCommand}"/>
+            Command="{Binding GoBackCommand}"/>
     </Grid>
 </local:UserControlBase>

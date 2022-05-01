@@ -43,7 +43,7 @@ namespace Carpool.App.ViewModel
             _session = session;
             
             BookRideCommand = new RelayCommand(OnBookRide,CanSaveRide);
-            DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
+            GoBackCommand = new RelayCommand(OnGoBack);
             //Model = RideDetailModel.Empty;
 
             _mediator.Register<DisplayBookRideMessage>(OnDisplayBookRide);
@@ -51,7 +51,7 @@ namespace Carpool.App.ViewModel
 
         public ICommand BookRideCommand { get; set; }
 
-        public ICommand DisplayUserProfileCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
 
         public Guid? CurrentUserId { get; set; }
 
@@ -114,9 +114,9 @@ namespace Carpool.App.ViewModel
             OnPropertyChanged();
         }
 
-        private void OnDisplayUserProfile()
+        private void OnGoBack()
         {
-            _mediator.Send(new DisplayUserProfileMessage());
+            _mediator.Send(new DisplayLastMessage());
         }
     }
 }
