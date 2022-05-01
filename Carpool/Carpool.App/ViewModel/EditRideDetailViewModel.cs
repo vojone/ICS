@@ -60,14 +60,14 @@ namespace Carpool.App.ViewModel
 
         public ICommand DisplayRideListCommand { get; set; }
 
-        private async Task OnSaveRide()
+        private async void OnSaveRide()
         {
             Model.CarId = Car.Id;
             await SaveAsync();
             _mediator.Send(new DisplayRideListMessage());
         }
 
-        private async Task OnDeleteRide()
+        private async void OnDeleteRide()
         {
             var answer = MessageBox.Show(
                 "The ride will be deleted.\nAre you sure?",
@@ -83,7 +83,7 @@ namespace Carpool.App.ViewModel
             }
         }
 
-        private async Task OnDisplayEditRide(DisplayEditRideMessage m)
+        private async void OnDisplayEditRide(DisplayEditRideMessage m)
         {
             await LoadAsync(m.rideId);
             Car = await _carFacade.GetAsync(Model.CarId);

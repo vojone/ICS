@@ -67,7 +67,7 @@ namespace Carpool.App.ViewModel
             _mediator.Send(new DisplayCreateRideMessage());
         }
         
-        private async Task OnOpenRide(Guid rideId)
+        private async void OnOpenRide(Guid rideId)
         {
             Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
             RideWrapper ride = await _rideFacade.GetAsync(rideId) ?? RideDetailModel.Empty;
@@ -111,8 +111,6 @@ namespace Carpool.App.ViewModel
             {
                 Rides.Add(item);
             }
-
         }
-
     }
 }

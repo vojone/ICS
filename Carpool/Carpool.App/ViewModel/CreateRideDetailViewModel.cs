@@ -84,7 +84,7 @@ namespace Carpool.App.ViewModel
             Debug.WriteLine("ArrivalT: " + (Model != null ? Model.ArrivalT : "EMPTY"));
         }
 
-        private async Task OnCreateRide()
+        private async void OnCreateRide()
         {
             if (CanSaveRide())
             {
@@ -96,7 +96,7 @@ namespace Carpool.App.ViewModel
             _mediator.Send(new DisplayRideListMessage());
         }
 
-        private async Task OnDisplayCreateRide(DisplayCreateRideMessage m)
+        private async void OnDisplayCreateRide(DisplayCreateRideMessage m)
         {
 
             var loggedUserId = _session.GetLoggedUser();

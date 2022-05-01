@@ -57,7 +57,7 @@ namespace Carpool.App.ViewModel
 
         public CarWrapper? Car { get; set; }
 
-        private async Task OnBookRide()
+        private async void OnBookRide()
         {
             Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
             if (currentUserId != Guid.Empty)
@@ -102,7 +102,7 @@ namespace Carpool.App.ViewModel
             OnPropertyChanged();
         }
 
-        private async Task OnDisplayBookRide(DisplayBookRideMessage m)
+        private async void OnDisplayBookRide(DisplayBookRideMessage m)
         {
             await LoadAsync(m.rideId);
             Car = await _carFacade.GetAsync(Model.CarId);

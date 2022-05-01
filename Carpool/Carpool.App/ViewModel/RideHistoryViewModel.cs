@@ -42,7 +42,7 @@ namespace Carpool.App.ViewModel
             _mediator.Send(new DisplayRideListMessage());
         }
 
-        private async Task OnDisplayRideHistory(DisplayRideHistoryMessage m)
+        private async void OnDisplayRideHistory(DisplayRideHistoryMessage m)
         {
             await LoadAsync();
         }
