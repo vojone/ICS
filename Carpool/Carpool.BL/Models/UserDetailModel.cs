@@ -24,7 +24,7 @@ namespace Carpool.BL.Models
 
         public DateTime RegistrationDate { get; set; } = RegistrationDate;
 
-        public List<CarDetailModel> Cars { get; init; } = new();
+        public List<CarListModel> Cars { get; init; } = new();
 
         public class MapperProfile : Profile
         {

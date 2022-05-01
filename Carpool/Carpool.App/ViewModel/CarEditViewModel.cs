@@ -1,7 +1,9 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
@@ -9,51 +11,76 @@ using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using CookBook.App.Extensions;
 
 namespace Carpool.App.ViewModel
 {
-    public class CarInfoViewModel : ViewModelBase, ICarInfoViewModel
+    public class CarEditViewModel : ViewModelBase, ICarEditViewModel
     {
-        private readonly CarFacade _carFacade;
-
         private readonly IMediator _mediator;
 
-        public UserWrapper? CurrentUserModel { get; private set; }
+        private readonly CarFacade _carFacade;
 
 
-        public CarInfoViewModel(
-            CarFacade carFacade, 
-            UserFacade userFacade,
+
+        private UserWrapper? _userModel;
+
+        public CarEditViewModel(
             ISession session,
+            CarFacade carFacade,
             IMediator mediator)
         {
-            _carFacade = carFacade;
             _mediator = mediator;
-            
+
+            _carFacade = carFacade;
+
+
+            GoBackCommand = new RelayCommand(OnGoBack);
+
+            _mediator.Register<SendModelToEditMessage<UserWrapper>>(OnSendToEdit);
 
             SaveCommand = new AsyncRelayCommand(OnSave);
             DeleteCommand = new AsyncRelayCommand(OnDelete);
             NewCarCommand = new RelayCommand(OnNewCar);
-            GoBackCommand = new RelayCommand(OnGoBack);
-
-            _mediator.Register<LoadedMessage<UserWrapper>>(OnUpdateUser);
+            SelectCarCommand = new AsyncRelayCommand<int>(OnSelectCar);
         }
 
+        public ICommand GoBackCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand DeleteCommand { get; }
-        public ICommand GoBackCommand { get; }
         public ICommand NewCarCommand { get; }
+        public ICommand SelectCarCommand { get; }
 
         public CarWrapper? Model { get; private set; }
 
-        private void OnUpdateUser(LoadedMessage<UserWrapper> msg)
+        public UserWrapper? UserModel
         {
-            if (msg.Model != null)
+            get => _userModel;
+            set
             {
-                CurrentUserModel = msg.Model;
-                OnPropertyChanged();
+                _userModel = value;
+
+                if (value?.Model.Cars != null && UserModel != null)
+                {
+                    foreach (var car in value.Model.Cars)
+                    {
+                        UserModel.Cars.Add(car);
+                    }
+                }
             }
         }
+
+
+        private void OnSendToEdit(SendModelToEditMessage<UserWrapper> message)
+        {
+            UserModel = message.Model;
+        }
+
+        private void OnGoBack()
+        {
+            _mediator.Send(new DisplayLastMessage());
+        }
+
 
         private async Task OnSave()
         {
@@ -81,9 +108,19 @@ namespace Carpool.App.ViewModel
             Model = CarDetailModel.Empty;
         }
 
-        private void OnGoBack()
+        public async Task OnSelectCar(int selectedIndex)
         {
-            _mediator.Send(new DisplayLastMessage());
+            if (selectedIndex == 0)
+            {
+                OnNewCar();
+            }
+            else
+            {
+                if (UserModel != null)
+                {
+                    await LoadAsync(UserModel.Cars[selectedIndex - 1].Id);
+                }
+            }
         }
 
         public async Task LoadAsync(Guid id)
@@ -99,7 +136,8 @@ namespace Carpool.App.ViewModel
             }
 
             Model = await _carFacade.SaveAsync(Model.Model);
-            _mediator.Send(new UpdateMessage<CarWrapper> { Model = Model });
+
+            _mediator.Send(new LoadToEditMessage<UserWrapper> { Id = UserModel?.Id });
         }
 
         public async Task DeleteAsync()
@@ -112,8 +150,10 @@ namespace Carpool.App.ViewModel
             {
                 await _carFacade.DeleteAsync(Model);
             }
+
+            _mediator.Send(new LoadToEditMessage<UserWrapper> { Id = UserModel?.Id });
         }
     }
-};
+}
 
 

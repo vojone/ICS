@@ -17,5 +17,16 @@ namespace Carpool.BL.Facades
         {
 
         }
+
+        public async Task<UserDetailModel?> GetAsyncWithCars(Guid id)
+        {
+            await using var uow = UnitOfWorkFactory.Create();
+            var query = uow
+                .GetRepository<UserEntity>()
+                .Get()
+                .Where(e => e.Id == id).Include(i => i.Cars);
+
+            return await Mapper.ProjectTo<UserDetailModel>(query).SingleOrDefaultAsync().ConfigureAwait(false);
+        }
     }
 }

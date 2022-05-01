@@ -70,7 +70,7 @@ public class UserWrapper : ModelWrapper<UserDetailModel>
         get => GetValue<string>(); 
         set => SetValue(value);
     }
-    public ObservableCollection<CarWrapper> Cars { get; init; } = new();
+    public ObservableCollection<CarListModel> Cars { get; init; } = new();
 
     public static implicit operator UserWrapper(UserDetailModel detailModel) => new(detailModel);
 

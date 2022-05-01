@@ -30,7 +30,8 @@ namespace Carpool.BL.Tests
                 Brand: @"Škoda",
                 Type: CarType.Sport,
                 Registration: new DateTime(2005, 5, 4),
-                Seats: 4
+                Seats: 4,
+                Guid.Empty
             );
 
             //Act & Assert

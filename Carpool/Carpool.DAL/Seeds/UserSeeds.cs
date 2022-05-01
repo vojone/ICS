@@ -60,6 +60,7 @@ public static class UserSeeds
         Id: Guid.Parse("488651AC-BCE5-4362-9167-B6EF6B00AF36"),
         Name: "Chuck",
         Surname: "Norris",
+        RegistrationDate: DateTime.MinValue, 
         PhotoUrl: "TestUrl",
         Country: "USA",
         Rating: 454657894

@@ -30,7 +30,7 @@ namespace Carpool.App.ViewModel
         {
             _session = session;
 
-            mediator.Register<SelectedMessage<UserWrapper>>(OnUserSelected);
+            mediator.Register<LoadToEditMessage<UserWrapper>>(OnLoadUser);
 
             SaveChangesCommand = new AsyncRelayCommand(OnSaveChanges, CanSave);
             DeleteAccountCommand = new AsyncRelayCommand(OnDeleteAccount);
@@ -40,15 +40,15 @@ namespace Carpool.App.ViewModel
         }
 
 
-        public ICommand SaveChangesCommand { get; set; }
+        public ICommand SaveChangesCommand { get; }
 
-        public ICommand DeleteAccountCommand { get; set; }
+        public ICommand DeleteAccountCommand { get; }
 
-        public ICommand LogOutCommand { get; set; }
+        public ICommand LogOutCommand { get; }
 
-        public ICommand DisplayCarEditCommand { get; set; }
+        public ICommand DisplayCarEditCommand { get; }
 
-        public ICommand DisplayRideListCommand { get; set; }
+        public ICommand DisplayRideListCommand { get; }
 
 
         private bool CanSave()
@@ -107,6 +107,25 @@ namespace Carpool.App.ViewModel
         }
 
 
+        //This is event handler so "async void" should be ok
+        private async void OnLoadUser(LoadToEditMessage<UserWrapper> message)
+        {
+            if (message.Id != null)
+            {
+                await LoadAsync((Guid)message.Id);
+            }
+            else
+            {
+                await LoadDefaultProfile();
+            }
+
+            OnPropertyChanged();
+            RememberCurrentModel();
+
+            Mediator.Send(new SendModelToEditMessage<UserWrapper>() { Model = this.Model });
+        }
+
+
         private void RememberCurrentModel()
         {
             if (Model == null)
@@ -119,23 +138,6 @@ namespace Carpool.App.ViewModel
                 Model.RegistrationDate, Model.PhotoUrl,
                 Model.Country, Model.Rating);
 
-        }
-
-
-        private async void OnUserSelected(SelectedMessage<UserWrapper> message)
-        {
-            if (message.Id != null)
-            {
-                await LoadAsync((Guid)message.Id);
-            }
-            else
-            {
-                await LoadDefaultProfile();
-            }
-
-            Mediator.Send(new LoadedMessage<UserWrapper>() { Model = Model});
-            OnPropertyChanged();
-            RememberCurrentModel();
         }
 
 

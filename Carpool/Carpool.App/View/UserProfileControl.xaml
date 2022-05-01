@@ -137,6 +137,7 @@
             <Button Margin="110,295,110,-20" 
                     Content="Clear photo"
                     Name="ClearUserPhoto" 
+                    ToolTip="{Binding Model.PhotoUrl}"
                     Visibility="{Binding Model.PhotoUrl, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
                     Command="{Binding ClearPhotoCommand}">
             </Button>

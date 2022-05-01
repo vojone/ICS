@@ -44,6 +44,12 @@ namespace Carpool.App.Wrapper
             set => SetValue(value);
         }
 
+        public Guid OwnerId
+        {
+            get => GetValue<Guid>();
+            set => SetValue(value);
+        }
+
         /*public List<CarPhotoModel> Photos
         {
             get => GetValue<List<CarPhotoModel>>();

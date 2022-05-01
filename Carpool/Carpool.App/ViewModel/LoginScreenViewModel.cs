@@ -12,6 +12,7 @@ using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using CookBook.App.Extensions;
 
 namespace Carpool.App.ViewModel
 {
@@ -29,8 +30,8 @@ namespace Carpool.App.ViewModel
             _mediator = mediator;
             _session = session;
 
-            DisplayUserCreateScreenCommand = new RelayCommand(DisplayUserCreateScreen);
-            LogInCommand = new RelayCommand<Guid>(LogUserIn);
+            DisplayUserCreateScreenCommand = new RelayCommand(OnDisplayUserCreateScreen);
+            LogInCommand = new RelayCommand<Guid>(OnLogIn);
         }
 
         public ObservableCollection<UserListModel> Users { get; set; } = new();
@@ -41,18 +42,18 @@ namespace Carpool.App.ViewModel
         public ICommand LogInCommand { get; set; }
 
 
-        private void DisplayUserCreateScreen()
+        private void OnDisplayUserCreateScreen()
         {
             System.Diagnostics.Debug.WriteLine("Going to User Create, sending");
             _mediator.Send(new DisplayUserCreateScreenMessage());
             _mediator.Send(new NewMessage<UserWrapper>());
         }
 
-        private void LogUserIn(Guid userId)
+        private void OnLogIn(Guid userId)
         {
             System.Diagnostics.Debug.WriteLine("Logging In As user with Id:" + userId);
             _session.LogUserIn(userId);
-            _mediator.Send(new SelectedMessage<UserWrapper>() {Id = userId});
+            _mediator.Send(new LoadToEditMessage<UserWrapper>() {Id = userId});
             _mediator.Send(new DisplayUserProfileMessage());
         }
 
@@ -60,11 +61,7 @@ namespace Carpool.App.ViewModel
         {
             Users.Clear();
             var users = await _userFacade.GetAsync();
-
-            foreach (var user in users)
-            {
-                Users.Add(user);
-            }
+            Users.AddRange(users);
         }
     }
 }

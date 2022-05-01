@@ -100,7 +100,6 @@ namespace Carpool.App.ViewModel
             }
 
             Model = await UserFacade.SaveAsync(Model.Model);
-            Mediator.Send(new UpdateMessage<UserWrapper> { Model = Model });
         }
 
 

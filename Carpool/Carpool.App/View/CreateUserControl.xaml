@@ -71,7 +71,8 @@
             </Ellipse>
             <Button Margin="104,299,105,-14" 
                     Content="Clear photo"
-                    Name="ClearUserPhoto" 
+                    Name="ClearUserPhoto"
+                    ToolTip="{Binding Model.PhotoUrl}"
                     Visibility="{Binding Model.PhotoUrl, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
                     Command="{Binding ClearPhotoCommand}">
             </Button>

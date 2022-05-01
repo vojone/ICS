@@ -1,4 +1,4 @@
-<UserControl x:Class="Carpool.App.View.CarInfoControl"
+<UserControl x:Class="Carpool.App.View.CarEditControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,8 @@
              xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900"
-             d:DataContext="{d:DesignInstance viewModel:CarInfoViewModel}">
+             d:DataContext="{d:DesignInstance viewModel:CarEditViewModel}"
+             DataContext="{Binding}">
     <Grid Background="#FFA1A1A1"
           Width="auto"
           Height="auto"
@@ -53,7 +54,7 @@
                 Grid.Column="0"
                 Validation.ErrorTemplate="{x:Null}"
                 x:Name="LoggedUsername" 
-                Content="{Binding CurrentUserModel.Name, UpdateSourceTrigger=PropertyChanged}" 
+                Content="{Binding UserModel.Name, UpdateSourceTrigger=PropertyChanged}" 
                 Background="{x:Null}" 
                 BorderBrush="{x:Null}" 
                 VerticalAlignment="Center" 
@@ -67,7 +68,7 @@
                 Grid.Column="1"
                 Validation.ErrorTemplate="{x:Null}"
                 x:Name="LoggedSurname" 
-                Content="{Binding CurrentUserModel.Surname, UpdateSourceTrigger=PropertyChanged}" 
+                Content="{Binding UserModel.Surname, UpdateSourceTrigger=PropertyChanged}" 
                 Background="{x:Null}" 
                 BorderBrush="{x:Null}" 
                 VerticalAlignment="Center" 
@@ -108,10 +109,11 @@
             VerticalAlignment="Top" 
             Width="130" 
             BorderBrush="{x:Null}"
-            ItemsSource="{Binding CurrentUserModel.Cars, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding UserModel.Cars, UpdateSourceTrigger=PropertyChanged}"
             DisplayMemberPath="Name"
-            SelectedValuePath="Name"
+            SelectedValuePath="Name" SelectionChanged="SelectedCarCombobox_SelectionChanged"
             >
+            <ComboBoxItem IsSelected="True">Add New Car</ComboBoxItem>
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#DBDBDBDB"/>
@@ -128,7 +130,8 @@
             Margin="66,35,0,0" 
             TextAlignment="Center" 
             VerticalAlignment="Top" 
-            HorizontalAlignment="Left"/>
+            HorizontalAlignment="Left"
+            Text="{Binding Model.Name}"/>
 
         <DatePicker 
             Grid.Column="1" 
@@ -139,7 +142,8 @@
             VerticalAlignment="Top" 
             Width="130" 
             BorderBrush="{x:Null}" 
-            Margin="0,33,0,0"/>
+            Margin="0,33,0,0"
+            Text="{Binding Model.Registration}"/>
 
         <TextBox  
             x:Name="CarMakeCombobox" 
@@ -149,7 +153,8 @@
             Grid.Row="4" 
             Grid.Column="0" 
             VerticalAlignment="Top" 
-            Width="130" >
+            Width="130" 
+            Text="{Binding Model.Brand}">
 
         </TextBox>
 
