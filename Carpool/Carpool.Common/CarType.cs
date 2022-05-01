@@ -9,5 +9,6 @@ public enum CarType
     Hatchback,
     Minivan,
     Pickup,
-    SUV
+    SUV,
+    Other
 }

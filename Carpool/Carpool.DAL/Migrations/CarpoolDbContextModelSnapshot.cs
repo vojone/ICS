@@ -39,6 +39,9 @@ namespace Carpool.DAL.Migrations
                     b.Property<Guid>("OwnerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Registration")
                         .HasColumnType("datetime2");
 
@@ -52,27 +55,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("Carpool.DAL.Entities.CarPhotoEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CarId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("CarPhotos");
+                    b.ToTable("Cars", (string)null);
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.ParticipantEntity", b =>
@@ -96,7 +79,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Participants");
+                    b.ToTable("Participants", (string)null);
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.RideEntity", b =>
@@ -143,7 +126,7 @@ namespace Carpool.DAL.Migrations
 
                     b.HasIndex("DriverId");
 
-                    b.ToTable("Rides");
+                    b.ToTable("Rides", (string)null);
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.UserEntity", b =>
@@ -165,13 +148,16 @@ namespace Carpool.DAL.Migrations
                     b.Property<long>("Rating")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.CarEntity", b =>
@@ -183,17 +169,6 @@ namespace Carpool.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("Owner");
-                });
-
-            modelBuilder.Entity("Carpool.DAL.Entities.CarPhotoEntity", b =>
-                {
-                    b.HasOne("Carpool.DAL.Entities.CarEntity", "Car")
-                        .WithMany("Photos")
-                        .HasForeignKey("CarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Car");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.ParticipantEntity", b =>
@@ -232,11 +207,6 @@ namespace Carpool.DAL.Migrations
                     b.Navigation("Car");
 
                     b.Navigation("Driver");
-                });
-
-            modelBuilder.Entity("Carpool.DAL.Entities.CarEntity", b =>
-                {
-                    b.Navigation("Photos");
                 });
 
             modelBuilder.Entity("Carpool.DAL.Entities.RideEntity", b =>

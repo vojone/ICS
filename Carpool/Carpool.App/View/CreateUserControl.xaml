@@ -1,0 +1,199 @@
+<UserControl x:Class="Carpool.App.View.CreateUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Carpool.App.View"
+             xmlns:converters="clr-namespace:Carpool.App.Converters"
+             xmlns:validators="clr-namespace:Carpool.App.Services"
+             mc:Ignorable="d"
+             xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
+             d:DataContext="{d:DesignInstance viewModels:CreateUserDetailViewModel}"
+             d:DesignHeight="550" d:DesignWidth="900">
+
+    <Grid Background="#FFA1A1A1" Visibility="{Binding Model, Converter={StaticResource NullToVisibilityConverter}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="70*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Rectangle 
+            Fill="#FFC4C4C4" 
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="0,5,0,5"/>
+
+        <Label
+            Margin="0,0,0,0" 
+            Content="Create user profile" 
+            Background="{x:Null}" 
+            FontSize="18" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="209" 
+            VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+
+        <Grid
+            Grid.Row="1"
+            Grid.RowSpan="4"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            ToolTip="Click to change profile image..." Margin="0,10,0,0"
+        >
+            <!-- Background when image is not set -->
+            <!-- Background when image is not set -->
+            <Ellipse Height="300" 
+                     Width="300" Margin="-7,-10,-6,10"
+                     Name="UserPhotoBackground">
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="#FF8A8383" />
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Ellipse Height="300" Width="300" Cursor="Hand" Margin="-7,-6,-6,14" Name="UserPhoto">
+                <Ellipse.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectPhotoCommand}"/>
+                </Ellipse.InputBindings>
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding Model.PhotoUrl, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Button Margin="104,299,105,-14" 
+                    Content="Clear photo"
+                    Name="ClearUserPhoto"
+                    ToolTip="{Binding Model.PhotoUrl}"
+                    Visibility="{Binding Model.PhotoUrl, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding ClearPhotoCommand}">
+            </Button>
+        </Grid>
+
+        <TextBox
+            x:Name="TextBoxFirstName" 
+            Grid.Column="0"
+            Grid.Row="2" 
+            Height="25" 
+            Margin="66,28,71,18" 
+            TextAlignment="Left"
+            VerticalContentAlignment="Center"
+            Text="{Binding Model.Name, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+
+        <TextBox
+            x:Name="TextBoxLastName" 
+            Grid.Column="0"
+            Grid.Row="3" 
+            Height="25" 
+            Margin="70,29,71,18" 
+            TextAlignment="Left"
+            VerticalContentAlignment="Center"
+            Text="{Binding Model.Surname, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+
+        <TextBox
+            x:Name="TextBoxCountry" 
+            Grid.Column="0"
+            Grid.Row="4" 
+            Height="25" 
+            Margin="70,29,70,17" 
+            TextAlignment="Left"
+            HorizontalContentAlignment="Left"
+            Text="{Binding Model.Country}"/>
+
+        <DatePickerTextBox 
+            x:Name="RegistrationDate"
+            Grid.Row="5" 
+            Height="25" 
+            IsReadOnly="True"
+            Margin="70,29,70,18"
+            Background="LightGray"
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Center"
+            Style="{StaticResource ReadOnlyDateTextBoxStyle}"
+            Text="{Binding Model.RegistrationDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='dd/MM/yyyy'}" FontSize="14"/>
+
+
+        <Button 
+            Grid.Row="3"
+            Grid.Column="2"
+            x:Name="ButtonSave" 
+            Content="Save" 
+            Margin="0,0,0,0" 
+            Background="#FF005FB8" 
+            HorizontalAlignment="Center" 
+            Height="40" 
+            VerticalAlignment="Center"
+            Width="130"
+            Command="{Binding SaveUserCommand}" FontSize="17"/>
+
+        <Button 
+            Grid.Row="4"
+            Grid.Column="2"
+            x:Name="ButtonCancel" 
+            Content="Cancel" 
+            Margin="0,0,0,0" 
+            Background="#B80000" 
+            HorizontalAlignment="Center" 
+            Height="40" 
+            VerticalAlignment="Center"
+            Width="130"
+            Command="{Binding CancelCommand}" FontSize="17"/>
+
+        <Label
+            Margin="70,10,0,0" 
+            Content="First name" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="127" 
+            VerticalAlignment="Top" 
+            Height="26" Grid.Row="2" FontSize="13"/>
+
+        <Label
+            Name="RegistrationDateLabel"
+            Margin="71,6,0,0" 
+            Content="Date of registration" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="126" 
+            VerticalAlignment="Top" 
+            Height="30" 
+            Grid.Row="5" 
+            FontSize="13"/>
+
+        <Label
+            Content="Last name" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="127" 
+            VerticalAlignment="Top" 
+            Height="24" 
+            Grid.Row="3" 
+            FontSize="13" 
+            Margin="70,10,0,0"/>
+
+        <Label
+            Content="Country" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="127" 
+            VerticalAlignment="Top" 
+            Height="29" 
+            Grid.Row="4" 
+            FontSize="13" 
+            Grid.Column="0" 
+            Margin="70,10,0,0"/>
+
+    </Grid>
+</UserControl>

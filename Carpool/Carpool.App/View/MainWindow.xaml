@@ -1,0 +1,48 @@
+<Window x:Class="Carpool.App.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Carpool.App.View"
+        xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="900"
+        d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
+        DataContext="{Binding}">
+
+    <Window.Resources>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:LoginScreenViewModel}">
+            <local:LoginScreenControl></local:LoginScreenControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:CreateUserDetailViewModel}">
+            <local:CreateUserControl></local:CreateUserControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:ProfileUserDetailViewModel}">
+            <local:UserProfileControl></local:UserProfileControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:CarEditViewModel}">
+            <local:CarEditControl></local:CarEditControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:RideListViewModel}">
+            <local:RideListControl></local:RideListControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:RideHistoryViewModel}">
+            <local:RideHistoryControl></local:RideHistoryControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:CreateRideDetailViewModel}">
+            <local:CreateRideControl></local:CreateRideControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:BookRideDetailViewModel}">
+            <local:BookRideControl></local:BookRideControl>
+        </DataTemplate>
+        <DataTemplate x:Shared="False" DataType="{x:Type viewModel:EditRideDetailViewModel}">
+            <local:EditRideControl></local:EditRideControl>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+
+        <ContentControl Content="{Binding CurrentViewModel, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
+        <!--<local:LoginWindow HorizontalContentAlignment="Stretch" DataContext="{Binding LoginScreenViewModel}"/>-->
+    </Grid>
+</Window>
