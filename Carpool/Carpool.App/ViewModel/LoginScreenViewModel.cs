@@ -6,13 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Carpool.App.Command;
+using Carpool.App.Extensions;
 using Carpool.App.Messages;
-using Carpool.App.Model;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
-using CookBook.App.Extensions;
 
 namespace Carpool.App.ViewModel
 {

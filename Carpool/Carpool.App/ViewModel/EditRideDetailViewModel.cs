@@ -11,7 +11,6 @@ using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
-using Carpool.App.Model;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
@@ -27,16 +26,12 @@ namespace Carpool.App.ViewModel
         private readonly IMediator _mediator;
         private readonly ISession _session;
 
-        public CarWrapper Car { get; set; }
-
-        public UserWrapper Driver { get; set; }
-
         public EditRideDetailViewModel(
             RideFacade rideFacade,
             UserFacade userFacade,
             CarFacade carFacade,
             IMediator mediator,
-            ISession session) : base(rideFacade, userFacade, mediator)
+            ISession session) : base(rideFacade, userFacade, carFacade, mediator)
         {
             _rideFacade = rideFacade;
             _userFacade = userFacade;
@@ -46,24 +41,31 @@ namespace Carpool.App.ViewModel
 
             SaveRideCommand = new RelayCommand(OnSaveRide);
             DeleteRideCommand = new RelayCommand(OnDeleteRide);
-            DisplayRideListCommand = new RelayCommand(OnDisplayRideList);
+            GoBackCommand = new RelayCommand(OnGoBack);
             //Model = RideDetailModel.Empty;
 
             _mediator.Register<DisplayEditRideMessage>(OnDisplayEditRide);
         }
 
-        public ICommand PrintDataCommand { get; set; }
-
         public ICommand SaveRideCommand { get; set; }
 
         public ICommand DeleteRideCommand { get; set; }
 
-        public ICommand DisplayRideListCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
+
 
         private async void OnSaveRide()
         {
-            Model.CarId = Car.Id;
-            await SaveAsync();
+            try
+            {
+                await SaveAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+            
             _mediator.Send(new DisplayRideListMessage());
         }
 
@@ -86,15 +88,13 @@ namespace Carpool.App.ViewModel
         private async void OnDisplayEditRide(DisplayEditRideMessage m)
         {
             await LoadAsync(m.rideId);
-            Car = await _carFacade.GetAsync(Model.CarId);
-            Driver = await _userFacade.GetAsync(Model.DriverId);
-            Debug.WriteLine("Editing ride with id: " + Model.Id + "\nDriver: " + Driver.Name);
+            Debug.WriteLine("Editing ride with id: " + Model.Id);
             OnPropertyChanged();
         }
 
-        private void OnDisplayRideList()
+        private void OnGoBack()
         {
-            _mediator.Send(new DisplayRideListMessage());
+            _mediator.Send(new DisplayLastMessage());
         }
     }
 }

@@ -12,7 +12,8 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.Converters
 {
-    public class RideListButtonTextConverter : IMultiValueConverter
+    //From example project "CookBook"
+    public class BookLeaveButtonTextConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -20,26 +21,19 @@ namespace Carpool.App.Converters
             {
                 return "";
             }
-            RideListModel ride = (RideListModel) values[0];
+            RideDetailModel ride = (RideDetailModel)values[0];
             Guid currentUserId = (Guid)values[1];
 
-            if (ride.DriverId == currentUserId)
+            
+            if (ParticipantModel.IsParticipant(ride, currentUserId))
             {
-                return "Edit ride";
+                return "Leave";
             }
             else
             {
-                if (ParticipantModel.IsParticipant(ride, currentUserId))
-                {
-                    return "Leave";
-                }
-                else
-                {
-                    return "Book";
-
-                }
+                return "Book";
             }
-            return ride.Driver.Name;
+           
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

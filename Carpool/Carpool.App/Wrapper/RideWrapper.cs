@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Carpool.App.Extensions;
+using Carpool.BL.Facades;
 using Carpool.BL.Models;
 using Carpool.Common;
 
@@ -21,13 +22,13 @@ namespace Carpool.App.Wrapper
 
         public string? DepartureL
         {
-            get => GetValue<String>(); 
+            get => GetValue<string>(); 
             set => SetValue(value);
         }
 
         public string? ArrivalL
         {
-            get => GetValue<String>(); 
+            get => GetValue<string>(); 
             set => SetValue(value);
         }
 
@@ -94,6 +95,49 @@ namespace Carpool.App.Wrapper
         {
             get => GetValue<UserWrapper>(); 
             set => SetValue(value);
+        }
+
+        public override void Validate(string? propertyName = null)
+        {
+            if (propertyName is null or nameof(DepartureL))
+            {
+                if (DepartureL == string.Empty)
+                {
+                    AddError(nameof(DepartureL), "The departure location cannot be empty!");
+                }
+            }
+
+            if (propertyName is null or nameof(ArrivalL))
+            {
+                if (ArrivalL == string.Empty)
+                {
+                    AddError(nameof(ArrivalL), "The destination cannot be empty!");
+                }
+            }
+
+            if (propertyName is null or nameof(Car))
+            {
+                if (Car == CarDetailModel.Empty || Car == null)
+                {
+                    AddError(nameof(Car), "A car must be selected!");
+                }
+            }
+
+            if (propertyName is null or nameof(ArrivalT))
+            {
+                if (ArrivalT < DepartureT)
+                {
+                    AddError(nameof(ArrivalT), "Arrival time must be greater than departure time!");
+                }
+            }
+
+            if (propertyName is null or nameof(DepartureT))
+            {
+                if (ArrivalT >= DepartureT)
+                {
+                    AddError(nameof(DepartureT), "Arrival time must be lower than departure time!");
+                }
+            }
         }
 
         public ObservableCollection<ParticipantWrapper> Participants { get; init; } = new();

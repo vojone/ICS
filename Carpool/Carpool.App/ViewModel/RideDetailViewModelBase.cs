@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
-using Carpool.App.Model;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
@@ -22,16 +21,19 @@ namespace Carpool.App.ViewModel
     {
         private readonly RideFacade _rideFacade;
         private readonly UserFacade _userFacade;
+        private readonly CarFacade _carFacade;
         private readonly IMediator _mediator;
         private readonly ISession _session;
         
         public RideDetailViewModelBase(
             RideFacade rideFacade,
             UserFacade userFacade,
+            CarFacade carFacade,
             IMediator mediator)
         {
             _rideFacade = rideFacade;
             _userFacade = userFacade;
+            _carFacade = carFacade;
             _mediator = mediator;
             //Model = RideDetailModel.Empty;
             
@@ -39,11 +41,17 @@ namespace Carpool.App.ViewModel
 
         public RideWrapper Model { get; set; }
 
+        public UserWrapper Driver { get; set; }
+
+        public CarWrapper? Car { get; set; }
+
         public async Task LoadAsync(Guid id)
         {
             //not running for some reason
             Debug.WriteLine("load async running");
             Model = await _rideFacade.GetAsync(id) ?? RideDetailModel.Empty;
+            Car = await _carFacade.GetAsync(Model.CarId);
+            Driver = await _userFacade.GetAsync(Model.DriverId);
         }
 
 
@@ -53,12 +61,16 @@ namespace Carpool.App.ViewModel
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
-
+            Model.CarId = Car.Id;
+            Model.DriverId = Driver.Id;
             Model = await _rideFacade.SaveAsync(Model.Model);
             _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
         }
 
-        //private bool CanSave() => Model?.IsValid ?? false;
+        protected bool CanSaveRide()
+        {
+            return Model is { HasErrors: false };
+        }
 
         public async Task DeleteAsync()
         {

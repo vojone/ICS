@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Carpool.App.ViewModel;
-using Carpool.App.Model;
 using Carpool.BL.Models;
 using Microsoft.IdentityModel.Tokens;
 

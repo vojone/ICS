@@ -44,6 +44,7 @@
         <Button
             x:Name="ButtonCreateUser" 
             Content="Create Ride" 
+            Cursor="Hand"
             Margin="0,16,200,0" 
             Background="#FF005FB8" Height="34" VerticalAlignment="Top" HorizontalAlignment="Right" Width="98"/>
 

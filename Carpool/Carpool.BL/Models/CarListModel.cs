@@ -26,5 +26,10 @@ namespace Carpool.BL.Models
                 CreateMap<CarEntity, CarListModel>();
             }
         }
+
+        public override string ToString()
+        {
+            return Brand + " " + Name;
+        }
     }
 }

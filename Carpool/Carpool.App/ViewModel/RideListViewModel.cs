@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
-using Carpool.App.Model;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
@@ -39,7 +38,7 @@ namespace Carpool.App.ViewModel
             DisplayRideHistoryCommand = new RelayCommand(OnDisplayRideHistory);
             DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRide);
             OpenRideCommand = new RelayCommand<Guid>(OnOpenRide);
-            DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
+            GoBackCommand = new RelayCommand(OnGoBack);
         }
 
         public ICommand FilterRidesCommand { get; set; }
@@ -50,7 +49,7 @@ namespace Carpool.App.ViewModel
 
         public ICommand OpenRideCommand { get; set; }
 
-        public ICommand DisplayUserProfileCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
 
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
 
@@ -87,12 +86,11 @@ namespace Carpool.App.ViewModel
                 _mediator.Send(msg);
             }
             //RideWrapper ride = await _rideFacade.GetAsync(rideId);
-            
         }
 
-        private void OnDisplayUserProfile()
+        private void OnGoBack()
         {
-            _mediator.Send(new DisplayUserProfileMessage());
+            _mediator.Send(new DisplayLastMessage());
         }
 
         private void OnDisplayRideHistory()
@@ -111,8 +109,6 @@ namespace Carpool.App.ViewModel
             {
                 Rides.Add(item);
             }
-
         }
-
     }
 }

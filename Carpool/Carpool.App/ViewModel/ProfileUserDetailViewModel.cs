@@ -102,7 +102,6 @@ namespace Carpool.App.ViewModel
         private void OnDisplayCarEdit()
         {
             Mediator.Send(new DisplayCarInfoMessage());
-            Mediator.Send(new SendModelToEditMessage<UserWrapper>() { Model = this.Model });
         }
 
 
@@ -126,6 +125,8 @@ namespace Carpool.App.ViewModel
 
             OnPropertyChanged();
             RememberCurrentModel();
+
+            Mediator.Send(new SendModelToEditMessage<UserWrapper>() { Model = this.Model });
         }
 
 
