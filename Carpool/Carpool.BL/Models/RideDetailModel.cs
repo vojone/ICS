@@ -41,8 +41,8 @@ namespace Carpool.BL.Models
         public static RideDetailModel Empty => 
             new(string.Empty,
                 string.Empty, 
-                default,
-                default,
+                DateTime.Now,
+                DateTime.Now.AddHours(1.0),
                 default,
                 default,
                 RideState.None,

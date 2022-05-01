@@ -22,13 +22,13 @@ namespace Carpool.App.Wrapper
 
         public string? DepartureL
         {
-            get => GetValue<String>(); 
+            get => GetValue<string>(); 
             set => SetValue(value);
         }
 
         public string? ArrivalL
         {
-            get => GetValue<String>(); 
+            get => GetValue<string>(); 
             set => SetValue(value);
         }
 
@@ -114,8 +114,8 @@ namespace Carpool.App.Wrapper
                     AddError(nameof(ArrivalL), "The destination cannot be empty!");
                 }
             }
-
-            if (propertyName is null or nameof(DepartureT) )
+            
+            /*if (propertyName is null or nameof(DepartureT) )
             {
                 if (DateTime.Compare(DepartureT, ArrivalT) >= 0)
                 {
@@ -129,11 +129,11 @@ namespace Carpool.App.Wrapper
                 {
                     AddError(nameof(ArrivalT), "Arrival time must be after departure time!");
                 }
-            }
-
-            if (propertyName is null or nameof(Car))
+            }*/
+            
+            if (propertyName is null or nameof(CarId))
             {
-                if (Car == null || Car.HasErrors)
+                if (CarId == Guid.Empty)
                 {
                     AddError(nameof(Car), "A car must be selected!");
                 }

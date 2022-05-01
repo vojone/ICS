@@ -59,7 +59,7 @@ namespace Carpool.App.ViewModel
             foreach (var item in rides)
             {
                 RideWrapper ride = await _rideFacade.GetAsync(item.Id);
-                if ((item.ArrivalT < DateTime.Now) && (ParticipantWrapper.IsParticipant(ride,CurrentUserId) || CurrentUserId == item.DriverId))
+                if ((item.ArrivalT < DateTime.Now) && (ParticipantWrapper.IsParticipant(ride, CurrentUserId) || CurrentUserId == item.DriverId))
                 {
                     Rides.Add(item);
                 }

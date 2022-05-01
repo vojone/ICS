@@ -172,7 +172,7 @@ namespace Carpool.App.ViewModel
                 MessageBox.Show(e.Message);
                 return;
             }
-            _mediator.Send(new DisplayRideListMessage());
+            _mediator.Send(new DisplayLastMessage());
         }
     }
 }
