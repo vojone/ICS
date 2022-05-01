@@ -13,6 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:RideListButtonTextConverter x:Key="RideListButtonTextConverter" />
+            <converters:DateConverter x:Key="DateConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

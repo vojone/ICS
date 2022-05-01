@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using Carpool.App.Command;
@@ -33,6 +35,7 @@ namespace Carpool.App
 
         public App()
         {
+
             _host = Host.CreateDefaultBuilder()
                 .ConfigureAppConfiguration(ConfigureAppConfiguration)
                 .ConfigureServices((context, services) => { ConfigureServices(context.Configuration, services); })

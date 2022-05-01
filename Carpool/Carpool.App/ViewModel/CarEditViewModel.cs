@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
 using CookBook.App.Extensions;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Win32;
@@ -46,6 +48,7 @@ namespace Carpool.App.ViewModel
             GoBackCommand = new RelayCommand(OnGoBack);
 
             _mediator.Register<SendModelToEditMessage<UserWrapper>>(OnSendToEdit);
+            _mediator.Register<DisplayCarInfoMessage>(Init);
 
             SaveCommand = new AsyncRelayCommand(OnSave, CanSave);
             DeleteCommand = new AsyncRelayCommand(OnDelete, CanDelete);
@@ -106,11 +109,15 @@ namespace Carpool.App.ViewModel
             }
         }
 
+        private async void Init(DisplayCarInfoMessage message)
+        {
+            await SetDefaultCar();
+        }
 
-        private async void OnSendToEdit(SendModelToEditMessage<UserWrapper> message)
+
+        private void OnSendToEdit(SendModelToEditMessage<UserWrapper> message)
         {
             UserModel = message.Model;
-            await SetDefaultCar();
         }
 
         private void OnGoBack()
@@ -205,8 +212,8 @@ namespace Carpool.App.ViewModel
         {
             await LoadAsync(carId);
             _isPersisted = true;
-            SelectCarCommand.NotifyCanExecuteChanged();
             RememberCurrentModel();
+            SelectCarCommand.NotifyCanExecuteChanged();
             SaveCommand.NotifyCanExecuteChanged();
         }
 
@@ -247,14 +254,23 @@ namespace Carpool.App.ViewModel
         {
             if (Model is null)
             {
-                throw new InvalidOperationException("Null model cannot be deleted");
+                MessageBox.Show("Cannot delete null mode!", "Unable to delete car");
             }
             else
             {
-                await _carFacade.DeleteAsync(Model);
+                try
+                {
+                    await _carFacade.DeleteAsync(Model);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Car is linked to some rides!", "Unable to delete car");
+                    return;
+                }
 
                 _mediator.Send(new LoadToEditMessage<UserWrapper> { Id = UserModel?.Id });
 
+                await SetDefaultCar();
                 SaveCommand.NotifyCanExecuteChanged();
                 RememberCurrentModel();
             }
