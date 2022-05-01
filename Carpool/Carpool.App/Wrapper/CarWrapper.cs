@@ -14,6 +14,25 @@ namespace Carpool.App.Wrapper
             
         }
 
+        public override void Validate(string? propertyName = null)
+        {
+            if (propertyName is null or nameof(Name))
+            {
+                if (Name == string.Empty)
+                {
+                    AddError(nameof(Name), "The car name cannot be empty!");
+                }
+            }
+
+            if (propertyName is null or nameof(Brand))
+            {
+                if (Brand == string.Empty)
+                {
+                    AddError(nameof(Brand), "The brand cannot be empty!");
+                }
+            }
+        }
+
         public string? Name
         {
             get => GetValue<string>();

@@ -106,10 +106,10 @@
                 Grid.RowSpan="2"
                 VerticalContentAlignment="Top"
                 HorizontalContentAlignment="Right"
-                ItemsSource="{Binding UserModel.Cars}" Margin="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
+                ItemsSource="{Binding UserModel.Cars, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Width="261" Background="#FFD1D1D1" VerticalAlignment="Center">
+                    <StackPanel Width="261" Background="#FFD1D1D1" VerticalAlignment="Top">
                         <Grid Height="39">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
@@ -119,15 +119,16 @@
                                 <RowDefinition Height="25*"/>
                                 <RowDefinition Height="25*"/>
                             </Grid.RowDefinitions>
-                            <Label Content="{Binding Name}"  HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Height="24" VerticalAlignment="Bottom" Margin="10,0,0,13" Grid.RowSpan="2"/>
-                            <Label Content="{Binding Brand}"  HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Height="24" VerticalAlignment="Bottom" Margin="87,0,0,13" Grid.RowSpan="2"/>
+                            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Height="24" VerticalAlignment="Bottom" Margin="10,0,0,13" Grid.RowSpan="2"/>
+                            <Label Content="{Binding Brand, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Height="24" VerticalAlignment="Bottom" Margin="87,0,0,13" Grid.RowSpan="2"/>
                             <Button 
                                     Grid.Row="0"
                                     Grid.RowSpan="2"
                                     x:Name="ButtonLogin" 
                                     Content="Select" 
+                                    Cursor="Hand"
                                     Background="#FF005FB8"  BorderBrush="{x:Null}" Width="50" Margin="0,5,10,10" HorizontalAlignment="Right"
-                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.SelectCarCommand}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=DataContext.SelectCarCommand}"
                                     CommandParameter="{Binding Id}" Grid.Column="1"/>
                         </Grid>
                     </StackPanel>
@@ -144,7 +145,7 @@
             TextAlignment="Center" 
             VerticalAlignment="Top" 
             HorizontalAlignment="Left"
-            Text="{Binding Model.Name}"/>
+            Text="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <DatePicker 
             Grid.Column="1" 
@@ -156,7 +157,7 @@
             Width="130" 
             BorderBrush="{x:Null}" 
             Margin="0,33,0,0"
-            Text="{Binding Model.Registration}"/>
+            Text="{Binding Model.Registration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBox  
             x:Name="CarMakeCombobox" 
@@ -167,7 +168,7 @@
             Grid.Column="0" 
             VerticalAlignment="Top" 
             Width="130" 
-            Text="{Binding Model.Brand}">
+            Text="{Binding Model.Brand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
         </TextBox>
 
@@ -209,7 +210,7 @@
             />
 
         <TextBox x:Name="CarSeatsTextBox" HorizontalAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="5" Grid.Column="1" 
-                  VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}">
+                  VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}" Text="{Binding Model.Seats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <Label
             Margin="68,10,0,0" 

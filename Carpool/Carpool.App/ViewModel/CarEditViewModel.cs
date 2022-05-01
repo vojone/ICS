@@ -42,7 +42,7 @@ namespace Carpool.App.ViewModel
             SaveCommand = new AsyncRelayCommand(OnSave);
             DeleteCommand = new AsyncRelayCommand(OnDelete);
             NewCarCommand = new RelayCommand(OnNewCar);
-            SelectCarCommand = new AsyncRelayCommand<int>(OnSelectCar);
+            SelectCarCommand = new AsyncRelayCommand<Guid>(OnSelectCar);
         }
 
         public ICommand GoBackCommand { get; }
@@ -68,6 +68,8 @@ namespace Carpool.App.ViewModel
                         UserModel.Cars.Add(car);
                     }
                 }
+
+                OnPropertyChanged();
             }
         }
 
@@ -109,19 +111,10 @@ namespace Carpool.App.ViewModel
             Model = CarDetailModel.Empty;
         }
 
-        public async Task OnSelectCar(int selectedIndex)
+        public async Task OnSelectCar(Guid carId)
         {
-            if (selectedIndex == 0)
-            {
-                OnNewCar();
-            }
-            else
-            {
-                if (UserModel != null)
-                {
-                    await LoadAsync(UserModel.Cars[selectedIndex - 1].Id);
-                }
-            }
+            await LoadAsync(carId);
+            OnPropertyChanged();
         }
 
         public async Task LoadAsync(Guid id)
