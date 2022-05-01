@@ -11,6 +11,7 @@ using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Services;
+using Carpool.App.View;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
@@ -58,7 +59,13 @@ namespace Carpool.App.ViewModel
         public String ButtonText = "Book";
         private void OnFilterRides()
         {
-            LoadAsync();
+            var dialog = new FilterDialogWindow();
+
+            if (dialog.ShowDialog() == true)
+            {
+                dialog.Inpu
+            }
+            
         }
 
         private void OnDisplayCreateRide()

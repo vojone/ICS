@@ -143,15 +143,11 @@
                                 Grid.Column="4"
                                 x:Name="ButtonBook" 
                                 Cursor="Hand"
-                                ContentStringFormat="Send ⭐"
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.OpenRideCommand}"
                                 CommandParameter="{Binding Id}"
-                                Background="#FF005FB8" Margin="0,12,5,11" BorderBrush="{x:Null}">
+                                Background="#FFFDF41C" Margin="0,12,5,11" BorderBrush="{x:Null}">
                                 <Button.Content>
-                                    <MultiBinding Converter="{StaticResource RideListButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding UpdateSourceTrigger="PropertyChanged"/>
-                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=local:RideListControl}" Path="DataContext.CurrentUserId" UpdateSourceTrigger="PropertyChanged"/>
-                                    </MultiBinding>
+                                    <TextBlock Text="Send ⭐"></TextBlock>
                                 </Button.Content>
                             </Button>
 
