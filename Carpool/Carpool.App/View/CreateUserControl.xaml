@@ -71,6 +71,7 @@
             </Ellipse>
             <Button Margin="104,299,105,-14" 
                     Content="Clear photo"
+                    Cursor="Hand"
                     Name="ClearUserPhoto"
                     ToolTip="{Binding Model.PhotoUrl}"
                     Visibility="{Binding Model.PhotoUrl, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
@@ -125,6 +126,7 @@
             Grid.Row="3"
             Grid.Column="2"
             x:Name="ButtonSave" 
+            Cursor="Hand"
             Content="Save" 
             Margin="0,0,0,0" 
             Background="#FF005FB8" 
@@ -138,6 +140,7 @@
             Grid.Row="4"
             Grid.Column="2"
             x:Name="ButtonCancel" 
+            Cursor="Hand"
             Content="Cancel" 
             Margin="0,0,0,0" 
             Background="#B80000" 

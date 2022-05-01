@@ -33,6 +33,7 @@
         <Button 
             x:Name="ButtonCreateRideProfile" 
             Content="Create New User" 
+            Cursor="Hand"
             Background="#FF005FB8" 
             HorizontalAlignment="Right"
             Margin="0,0,20,0"
@@ -62,7 +63,8 @@
                                 <Button 
                                     Grid.Row="0"
                                     Grid.RowSpan="2"
-                                    x:Name="ButtonLogin" 
+                                    x:Name="ButtonLogin"
+                                    Cursor="Hand"
                                     Content="Login" 
                                     Background="#FF005FB8" Height="35"  BorderBrush="{x:Null}" Width="100" Grid.ColumnSpan="2" Margin="490,5,10,5" HorizontalAlignment="Right"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.LogInCommand}"

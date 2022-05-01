@@ -50,6 +50,7 @@
                     x:Name="ButtonEditRideSaveChanges" 
                     Margin="0,0,70,25" 
                     FontSize="20"
+                    Cursor="Hand"
                     Background="#FF005FB8" Height="34" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="267" Grid.Column="1" Grid.Row="1" Click="ButtonEditRideSaveChanges_Click" 
                     Command="{Binding BookRideCommand}"
                     >
@@ -172,12 +173,14 @@
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="34" 
+            Cursor="Hand"
             HorizontalAlignment="Left" 
             Command="{Binding GoBackCommand}"
             Width="50" BorderBrush="{x:Null}" FontSize="17"/>
         <Button
             x:Name="ButtonCreateUser_Copy" 
             Content="Create Ride" 
+            Cursor="Hand"
             Margin="0,0,150,0" 
             Background="#FF005FB8" Height="36" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98" BorderBrush="{x:Null}" Grid.Column="1" FontSize="17"/>
         <Label
