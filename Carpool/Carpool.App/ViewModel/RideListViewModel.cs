@@ -63,7 +63,7 @@ namespace Carpool.App.ViewModel
 
             if (dialog.ShowDialog() == true)
             {
-                dialog.Inpu
+                
             }
             
         }

@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:views = "clr-namespace:Carpool.App.View"
-        Title="Change Margins"
+        Title="Filter Rides"
         MinHeight="200"
         MinWidth="300"
         SizeToContent="WidthAndHeight"
