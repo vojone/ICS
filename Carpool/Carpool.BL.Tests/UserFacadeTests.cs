@@ -153,6 +153,7 @@ namespace Carpool.BL.Tests
             var newCar = new CarDetailModel(
                 Name: @"New car",
                 Brand: @"BMW",
+                Photo: @"New_photo_1_of\update\bmw\URL.png",
                 Type: CarType.Pickup,
                 Registration: new DateTime(1999, 12, 1),
                 Seats: 4
@@ -173,45 +174,8 @@ namespace Carpool.BL.Tests
             Assert.Contains(
                 Mapper.Map<UserDetailModel>(userFromDb).Cars, 
                 i => i.Name == newCar.Name && 
-                     i.Brand == newCar.Brand && 
-                     i.Registration == newCar.Registration);
-        }
-
-        [Fact]
-        public async Task InsertOrUpdate_UpdateCarsOfUpdateLeonardoIncludingPhoto()
-        {
-            //Arrange
-            var newCar = new CarDetailModel(
-                Name: @"New car",
-                Brand: @"BMW",
-                Type: CarType.Pickup,
-                Registration: new DateTime(1999, 12, 1),
-                Seats: 4
-            )
-            {
-                Photos = {
-                    new CarPhotoModel(@"Testing\url"),
-                    new CarPhotoModel(@"Testing\url2")
-                }
-            };
-
-            var user = Mapper.Map<UserDetailModel>(UserSeeds.UpdateLeonardo);
-            user.Cars.Add(newCar);
-
-            //Act
-            await _userFacadeSut.SaveAsync(user);
-
-            //Assert
-            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
-            var userFromDb = await dbxAssert.Users
-                .Include(i => i.Cars)
-                .ThenInclude(i => i.Photos)
-                .SingleAsync(i => i.Id == user.Id);
-
-            var carFromDb = Mapper.Map<CarDetailModel>(userFromDb.Cars.First(i => i.Name == newCar.Name));
-
-            Assert.Contains(carFromDb.Photos, i => i.Url == newCar.Photos[0].Url);
-            Assert.Contains(carFromDb.Photos, i => i.Url == newCar.Photos[1].Url);
+                     i.Brand == newCar.Brand &&
+                     i.Photo == newCar.Photo);
         }
     }
 }

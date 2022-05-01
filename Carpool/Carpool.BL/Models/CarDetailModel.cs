@@ -12,19 +12,19 @@ namespace Carpool.BL.Models
     public record CarDetailModel(
         string Name,
         string Brand,
+        string Photo,
         CarType Type,
         DateTime Registration,
-        uint Seats,
-        Guid OwnerId
+        uint Seats 
     ) : ModelBase
     {
         public string Name { get; set; } = Name;
         public string Brand { get; set; } = Brand;
+        public string Photo { get; set; } = Photo;
         public CarType Type { get; set; } = Type;
         public DateTime Registration { get; set; } = Registration;
         public uint Seats { get; set; } = Seats;
-        public Guid OwnerId { get; set; } = OwnerId;
-        public List<CarPhotoModel> Photos { get; init; } = new();
+
         public class MapperProfile : Profile
         {
             public MapperProfile()
@@ -37,9 +37,9 @@ namespace Carpool.BL.Models
         public static CarDetailModel Empty =>
             new(string.Empty,
                 string.Empty,
+                string.Empty,
                 CarType.None,
                 default,
-                0,
-                Guid.Empty);
+                0);
     }
 }
