@@ -8,6 +8,7 @@ using System.Media;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
@@ -16,6 +17,7 @@ using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.App.ViewModel
 {
@@ -32,7 +34,7 @@ namespace Carpool.App.ViewModel
             UserFacade userFacade,
             CarFacade carFacade,
             IMediator mediator,
-            ISession session) : base(rideFacade, userFacade, mediator)
+            ISession session) : base(rideFacade, userFacade, carFacade, mediator)
         {
             _rideFacade = rideFacade;
             _userFacade = userFacade;
@@ -40,22 +42,18 @@ namespace Carpool.App.ViewModel
             _mediator = mediator;
             _session = session;
             
-            BookRideCommand = new RelayCommand(OnBookRide);
-            DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
+            BookRideCommand = new RelayCommand(OnBookRide,CanSaveRide);
+            GoBackCommand = new RelayCommand(OnGoBack);
             //Model = RideDetailModel.Empty;
 
             _mediator.Register<DisplayBookRideMessage>(OnDisplayBookRide);
         }
 
-        public ICommand PrintDataCommand { get; set; }
-
         public ICommand BookRideCommand { get; set; }
 
-        public ICommand DisplayUserProfileCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
 
-        public UserWrapper Driver { get; set; }
-
-        public CarWrapper? Car { get; set; }
+        public Guid? CurrentUserId { get; set; }
 
         private async void OnBookRide()
         {
@@ -87,7 +85,14 @@ namespace Carpool.App.ViewModel
             ParticipantWrapper CurrentUserParticipantWrapper = new ParticipantWrapper(CurrentUserParticipantModel);
             Model.Participants.Add(CurrentUserParticipantWrapper);
 
-            await SaveAsync();
+            try
+            {
+                await SaveAsync();
+            }
+            catch (DbUpdateException e)
+            { 
+                MessageBox.Show("Cannot book ride in same timespan as another ride!");
+            }
             OnPropertyChanged();
         }
 
@@ -104,15 +109,14 @@ namespace Carpool.App.ViewModel
 
         private async void OnDisplayBookRide(DisplayBookRideMessage m)
         {
+            CurrentUserId = _session.GetLoggedUserId();
             await LoadAsync(m.rideId);
-            Car = await _carFacade.GetAsync(Model.CarId);
-            Driver = await _userFacade.GetAsync(Model.DriverId);
             OnPropertyChanged();
         }
 
-        private void OnDisplayUserProfile()
+        private void OnGoBack()
         {
-            _mediator.Send(new DisplayUserProfileMessage());
+            _mediator.Send(new DisplayLastMessage());
         }
     }
 }

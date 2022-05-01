@@ -5,6 +5,8 @@
              xmlns:system="clr-namespace:System;assembly=System.Runtime"
              xmlns:viewModels="clr-namespace:Carpool.App.ViewModel"
              xmlns:converters="clr-namespace:Carpool.App.Converters"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:views="clr-namespace:Carpool.App.View">
     <Application.Resources>
         <ResourceDictionary>
@@ -14,6 +16,11 @@
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:RideListButtonTextConverter x:Key="RideListButtonTextConverter" />
             <converters:DateConverter x:Key="DateConverter" />
+            <converters:DateTimeConverter x:Key="DateTimeConverter" />
+            <converters:TimeConverter x:Key="TimeConverter" />
+            <converters:BookLeaveButtonTextConverter x:Key="BookLeaveButtonTextConverter" />
+            <converters:CarToStringConverter x:Key="CarToStringConverter" />
+            <converters:UserToStringConverter x:Key="UserToStringConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

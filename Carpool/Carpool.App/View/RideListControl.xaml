@@ -111,10 +111,18 @@
                                 BorderBrush="{x:Null}" Grid.RowSpan="2"/>
 
                             <Label 
+                                x:Name="Sep" Grid.Row="0" 
+                                Content="-" 
+                                FontSize="14" 
+                                Margin="63,0,59,19" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2"/>
+
+                            <Label 
                                 x:Name="LabelCarName" 
                                 Grid.Column="0" 
                                 Grid.Row="2" 
-                                Content="{Binding Car.Name}" 
+                                Content="{Binding Path=Car,Converter={StaticResource CarToStringConverter}}"
                                 FontSize="10" 
                                 Margin="10,3,102,-8" 
                                 Background="{x:Null}" 
@@ -122,53 +130,40 @@
 
                             <Label 
                                 x:Name="LabelRating" 
-                                Grid.Row="1" 
-                                Grid.Column="1" 
-                                Content="{Binding Driver.Rating}"
+                                Grid.Row="1"
+                                Grid.Column="0" 
+                                Content="{Binding Path=Driver,Converter={StaticResource UserToStringConverter}}"
                                 Background="{x:Null}" 
                                 BorderBrush="{x:Null}" 
-                                Height="auto" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,23,0,0" Grid.RowSpan="2"/>
+                                Height="auto" Margin="160,23,10,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
 
                             <Label 
                                 x:Name="LabelDeparture" 
-                                Grid.Row="0" Grid.Column="2" 
-                                Content="{Binding DepartureT}" 
-                                Margin="10,0,10,0"
+                                Grid.Row="0" Grid.Column="2"
+                                Content="{Binding DepartureT, Converter={StaticResource TimeConverter}}"
                                 Background="{x:Null}" 
                                 BorderBrush="{x:Null}" 
-                                Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                Height="auto" VerticalAlignment="Top" Grid.RowSpan="2" Margin="18,0,0,0"/>
 
                             <Label 
                                 x:Name="LabelArrival" 
                                 Grid.Row="0" 
                                 Grid.Column="3" 
-                                Content="{Binding ArrivalT}" 
-                                Margin="10,0,10,0"
+                                Content="{Binding ArrivalT, Converter={StaticResource TimeConverter}}" 
+                                Margin="18,0,0,0"
                                 Background="{x:Null}" 
                                 BorderBrush="{x:Null}" 
-                                Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                Height="auto" HorizontalAlignment="Left" VerticalAlignment="Top" Width="59"/>
 
                             <Label 
                                 x:Name="LabelWhen" 
                                 Grid.Row="1" 
                                 Grid.Column="2" 
-                                Grid.ColumnSpan="2" 
-                                Content="{Binding DepartureT.Date}" 
-                                Margin="10,0,10,0"
+                                Content="{Binding DepartureT, Converter={StaticResource DateConverter}}"
                                 Background="{x:Null}" 
                                 BorderBrush="{x:Null}" 
-                                Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                Height="auto" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="50,0,0,0" />
 
-                            <Label 
-                                x:Name="LabelSeats" 
-                                Grid.Row="2" 
-                                Grid.Column="2" 
-                                Grid.ColumnSpan="2" 
-                                Content="{Binding Capacity}"
-                                Margin="10,0,10,0"
-                                Background="{x:Null}" 
-                                BorderBrush="{x:Null}" 
-                                Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 
                             <Button 
@@ -185,6 +180,25 @@
                                     </MultiBinding>
                                 </Button.Content>
                             </Button>
+                            <Label 
+                                x:Name="LabelSeats_Copy" 
+                                Grid.Row="1" 
+                                Grid.Column="2" 
+                                Content="Seats left:"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                HorizontalContentAlignment="Center"
+                                Height="auto" Margin="0,23,7,0" Grid.RowSpan="2"/>
+
+                            <Label 
+                                x:Name="LabelSeats" 
+                                Grid.Row="2" 
+                                Grid.Column="2" 
+                                Content="{Binding Capacity}"
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                HorizontalContentAlignment="Left"
+                                Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="63,0,0,0" Width="59"/>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
@@ -198,7 +212,7 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
-            Command="{Binding DisplayUserProfileCommand}"
+            Command="{Binding GoBackCommand}"
             Width="50" BorderBrush="{x:Null}" FontSize="17"/>
     </Grid>
 </local:UserControlBase>

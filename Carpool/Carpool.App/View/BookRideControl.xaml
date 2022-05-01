@@ -26,19 +26,19 @@
          
         />
         <TextBox
-                    IsEnabled="False"
+            IsReadOnly="True"
                     x:Name="TextBoxArrivalCreateRides_Copy" Margin="44,0,0,133"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
-                    BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="280"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="280"
                     Text="{Binding Model.ArrivalL, UpdateSourceTrigger=PropertyChanged}"/>
-        <DatePicker
-                    IsEnabled="False"
-                    Grid.Column="0"
+
+        <Label
+            Grid.Column="0"
                     x:Name="TextBoxDate_arrCreateRides_Copy"
                     Margin="45,0,0,90"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="211"
-                    SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged}"/>
+            Content="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateConverter}}"/>
 
         <Image
                     Grid.Row="0"
@@ -48,11 +48,18 @@
 
         <Button
                     x:Name="ButtonEditRideSaveChanges" 
-                    Content="Book" 
                     Margin="0,0,70,25" 
                     FontSize="20"
                     Background="#FF005FB8" Height="34" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="267" Grid.Column="1" Grid.Row="1" Click="ButtonEditRideSaveChanges_Click" 
-                    Command="{Binding BookRideCommand}"/>
+                    Command="{Binding BookRideCommand}"
+                    >
+            <Button.Content>
+                <MultiBinding Converter="{StaticResource BookLeaveButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
+                    <Binding UpdateSourceTrigger="PropertyChanged" Path="Model.Model"/>
+                    <Binding UpdateSourceTrigger="PropertyChanged" Path="CurrentUserId"/>
+                </MultiBinding>
+            </Button.Content>
+        </Button>
 
         <ListView Grid.Column="1" Grid.Row="1"
                     Background="#FFC4C4C4"
@@ -75,16 +82,12 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Rectangle
-                    Fill="#FF919191"
-                    HorizontalAlignment="Right"
-                    Height="126" 
-                    VerticalAlignment="Top" 
-                    Width="267"
-                    RadiusX="10" 
-                    RadiusY="10"  
-                    Grid.Column="1" Grid.Row="1" Margin="0,25,70,0"
-            />
+        <Rectangle Grid.Column="1" Grid.Row="1" Margin="0,21,70,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="267" VerticalAlignment="Top" Height="143">
+            
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>
+            </Rectangle.Fill>
+        </Rectangle>
 
         <Label
                     Width="67"
@@ -108,19 +111,18 @@
          
         />
         <TextBox
-                    IsEnabled="False"
-                    x:Name="TextBoxArrivalCreateRides_Copy1" Margin="44,51,0,0"
+            x:Name="TextBoxArrivalCreateRides_Copy1" Margin="44,51,0,0"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
+                    IsReadOnly="True"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="296" TextChanged="TextBoxArrivalCreateRides_Copy1_TextChanged"
                     Text="{Binding Model.DepartureL, UpdateSourceTrigger=PropertyChanged}"/>
-        <DatePicker
-                    IsEnabled="False"
-                    Grid.Column="0"
+        <Label
+            Grid.Column="0"
                     x:Name="TextBoxDate_arrCreateRides_Copy1"
                     Margin="45,114,0,0"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
-                    SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged}"/>
+                    Content="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateConverter}}"/>
         <Label
                     Margin="44,21,0,0"
                     Content="Departure"
@@ -170,7 +172,7 @@
             VerticalAlignment="Center" 
             Height="34" 
             HorizontalAlignment="Left" 
-            Command="{Binding DisplayUserProfileCommand}"
+            Command="{Binding GoBackCommand}"
             Width="50" BorderBrush="{x:Null}" FontSize="17"/>
         <Button
             x:Name="ButtonCreateUser_Copy" 

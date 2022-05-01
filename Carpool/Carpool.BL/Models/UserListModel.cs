@@ -24,5 +24,10 @@ namespace Carpool.BL.Models
                 CreateMap<UserEntity, UserListModel>();
             }
         }
+
+        public override string ToString()
+        {
+            return Name + " " + Surname + " (⭐ " + Rating + ")";
+        }
     }
 }
