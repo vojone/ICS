@@ -86,19 +86,19 @@
             x:Name="ButtonCreateRide"
             Cursor="Hand"
             Content="Create Ride" 
-            Margin="71,0,0,0" 
+            Margin="0,0,85,0" 
             Background="#FF005FB8" 
-            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Left" Width="130"/>
+            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130"/>
 
         <Button
             x:Name="ButtonNewCar" 
             Content="New Car" 
-            Margin="71,0,0,0" 
+            Margin="0,0,85,0" 
             Cursor="Hand"
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="40" 
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Right" 
             Width="130" 
             Grid.Row="3" 
             Grid.Column="2"
@@ -109,7 +109,7 @@
                 Grid.RowSpan="2"
                 VerticalContentAlignment="Top"
                 HorizontalContentAlignment="Left"
-                ItemsSource="{Binding UserModel.Cars, UpdateSourceTrigger=PropertyChanged}" Margin="0,32,0,0" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Height="178" SelectionChanged="ListView_SelectionChanged">
+                ItemsSource="{Binding UserModel.Cars, UpdateSourceTrigger=PropertyChanged}" Margin="10,32,0,0" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Height="178" SelectionChanged="ListView_SelectionChanged">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Focusable" Value="False"/>
@@ -174,7 +174,7 @@
                     Name="ClearUserPhoto"
                     ToolTip="{Binding Model.Photo}"
                     Visibility="{Binding Model.Photo, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
-                    Command="{Binding ClearPhotoCommand}">
+                    Command="{Binding ClearPhotoCommand}" HorizontalAlignment="Center" VerticalAlignment="Center">
             </Button>
         </Grid>
 
@@ -196,10 +196,10 @@
             HorizontalAlignment="Center" 
             Height="25" 
             Grid.Row="4" 
-            VerticalAlignment="Top" 
+            VerticalAlignment="Center" 
             Width="130" 
             BorderBrush="{x:Null}" 
-            Margin="0,33,0,0"
+            Margin="0,33,0,16"
             VerticalContentAlignment="Center"
             Text="{Binding Model.Registration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
@@ -232,11 +232,11 @@
         <Button
             x:Name="SaveChanges" 
             Content="Save Changes" 
-            Margin="71,0,0,0" 
+            Margin="0,0,85,0" 
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="40" 
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Right" 
             Width="130"
             Grid.Row="4" 
             Grid.Column="2"
@@ -245,11 +245,11 @@
         <Button
             x:Name="ButtonDeleteCar" 
             Content="Delete Car" 
-            Margin="71,0,0,0" 
+            Margin="0,0,85,0" 
             Background="#FFC51111" 
             VerticalAlignment="Center" 
             Height="40" 
-            HorizontalAlignment="Left" 
+            HorizontalAlignment="Right" 
             Width="130" 
             Grid.Row="5" 
             Grid.Column="2"
@@ -298,8 +298,8 @@
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Center" 
             Width="127" 
-            VerticalAlignment="Top" 
-            Height="26" Grid.Row="4" FontSize="13" Margin="0,4,0,0"
+            VerticalAlignment="Center" 
+            Height="26" Grid.Row="4" FontSize="13" Margin="0,12,0,50"
     />
         <Label 
             Content="Number of seats" 

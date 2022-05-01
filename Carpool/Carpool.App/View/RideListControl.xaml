@@ -74,7 +74,8 @@
             Content="Create Ride"
             Cursor="Hand"
             Margin="0,0,150,0" 
-            Background="#FF005FB8" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120"
+            Height="40" Width="130"
+            Background="#FF005FB8" VerticalAlignment="Center" HorizontalAlignment="Right"
             Command="{Binding DisplayCreateRideCommand}" BorderBrush="{x:Null}" FontSize="17"/>
 
         <ListView 

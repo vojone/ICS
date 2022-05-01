@@ -182,7 +182,7 @@
             Content="Create Ride" 
             Cursor="Hand"
             Margin="0,0,150,0" 
-            Background="#FF005FB8" Height="36" VerticalAlignment="Center" HorizontalAlignment="Right" Width="98" BorderBrush="{x:Null}" Grid.Column="1" FontSize="17"/>
+            Background="#FF005FB8" VerticalAlignment="Center" HorizontalAlignment="Right" Height="40" Width="130" BorderBrush="{x:Null}" Grid.Column="1" FontSize="17"/>
         <Label
             Margin="70,0,0,0" 
             Content="Book a ride" 

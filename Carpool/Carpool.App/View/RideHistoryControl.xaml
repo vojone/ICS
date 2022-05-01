@@ -50,7 +50,8 @@
             Cursor="Hand"
             Content="Create Ride" 
             Margin="0,0,150,0" 
-            Background="#FF005FB8" Height="34" HorizontalAlignment="Right" Width="120" VerticalAlignment="Center" FontSize="17"/>
+            Height="40" Width="130"
+            Background="#FF005FB8"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17"/>
 
         <ListView 
             
