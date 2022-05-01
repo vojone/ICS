@@ -81,10 +81,10 @@
         <Button 
             Grid.Column="2"
             x:Name="ButtonCreateRideProfile" 
+            Cursor="Hand"
             Content="Create Ride" 
             Background="#FF005FB8" 
-            Height="40
-" 
+            Height="40"
             HorizontalAlignment="Center" 
             Width="130" VerticalAlignment="Center" FontSize="17"/>
 
@@ -136,6 +136,7 @@
             </Ellipse>
             <Button Margin="110,295,110,-20" 
                     Content="Clear photo"
+                    Cursor="Hand"
                     Name="ClearUserPhoto" 
                     ToolTip="{Binding Model.PhotoUrl}"
                     Visibility="{Binding Model.PhotoUrl, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
@@ -183,6 +184,7 @@
             Grid.Row="2"
             Grid.Column="2"
             x:Name="ButtonSaveChanges" 
+            Cursor="Hand"
             Content="Save Changes" 
             Background="#FF005FB8" 
             HorizontalAlignment="Center" 
@@ -196,6 +198,7 @@
             Grid.Row="3"
             Grid.Column="2"
             x:Name="ButtonRidesProfile" 
+            Cursor="Hand"
             Content="Rides" 
             Background="#FF005FB8" 
             HorizontalAlignment="Center" 
@@ -208,6 +211,7 @@
             Grid.Row="4"
             Grid.Column="2"
             x:Name="ButtonEditCarsProfile" 
+            Cursor="Hand"
             Content="Edit cars" 
             Background="#FF005FB8" 
             HorizontalAlignment="Center" 
@@ -220,6 +224,7 @@
             Grid.Row="5"
             Grid.Column="2"
             x:Name="ButtonDelete" 
+            Cursor="Hand"
             Content="Delete account" 
             Background="#FFC51111" 
             HorizontalAlignment="Center" 
@@ -233,6 +238,7 @@
             Grid.Column="2"
             x:Name="ButtonLogout" 
             Content="Logout" 
+            Cursor="Hand"
             Background="#FF005FB8" 
             HorizontalAlignment="Center" 
             Height="40" 

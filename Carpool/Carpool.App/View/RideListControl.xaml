@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance viewModel:RideListViewModel}" >
-    <Grid Margin="0,0,21,0" 
+    <Grid 
           Background="#FFA1A1A1"
           Height="auto" Width="auto">
         <Grid.RowDefinitions>
@@ -38,15 +38,6 @@
             Width="209" 
             VerticalAlignment="Center" 
             Height="26"/>
-
-        <TextBox
-            IsReadOnly="True" 
-            Margin="0,0,0,0" 
-            TextWrapping="Wrap" 
-            Text="Jméno usera" 
-            Background="{x:Null}" 
-            BorderBrush="{x:Null}" 
-            TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Right" Height="18" Width="72"/>
         <Image
             Grid.Row="1"
             Height="40" 
@@ -55,6 +46,7 @@
         <Button 
             x:Name="ButtonCreateUser_Copy" 
             Content="Filter rides" 
+            Cursor="Hand"
             Margin="0,33,77,0" 
             Background="#FFDBDBDB" 
             BorderBrush="{x:Null}" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="100"
@@ -64,14 +56,17 @@
             Content="Ride History" 
             Margin="77,33,0,0" 
             Background="#FFDBDBDB" 
+            Cursor="Hand"
             HorizontalAlignment="Left" 
             BorderBrush="{x:Null}" Width="100" VerticalAlignment="Top" Height="28" Grid.Row="1" FontSize="17"
             Command="{Binding DisplayRideHistoryCommand}"/>
         <Button 
             x:Name="ButtonCreateUser" 
-            Content="Create Ride" 
+            Content="Create Ride"
+            Cursor="Hand"
             Margin="0,0,150,0" 
-            Background="#FF005FB8" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" Width="120"
+            Height="40" Width="130"
+            Background="#FF005FB8" VerticalAlignment="Center" HorizontalAlignment="Right"
             Command="{Binding DisplayCreateRideCommand}" BorderBrush="{x:Null}" FontSize="17"/>
 
         <ListView 
@@ -170,6 +165,7 @@
                                 Grid.Row="0" Grid.RowSpan="3"
                                 Grid.Column="3"
                                 x:Name="ButtonBook" 
+                                Cursor="Hand"
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.OpenRideCommand}"
                                 CommandParameter="{Binding Id}"
                                 Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}">
@@ -208,6 +204,7 @@
             x:Name="ButtonNewCar_Copy" 
             Content="&lt;=" 
             Margin="10,0,0,0" 
+            Cursor="Hand"
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="34" 

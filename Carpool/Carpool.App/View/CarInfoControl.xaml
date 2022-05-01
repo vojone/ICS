@@ -55,6 +55,7 @@
             Grid.Column="1"
             Grid.ColumnSpan="2"
             x:Name="ButtonCreateRide"
+            Cursor="Hand"
             Content="Create Ride" 
             Margin="216,0,108,0" 
             Background="#FF005FB8" 
@@ -64,9 +65,10 @@
             x:Name="ButtonNewCar" 
             Content="New Car" 
             Margin="70,7,0,0" 
+            Cursor="Hand"
             Background="#FF005FB8" VerticalAlignment="Top" Height="40" HorizontalAlignment="Left" Width="130" Grid.Row="1" FontSize="17"/>
 
-        <ComboBox x:Name="SelectedCarCombobox" HorizontalAlignment="Left" Height="25" Margin="70,20,0,0" Grid.Row="2" VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
+        <ComboBox x:Name="SelectedCarCombobox" HorizontalAlignment="Left" Cursor="Hand" Height="25" Margin="70,20,0,0" Grid.Row="2" VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#DBDBDBDB"/>
@@ -77,9 +79,9 @@
 
         <TextBox x:Name="CarName" Grid.Row="3" Width="130" Height="25" Margin="68,27,68,7" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
-        <DatePicker x:Name="CarRegistrationDate" HorizontalAlignment="Center" Height="25" Grid.Row="4" VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}" Margin="0,33,0,0"/>
+        <DatePicker x:Name="CarRegistrationDate" Cursor="Hand" HorizontalAlignment="Center" Height="25" Grid.Row="4" VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}" Margin="0,33,0,0"/>
 
-        <ComboBox  x:Name="CarMakeCombobox" HorizontalAlignment="Left" Height="25" Margin="70,20,0,0" Grid.Row="3" Grid.Column="1" 
+        <ComboBox  x:Name="CarMakeCombobox" HorizontalAlignment="Left" Cursor="Hand" Height="25" Margin="70,20,0,0" Grid.Row="3" Grid.Column="1" 
                   VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
@@ -89,7 +91,7 @@
             </ComboBox.Background>
         </ComboBox>
 
-        <ComboBox x:Name="CarTypeCombobox" HorizontalAlignment="Right" Height="25" Margin="70,20,68,0" Grid.Row="3" Grid.Column="2" 
+        <ComboBox x:Name="CarTypeCombobox" Cursor="Hand" HorizontalAlignment="Right" Height="25" Margin="70,20,68,0" Grid.Row="3" Grid.Column="2" 
                   VerticalAlignment="Center" Width="130" BorderBrush="{x:Null}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
@@ -102,10 +104,11 @@
         <Button
             x:Name="ButtonDeleteCar" 
             Content="Delete Car" 
+            Cursor="Hand"
             Margin="70,0,68,0" 
             Background="#FF005FB8" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130" Grid.Row="4" Grid.Column="3" FontSize="17"/>
 
-        <ComboBox x:Name="CarSeatsCombobox" HorizontalAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="4" Grid.Column="1" 
+        <ComboBox x:Name="CarSeatsCombobox" HorizontalAlignment="Center" Cursor="Hand" Height="25" Margin="-59,20,0,0" Grid.Row="4" Grid.Column="1" 
                   VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
@@ -180,6 +183,7 @@
             x:Name="ButtonNewCar_Copy" 
             Content="&lt;=" 
             Margin="8,0,0,0" 
+            Cursor="Hand"
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="40" 
