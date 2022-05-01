@@ -53,12 +53,12 @@
                     Background="#FF005FB8" Height="34" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="267" Grid.Column="1" Grid.Row="1" Click="ButtonEditRideSaveChanges_Click" 
                     Command="{Binding BookRideCommand}"
                     >
-                    <Button.Content>
-                    <MultiBinding Converter="{StaticResource BookLeaveButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
-                            <Binding UpdateSourceTrigger="PropertyChanged" Path="Model.Model"/>
-                            <Binding UpdateSourceTrigger="PropertyChanged" Path="CurrentUserId"/>
-                        </MultiBinding>
-                    </Button.Content>
+            <Button.Content>
+                <MultiBinding Converter="{StaticResource BookLeaveButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
+                    <Binding UpdateSourceTrigger="PropertyChanged" Path="Model.Model"/>
+                    <Binding UpdateSourceTrigger="PropertyChanged" Path="CurrentUserId"/>
+                </MultiBinding>
+            </Button.Content>
         </Button>
 
         <ListView Grid.Column="1" Grid.Row="1"
@@ -82,16 +82,12 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Rectangle
-                    Fill="#FF919191"
-                    HorizontalAlignment="Right"
-                    Height="126" 
-                    VerticalAlignment="Top" 
-                    Width="267"
-                    RadiusX="10" 
-                    RadiusY="10"  
-                    Grid.Column="1" Grid.Row="1" Margin="0,25,70,0"
-            />
+        <Rectangle Grid.Column="1" Grid.Row="1" Margin="0,21,70,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="267" VerticalAlignment="Top" Height="143">
+            
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>
+            </Rectangle.Fill>
+        </Rectangle>
 
         <Label
                     Width="67"
