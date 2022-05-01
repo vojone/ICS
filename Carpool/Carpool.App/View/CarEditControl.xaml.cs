@@ -21,19 +21,9 @@ namespace Carpool.App.View
     /// </summary>
     public partial class CarEditControl : UserControl
     {
-        public CarEditControl(CarEditViewModel carEditViewModel)
+        public CarEditControl()
         {
             InitializeComponent();
-            DataContext = carEditViewModel;
-        }
-
-        private void SelectedCarCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ICommand command = ((CarEditViewModel) DataContext).SelectCarCommand;
-            if (command.CanExecute(((ComboBox)sender).SelectedIndex))
-            {
-                command.Execute(((ComboBox)sender).SelectedIndex);
-            }
         }
     }
 }

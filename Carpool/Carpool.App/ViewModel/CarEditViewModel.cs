@@ -60,6 +60,7 @@ namespace Carpool.App.ViewModel
             {
                 _userModel = value;
 
+                
                 if (value?.Model.Cars != null && UserModel != null)
                 {
                     foreach (var car in value.Model.Cars)
