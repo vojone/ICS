@@ -95,7 +95,7 @@ namespace Carpool.App.Wrapper
             get => GetValue<UserWrapper>(); 
             set => SetValue(value);
         }
-        //change to wrapper
+
         public ObservableCollection<ParticipantWrapper> Participants { get; init; } = new();
 
         public static implicit operator RideWrapper(RideDetailModel detailModel) => new(detailModel);

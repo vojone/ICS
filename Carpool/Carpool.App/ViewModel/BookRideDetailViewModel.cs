@@ -62,20 +62,44 @@ namespace Carpool.App.ViewModel
             Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
             if (currentUserId != Guid.Empty)
             {
-                UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
-
-                ParticipantModel CurrentUserParticipantModel = new ParticipantModel(
-                    currentUserId,
-                    currentUserWrapper.Name,
-                    currentUserWrapper.Surname,
-                    currentUserWrapper.Rating
-                    );
-                ParticipantWrapper CurrentUserParticipantWrapper = new ParticipantWrapper(CurrentUserParticipantModel);
-                Model.Participants.Add(CurrentUserParticipantWrapper);
-                SaveAsync();
+                if (ParticipantWrapper.IsParticipant( Model, currentUserId))
+                {
+                    await UserLeaveRide(currentUserId);
+                }
+                else
+                {
+                    await UserJoinRide(currentUserId);
+                }
                 _mediator.Send(new DisplayRideListMessage());
             }
+        }
+
+        private async Task UserJoinRide(Guid currentUserId)
+        {
+            UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
+
+            ParticipantModel CurrentUserParticipantModel = new ParticipantModel(
+                currentUserId,
+                currentUserWrapper.Name,
+                currentUserWrapper.Surname,
+                currentUserWrapper.Rating
+            );
+            ParticipantWrapper CurrentUserParticipantWrapper = new ParticipantWrapper(CurrentUserParticipantModel);
+            Model.Participants.Add(CurrentUserParticipantWrapper);
+
+            await SaveAsync();
+            OnPropertyChanged();
+        }
+
+        private async Task UserLeaveRide(Guid currentUserId)
+        {
+            UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
+
+            ParticipantWrapper currentUserParticipant = Model.Participants.First(i => i.UserId == currentUserId);
+            Model.Participants.Remove(currentUserParticipant);
             
+            await SaveAsync();
+            OnPropertyChanged();
         }
 
         private async void OnDisplayBookRide(DisplayBookRideMessage m)

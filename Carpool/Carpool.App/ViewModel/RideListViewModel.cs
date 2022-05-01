@@ -54,33 +54,7 @@ namespace Carpool.App.ViewModel
 
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
 
-        private bool IsParticipant(RideWrapper ride, Guid userId)
-        {
-            ParticipantWrapper? participant = ride.Participants.FirstOrDefault(p => p.UserId == userId);
-            if (participant != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        private bool BookButtonVisible(RideWrapper ride)
-        {
-            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
-            return !IsParticipant(ride, currentUserId);
-        }
-        private bool LeaveButtonVisible(RideWrapper ride)
-        {
-            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
-            return IsParticipant(ride, currentUserId);
-        }
-        private bool EditButtonVisible(RideWrapper ride)
-        {
-            Guid currentUserId = _session.GetLoggedUser() ?? Guid.Empty;
-            return ride.DriverId == currentUserId;
-        }
+        public Guid? CurrentUserId { get; set; }
 
         public String ButtonText = "Book";
         private void OnFilterRides()
@@ -107,22 +81,10 @@ namespace Carpool.App.ViewModel
             }
             else
             {
-                if (IsParticipant(ride, currentUserId))
-                {
-                    //leave ride
-                    Debug.WriteLine("Leaving ride with id: " + rideId);
-                    ParticipantWrapper currentUserParticipant = ride.Participants.First(i => i.UserId == currentUserId);
-                    ride.Participants.Remove(currentUserParticipant);
-                    //cannot leave ride in ListViewModel 
-                    //cannot save
-                }
-                else
-                {
-                    Debug.WriteLine("Booking ride with id: " + rideId);
-                    DisplayBookRideMessage msg = new DisplayBookRideMessage();
-                    msg.rideId = rideId;
-                    _mediator.Send(msg);
-                }
+                Debug.WriteLine("Booking/Leaving ride with id: " + rideId);
+                DisplayBookRideMessage msg = new DisplayBookRideMessage();
+                msg.rideId = rideId;
+                _mediator.Send(msg);
             }
             //RideWrapper ride = await _rideFacade.GetAsync(rideId);
             
@@ -140,6 +102,8 @@ namespace Carpool.App.ViewModel
 
         public async Task LoadAsync()
         {
+            CurrentUserId = _session.GetLoggedUser();
+            Debug.WriteLine("Ride list user id "+CurrentUserId);
             Rides.Clear();
             var rides = await _rideFacade.GetAsync();
             

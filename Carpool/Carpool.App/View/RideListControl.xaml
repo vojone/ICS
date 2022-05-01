@@ -164,7 +164,7 @@
                                 Grid.Row="2" 
                                 Grid.Column="2" 
                                 Grid.ColumnSpan="2" 
-                                Content="{Binding Capacity}" 
+                                Content="{Binding Capacity}"
                                 Margin="10,0,10,0"
                                 Background="{x:Null}" 
                                 BorderBrush="{x:Null}" 
@@ -175,10 +175,16 @@
                                 Grid.Row="0" Grid.RowSpan="3"
                                 Grid.Column="3"
                                 x:Name="ButtonBook" 
-                                Content="Book" 
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.OpenRideCommand}"
                                 CommandParameter="{Binding Id}"
-                                Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}"/>
+                                Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}">
+                                <Button.Content>
+                                    <MultiBinding Converter="{StaticResource RideListButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding UpdateSourceTrigger="PropertyChanged"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=local:RideListControl}" Path="DataContext.CurrentUserId" UpdateSourceTrigger="PropertyChanged"/>
+                                    </MultiBinding>
+                                </Button.Content>
+                            </Button>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>

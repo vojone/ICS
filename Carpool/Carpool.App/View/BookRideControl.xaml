@@ -65,7 +65,7 @@
                 <DataTemplate >
                     <StackPanel Grid.Column="1" Grid.Row="1" Height="23" Width="216">
                         <Label 
-                                    Content="{Binding UserName}" 
+                                    Content="{Binding }" 
                                     Background="#d1d1d1" 
                                     Height="24" 
                                     BorderBrush="{x:Null}"/>
