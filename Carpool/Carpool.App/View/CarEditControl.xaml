@@ -201,7 +201,7 @@
             BorderBrush="{x:Null}" 
             Margin="0,33,0,16"
             VerticalContentAlignment="Center"
-            Text="{Binding Model.Registration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
+            Text="{Binding Model.Registration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True, Converter={StaticResource DateConverter}, StringFormat='dd/MM/yyyy'}"/>
 
         <TextBox  
             x:Name="CarMakeCombobox" 
@@ -212,6 +212,7 @@
             Grid.Row="4" 
             Grid.Column="0" 
             VerticalAlignment="Top" 
+            VerticalContentAlignment="Center"
             Width="130" 
             Text="{Binding Model.Brand, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 

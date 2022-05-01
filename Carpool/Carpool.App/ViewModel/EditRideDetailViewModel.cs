@@ -11,7 +11,6 @@ using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
-using Carpool.App.Model;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
@@ -56,7 +55,16 @@ namespace Carpool.App.ViewModel
 
         private async void OnSaveRide()
         {
-            await SaveAsync();
+            try
+            {
+                await SaveAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+            
             _mediator.Send(new DisplayRideListMessage());
         }
 

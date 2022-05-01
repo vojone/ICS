@@ -15,16 +15,14 @@ namespace Carpool.App.Converters
 {
     public class UserToStringConverter : IValueConverter
     {
-        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == DependencyProperty.UnsetValue)
             {
-                return "";
+                return string.Empty;
             }
-            UserListModel user = (UserListModel)value;
-            String result = user.Name + " " + user.Surname + " (⭐ " + user.Rating + ")";
-            Debug.WriteLine(result);
-            return result;
+            
+            return value == null ? string.Empty : value.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

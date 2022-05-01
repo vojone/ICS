@@ -30,7 +30,7 @@ public static class UserSeeds
         Id: Guid.Parse("DE5D480F-883C-4F70-81BE-9D7E9B360C31"),
         Name: "Chuck",
         Surname: "Norris",
-        PhotoUrl: "TestUrl",
+        PhotoUrl: "https://upload.wikimedia.org/wikipedia/commons/3/30/Chuck_Norris_May_2015.jpg",
         Country: "USA",
         Rating: 454657894,
         RegistrationDate: new DateTime(2020, 12, 11)

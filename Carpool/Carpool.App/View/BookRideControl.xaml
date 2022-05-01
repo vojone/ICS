@@ -26,19 +26,19 @@
          
         />
         <TextBox
-                    IsEnabled="False"
+            IsReadOnly="True"
                     x:Name="TextBoxArrivalCreateRides_Copy" Margin="44,0,0,133"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
-                    BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="280"
+            BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="280"
                     Text="{Binding Model.ArrivalL, UpdateSourceTrigger=PropertyChanged}"/>
-        <DatePicker
-                    IsEnabled="False"
-                    Grid.Column="0"
+
+        <Label
+            Grid.Column="0"
                     x:Name="TextBoxDate_arrCreateRides_Copy"
                     Margin="45,0,0,90"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="211"
-                    SelectedDate="{Binding Model.ArrivalT, UpdateSourceTrigger=PropertyChanged}"/>
+            Content="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateConverter}}"/>
 
         <Image
                     Grid.Row="0"
@@ -112,19 +112,18 @@
          
         />
         <TextBox
-                    IsEnabled="False"
-                    x:Name="TextBoxArrivalCreateRides_Copy1" Margin="44,51,0,0"
+            x:Name="TextBoxArrivalCreateRides_Copy1" Margin="44,51,0,0"
                     TextWrapping="Wrap"
                     Background="#FFEDEDED"
+                    IsReadOnly="True"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="296" TextChanged="TextBoxArrivalCreateRides_Copy1_TextChanged"
                     Text="{Binding Model.DepartureL, UpdateSourceTrigger=PropertyChanged}"/>
-        <DatePicker
-                    IsEnabled="False"
-                    Grid.Column="0"
+        <Label
+            Grid.Column="0"
                     x:Name="TextBoxDate_arrCreateRides_Copy1"
                     Margin="45,114,0,0"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="211"
-                    SelectedDate="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged}"/>
+                    Content="{Binding Model.DepartureT, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateConverter}}"/>
         <Label
                     Margin="44,21,0,0"
                     Content="Departure"
@@ -154,16 +153,6 @@
                     Background="#FFEDEDED"
                     BorderBrush="{x:Null}" Grid.Row="1" Height="28" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="129"
                     Text="{Binding Car.Name, UpdateSourceTrigger=PropertyChanged}"/>
-
-        <Label
-            Margin="0,0,10,0" 
-            Content="Jméno usera" 
-            Background="{x:Null}" 
-            BorderBrush="{x:Null}" 
-            VerticalAlignment="Center" 
-            HorizontalAlignment="Right" 
-            Height="27"
-                Grid.Column="1"/>
         <Button
             Grid.Column="0"
             Grid.Row="0"
@@ -177,12 +166,6 @@
             HorizontalAlignment="Left" 
             Command="{Binding GoBackCommand}"
             Width="50" BorderBrush="{x:Null}" FontSize="17"/>
-        <Button
-            x:Name="ButtonCreateUser_Copy" 
-            Content="Create Ride" 
-            Cursor="Hand"
-            Margin="0,0,150,0" 
-            Background="#FF005FB8" VerticalAlignment="Center" HorizontalAlignment="Right" Height="40" Width="130" BorderBrush="{x:Null}" Grid.Column="1" FontSize="17"/>
         <Label
             Margin="70,0,0,0" 
             Content="Book a ride" 

@@ -15,16 +15,14 @@ namespace Carpool.App.Converters
 {
     public class CarToStringConverter : IValueConverter
     {
-        public object Convert(object? value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value == DependencyProperty.UnsetValue)
             {
-                return "";
+                return string.Empty;
             }
-            CarListModel car = (CarListModel) value;
-            String result = car.Brand + " " + car.Name;
-            Debug.WriteLine(result);
-            return result;
+
+            return value == null ? string.Empty : value.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
