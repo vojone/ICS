@@ -21,7 +21,7 @@ namespace Carpool.App.Converters
             {
                 return "";
             }
-            RideListModel ride = (RideListModel)values[0];
+            RideDetailModel ride = (RideDetailModel)values[0];
             Guid currentUserId = (Guid)values[1];
 
             

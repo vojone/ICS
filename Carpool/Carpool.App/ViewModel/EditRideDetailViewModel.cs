@@ -36,7 +36,7 @@ namespace Carpool.App.ViewModel
             UserFacade userFacade,
             CarFacade carFacade,
             IMediator mediator,
-            ISession session) : base(rideFacade, userFacade, mediator)
+            ISession session) : base(rideFacade, userFacade, carFacade, mediator)
         {
             _rideFacade = rideFacade;
             _userFacade = userFacade;
@@ -52,8 +52,6 @@ namespace Carpool.App.ViewModel
             _mediator.Register<DisplayEditRideMessage>(OnDisplayEditRide);
         }
 
-        public ICommand PrintDataCommand { get; set; }
-
         public ICommand SaveRideCommand { get; set; }
 
         public ICommand DeleteRideCommand { get; set; }
@@ -62,7 +60,6 @@ namespace Carpool.App.ViewModel
 
         private async void OnSaveRide()
         {
-            Model.CarId = Car.Id;
             await SaveAsync();
             _mediator.Send(new DisplayRideListMessage());
         }
@@ -86,8 +83,6 @@ namespace Carpool.App.ViewModel
         private async void OnDisplayEditRide(DisplayEditRideMessage m)
         {
             await LoadAsync(m.rideId);
-            Car = await _carFacade.GetAsync(Model.CarId);
-            Driver = await _userFacade.GetAsync(Model.DriverId);
             Debug.WriteLine("Editing ride with id: " + Model.Id + "\nDriver: " + Driver.Name);
             OnPropertyChanged();
         }

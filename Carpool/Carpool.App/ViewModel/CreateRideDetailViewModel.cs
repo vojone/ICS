@@ -30,8 +30,9 @@ namespace Carpool.App.ViewModel
         public CreateRideDetailViewModel(
             RideFacade rideFacade,
             UserFacade userFacade,
+            CarFacade carFacade,
             IMediator mediator,
-            ISession session) : base(rideFacade, userFacade, mediator)
+            ISession session) : base(rideFacade, userFacade, carFacade, mediator)
         {
             _rideFacade = rideFacade;
             _userFacade = userFacade;
@@ -90,8 +91,6 @@ namespace Carpool.App.ViewModel
             {
                 Debug.WriteLine("Can save!");
             }
-            Model.CarId = Car.Id;
-            Model.DriverId = Driver.Id;
             await SaveAsync();
             _mediator.Send(new DisplayRideListMessage());
         }

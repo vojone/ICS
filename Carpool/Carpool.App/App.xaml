@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:RideListButtonTextConverter x:Key="RideListButtonTextConverter" />
-            <!--<converters:BookLeaveButtonTextConverter x:Key="BookLeaveButtonTextConverter" />-->
+            <converters:BookLeaveButtonTextConverter x:Key="BookLeaveButtonTextConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
