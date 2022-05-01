@@ -86,6 +86,10 @@ namespace Carpool.App.ViewModel
 
         private async void OnCreateRide()
         {
+            if (CanSaveRide())
+            {
+                Debug.WriteLine("Can save!");
+            }
             Model.CarId = Car.Id;
             Model.DriverId = Driver.Id;
             await SaveAsync();

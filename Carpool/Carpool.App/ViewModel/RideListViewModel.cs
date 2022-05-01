@@ -111,8 +111,6 @@ namespace Carpool.App.ViewModel
             {
                 Rides.Add(item);
             }
-
         }
-
     }
 }

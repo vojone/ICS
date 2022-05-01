@@ -40,7 +40,7 @@ namespace Carpool.App.ViewModel
             _mediator = mediator;
             _session = session;
             
-            BookRideCommand = new RelayCommand(OnBookRide);
+            BookRideCommand = new RelayCommand(OnBookRide,CanSaveRide);
             DisplayUserProfileCommand = new RelayCommand(OnDisplayUserProfile);
             //Model = RideDetailModel.Empty;
 

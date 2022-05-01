@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Carpool.App.Extensions;
+using Carpool.BL.Facades;
 using Carpool.BL.Models;
 using Carpool.Common;
 
@@ -94,6 +95,33 @@ namespace Carpool.App.Wrapper
         {
             get => GetValue<UserWrapper>(); 
             set => SetValue(value);
+        }
+
+        public override void Validate(string? propertyName = null)
+        {
+            if (propertyName is null or nameof(DepartureL))
+            {
+                if (DepartureL == string.Empty)
+                {
+                    AddError(nameof(DepartureL), "The departure location cannot be empty!");
+                }
+            }
+
+            if (propertyName is null or nameof(ArrivalL))
+            {
+                if (ArrivalL == string.Empty)
+                {
+                    AddError(nameof(ArrivalL), "The destination cannot be empty!");
+                }
+            }
+
+            if (propertyName is null or nameof(Car))
+            {
+                if (Car == CarDetailModel.Empty || Car == null)
+                {
+                    AddError(nameof(Car), "A car must be selected!");
+                }
+            }
         }
 
         public ObservableCollection<ParticipantWrapper> Participants { get; init; } = new();
