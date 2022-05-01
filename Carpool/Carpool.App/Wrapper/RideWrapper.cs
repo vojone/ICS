@@ -115,11 +115,43 @@ namespace Carpool.App.Wrapper
                 }
             }
 
+            if (propertyName is null or nameof(DepartureT) )
+            {
+                if (DateTime.Compare(DepartureT, ArrivalT) >= 0)
+                {
+                    AddError(nameof(DepartureT), "Departure time must be before arrival time!");
+                }
+            }
+
+            if (propertyName is null or nameof(ArrivalT))
+            {
+                if (DateTime.Compare(DepartureT, ArrivalT) >= 0)
+                {
+                    AddError(nameof(ArrivalT), "Arrival time must be after departure time!");
+                }
+            }
+
             if (propertyName is null or nameof(Car))
             {
-                if (Car == CarDetailModel.Empty || Car == null)
+                if (Car == null || Car.HasErrors)
                 {
                     AddError(nameof(Car), "A car must be selected!");
+                }
+            }
+
+            if (propertyName is null or nameof(InitialCapacity))
+            {
+                if (InitialCapacity <= 0)
+                {
+                    AddError(nameof(InitialCapacity), "Initial capacity must be greater than 0!");
+                }
+            }
+
+            if (propertyName is null or nameof(Capacity))
+            {
+                if (Capacity > InitialCapacity)
+                {
+                    AddError(nameof(Capacity), "Capacity cannot be greater than InitialCapacity");
                 }
             }
         }

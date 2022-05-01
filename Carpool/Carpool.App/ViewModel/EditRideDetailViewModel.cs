@@ -58,17 +58,7 @@ namespace Carpool.App.ViewModel
 
         private async void OnSaveRide()
         {
-            try
-            {
-                await SaveAsync();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-                return;
-            }
-            
-            _mediator.Send(new DisplayRideListMessage());
+            await SaveEditedRide();
         }
 
         private async void OnDeleteRide()
