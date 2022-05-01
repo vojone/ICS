@@ -27,8 +27,6 @@ namespace Carpool.App.ViewModel
         private readonly IMediator _mediator;
         private readonly ISession _session;
 
-        public CarWrapper Car { get; set; }
-
         public EditRideDetailViewModel(
             RideFacade rideFacade,
             UserFacade userFacade,

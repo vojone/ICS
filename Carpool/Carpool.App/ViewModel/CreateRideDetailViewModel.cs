@@ -53,10 +53,6 @@ namespace Carpool.App.ViewModel
 
         public ICommand GoBackCommand { get; set; }
 
-        public UserWrapper Driver { get; set; }
-
-        public CarWrapper Car { get; set; }
-
         private void OnGoBack()
         {
             _mediator.Send(new DisplayLastMessage());
@@ -91,6 +87,8 @@ namespace Carpool.App.ViewModel
             {
                 Debug.WriteLine("Can save!");
             }
+
+            Model.Capacity = Model.InitialCapacity;
             await SaveAsync();
             _mediator.Send(new DisplayRideListMessage());
         }

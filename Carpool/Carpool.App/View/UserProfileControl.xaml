@@ -84,8 +84,7 @@
             Cursor="Hand"
             Content="Create Ride" 
             Background="#FF005FB8" 
-            Height="40
-" 
+            Height="40"
             HorizontalAlignment="Center" 
             Width="130" VerticalAlignment="Center" FontSize="17"/>
 
