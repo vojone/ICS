@@ -25,5 +25,10 @@ namespace Carpool.App.View
         {
             InitializeComponent();
         }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            return;
+        }
     }
 }

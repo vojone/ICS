@@ -189,7 +189,7 @@
             Height="40" 
             VerticalAlignment="Center"
             Width="130"
-            Command="{Binding SaveChangesCommand}"/>
+            Command="{Binding SaveChangesCommand, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button 
             Grid.Row="3"

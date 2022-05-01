@@ -156,7 +156,8 @@ namespace Carpool.BL.Tests
                 Photo: @"New_photo_1_of\update\bmw\URL.png",
                 Type: CarType.Pickup,
                 Registration: new DateTime(1999, 12, 1),
-                Seats: 4
+                Seats: 4,
+                OwnerId: UserSeeds.UpdateLeonardo.Id
             );
 
             var user = Mapper.Map<UserDetailModel>(UserSeeds.UpdateLeonardo);

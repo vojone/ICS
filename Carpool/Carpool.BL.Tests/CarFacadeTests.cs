@@ -31,7 +31,8 @@ namespace Carpool.BL.Tests
                 Photo: @"TestUrl",
                 Type: CarType.Sport,
                 Registration: new DateTime(2005, 5, 4),
-                Seats: 4
+                Seats: 4,
+                OwnerId: Guid.Empty
             );
 
             //Act & Assert

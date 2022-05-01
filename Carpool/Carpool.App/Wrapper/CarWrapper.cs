@@ -31,6 +31,22 @@ namespace Carpool.App.Wrapper
                     AddError(nameof(Brand), "The brand cannot be empty!");
                 }
             }
+
+            if (propertyName is null or nameof(Name))
+            {
+                if (Name == string.Empty)
+                {
+                    AddError(nameof(Name), "The car name cannot be empty!");
+                }
+            }
+
+            if (propertyName is null or nameof(Brand))
+            {
+                if (Brand == string.Empty)
+                {
+                    AddError(nameof(Brand), "The brand cannot be empty!");
+                }
+            }
         }
 
         public string? Name
@@ -66,6 +82,12 @@ namespace Carpool.App.Wrapper
         public uint Seats
         {
             get => GetValue<uint>();
+            set => SetValue(value);
+        }
+
+        public Guid OwnerId
+        {
+            get => GetValue<Guid>();
             set => SetValue(value);
         }
 

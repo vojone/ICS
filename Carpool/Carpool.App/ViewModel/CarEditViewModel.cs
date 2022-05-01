@@ -5,13 +5,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
-using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
 using CookBook.App.Extensions;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.Toolkit.Mvvm.Input;
+using Microsoft.Win32;
+using AsyncRelayCommand = Carpool.App.Command.AsyncRelayCommand;
+using RelayCommand = Carpool.App.Command.RelayCommand;
 
 namespace Carpool.App.ViewModel
 {
@@ -21,7 +25,7 @@ namespace Carpool.App.ViewModel
 
         private readonly CarFacade _carFacade;
 
-
+        private CarWrapper? _carModel;
 
         private UserWrapper? _userModel;
 
@@ -42,16 +46,36 @@ namespace Carpool.App.ViewModel
             SaveCommand = new AsyncRelayCommand(OnSave);
             DeleteCommand = new AsyncRelayCommand(OnDelete);
             NewCarCommand = new RelayCommand(OnNewCar);
-            SelectCarCommand = new AsyncRelayCommand<Guid>(OnSelectCar);
+            SelectCarCommand = new Command.AsyncRelayCommand<Guid>(OnSelectCar, CanSelect);
+            SelectPhotoCommand = new RelayCommand(OnSelectPhoto);
+            ClearPhotoCommand = new RelayCommand(OnClearPhoto);
         }
 
-        public ICommand GoBackCommand { get; }
-        public ICommand SaveCommand { get; }
-        public ICommand DeleteCommand { get; }
-        public ICommand NewCarCommand { get; }
-        public ICommand SelectCarCommand { get; }
+        public ICommand GoBackCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
+        public ICommand NewCarCommand { get; set; }
+        public IAsyncRelayCommand SelectCarCommand { get; set; }
 
-        public CarWrapper? Model { get; private set; }
+        public ICommand SelectPhotoCommand { get; set; }
+        public ICommand ClearPhotoCommand { get; set; }
+
+        public CarWrapper? Model
+        {
+            get => _carModel;
+            set
+            {
+                _carModel = value;
+
+
+                if (UserModel != null && _carModel != null)
+                {
+                    _carModel.OwnerId = UserModel.Id;
+                }
+
+                OnPropertyChanged();
+            }
+        }
 
         public UserWrapper? UserModel
         {
@@ -84,6 +108,33 @@ namespace Carpool.App.ViewModel
             _mediator.Send(new DisplayLastMessage());
         }
 
+        private void OnClearPhoto()
+        {
+            if (Model != null)
+            {
+                Model.Photo = null;
+            }
+        }
+
+        private void OnSelectPhoto()
+        {
+            if (Model == null)
+                return;
+
+            var file = new OpenFileDialog
+            {
+                DefaultExt = ".jpg",
+                Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif"
+            };
+
+            var wasFileChosen = file.ShowDialog();
+
+            if (wasFileChosen == true)
+            {
+                Model.Photo = file.FileName;
+            }
+        }
+
 
         private async Task OnSave()
         {
@@ -111,10 +162,15 @@ namespace Carpool.App.ViewModel
             Model = CarDetailModel.Empty;
         }
 
-        public async Task OnSelectCar(Guid carId)
+        private async Task OnSelectCar(Guid carId)
         {
             await LoadAsync(carId);
-            OnPropertyChanged();
+            SelectCarCommand.NotifyCanExecuteChanged();
+        }
+
+        private bool CanSelect(Guid carId)
+        {
+            return carId != Model?.Id;
         }
 
         public async Task LoadAsync(Guid id)

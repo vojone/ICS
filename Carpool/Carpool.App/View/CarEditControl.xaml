@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Carpool.App.View"
              xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
+             xmlns:extensions="clr-namespace:Carpool.App.Extensions"
+             xmlns:common="clr-namespace:Carpool.Common;assembly=Carpool.Common"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900"
              d:DataContext="{d:DesignInstance viewModel:CarEditViewModel}"
@@ -99,18 +101,22 @@
             Grid.Row="3" 
             Grid.Column="2"
             Command="{Binding NewCarCommand}"/>
-
-
         <ListView 
+                Padding="-1"
                 Grid.Row="1"
                 Grid.RowSpan="2"
                 VerticalContentAlignment="Top"
-                HorizontalContentAlignment="Right"
-                ItemsSource="{Binding UserModel.Cars, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Center" d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListView.ItemTemplate>
+                HorizontalContentAlignment="Center"
+                ItemsSource="{Binding UserModel.Cars, UpdateSourceTrigger=PropertyChanged}" Margin="0,32,0,0" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Height="178" SelectionChanged="ListView_SelectionChanged">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Focusable" Value="False"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Width="261" Background="#FFD1D1D1" VerticalAlignment="Top">
-                        <Grid Height="39">
+                    <StackPanel Width="260" Height="40" Background="#FFD1D1D1" VerticalAlignment="Top">
+                        <Grid Height="30">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="1*"/>
@@ -119,22 +125,55 @@
                                 <RowDefinition Height="25*"/>
                                 <RowDefinition Height="25*"/>
                             </Grid.RowDefinitions>
-                            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Height="24" VerticalAlignment="Bottom" Margin="10,0,0,13" Grid.RowSpan="2"/>
-                            <Label Content="{Binding Brand, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Height="24" VerticalAlignment="Bottom" Margin="87,0,0,13" Grid.RowSpan="2"/>
+                            <Label Content="{Binding Name, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Margin="10,5,0,0" Grid.RowSpan="2" Width="93"/>
+                            <Label Content="{Binding Brand, UpdateSourceTrigger=PropertyChanged}"  HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Height="24" VerticalAlignment="Bottom" Margin="103,0,0,1" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="82"/>
                             <Button 
                                     Grid.Row="0"
                                     Grid.RowSpan="2"
                                     x:Name="ButtonLogin" 
                                     Content="Select" 
                                     Cursor="Hand"
-                                    Background="#FF005FB8"  BorderBrush="{x:Null}" Width="50" Margin="0,5,10,10" HorizontalAlignment="Right"
+                                    Background="#FF005FB8"  BorderBrush="{x:Null}" Width="48" Margin="0,8,10,0" HorizontalAlignment="Right"
                                     Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=DataContext.SelectCarCommand}"
                                     CommandParameter="{Binding Id}" Grid.Column="1"/>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ItemsControl.ItemTemplate>
         </ListView>
+
+        <Grid
+            Grid.Row="1"
+            Grid.RowSpan="4"
+            Grid.Column="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            ToolTip="Click to change profile image..." Margin="0,10,0,0" Width="280" Height="317"
+        >
+            <!-- Background when image is not set -->
+            <Rectangle Margin="0,0,0,110"
+                       Name="UserPhotoBackground">
+                <Rectangle.Fill>
+                    <SolidColorBrush Color="#FF8A8383" />
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <Rectangle Cursor="Hand" Margin="0,0,0,110" Name="UserPhoto">
+                <Rectangle.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding SelectPhotoCommand}"/>
+                </Rectangle.InputBindings>
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="{Binding Model.Photo, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Button Margin="106,212,101,80" 
+                    Content="Clear photo"
+                    Name="ClearUserPhoto"
+                    ToolTip="{Binding Model.Photo}"
+                    Visibility="{Binding Model.Photo, Converter={StaticResource NullToVisibilityConverter}, UpdateSourceTrigger=PropertyChanged}"
+                    Command="{Binding ClearPhotoCommand}">
+            </Button>
+        </Grid>
 
         <TextBox 
             x:Name="CarName" 
@@ -142,7 +181,8 @@
             Width="130" 
             Height="25" 
             Margin="66,35,0,0" 
-            TextAlignment="Center" 
+            TextAlignment="Left" 
+            VerticalContentAlignment="Center"
             VerticalAlignment="Top" 
             HorizontalAlignment="Left"
             Text="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -157,11 +197,13 @@
             Width="130" 
             BorderBrush="{x:Null}" 
             Margin="0,33,0,0"
+            VerticalContentAlignment="Center"
             Text="{Binding Model.Registration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <TextBox  
             x:Name="CarMakeCombobox" 
             HorizontalAlignment="Left" 
+            TextAlignment="Left"
             Height="25" 
             Margin="66,33,0,0" 
             Grid.Row="4" 
@@ -173,7 +215,9 @@
         </TextBox>
 
         <ComboBox x:Name="CarTypeCombobox" HorizontalAlignment="Left" Height="25" Margin="67,33,0,0" Grid.Row="5" Grid.Column="0" 
-                  VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}">
+                  VerticalAlignment="Top" Width="130" BorderBrush="{x:Null}"
+                  ItemsSource="{Binding Source={extensions:EnumBindingSource {x:Type common:CarType}}}"
+                  SelectedItem="{Binding Model.Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBox.Background>
                 <LinearGradientBrush EndPoint="0,1">
                     <GradientStop Color="#DBDBDBDB"/>
@@ -209,7 +253,7 @@
             Command="{Binding DeleteCommand}"
             />
 
-        <TextBox x:Name="CarSeatsTextBox" HorizontalAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="5" Grid.Column="1" 
+        <TextBox x:Name="CarSeatsTextBox" HorizontalAlignment="Center" VerticalContentAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="5" Grid.Column="1" 
                   VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}" Text="{Binding Model.Seats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         </TextBox>
         <Label
@@ -277,5 +321,15 @@
                 <TextBlock Text="Back" FontWeight="Bold"></TextBlock>
             </Button.Content>
         </Button>
+        <Label
+            Margin="10,6,0,0" 
+            Content="Your Saved Cars" 
+            Background="{x:Null}" 
+            BorderBrush="{x:Null}" 
+            HorizontalAlignment="Left" 
+            Width="128" 
+            VerticalAlignment="Top" 
+            Height="26" Grid.Row="1" FontSize="13"
+    />
     </Grid>
 </UserControl>

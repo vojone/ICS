@@ -6,13 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Carpool.App.Command;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using Microsoft.Toolkit.Mvvm.Input;
 using Microsoft.Win32;
+using AsyncRelayCommand = Carpool.App.Command.AsyncRelayCommand;
+using RelayCommand = Carpool.App.Command.RelayCommand;
 
 namespace Carpool.App.ViewModel
 {
@@ -40,7 +42,7 @@ namespace Carpool.App.ViewModel
         }
 
 
-        public ICommand SaveChangesCommand { get; }
+        public IAsyncRelayCommand SaveChangesCommand { get; }
 
         public ICommand DeleteAccountCommand { get; }
 
@@ -67,6 +69,8 @@ namespace Carpool.App.ViewModel
         private async Task OnSaveChanges()
         {
             await SaveAsync();
+            RememberCurrentModel();
+            SaveChangesCommand.NotifyCanExecuteChanged();
         }
 
 
@@ -137,7 +141,6 @@ namespace Carpool.App.ViewModel
                 Model.Name ?? string.Empty, Model.Surname ?? string.Empty,
                 Model.RegistrationDate, Model.PhotoUrl,
                 Model.Country, Model.Rating);
-
         }
 
 
