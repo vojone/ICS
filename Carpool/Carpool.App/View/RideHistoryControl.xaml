@@ -60,11 +60,11 @@
                     <StackPanel Width="560"  Background="#FFD1D1D1" Height="70" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Grid Height="70">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="320*"/>
+                                <ColumnDefinition Width="280*"/>
                                 <ColumnDefinition Width="80*"/>
                                 <ColumnDefinition Width="80*"/>
                                 <ColumnDefinition Width="80*"/>
-                                <ColumnDefinition Width="80*"/>
+                                <ColumnDefinition Width="120*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="24*"/>
@@ -95,9 +95,15 @@
                                 Grid.Column="3"
                                 x:Name="ButtonBook" 
                                 Cursor="Hand"
-                                Content="Add⭐" 
 
-                                Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}" FontSize="17"/>
+                                Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}" FontSize="16">
+                                <Button.Content>
+                                    <MultiBinding Converter="{StaticResource RideHistoryButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
+                                        <Binding UpdateSourceTrigger="PropertyChanged"/>
+                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=local:RideHistoryControl}" Path="DataContext.CurrentUserId" UpdateSourceTrigger="PropertyChanged"/>
+                                    </MultiBinding>
+                                </Button.Content>
+                            </Button>
                         </Grid>
                     </StackPanel>
                 </DataTemplate>

@@ -12,7 +12,7 @@ using Carpool.BL.Models;
 
 namespace Carpool.App.Converters
 {
-    public class RideListButtonTextConverter : IMultiValueConverter
+    public class RideHistoryButtonTextConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -20,31 +20,36 @@ namespace Carpool.App.Converters
             {
                 return "";
             }
-            RideListModel ride = (RideListModel) values[0];
+
+            RideListModel ride = (RideListModel)values[0];
             Guid currentUserId = (Guid)values[1];
 
             if (ride.DriverId == currentUserId)
             {
-                return "Edit ride";
+                return "Your ride";
             }
             else
             {
-                if (ParticipantModel.IsParticipant(ride, currentUserId))
+                ParticipantModel currentParticipant = GetParticipant(ride, currentUserId);
+                if (!currentParticipant.HasUserRated)
                 {
-                    return "Leave";
+                    return "Add ⭐";
                 }
                 else
                 {
-                    return "Book";
-
+                    return "Rated";
                 }
             }
-            return ride.Driver.Name;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        private ParticipantModel? GetParticipant(RideListModel ride, Guid userId)
+        {
+            return ride.Participants.FirstOrDefault(p => p.UserId == userId);
         }
     }
 }

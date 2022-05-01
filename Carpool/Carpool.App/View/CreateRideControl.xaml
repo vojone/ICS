@@ -148,11 +148,5 @@
                 <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
-        <TextBox
-            x:Name="TextBoxArrivalCreateRides_Copy" Margin="0,96,100,0"
-            TextWrapping="Wrap"
-            Background="#FFEDEDED"
-            BorderBrush="{x:Null}" Grid.Row="1" Height="23" VerticalAlignment="Top" HorizontalAlignment="Right" Width="204"
-            Text="{Binding Model.DepartureL, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"/>
     </Grid>
 </local:UserControlBase>

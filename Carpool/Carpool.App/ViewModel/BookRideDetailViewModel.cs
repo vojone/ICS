@@ -74,6 +74,11 @@ namespace Carpool.App.ViewModel
 
         private async Task UserJoinRide(Guid currentUserId)
         {
+            if (Model.Capacity <= 0)
+            {
+                MessageBox.Show("Ride is already full!");
+                return;
+            }
             UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
 
             ParticipantModel CurrentUserParticipantModel = new ParticipantModel(
@@ -84,7 +89,7 @@ namespace Carpool.App.ViewModel
             );
             ParticipantWrapper CurrentUserParticipantWrapper = new ParticipantWrapper(CurrentUserParticipantModel);
             Model.Participants.Add(CurrentUserParticipantWrapper);
-
+            Model.Capacity--;
             try
             {
                 await SaveAsync();
@@ -102,6 +107,7 @@ namespace Carpool.App.ViewModel
 
             ParticipantWrapper currentUserParticipant = Model.Participants.First(i => i.UserId == currentUserId);
             Model.Participants.Remove(currentUserParticipant);
+            Model.Capacity++;
             
             await SaveAsync();
             OnPropertyChanged();

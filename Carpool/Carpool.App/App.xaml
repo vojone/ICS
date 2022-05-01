@@ -16,6 +16,7 @@
             <converters:BookLeaveButtonTextConverter x:Key="BookLeaveButtonTextConverter" />
             <converters:CarToStringConverter x:Key="CarToStringConverter" />
             <converters:UserToStringConverter x:Key="UserToStringConverter" />
+            <converters:RideHistoryButtonTextConverter x:Key="RideHistoryButtonTextConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

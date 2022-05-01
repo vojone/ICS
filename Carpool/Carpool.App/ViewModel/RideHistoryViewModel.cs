@@ -37,6 +37,8 @@ namespace Carpool.App.ViewModel
 
         public ICommand GoBackCommand { get; set; }
 
+        public Guid CurrentUserId { get; set; }
+
         private void OnGoBack()
         {
             _mediator.Send(new DisplayLastMessage());
@@ -53,28 +55,15 @@ namespace Carpool.App.ViewModel
             Rides.Clear();
             var rides = await _rideFacade.GetAsync();
 
-            Guid? currentUserId = _session.GetLoggedUserId();
+            CurrentUserId = _session.GetLoggedUserId() ?? Guid.Empty;
 
             foreach (var item in rides)
             {
                 RideWrapper ride = await _rideFacade.GetAsync(item.Id);
-                if ((item.ArrivalT < DateTime.Now) && (IsParticipant(ride,currentUserId) || currentUserId == item.DriverId))
+                if ((item.ArrivalT < DateTime.Now) && (ParticipantWrapper.IsParticipant(ride,CurrentUserId) || CurrentUserId == item.DriverId))
                 {
                     Rides.Add(item);
                 }
-            }
-        }
-
-        private bool IsParticipant(RideWrapper ride, Guid? userId)
-        {
-            ParticipantWrapper? participant = ride.Participants.FirstOrDefault(p => p.UserId == userId);
-            if (participant != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
     }
