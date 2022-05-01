@@ -90,13 +90,33 @@
 
             <ListView.ItemTemplate >
                 <DataTemplate >
-                    <StackPanel Grid.Column="1" Grid.Row="1" Height="23" Width="216">
-                        <Label 
-                            Background="#d1d1d1" 
-                            Height="24" 
-                            BorderBrush="{x:Null}"
-                            Content="{Binding}">
-                        </Label>
+                    <StackPanel Height="auto" Width="266">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="27*"/>
+                                <ColumnDefinition Width="11*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="0"
+                                Background="#d1d1d1" 
+                                Height="Auto" 
+                                BorderBrush="{x:Null}"
+                                Content="{Binding}">
+                            </Label>
+
+                            <Button
+                                Grid.Column="1"
+                                Background="#B80000"
+                                x:Name="ButtonKickCoDriver"
+                                Content="Kick"
+                                Cursor="Hand" BorderBrush="{x:Null}" Margin="0,1,15,1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="50"
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:EditRideControl}},Path=DataContext.KickParticipantCommand}"
+                                CommandParameter="{Binding UserId}"
+                            >
+                            </Button>
+
+                        </Grid>
+
                     </StackPanel>
                 </DataTemplate>
 

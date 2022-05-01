@@ -7,6 +7,7 @@ using System.Media;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
@@ -14,6 +15,7 @@ using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.App.ViewModel
 {
@@ -95,6 +97,46 @@ namespace Carpool.App.ViewModel
                     Model = Model
                 });
             }
+        }
+        protected async Task UserJoinRide(Guid currentUserId)
+        {
+            if (Model.Capacity <= 0)
+            {
+                MessageBox.Show("Ride is already full!");
+                return;
+            }
+            UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
+
+            ParticipantModel CurrentUserParticipantModel = new ParticipantModel(
+                currentUserId,
+                currentUserWrapper.Name,
+                currentUserWrapper.Surname,
+                currentUserWrapper.Rating
+            );
+            ParticipantWrapper CurrentUserParticipantWrapper = new ParticipantWrapper(CurrentUserParticipantModel);
+            Model.Participants.Add(CurrentUserParticipantWrapper);
+            Model.Capacity--;
+            try
+            {
+                await SaveAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                MessageBox.Show("Cannot book ride in same timespan as another ride!");
+            }
+            OnPropertyChanged();
+        }
+
+        protected async Task UserLeaveRide(Guid currentUserId)
+        {
+            UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
+
+            ParticipantWrapper currentUserParticipant = Model.Participants.First(i => i.UserId == currentUserId);
+            Model.Participants.Remove(currentUserParticipant);
+            Model.Capacity++;
+
+            await SaveAsync();
+            OnPropertyChanged();
         }
     }
 }

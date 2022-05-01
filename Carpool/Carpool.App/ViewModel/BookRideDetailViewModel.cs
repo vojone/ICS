@@ -71,47 +71,6 @@ namespace Carpool.App.ViewModel
             }
         }
 
-        private async Task UserJoinRide(Guid currentUserId)
-        {
-            if (Model.Capacity <= 0)
-            {
-                MessageBox.Show("Ride is already full!");
-                return;
-            }
-            UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
-
-            ParticipantModel CurrentUserParticipantModel = new ParticipantModel(
-                currentUserId,
-                currentUserWrapper.Name,
-                currentUserWrapper.Surname,
-                currentUserWrapper.Rating
-            );
-            ParticipantWrapper CurrentUserParticipantWrapper = new ParticipantWrapper(CurrentUserParticipantModel);
-            Model.Participants.Add(CurrentUserParticipantWrapper);
-            Model.Capacity--;
-            try
-            {
-                await SaveAsync();
-            }
-            catch (DbUpdateException e)
-            { 
-                MessageBox.Show("Cannot book ride in same timespan as another ride!");
-            }
-            OnPropertyChanged();
-        }
-
-        private async Task UserLeaveRide(Guid currentUserId)
-        {
-            UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
-
-            ParticipantWrapper currentUserParticipant = Model.Participants.First(i => i.UserId == currentUserId);
-            Model.Participants.Remove(currentUserParticipant);
-            Model.Capacity++;
-            
-            await SaveAsync();
-            OnPropertyChanged();
-        }
-
         private async void OnDisplayBookRide(DisplayBookRideMessage m)
         {
             CurrentUserId = _session.GetLoggedUserId();
