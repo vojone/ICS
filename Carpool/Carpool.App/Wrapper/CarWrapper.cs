@@ -31,22 +31,6 @@ namespace Carpool.App.Wrapper
                     AddError(nameof(Brand), "The brand cannot be empty!");
                 }
             }
-
-            if (propertyName is null or nameof(Name))
-            {
-                if (Name == string.Empty)
-                {
-                    AddError(nameof(Name), "The car name cannot be empty!");
-                }
-            }
-
-            if (propertyName is null or nameof(Brand))
-            {
-                if (Brand == string.Empty)
-                {
-                    AddError(nameof(Brand), "The brand cannot be empty!");
-                }
-            }
         }
 
         public string? Name
@@ -95,6 +79,15 @@ namespace Carpool.App.Wrapper
 
         public static implicit operator CarDetailModel(CarWrapper wrapper) => wrapper.Model;
 
+        public bool DataEquals(CarDetailModel model)
+        {
+            return this.Name == model.Name &&
+                   this.Brand == model.Brand &&
+                   this.Photo == model.Photo &&
+                   this.Registration == model.Registration &&
+                   this.Seats == model.Seats &&
+                   this.Type == model.Type;
+        }
     }
 }
 

@@ -7,7 +7,7 @@ using Carpool.App.Wrapper;
 
 namespace Carpool.App.ViewModel
 {
-    public interface ICarEditViewModel : IViewModel
+    public interface ICarEditViewModel : IDetailViewModel<CarWrapper>
     {
     }
 }

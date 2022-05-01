@@ -185,7 +185,7 @@
             VerticalContentAlignment="Center"
             VerticalAlignment="Top" 
             HorizontalAlignment="Left"
-            Text="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Model.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <DatePicker 
             Grid.Column="1" 
@@ -198,7 +198,7 @@
             BorderBrush="{x:Null}" 
             Margin="0,33,0,0"
             VerticalContentAlignment="Center"
-            Text="{Binding Model.Registration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            Text="{Binding Model.Registration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}"/>
 
         <TextBox  
             x:Name="CarMakeCombobox" 
@@ -254,7 +254,7 @@
             />
 
         <TextBox x:Name="CarSeatsTextBox" HorizontalAlignment="Center" VerticalContentAlignment="Center" Height="25" Margin="-59,20,0,0" Grid.Row="5" Grid.Column="1" 
-                  VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}" Text="{Binding Model.Seats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                  VerticalAlignment="Center" Width="60" BorderBrush="{x:Null}" Text="{Binding Model.Seats, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
         </TextBox>
         <Label
             Margin="68,10,0,0" 

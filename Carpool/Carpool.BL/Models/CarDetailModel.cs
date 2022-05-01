@@ -12,7 +12,7 @@ namespace Carpool.BL.Models
     public record CarDetailModel(
         string Name,
         string Brand,
-        string Photo,
+        string? Photo,
         CarType Type,
         DateTime Registration,
         uint Seats,
@@ -39,10 +39,11 @@ namespace Carpool.BL.Models
         public static CarDetailModel Empty =>
             new(string.Empty,
                 string.Empty,
-                string.Empty,
+                null,
                 CarType.None,
-                default,
+                DateTime.Now,
                 0,
                 Guid.Empty);
+
     }
 }

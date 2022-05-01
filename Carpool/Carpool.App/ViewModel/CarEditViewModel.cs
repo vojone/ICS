@@ -27,10 +27,13 @@ namespace Carpool.App.ViewModel
 
         private CarWrapper? _carModel;
 
+        private CarWrapper? _origCarModel;
+
         private UserWrapper? _userModel;
 
+        private bool _isPersisted = true;
+
         public CarEditViewModel(
-            ISession session,
             CarFacade carFacade,
             IMediator mediator)
         {
@@ -43,8 +46,8 @@ namespace Carpool.App.ViewModel
 
             _mediator.Register<SendModelToEditMessage<UserWrapper>>(OnSendToEdit);
 
-            SaveCommand = new AsyncRelayCommand(OnSave);
-            DeleteCommand = new AsyncRelayCommand(OnDelete);
+            SaveCommand = new AsyncRelayCommand(OnSave, CanSave);
+            DeleteCommand = new AsyncRelayCommand(OnDelete, CanDelete);
             NewCarCommand = new RelayCommand(OnNewCar);
             SelectCarCommand = new Command.AsyncRelayCommand<Guid>(OnSelectCar, CanSelect);
             SelectPhotoCommand = new RelayCommand(OnSelectPhoto);
@@ -52,7 +55,7 @@ namespace Carpool.App.ViewModel
         }
 
         public ICommand GoBackCommand { get; set; }
-        public ICommand SaveCommand { get; set; }
+        public IAsyncRelayCommand SaveCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand NewCarCommand { get; set; }
         public IAsyncRelayCommand SelectCarCommand { get; set; }
@@ -73,6 +76,7 @@ namespace Carpool.App.ViewModel
                     _carModel.OwnerId = UserModel.Id;
                 }
 
+                Model?.Validate();
                 OnPropertyChanged();
             }
         }
@@ -91,10 +95,17 @@ namespace Carpool.App.ViewModel
                     {
                         UserModel.Cars.Add(car);
                     }
+
+                    SetDefaultCar();
                 }
 
                 OnPropertyChanged();
             }
+        }
+
+        private void SetDefaultCar()
+        {
+            Model = UserModel?.Cars.Count > 0 ? UserModel.Cars[0] : CarDetailModel.Empty;
         }
 
 
@@ -136,6 +147,19 @@ namespace Carpool.App.ViewModel
         }
 
 
+        private bool CanSave()
+        {
+            if (Model == null)
+            {
+                return true;
+            }
+
+            bool hasChanged = !_origCarModel?.DataEquals(Model.Model) ?? true;
+
+            return !Model.HasErrors && hasChanged;
+        }
+
+
         private async Task OnSave()
         {
             await SaveAsync();
@@ -153,19 +177,36 @@ namespace Carpool.App.ViewModel
             if (answer == MessageBoxResult.Yes && Model != null)
             {
                 await DeleteAsync();
-                _mediator.Send(new DisplayUserProfileMessage());
             }
         }
+
+
+        private void RememberCurrentModel()
+        {
+            if (Model == null)
+            {
+                return;
+            }
+
+            _origCarModel = new CarDetailModel(
+                Model.Name ?? string.Empty, Model.Brand ?? string.Empty,
+                Model.Photo ?? null, Model.Type,
+                Model.Registration, Model.Seats, Model.OwnerId);
+        }
+
 
         private void OnNewCar()
         {
             Model = CarDetailModel.Empty;
+            _isPersisted = false;
+            RememberCurrentModel();
         }
 
         private async Task OnSelectCar(Guid carId)
         {
             await LoadAsync(carId);
             SelectCarCommand.NotifyCanExecuteChanged();
+            RememberCurrentModel();
         }
 
         private bool CanSelect(Guid carId)
@@ -176,6 +217,7 @@ namespace Carpool.App.ViewModel
         public async Task LoadAsync(Guid id)
         {
             Model = await _carFacade.GetAsync(id) ?? CarDetailModel.Empty;
+            RememberCurrentModel();
         }
 
         public async Task SaveAsync()
@@ -188,6 +230,16 @@ namespace Carpool.App.ViewModel
             Model = await _carFacade.SaveAsync(Model.Model);
 
             _mediator.Send(new LoadToEditMessage<UserWrapper> { Id = UserModel?.Id });
+
+            SaveCommand.NotifyCanExecuteChanged();
+            RememberCurrentModel();
+            _isPersisted = true;
+        }
+
+
+        private bool CanDelete()
+        {
+            return _isPersisted;
         }
 
         public async Task DeleteAsync()
