@@ -18,7 +18,6 @@ namespace Carpool.DAL
         public DbSet<RideEntity> Rides => Set<RideEntity>();
         public DbSet<CarEntity> Cars => Set<CarEntity>();
         public DbSet<ParticipantEntity> Participants => Set<ParticipantEntity>();
-        public DbSet<CarPhotoEntity> CarPhotos => Set<CarPhotoEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,20 +57,12 @@ namespace Carpool.DAL
                 .OnDelete(DeleteBehavior.Cascade);
 
 
-
-            modelBuilder.Entity<CarEntity>()
-                .HasMany(i => i.Photos)
-                .WithOne(i => i.Car)
-                .HasForeignKey(i => i.CarId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             if (!_seedDemoData) return;
 
             UserSeeds.Seed(modelBuilder);
 
             CarSeeds.Seed(modelBuilder);
-            CarPhotoSeeds.Seed(modelBuilder);
-            
+
             RideSeeds.Seed(modelBuilder);
 
             ParticipantSeeds.Seed(modelBuilder);

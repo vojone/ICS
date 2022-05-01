@@ -26,6 +26,12 @@ namespace Carpool.App.Wrapper
             set => SetValue(value);
         }
 
+        public string? Photo
+        {
+            get => GetValue<string>();
+            set => SetValue(value);
+        }
+
         public CarType Type
         {
             get => GetValue<CarType>();
@@ -43,13 +49,6 @@ namespace Carpool.App.Wrapper
             get => GetValue<uint>();
             set => SetValue(value);
         }
-
-        /*public List<CarPhotoModel> Photos
-        {
-            get => GetValue<List<CarPhotoModel>>();
-            set => SetValue(value);
-        }*/
-        private ObservableCollection<CarPhotoWrapper> Photos = new();
 
         public static implicit operator CarWrapper(CarDetailModel detailModel) => new(detailModel);
 
