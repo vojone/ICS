@@ -147,13 +147,13 @@ namespace Carpool.App.Wrapper
                 }
             }
 
-            if (propertyName is null or nameof(Capacity))
+            /*if (propertyName is null or nameof(Capacity))
             {
                 if (Capacity > InitialCapacity)
                 {
                     AddError(nameof(Capacity), "Capacity cannot be greater than InitialCapacity");
                 }
-            }
+            }*/
         }
 
         public ObservableCollection<ParticipantWrapper> Participants { get; init; } = new();

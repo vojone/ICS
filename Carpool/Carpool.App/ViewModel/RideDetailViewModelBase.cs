@@ -64,13 +64,14 @@ namespace Carpool.App.ViewModel
                 throw new InvalidOperationException("Null model cannot be saved");
             }
 
-            if (Car != null)
+            if (Car == null || Driver == null)
             {
-                Model.CarId = Car.Id;
-                Model.DriverId = Driver.Id;
-                Model = await _rideFacade.SaveAsync(Model.Model);
-                _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
+                return;
             }
+            Model.CarId = Car.Id;
+            Model.DriverId = Driver.Id;
+            Model = await _rideFacade.SaveAsync(Model.Model);
+            _mediator.Send(new UpdateMessage<RideWrapper> { Model = Model });
         }
 
         protected bool CanSaveRide()
