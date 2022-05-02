@@ -73,7 +73,7 @@ namespace Carpool.App.ViewModel
             if (answer == MessageBoxResult.Yes && Model != null)
             {
                 await _rideFacade.DeleteAsync(Model.Id);
-                _mediator.Send(new DisplayRideListMessage());
+                _mediator.Send(new DisplayLastMessage());
             }
         }
 

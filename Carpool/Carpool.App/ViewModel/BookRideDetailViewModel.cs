@@ -67,7 +67,7 @@ namespace Carpool.App.ViewModel
                 {
                     await UserJoinRide(currentUserId);
                 }
-                _mediator.Send(new DisplayRideListMessage());
+                _mediator.Send(new DisplayLastMessage());
             }
         }
 

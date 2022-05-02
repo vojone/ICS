@@ -100,8 +100,6 @@ namespace Carpool.App.ViewModel
                 MessageBox.Show(e.Message, "Cannot save a ride!");
                 return;
             }
-            
-            _mediator.Send(new DisplayRideListMessage());
         }
 
         private async void OnDisplayCreateRide(DisplayCreateRideMessage m)
