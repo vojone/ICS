@@ -80,6 +80,10 @@ namespace Carpool.App.ViewModel
         private async void OnDisplayEditRide(DisplayEditRideMessage m)
         {
             await LoadAsync(m.rideId);
+            if (Model.Car != null)
+            {
+                Car = Model.Car;
+            }
             Debug.WriteLine("Editing ride with id: " + Model.Id);
             OnPropertyChanged();
         }
