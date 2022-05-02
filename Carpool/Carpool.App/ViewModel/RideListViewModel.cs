@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
+using Carpool.App.Extensions;
 using Carpool.App.Messages;
 using Carpool.App.Services;
 using Carpool.App.View;
@@ -35,7 +36,7 @@ namespace Carpool.App.ViewModel
 
             //mediator.Register<UpdateMessage<RideWrapper>>(RideUpdated);
             //mediator.Register<DeleteMessage<RideWrapper>>(RideDeleted);
-            FilterRidesCommand = new RelayCommand(OnFilterRides);
+            FilterRidesCommand = new AsyncRelayCommand(OnFilterRides);
             DisplayRideHistoryCommand = new RelayCommand(OnDisplayRideHistory);
             DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRide);
             OpenRideCommand = new RelayCommand<Guid>(OnOpenRide);
@@ -56,16 +57,23 @@ namespace Carpool.App.ViewModel
 
         public Guid? CurrentUserId { get; set; }
 
-        public String ButtonText = "Book";
-        private void OnFilterRides()
+
+        private async Task OnFilterRides()
         {
             var dialog = new FilterDialogWindow();
 
             if (dialog.ShowDialog() == true)
             {
-                
+                var rides = await _rideFacade.FilterAsync(
+                    dialog.GetDepartureLocation(),
+                    dialog.GetArrivalLocation(),
+                    dialog.GetDepartureDateTime(),
+                    dialog.GetArrivalTime(),
+                    dialog.GetAvailabilityFlag());
+
+                Rides.Clear(); 
+                Rides.AddRange(rides);
             }
-            
         }
 
         private void OnDisplayCreateRide()

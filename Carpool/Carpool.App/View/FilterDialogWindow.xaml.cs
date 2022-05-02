@@ -26,6 +26,7 @@ namespace Carpool.App.View
         public FilterDialogWindow()
         {
             InitializeComponent();
+            DepartureTime.Value = DateTime.Now;
         }
 
         private void okButton_Click(object sender, RoutedEventArgs e)
@@ -36,6 +37,57 @@ namespace Carpool.App.View
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = false;
+        }
+
+        public DateTime? GetArrivalTime()
+        {
+            if (ArrTimeChecked.IsChecked == null)
+            {
+                return null;
+            }
+
+            return (bool)ArrTimeChecked.IsChecked ? ArrivalTime.Value : null;
+        }
+
+        public DateTime? GetDepartureDateTime()
+        {
+            if (DepartureTimeChecked.IsChecked == null)
+            {
+                return null;
+            }
+
+            return (bool)DepartureTimeChecked.IsChecked ? DepartureTime.Value : null;
+        }
+
+        public string? GetArrivalLocation()
+        {
+            if (ArrPlaceChecked.IsChecked == null)
+            {
+                return null;
+            }
+
+            return (bool)ArrPlaceChecked.IsChecked ? ArrPlace.Text : null;
+        }
+
+        public string? GetDepartureLocation()
+        {
+            if (DepPlaceChecked.IsChecked == null)
+            {
+                return null;
+            }
+
+            return (bool)DepPlaceChecked.IsChecked ? DepPlace.Text : null;
+        }
+
+
+        public bool GetAvailabilityFlag()
+        {
+            if (AvailabilityFlag.IsChecked == null)
+            {
+                return false;
+            }
+
+            return (bool)AvailabilityFlag.IsChecked;
         }
     }
 }

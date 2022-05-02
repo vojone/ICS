@@ -143,8 +143,8 @@
                                 Grid.Column="4"
                                 x:Name="ButtonBook" 
                                 Cursor="Hand"
-                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.OpenRideCommand}"
-                                CommandParameter="{Binding Id}"
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=DataContext.RateDriverCommand}"
+                                CommandParameter="{Binding DriverId}"
                                 Background="#FFFDF41C" Margin="0,12,5,11" BorderBrush="{x:Null}">
                                 <Button.Content>
                                     <TextBlock Text="Send ⭐"></TextBlock>

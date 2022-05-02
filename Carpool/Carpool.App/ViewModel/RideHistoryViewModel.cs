@@ -34,9 +34,18 @@ namespace Carpool.App.ViewModel
 
         public ObservableCollection<RideListModel> Rides { get; set; } = new();
 
+        public IUserRateViewModel UserRateViewModel { get; set; }
+
         public ICommand GoBackCommand { get; set; }
 
+        public ICommand RateDriverCommand { get; set; }
+
         public Guid CurrentUserId { get; set; }
+
+        private async Task OnRate(Guid id)
+        {
+            await UserRateViewModel.IncreaseRating(id);
+        }
 
         private void OnGoBack()
         {
@@ -59,7 +68,9 @@ namespace Carpool.App.ViewModel
             foreach (var item in rides)
             {
                 RideWrapper ride = await _rideFacade.GetAsync(item.Id);
-                if ((item.ArrivalT < DateTime.Now) && (ParticipantWrapper.IsParticipant(ride, CurrentUserId) || CurrentUserId == item.DriverId))
+                if ((item.ArrivalT < DateTime.Now) && 
+                    (ParticipantWrapper.IsParticipant(ride, CurrentUserId) || 
+                     CurrentUserId == item.DriverId))
                 {
                     Rides.Add(item);
                 }

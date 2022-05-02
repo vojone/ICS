@@ -25,10 +25,20 @@ namespace Carpool.BL.Facades
         {
             await using var uow = UnitOfWorkFactory.Create();
 
+            CheckTimeValidity(model);
             await CheckDriverCollisionsAsync(uow, model);
             await CheckParticipantCollisionsAsync(uow, model);
 
             return await base.SaveAsync(model); 
+        }
+
+
+        private void CheckTimeValidity(RideDetailModel model)
+        {
+            if (model.ArrivalT < model.DepartureT)
+            {
+                throw new DbUpdateException("The Arrival Time must be greater than Departure Time!");
+            }
         }
 
 
@@ -95,7 +105,6 @@ namespace Carpool.BL.Facades
             return await Mapper.ProjectTo<RideListModel>(query)
                 .ToArrayAsync().ConfigureAwait(false);
         }
-
 
         public async Task<IEnumerable<RideListModel>> GetByDriverIdAsync(Guid driverId)
         {

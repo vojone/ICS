@@ -88,7 +88,17 @@ namespace Carpool.App.ViewModel
             }
 
             Model.Capacity = Model.InitialCapacity;
-            await SaveAsync();
+
+            try
+            {
+                await SaveAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Cannot save a ride!");
+                return;
+            }
+            
             _mediator.Send(new DisplayRideListMessage());
         }
 

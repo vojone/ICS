@@ -6,7 +6,7 @@
         xmlns:views = "clr-namespace:Carpool.App.View"
         Title="Filter Rides"
         MinHeight="200"
-        MinWidth="300"
+        MinWidth="350"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize"
         ShowInTaskbar="False"
@@ -31,6 +31,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
@@ -40,44 +41,43 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0">Departure place:</Label>
-        <TextBox Name="leftMarginTextBox" Grid.Column="1" Grid.Row="0"/>
+        <Label Grid.Column="0" Grid.Row="0" ToolTip="Place of departure">Departure place:</Label>
+        <TextBox x:Name="DepPlace" Grid.Column="1" Grid.Row="0"/>
+        <CheckBox x:Name="DepPlaceChecked"  Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
 
-        <Label Grid.Column="0" Grid.Row="1">Arrival place:</Label>
-        <TextBox Name="topMarginTextBox" Grid.Column="1" Grid.Row="1"/>
+        <Label Grid.Column="0" Grid.Row="1" ToolTip="Place of arrival">Arrival place:</Label>
+        <TextBox x:Name="ArrPlace" Grid.Column="1" Grid.Row="1"/>
+        <CheckBox x:Name="ArrPlaceChecked"  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
 
-        <Label Grid.Column="0" Grid.Row="2">Departure time:</Label>
-        <xctk:DateTimePicker 
-            x:Name="TimePickerEditRideDeparture"
-            Height="24" 
-            Width="205" 
-            Value="" 
-            Grid.Row="2"
-            Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-        <Label Grid.Column="0" Grid.Row="3">Arrival time:</Label>
-
-        <!-- Accept or Cancel -->
-        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Name="okButton" IsDefault="True" Click="okButton_Click">OK</Button>
-            <Button x:Name="cancelButton" IsCancel="True" Content="Cancel" Click="cancelButton_Click"/>
-        </StackPanel>
+        <Label Grid.Column="0" Grid.Row="2" ToolTip="Time of departure">Departure time:</Label>
         <xctk:DateTimePicker 
             x:Name="DepartureTime"
             Height="24" 
             Width="205" 
-            Value="" 
             Grid.Row="2"
-            Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            Grid.Column="1" VerticalAlignment="Center"  HorizontalAlignment="Center"/>
+        <CheckBox x:Name="DepartureTimeChecked"  Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+
+        <Label Grid.Column="0" Grid.Row="3" ToolTip="Time of arrival">Arrival time:</Label>
+
+        <!-- Accept or Cancel -->
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Name="OkButton" IsDefault="True" Click="okButton_Click">OK</Button>
+            <Button x:Name="CancelButton" IsCancel="True" Content="Cancel" Click="cancelButton_Click"/>
+        </StackPanel>
         <xctk:DateTimePicker 
             x:Name="ArrivalTime"
             Height="24" 
             Width="205" 
-            Value="" 
             Grid.Row="3"
             Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <CheckBox x:Name="ArrTimeChecked"  Grid.Column="2" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+
+        <Label Grid.Column="0" Grid.Row="4" ToolTip="Time of arrival">Must be available:</Label>
+        <CheckBox x:Name="AvailabilityFlag"  Grid.Column="1" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
     </Grid >
 </Window>

@@ -18,15 +18,16 @@ namespace Carpool.BL.Facades
 
         }
 
-        public async Task<UserDetailModel?> GetAsyncWithCars(Guid id)
+        public async Task IncreaseRatingAsync(Guid id)
         {
-            await using var uow = UnitOfWorkFactory.Create();
-            var query = uow
-                .GetRepository<UserEntity>()
-                .Get()
-                .Where(e => e.Id == id).Include(i => i.Cars);
+            var user = await GetAsync(id);
 
-            return await Mapper.ProjectTo<UserDetailModel>(query).SingleOrDefaultAsync().ConfigureAwait(false);
+            if (user != null)
+            {
+                user.Rating++;
+
+                await SaveAsync(user);
+            }
         }
     }
 }
