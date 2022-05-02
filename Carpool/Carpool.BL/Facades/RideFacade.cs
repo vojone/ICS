@@ -98,8 +98,8 @@ namespace Carpool.BL.Facades
                 .Where(e => 
                     (e.DepartureL == departureLoc || departureLoc == null) &&
                     (e.ArrivalL == arrivalLoc || arrivalLoc == null) &&
-                    (e.DepartureT == departureTime || departureTime == null) &&
-                    (e.ArrivalT == arrivalTime || arrivalTime == null) &&
+                    (e.DepartureT >= departureTime || departureTime == null) &&
+                    (e.ArrivalT <= arrivalTime || arrivalTime == null) &&
                     (e.Capacity > 0 || !mustBeAvailable));
 
             return await Mapper.ProjectTo<RideListModel>(query)
