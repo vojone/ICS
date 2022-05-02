@@ -146,6 +146,21 @@ namespace Carpool.BL.Tests
             DeepAssert.Equal(user, Mapper.Map<UserDetailModel>(userFromDb));
         }
 
+
+        [Fact]
+        public async Task InsertOrUpdate_IncreaseUserRating()
+        {
+
+            //Act
+            await _userFacadeSut.IncreaseRatingAsync(UserSeeds.Leonardo.Id);
+
+            //Assert
+            await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+            var userFromDb = await dbxAssert.Users.SingleAsync(i => i.Id == UserSeeds.Leonardo.Id);
+            DeepAssert.Equal(UserSeeds.Leonardo.Rating + 1, userFromDb.Rating);
+        }
+
+
         [Fact]
         public async Task InsertOrUpdate_UpdateCarsOfUpdateLeonardo()
         {

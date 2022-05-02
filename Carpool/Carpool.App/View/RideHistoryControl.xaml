@@ -138,20 +138,16 @@
 
 
 
-                            <Button 
+                            <Button
                                 Grid.Row="0" Grid.RowSpan="3"
-                                Grid.Column="4"
+                                Grid.Column="3"
                                 x:Name="ButtonBook" 
                                 Cursor="Hand"
-                                ContentStringFormat="Send ⭐"
-                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.OpenRideCommand}"
-                                CommandParameter="{Binding Id}"
-                                Background="#FF005FB8" Margin="0,12,5,11" BorderBrush="{x:Null}">
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=DataContext.RateDriverCommand}"
+                                CommandParameter="{Binding DriverId}"
+                                Background="#FFFDF41C" Margin="65,10,10,13" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
                                 <Button.Content>
-                                    <MultiBinding Converter="{StaticResource RideListButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
-                                        <Binding UpdateSourceTrigger="PropertyChanged"/>
-                                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType=local:RideListControl}" Path="DataContext.CurrentUserId" UpdateSourceTrigger="PropertyChanged"/>
-                                    </MultiBinding>
+                                    <TextBlock Text="Send ⭐"></TextBlock>
                                 </Button.Content>
                             </Button>
 

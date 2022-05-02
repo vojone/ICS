@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Formats.Asn1;
 using System.Linq;
@@ -88,8 +90,16 @@ namespace Carpool.App.ViewModel
             }
 
             Model.Capacity = Model.InitialCapacity;
-            await SaveAsync();
-            _mediator.Send(new DisplayRideListMessage());
+
+            try
+            {
+                await SaveEditedRide();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Cannot save a ride!");
+                return;
+            }
         }
 
         private async void OnDisplayCreateRide(DisplayCreateRideMessage m)
@@ -97,7 +107,7 @@ namespace Carpool.App.ViewModel
 
             var loggedUserId = _session.GetLoggedUserId();
             Debug.WriteLine("User id: " + loggedUserId);
-
+            Car = CarDetailModel.Empty;
             if (loggedUserId != null)
             {
                 UserDetailModel? driver = await _userFacade.GetAsync((Guid)loggedUserId);

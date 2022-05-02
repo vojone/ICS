@@ -7,6 +7,7 @@ using System.Media;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Carpool.App.Command;
 using Carpool.App.Messages;
@@ -14,6 +15,7 @@ using Carpool.App.Services;
 using Carpool.App.Wrapper;
 using Carpool.BL.Facades;
 using Carpool.BL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Carpool.App.ViewModel
 {
@@ -61,6 +63,11 @@ namespace Carpool.App.ViewModel
             {
                 throw new InvalidOperationException("Null model cannot be saved");
             }
+
+            if (Car == null || Driver == null)
+            {
+                return;
+            }
             Model.CarId = Car.Id;
             Model.DriverId = Driver.Id;
             Model = await _rideFacade.SaveAsync(Model.Model);
@@ -95,6 +102,88 @@ namespace Carpool.App.ViewModel
                     Model = Model
                 });
             }
+        }
+        protected async Task UserJoinRide(Guid currentUserId)
+        {
+            if (Model.Capacity <= 0)
+            {
+                MessageBox.Show("Ride is already full!");
+                return;
+            }
+            UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
+
+            ParticipantModel CurrentUserParticipantModel = new ParticipantModel(
+                currentUserId,
+                currentUserWrapper.Name,
+                currentUserWrapper.Surname,
+                currentUserWrapper.Rating
+            );
+            ParticipantWrapper CurrentUserParticipantWrapper = new ParticipantWrapper(CurrentUserParticipantModel);
+            Model.Participants.Add(CurrentUserParticipantWrapper);
+            Model.Capacity--;
+            try
+            {
+                await SaveAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                MessageBox.Show("Cannot book ride in same timespan as another ride!");
+            }
+            OnPropertyChanged();
+        }
+
+        protected async Task UserLeaveRide(Guid currentUserId)
+        {
+            UserWrapper currentUserWrapper = await _userFacade.GetAsync(currentUserId);
+
+            ParticipantWrapper currentUserParticipant = Model.Participants.First(i => i.UserId == currentUserId);
+            Model.Participants.Remove(currentUserParticipant);
+            Model.Capacity++;
+            try
+            {
+                await SaveAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                MessageBox.Show("Ride timespan collision!");
+            }
+            OnPropertyChanged();
+        }
+
+        internal async Task SaveEditedRide()
+        {
+            if (Car == null)
+            {
+                MessageBox.Show("You must select a car!");
+                return;
+            }
+            Car.Validate();
+            if (Car.HasErrors)
+            {
+                MessageBox.Show("You must select a car!");
+                return;
+            }
+            Model.CarId = Car.Id;
+            OnPropertyChanged();
+            Model.Validate();
+            List<String> errors = (List<String>)Model.GetErrors("DepartureT");
+            if (Model.HasErrors)
+            {
+                if(errors.Count > 0)
+                    MessageBox.Show(errors[0]);
+                return;
+            }
+            Model.Capacity = Model.InitialCapacity;
+            try
+            {
+                await SaveAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+            _mediator.Send(new DisplayLastMessage());
         }
     }
 }

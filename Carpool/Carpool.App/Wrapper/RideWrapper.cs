@@ -114,30 +114,46 @@ namespace Carpool.App.Wrapper
                     AddError(nameof(ArrivalL), "The destination cannot be empty!");
                 }
             }
-
-            if (propertyName is null or nameof(Car))
+            
+            /*if (propertyName is null or nameof(DepartureT) )
             {
-                if (Car == CarDetailModel.Empty || Car == null)
+                if (DateTime.Compare(DepartureT, ArrivalT) >= 0)
                 {
-                    AddError(nameof(Car), "A car must be selected!");
+                    AddError(nameof(DepartureT), "Departure time must be before arrival time!");
                 }
             }
 
             if (propertyName is null or nameof(ArrivalT))
             {
-                if (ArrivalT < DepartureT)
+                if (DateTime.Compare(DepartureT, ArrivalT) >= 0)
                 {
-                    AddError(nameof(ArrivalT), "Arrival time must be greater than departure time!");
+                    AddError(nameof(ArrivalT), "Arrival time must be after departure time!");
+                }
+            }*/
+            
+            if (propertyName is null or nameof(CarId))
+            {
+                if (CarId == Guid.Empty)
+                {
+                    AddError(nameof(Car), "A car must be selected!");
                 }
             }
 
-            if (propertyName is null or nameof(DepartureT))
+            if (propertyName is null or nameof(InitialCapacity))
             {
-                if (ArrivalT >= DepartureT)
+                if (InitialCapacity <= 0)
                 {
-                    AddError(nameof(DepartureT), "Arrival time must be lower than departure time!");
+                    AddError(nameof(InitialCapacity), "Initial capacity must be greater than 0!");
                 }
             }
+
+            /*if (propertyName is null or nameof(Capacity))
+            {
+                if (Capacity > InitialCapacity)
+                {
+                    AddError(nameof(Capacity), "Capacity cannot be greater than InitialCapacity");
+                }
+            }*/
         }
 
         public ObservableCollection<ParticipantWrapper> Participants { get; init; } = new();
