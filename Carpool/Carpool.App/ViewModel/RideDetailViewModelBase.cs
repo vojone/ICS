@@ -134,8 +134,14 @@ namespace Carpool.App.ViewModel
             ParticipantWrapper currentUserParticipant = Model.Participants.First(i => i.UserId == currentUserId);
             Model.Participants.Remove(currentUserParticipant);
             Model.Capacity++;
-
-            await SaveAsync();
+            try
+            {
+                await SaveAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                MessageBox.Show("Ride timespan collision!");
+            }
             OnPropertyChanged();
         }
 
