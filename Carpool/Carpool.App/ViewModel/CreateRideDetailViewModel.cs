@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Formats.Asn1;
 using System.Linq;
@@ -91,7 +93,7 @@ namespace Carpool.App.ViewModel
 
             try
             {
-                await SaveAsync();
+                await SaveEditedRide();
             }
             catch (Exception e)
             {
@@ -107,7 +109,7 @@ namespace Carpool.App.ViewModel
 
             var loggedUserId = _session.GetLoggedUserId();
             Debug.WriteLine("User id: " + loggedUserId);
-
+            Car = CarDetailModel.Empty;
             if (loggedUserId != null)
             {
                 UserDetailModel? driver = await _userFacade.GetAsync((Guid)loggedUserId);

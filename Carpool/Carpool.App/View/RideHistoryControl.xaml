@@ -138,14 +138,14 @@
 
 
 
-                            <Button 
+                            <Button
                                 Grid.Row="0" Grid.RowSpan="3"
-                                Grid.Column="4"
+                                Grid.Column="3"
                                 x:Name="ButtonBook" 
                                 Cursor="Hand"
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=DataContext.RateDriverCommand}"
                                 CommandParameter="{Binding DriverId}"
-                                Background="#FFFDF41C" Margin="0,12,5,11" BorderBrush="{x:Null}">
+                                Background="#FFFDF41C" Margin="65,10,10,13" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
                                 <Button.Content>
                                     <TextBlock Text="Send ⭐"></TextBlock>
                                 </Button.Content>

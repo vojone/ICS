@@ -138,5 +138,41 @@ namespace Carpool.App.ViewModel
             await SaveAsync();
             OnPropertyChanged();
         }
+
+        internal async Task SaveEditedRide()
+        {
+            if (Car == null)
+            {
+                MessageBox.Show("You must select a car!");
+                return;
+            }
+            Car.Validate();
+            if (Car.HasErrors)
+            {
+                MessageBox.Show("You must select a car!");
+                return;
+            }
+            Model.CarId = Car.Id;
+            OnPropertyChanged();
+            Model.Validate();
+            List<String> errors = (List<String>)Model.GetErrors("DepartureT");
+            if (Model.HasErrors)
+            {
+                if(errors.Count > 0)
+                    MessageBox.Show(errors[0]);
+                return;
+            }
+            Model.Capacity = Model.InitialCapacity;
+            try
+            {
+                await SaveAsync();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return;
+            }
+            _mediator.Send(new DisplayLastMessage());
+        }
     }
 }
