@@ -39,6 +39,7 @@ namespace Carpool.App.ViewModel
             LogOutCommand = new RelayCommand(OnLogOut);
             DisplayCarEditCommand = new RelayCommand(OnDisplayCarEdit);
             DisplayRideListCommand = new RelayCommand(OnDisplayRideList);
+            DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRide);
         }
 
 
@@ -51,6 +52,8 @@ namespace Carpool.App.ViewModel
         public ICommand DisplayCarEditCommand { get; }
 
         public ICommand DisplayRideListCommand { get; }
+
+        public ICommand DisplayCreateRideCommand { get; }
 
 
         private bool CanSave()
@@ -108,6 +111,11 @@ namespace Carpool.App.ViewModel
         private void OnDisplayRideList()
         {
             Mediator.Send(new DisplayRideListMessage());
+        }
+
+        private void OnDisplayCreateRide()
+        {
+            Mediator.Send(new DisplayCreateRideMessage());
         }
 
 

@@ -11,9 +11,9 @@
           Height="auto"
           >
         <Grid.RowDefinitions>
-            <RowDefinition Height="65*"/>
+            <RowDefinition Height="72*"/>
             <RowDefinition Height="52*"/>
-            <RowDefinition Height="188*"/>
+            <RowDefinition Height="181*"/>
             <RowDefinition Height="58*"/>
             <RowDefinition Height="71*"/>
         </Grid.RowDefinitions>
@@ -22,44 +22,45 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle 
-            Fill="#FFC4C4C4" 
-            Margin="0,8,0,8"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"/>
 
-        <Label
-            Margin="70,0,0,0" 
-            Content="Please select the user" 
-            Background="{x:Null}" 
-            FontSize="18" 
-            BorderBrush="{x:Null}" 
-            HorizontalAlignment="Left" 
-            Width="209" 
-            VerticalAlignment="Center"
-            Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Grid ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label
-            x:Name="LoggedUserName"
-            Grid.Column="2"
-            Margin="185,0,0,0" 
-            Content="Jméno usera" 
-            Background="{x:Null}" 
-            BorderBrush="{x:Null}" 
-            VerticalAlignment="Center" 
-            Height="25" 
-            HorizontalAlignment="Right" 
-            Width="82"/>
+            <Rectangle 
+                Fill="#FFC4C4C4" 
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,8,0,10" Grid.ColumnSpan="3"/>
 
-        <Button 
-            Grid.Column="1"
-            Grid.ColumnSpan="2"
-            x:Name="ButtonCreateRide"
-            Cursor="Hand"
-            Content="Create Ride" 
-            Margin="216,0,108,0" 
-            Background="#FF005FB8" 
-            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130" FontSize="17"/>
+            <Button
+                x:Name="ButtonNewCar_Copy" 
+                Margin="10,0,0,0" 
+                Cursor="Hand"
+                Background="#FF005FB8" 
+                VerticalAlignment="Center" 
+                Height="40"
+                HorizontalAlignment="Left" 
+                Command="{Binding GoBackCommand}"
+                Width="50" BorderBrush="{x:Null}" FontSize="17">
+                <Button.Content>
+                    <TextBlock Text="Back" FontWeight="Bold">
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+
+            <Label
+                Margin="70,0,0,0" 
+                Content="Car info" 
+                Background="{x:Null}" 
+                FontSize="17" 
+                BorderBrush="{x:Null}" 
+                HorizontalAlignment="Left" 
+                Width="187" VerticalAlignment="Center"/>
+        </Grid>
 
         <Button
             x:Name="ButtonNewCar" 
@@ -179,15 +180,6 @@
             VerticalAlignment="Center" 
             Height="26" Grid.Row="2" FontSize="13"
     />
-        <Button
-            x:Name="ButtonNewCar_Copy" 
-            Content="&lt;=" 
-            Margin="8,0,0,0" 
-            Cursor="Hand"
-            Background="#FF005FB8" 
-            VerticalAlignment="Center" 
-            Height="40" 
-            HorizontalAlignment="Left" 
-            Width="56" FontSize="17"/>
+        
     </Grid>
 </UserControl>

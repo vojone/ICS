@@ -12,37 +12,65 @@
           Background="#FFA1A1A1"
           Height="auto" Width="auto">
         <Grid.RowDefinitions>
-            <RowDefinition Height="26*"/>
-            <RowDefinition Height="199*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="377*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle 
-            Grid.Row = "0"
-            x:Name="TopBar" 
-            Fill="#FFC4C4C4" 
-            Margin="0,6,0,6"
-            Width="auto"
-            />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBox
-            Grid.Row = "0"
-            IsReadOnly="True" 
-            x:Name="TextBox1" 
-            Margin="70,0,0,0" 
-            TextWrapping="Wrap" 
-            Text="Please book a ride" 
-            Background="{x:Null}" 
-            FontSize="18" 
-            BorderBrush="{x:Null}" 
-            HorizontalAlignment="Left" 
-            Width="209" 
-            VerticalAlignment="Center" 
-            Height="26"/>
-        <Image
-            Grid.Row="1"
-            Height="40" 
-            Margin="735,18,25,0" 
-            VerticalAlignment="Top"/>
+            <Rectangle 
+                Fill="#FFC4C4C4" 
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,8,0,10" Grid.ColumnSpan="3"/>
+
+            <Button
+                x:Name="ButtonNewCar_Copy" 
+                Margin="10,0,0,0" 
+                Cursor="Hand"
+                Background="#FF005FB8" 
+                VerticalAlignment="Center" 
+                Height="40"
+                HorizontalAlignment="Left" 
+                Command="{Binding GoBackCommand}"
+                Width="50" BorderBrush="{x:Null}" FontSize="17">
+                <Button.Content>
+                    <TextBlock Text="Back" FontWeight="Bold">
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+
+            <Label
+                Margin="70,0,0,0" 
+                Content="Please book a ride" 
+                Background="{x:Null}" 
+                FontSize="17" 
+                BorderBrush="{x:Null}" 
+                HorizontalAlignment="Left" 
+                Width="187" VerticalAlignment="Center"/>
+
+            <Button 
+                x:Name="ButtonCreateRideProfile" 
+                Cursor="Hand"
+                Content="Create Ride" 
+                Background="#FF005FB8" 
+                Height="40"
+                HorizontalAlignment="Right" 
+                Width="130" VerticalAlignment="Center" FontSize="17"
+                Grid.Column="3"
+                Margin="0 0 10 0"
+                Command="{Binding DisplayCreateRideCommand}"
+            />
+        </Grid>
+
+
+
+
         <Button 
             x:Name="ButtonCreateUser_Copy" 
             Content="Filter rides" 
@@ -60,14 +88,6 @@
             HorizontalAlignment="Left" 
             BorderBrush="{x:Null}" Width="100" VerticalAlignment="Top" Height="28" Grid.Row="1" FontSize="17"
             Command="{Binding DisplayRideHistoryCommand}"/>
-        <Button 
-            x:Name="ButtonCreateUser" 
-            Content="Create Ride"
-            Cursor="Hand"
-            Margin="0,0,150,0" 
-            Height="40" Width="130"
-            Background="#FF005FB8" VerticalAlignment="Center" HorizontalAlignment="Right"
-            Command="{Binding DisplayCreateRideCommand}" BorderBrush="{x:Null}" FontSize="17"/>
 
         <ListView 
             ItemsSource="{Binding Rides}" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,81,0,0" Height="318" SelectionChanged="ListView_SelectionChanged" Grid.Row="1" Width="591">
@@ -168,7 +188,7 @@
                                 Cursor="Hand"
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:UserControlBase}},Path=DataContext.OpenRideCommand}"
                                 CommandParameter="{Binding Id}"
-                                Background="#FF005FB8" Height="47" Margin="74,12,5,12" Grid.ColumnSpan="2" BorderBrush="{x:Null}">
+                                Background="#FF005FB8" Margin="65,10,10,13" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
                                 <Button.Content>
                                     <MultiBinding Converter="{StaticResource RideListButtonTextConverter}" UpdateSourceTrigger="PropertyChanged">
                                         <Binding UpdateSourceTrigger="PropertyChanged"/>
@@ -200,16 +220,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button
-            x:Name="ButtonNewCar_Copy" 
-            Content="&lt;=" 
-            Margin="10,0,0,0" 
-            Cursor="Hand"
-            Background="#FF005FB8" 
-            VerticalAlignment="Center" 
-            Height="34" 
-            HorizontalAlignment="Left" 
-            Command="{Binding GoBackCommand}"
-            Width="50" BorderBrush="{x:Null}" FontSize="17"/>
+
     </Grid>
 </local:UserControlBase>

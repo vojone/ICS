@@ -34,14 +34,14 @@
             Margin="0,5,0,5"/>
 
         <Label
-            Margin="0,0,0,0" 
+            Margin="43,0,0,0" 
             Content="Create user profile" 
             Background="{x:Null}" 
             FontSize="18" 
             BorderBrush="{x:Null}" 
             HorizontalAlignment="Left" 
             Width="209" 
-            VerticalAlignment="Center" Grid.ColumnSpan="2"/>
+            VerticalAlignment="Center"/>
 
         <Grid
             Grid.Row="1"

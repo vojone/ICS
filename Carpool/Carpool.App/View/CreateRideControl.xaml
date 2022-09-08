@@ -18,34 +18,58 @@
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="26*"/>
-            <RowDefinition Height="199*"/>
-
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="377*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle 
-            x:Name="TopBar" 
-            Fill="#FFC4C4C4" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="0,5,0,5"/>
+        <Grid ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label
-            x:Name="TextBox1" 
-            Margin="70,0,0,0" 
-            Content="Create a ride" 
-            Background="{x:Null}" 
-            FontSize="18" 
-            BorderBrush="{x:Null}" 
-            HorizontalAlignment="Left" 
-            Width="209" 
-            VerticalAlignment="Center" 
-            Height="40"/>
-        <Button
-            Visibility="Visible"
-            x:Name="ButtonCreateUser" 
-            Content="Turn radio ON" 
-            Margin="0,0,150,0"
-            Cursor="Hand"
-            Background="#FF919191" Height="40" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="1"
-            Command="{Binding PrintDataCommand}" FontSize="17"/>
+            <Rectangle 
+                Fill="#FFC4C4C4" 
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,8,0,10" Grid.ColumnSpan="3"/>
+
+            <Button
+                x:Name="ButtonNewCar_Copy" 
+                Margin="10,0,0,0" 
+                Cursor="Hand"
+                Background="#FF005FB8" 
+                VerticalAlignment="Center" 
+                Height="40"
+                HorizontalAlignment="Left" 
+                Command="{Binding GoBackCommand}"
+                Width="50" BorderBrush="{x:Null}" FontSize="17">
+                <Button.Content>
+                    <TextBlock Text="Back" FontWeight="Bold">
+                    </TextBlock>
+                </Button.Content>
+            </Button>
+
+            <Button
+                Visibility="Visible"
+                x:Name="ButtonCreateUser" 
+                Content="Turn radio ON" 
+                Margin="127,0,0,0"
+                Cursor="Hand"
+                Background="#FF919191" Height="40" Width="130" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="2"
+                Command="{Binding PrintDataCommand}" FontSize="17"/>
+
+            <Label
+                Margin="70,0,0,0" 
+                Content="Please create new ride" 
+                Background="{x:Null}" 
+                FontSize="17" 
+                BorderBrush="{x:Null}" 
+                HorizontalAlignment="Left" 
+                Width="187" VerticalAlignment="Center"/>
+        </Grid>
+
         <Rectangle
             HorizontalAlignment="Right" 
             Width="267" Fill="#FFC4C4C4" 
@@ -122,18 +146,6 @@
             Content="Departure"
             Background="{x:Null}"
             BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
-        <Button
-            Grid.Column="0"
-            x:Name="ButtonNewCar_Copy" 
-            Content="&lt;=" 
-            Margin="10,0,0,0" 
-            Background="#FF005FB8" 
-            VerticalAlignment="Center" 
-            Height="34" 
-            Cursor="Hand"
-            HorizontalAlignment="Left" 
-            Width="50" BorderBrush="{x:Null}" FontSize="17"
-            Command="{Binding GoBackCommand}"/>
         <Rectangle Grid.Column="1" Grid.Row="1" Margin="0,132,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="227" VerticalAlignment="Top" Height="139">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>

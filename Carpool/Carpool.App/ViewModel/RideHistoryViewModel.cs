@@ -29,6 +29,8 @@ namespace Carpool.App.ViewModel
             _session = session;
 
             GoBackCommand = new RelayCommand(OnGoBack);
+            DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRideCommand);
+            DisplayRideListCommand = new RelayCommand(OnDisplayRideListCommand);
             _mediator.Register<DisplayRideHistoryMessage>(OnDisplayRideHistory);
         }
 
@@ -39,6 +41,10 @@ namespace Carpool.App.ViewModel
         public ICommand GoBackCommand { get; set; }
 
         public ICommand RateDriverCommand { get; set; }
+
+        public ICommand DisplayCreateRideCommand { get; set; }
+
+        public ICommand DisplayRideListCommand { get; set; }
 
         public Guid CurrentUserId { get; set; }
 
@@ -75,6 +81,16 @@ namespace Carpool.App.ViewModel
                     Rides.Add(item);
                 }
             }
+        }
+
+        public void OnDisplayCreateRideCommand()
+        {
+            _mediator.Send(new DisplayCreateRideMessage());
+        }
+
+        public void OnDisplayRideListCommand()
+        {
+            _mediator.Send(new DisplayRideListMessage());
         }
     }
 }

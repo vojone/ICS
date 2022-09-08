@@ -43,6 +43,7 @@ namespace Carpool.App.ViewModel
             
             BookRideCommand = new RelayCommand(OnBookRide,CanSaveRide);
             GoBackCommand = new RelayCommand(OnGoBack);
+            DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRide);
             //Model = RideDetailModel.Empty;
 
             _mediator.Register<DisplayBookRideMessage>(OnDisplayBookRide);
@@ -51,6 +52,8 @@ namespace Carpool.App.ViewModel
         public ICommand BookRideCommand { get; set; }
 
         public ICommand GoBackCommand { get; set; }
+
+        public ICommand DisplayCreateRideCommand { get; set; }
 
         public Guid? CurrentUserId { get; set; }
 
@@ -81,6 +84,11 @@ namespace Carpool.App.ViewModel
         private void OnGoBack()
         {
             _mediator.Send(new DisplayLastMessage());
+        }
+
+        private void OnDisplayCreateRide()
+        {
+            _mediator.Send((new DisplayCreateRideMessage()));
         }
     }
 }

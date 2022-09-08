@@ -16,9 +16,9 @@
           Height="auto"
           >
         <Grid.RowDefinitions>
-            <RowDefinition Height="65*"/>
+            <RowDefinition Height="72*"/>
             <RowDefinition Height="52*"/>
-            <RowDefinition Height="118*"/>
+            <RowDefinition Height="111*"/>
             <RowDefinition Height="70*"/>
             <RowDefinition Height="70*"/>
             <RowDefinition Height="70*"/>
@@ -28,67 +28,82 @@
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <Rectangle 
-            Fill="#FFC4C4C4" 
-            Margin="0,8,0,8"
-            Grid.Column="0"
-            Grid.ColumnSpan="3"/>
+        
 
-        <Label
-            Margin="70,0,0,0" 
-            Content="Your Cars" 
-            Background="{x:Null}" 
-            FontSize="18" 
-            BorderBrush="{x:Null}" 
-            HorizontalAlignment="Left" 
-            Width="197" 
-            VerticalAlignment="Center"
-            Grid.Column="0" Grid.ColumnSpan="2"/>
-
-        <Grid
-            Grid.Column="1">
+        <Grid ColumnSpan="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
-            <Label
+            <Rectangle 
+                Fill="#FFC4C4C4" 
+                Grid.Row="0"
                 Grid.Column="0"
-                Validation.ErrorTemplate="{x:Null}"
-                x:Name="LoggedUsername" 
-                Content="{Binding UserModel.Name, UpdateSourceTrigger=PropertyChanged}" 
-                Background="{x:Null}" 
-                BorderBrush="{x:Null}" 
+                Margin="0,8,0,10" Grid.ColumnSpan="3"/>
+
+            <Button
+                x:Name="ButtonNewCar_Copy" 
+                Margin="10,0,0,0" 
+                Cursor="Hand"
+                Background="#FF005FB8" 
                 VerticalAlignment="Center" 
-                HorizontalContentAlignment="Right"
-                VerticalContentAlignment="Center"
-                FontSize="14"
-                Padding="3,0"
-                Height="34" HorizontalAlignment="Stretch"/>
+                Height="40"
+                HorizontalAlignment="Left" 
+                Command="{Binding GoBackCommand}"
+                Width="50" BorderBrush="{x:Null}" FontSize="17">
+                <Button.Content>
+                    <TextBlock Text="Back" FontWeight="Bold">
+                    </TextBlock>
+                </Button.Content>
+            </Button>
 
             <Label
-                Grid.Column="1"
-                Validation.ErrorTemplate="{x:Null}"
-                x:Name="LoggedSurname" 
-                Content="{Binding UserModel.Surname, UpdateSourceTrigger=PropertyChanged}" 
+                Margin="70,0,0,0" 
+                Content="Car details" 
                 Background="{x:Null}" 
+                FontSize="17" 
                 BorderBrush="{x:Null}" 
-                VerticalAlignment="Center" 
-                HorizontalContentAlignment="Left"
-                VerticalContentAlignment="Center"
-                FontSize="14"
-                Padding="3,0"
-                Height="34" HorizontalAlignment="Stretch"/>
-        </Grid>
+                HorizontalAlignment="Left" 
+                Width="187" VerticalAlignment="Center"/>
 
-        <Button 
-            Grid.Column="2"
-            x:Name="ButtonCreateRide"
-            Cursor="Hand"
-            Content="Create Ride" 
-            Margin="0,0,85,0" 
-            Background="#FF005FB8" 
-            BorderBrush="{x:Null}" VerticalAlignment="Center" Height="40" HorizontalAlignment="Right" Width="130"/>
+            <Grid
+                Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Column="0"
+                    Validation.ErrorTemplate="{x:Null}"
+                    x:Name="LoggedUsername" 
+                    Content="{Binding UserModel.Name, UpdateSourceTrigger=PropertyChanged}" 
+                    Background="{x:Null}" 
+                    BorderBrush="{x:Null}" 
+                    VerticalAlignment="Center" 
+                    HorizontalContentAlignment="Right"
+                    VerticalContentAlignment="Center"
+                    FontSize="14"
+                    Padding="3,0"
+                    Height="34" HorizontalAlignment="Stretch"/>
+
+                <Label
+                    Grid.Column="1"
+                    Validation.ErrorTemplate="{x:Null}"
+                    x:Name="LoggedSurname" 
+                    Content="{Binding UserModel.Surname, UpdateSourceTrigger=PropertyChanged}" 
+                    Background="{x:Null}" 
+                    BorderBrush="{x:Null}" 
+                    VerticalAlignment="Center" 
+                    HorizontalContentAlignment="Left"
+                    VerticalContentAlignment="Center"
+                    FontSize="14"
+                    Padding="3,0"
+                    Height="34" HorizontalAlignment="Stretch"/>
+            </Grid>
+        </Grid>
 
         <Button
             x:Name="ButtonNewCar" 
@@ -237,6 +252,7 @@
             Background="#FF005FB8" 
             VerticalAlignment="Center" 
             Height="40" 
+            Cursor="Hand"
             HorizontalAlignment="Right" 
             Width="130"
             Grid.Row="4" 

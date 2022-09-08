@@ -34,12 +34,12 @@
             Margin="0,8,0,8"/>
 
         <Label
-            Margin="0,0,20,0" 
+            Margin="70,0,0,0" 
             Content="Your user profile" 
             Background="{x:Null}" 
             FontSize="17" 
             BorderBrush="{x:Null}" 
-            HorizontalAlignment="Center" 
+            HorizontalAlignment="Left" 
             Width="210" VerticalAlignment="Center"/>
 
         <Grid
@@ -85,8 +85,9 @@
             Content="Create Ride" 
             Background="#FF005FB8" 
             Height="40"
-            HorizontalAlignment="Center" 
-            Width="130" VerticalAlignment="Center" FontSize="17"/>
+            HorizontalAlignment="Right" 
+            Width="130" VerticalAlignment="Center" FontSize="17"
+            Command="{Binding DisplayCreateRideCommand }" Margin="0,0,10,0"/>
 
         <TextBox
             x:Name="TextBoxFirstName" 
