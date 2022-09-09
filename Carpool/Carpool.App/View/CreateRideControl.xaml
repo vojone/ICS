@@ -146,9 +146,9 @@
             Content="Departure"
             Background="{x:Null}"
             BorderBrush="{x:Null}" Height="30" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="132" />
-        <Rectangle Grid.Column="1" Grid.Row="1" Margin="0,94,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="228" VerticalAlignment="Top" Height="139">
+        <Rectangle x:Name="CarPhoto"  Grid.Column="1" Grid.Row="1" Margin="0,94,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Center" Width="228" VerticalAlignment="Top" Height="139">
             <Rectangle.Fill>
-                <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=Explicit}"  Stretch="UniformToFill"/>
             </Rectangle.Fill>
         </Rectangle>
 
