@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Carpool.App.View"
         xmlns:viewModel="clr-namespace:Carpool.App.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="900"
+        Title="Carpool" Height="550" Width="900"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel}"
         DataContext="{Binding}">
 
