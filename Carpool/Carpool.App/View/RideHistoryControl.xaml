@@ -46,7 +46,7 @@
 
             <Label
                 Margin="70,0,0,0" 
-                Content="Ride history" 
+                Content="Ride History" 
                 Background="{x:Null}" 
                 FontSize="17" 
                 BorderBrush="{x:Null}" 
@@ -69,7 +69,7 @@
 
         <Button 
             x:Name="ButtonCreateUser_Copy" 
-            Content="Filter rides" 
+            Content="Filter Rides" 
             Cursor="Hand"
             Margin="0,33,77,0" 
             Background="#FFDBDBDB" 
@@ -79,13 +79,13 @@
 
         <Button 
             x:Name="ButtonCreateUser_Copy1" 
-            Content="Planned rides" 
+            Content="Ride History" 
             Margin="77,33,0,0" 
             Background="#FFDBDBDB" 
             Cursor="Hand"
             HorizontalAlignment="Left" 
-            BorderBrush="{x:Null}" Width="107" VerticalAlignment="Top" Height="28" Grid.Row="1" FontSize="17"
-            Command="{Binding DisplayRideListCommand}"
+            BorderBrush="{x:Null}" Width="100" VerticalAlignment="Top" Height="28" Grid.Row="1" FontSize="17"
+            IsEnabled="False"
         />
 
         <ListView 
@@ -187,7 +187,7 @@
                                 x:Name="ButtonBook" 
                                 Cursor="Hand"
                                 Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}},Path=DataContext.RateDriverCommand}"
-                                CommandParameter="{Binding DriverId}"
+                                CommandParameter="{Binding Id}"
                                 Background="#FFFDF41C" Margin="65,10,10,13" BorderBrush="{x:Null}" Grid.ColumnSpan="2">
                                 <Button.Content>
                                     <TextBlock Text="Send ⭐"></TextBlock>

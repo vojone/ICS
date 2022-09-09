@@ -39,7 +39,7 @@ namespace Carpool.App.ViewModel
             FilterRidesCommand = new AsyncRelayCommand(OnFilterRides);
             DisplayRideHistoryCommand = new RelayCommand(OnDisplayRideHistory);
             DisplayCreateRideCommand = new RelayCommand(OnDisplayCreateRide);
-            OpenRideCommand = new RelayCommand<Guid>(OnOpenRide);
+            OpenRideCommand = new RelayCommand<Guid>(OnOpenRide, CanOpenRide);
             GoBackCommand = new RelayCommand(OnGoBack);
         }
 
@@ -69,7 +69,7 @@ namespace Carpool.App.ViewModel
                     dialog.GetArrivalLocation(),
                     dialog.GetDepartureDateTime(),
                     dialog.GetArrivalTime(),
-                    dialog.GetAvailabilityFlag());
+                    mustBeAvailable: dialog.GetAvailabilityFlag());
 
                 Rides.Clear(); 
                 Rides.AddRange(rides);
@@ -81,10 +81,10 @@ namespace Carpool.App.ViewModel
             _mediator.Send(new DisplayCreateRideMessage());
         }
         
-        private async void OnOpenRide(Guid rideId)
+        private void OnOpenRide(Guid rideId)
         {
             Guid currentUserId = _session.GetLoggedUserId() ?? Guid.Empty;
-            RideWrapper ride = await _rideFacade.GetAsync(rideId) ?? RideDetailModel.Empty;
+            var ride = Rides.FirstOrDefault(r => r.Id == rideId);
 ;
             if (ride.DriverId == currentUserId)
             {
@@ -118,12 +118,26 @@ namespace Carpool.App.ViewModel
             CurrentUserId = _session.GetLoggedUserId();
             Debug.WriteLine("Ride list user id "+CurrentUserId);
             Rides.Clear();
-            var rides = await _rideFacade.GetAsync();
+            var rides = await _rideFacade
+                .FilterAsync(arrivalTime: DateTime.Now, arrivalTimeIsGreater: false);
             
             foreach (var item in rides)
             {
                 Rides.Add(item);
             }
+        }
+
+        private bool CanOpenRide(Guid rideId)
+        {
+            Guid currentUserId = _session.GetLoggedUserId() ?? Guid.Empty;
+
+            var ride = Rides.FirstOrDefault(r => rideId == r.Id);
+            if (ride == null)
+            {
+                return false;
+            }
+
+            return (ride.DriverId == currentUserId) || ride.DepartureT > DateTime.Now;
         }
     }
 }

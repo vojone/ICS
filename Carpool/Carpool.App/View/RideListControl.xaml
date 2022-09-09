@@ -73,12 +73,12 @@
 
         <Button 
             x:Name="ButtonCreateUser_Copy" 
-            Content="Filter rides" 
+            Content="Filter Rides" 
             Cursor="Hand"
             Margin="0,33,77,0" 
             Background="#FFDBDBDB" 
             BorderBrush="{x:Null}" VerticalAlignment="Top" Height="28" HorizontalAlignment="Right" Width="100"
-            Command="{Binding FilterRidesCommand}" Grid.Row="1" FontSize="17"/>
+            Command="{Binding FilterRidesCommand}" Grid.Row="1" FontSize="17" Click="ButtonCreateUser_Copy_Click"/>
         <Button 
             x:Name="ButtonCreateUser_Copy1" 
             Content="Ride History" 

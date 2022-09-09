@@ -122,7 +122,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Rectangle Grid.Column="1" Grid.Row="1" Margin="0,21,70,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="267" VerticalAlignment="Top" Height="143">
+        <Rectangle Grid.Column="1" Grid.Row="1" Margin="68,16,0,0" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="267" VerticalAlignment="Top" Height="128">
 
             <Rectangle.Fill>
                 <ImageBrush ImageSource="{Binding Car.Model.Photo, UpdateSourceTrigger=PropertyChanged}"  Stretch="UniformToFill"/>

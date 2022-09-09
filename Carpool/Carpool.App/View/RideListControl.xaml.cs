@@ -29,5 +29,9 @@ namespace Carpool.App.View
         {
 
         }
+
+        private void ButtonCreateUser_Copy_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

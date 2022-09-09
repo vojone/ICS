@@ -88,19 +88,26 @@ namespace Carpool.BL.Facades
         public async Task<IEnumerable<RideListModel>> FilterAsync(string? departureLoc = null, 
                                                                   string? arrivalLoc = null, 
                                                                   DateTime? departureTime = null, 
-                                                                  DateTime? arrivalTime = null, 
+                                                                  DateTime? arrivalTime = null,
+                                                                  bool arrivalTimeIsGreater = true,
+                                                                  Guid? participantId = null,
                                                                   bool mustBeAvailable = false)
         {
             await using var uow = UnitOfWorkFactory.Create();
+
             var query = uow
                 .GetRepository<RideEntity>()
                 .Get()
+                .Include(i => i.Participants)
                 .Where(e => 
                     (e.DepartureL == departureLoc || departureLoc == null) &&
                     (e.ArrivalL == arrivalLoc || arrivalLoc == null) &&
                     (e.DepartureT >= departureTime || departureTime == null) &&
-                    (e.ArrivalT <= arrivalTime || arrivalTime == null) &&
-                    (e.Capacity > 0 || !mustBeAvailable));
+                    ((e.ArrivalT <= arrivalTime && arrivalTimeIsGreater) || 
+                     (!arrivalTimeIsGreater && e.ArrivalT > arrivalTime) || arrivalTime == null) &&
+                    (e.Capacity > 0 || !mustBeAvailable) &&
+                    (e.Participants
+                        .Any(p => p.UserId == participantId) || participantId == null));
 
             return await Mapper.ProjectTo<RideListModel>(query)
                 .ToArrayAsync().ConfigureAwait(false);
@@ -130,6 +137,32 @@ namespace Carpool.BL.Facades
 
             return await Mapper.ProjectTo<RideListModel>(query)
                 .ToArrayAsync().ConfigureAwait(false);
+        }
+
+        public async Task<bool> SendStar(Guid rideId, Guid donatorId, UserFacade userFacade)
+        {
+            var ride = await GetAsync(rideId);
+
+            if (ride == null)
+                return false;
+
+            if (ride.Participants.All(p => p.UserId != donatorId))
+                return false;
+
+            var participant = ride.Participants
+                .FirstOrDefault(p => p.UserId == donatorId);
+
+            if (participant == null || participant.HasUserRated)
+                return false;
+
+            ride.Driver.Rating += 1;
+
+            participant.HasUserRated = true;
+
+            await userFacade.SaveAsync(ride.Driver);
+            await SaveAsync(ride);
+
+            return true;
         }
     }
 }

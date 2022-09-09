@@ -94,7 +94,7 @@
             Content="Delete Ride" 
             Margin="0,0,70,37" 
             Cursor="Hand"
-            Background="#FF005FB8" Height="34" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="98" Grid.Column="1" Grid.Row="1" FontSize="17"
+            Background="#B80000" Height="34" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="98" Grid.Column="1" Grid.Row="1" FontSize="17"
             Command="{Binding DeleteRideCommand}"/>
 
         <ListView Grid.Column="1" Grid.Row="1"
